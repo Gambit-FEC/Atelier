@@ -1,19 +1,13 @@
 # Team Gambit
 
-Atelier
+### Atelier
 
-## Building and running on localhost
+## Building Client
 
 First install dependencies:
 
 ```sh
 npm install
-```
-
-To run in hot module reloading mode:
-
-```sh
-npm start
 ```
 
 To create a production build:
@@ -30,7 +24,9 @@ npm run build-dev
 
 ## Running
 
-Open the file `dist/index.html` in your browser
+```sh
+npm start
+```
 
 ## Testing
 
@@ -45,7 +41,3 @@ Members
 - Danika Partridge
 - Andy Luu
 - Esther Kuang
-
-Project guidelines DOC
-https://docs.google.com/document/d/1KAqduzY8ae3DYrSoCL1i23qHe95zJRYFulqMk-sGLWY/edit
-
