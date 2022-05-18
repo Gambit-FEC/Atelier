@@ -3,11 +3,11 @@ const path = require('path');
 
 const config = {
   entry: [
-    './src/index.js'
+    './src/index.jsx',
   ],
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   module: {
     rules: [
@@ -26,10 +26,10 @@ const config = {
     ]
   },
   devServer: {
-    'static': {
-      directory: './dist'
-    }
-  }
+    static: {
+      directory: './dist',
+    },
+  },
 };
 
 module.exports = config;
