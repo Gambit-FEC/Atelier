@@ -1,10 +1,8 @@
 {
-  "name": "atelier-base",
+  "name": "atelier",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "keywords": [],
-  "author": "",
+  "author": "Team Gambit",
   "license": "ISC",
   "scripts": {
     "clean": "rm dist/bundle.js",
