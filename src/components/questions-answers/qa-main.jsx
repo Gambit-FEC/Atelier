@@ -1,11 +1,10 @@
 import React from 'react';
-import {useContext} from 'react';
-import {useId} from // file
+// import {useContext} from 'react';
+import { useId } from '../../context/GlobalStore';
 
-import ListQA from './qa-main.jsx';
-import AnswerForm from './answer-form.jsx';
-import QuestionForm from './question-form.jsx';
-
+// import ListQA from './qa-list';
+// import AnswerForm from './answer-form';
+// import QuestionForm from './question-form';
 
 function QuestionsAnswersMain() {
   const [productId, useProductId] = useId();
@@ -14,13 +13,14 @@ function QuestionsAnswersMain() {
     <div>
       <div>The product id is: </div>
       <div>{productId}</div>
-      { productId ? <QA-List/> : null}
-      { productId ? <QuestionForm/> : null}
-      { productId ? <AnswerForm/> : null}
     </div>
   );
 };
 
 export default QuestionsAnswersMain;
 
-// pass in id and maybe set id into the context
+/*
+  { productId ? <QA-List/> : null}
+  { productId ? <QuestionForm/> : null}
+  { productId ? <AnswerForm/> : null}
+*/
