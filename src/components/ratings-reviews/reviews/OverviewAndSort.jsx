@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 
 export default function OverviewAndSort() {
+
   return (
     <div>
       <span>246 reviews </span>
-      <select value onChange>
+      <select>
         <option value="Sort By">Sort By</option>
         <option value="Newest">Newest</option>
         <option value="Helpful">Helpful</option>
