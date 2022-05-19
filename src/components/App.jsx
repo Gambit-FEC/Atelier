@@ -8,8 +8,8 @@ function App() {
   return (
     <IdContextProvider>
       <ProductDetail />
-      <RelatedItems />
       {/* <QuestionsAndAnswers /> */}
+      <RelatedItems />
       <RatingsAndReviews />
     </IdContextProvider>
   );

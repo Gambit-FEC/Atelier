@@ -7,7 +7,11 @@ import { useId } from '../../context/GlobalStore';
 // import QuestionForm from './question-form';
 
 function QuestionsAnswersMain() {
+<<<<<<< HEAD
   const [productId, useProductId] = useId();
+=======
+  const [productId] = useId();
+>>>>>>> master
 
   return (
     <div>
