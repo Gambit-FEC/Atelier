@@ -1,5 +1,9 @@
 import React from 'react';
 import { useId } from '../../context/GlobalStore';
+// import AddToCart from './add_to_cart/addToCart';
+// import ImageGallery from './product_information/imageGallery';
+// import ProductInfo from './product_information/productInfo';
+// import StyleSelector from './style_selecor/styleSelector';
 // import axios from 'axios';
 // import styled from 'styled-components';
 
