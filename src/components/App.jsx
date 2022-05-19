@@ -1,5 +1,5 @@
 import React from "react";
-import RatingsAndReviews from './ratings-reviews/index.jsx';
+import RatingsAndReviews from './ratings-reviews';
 
 function App() {
   // state item id
