@@ -2,7 +2,7 @@ import React from 'react';
 import { useId } from '../../../context/GlobalStore';
 
 export default function ImageGallery() {
-  const [productId, setProductId] = useId();
+  const productId = useId();
   return (
     <>
       <h1>imageGallery? {productId}</h1>

@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { useId } from '../../context/GlobalStore';
+import { useId, updateId } from '../../context/GlobalStore';
 import AddToCart from './add_to_cart/addToCart';
 import ImageGallery from './image_gallery/imageGallery';
 import ProductInfo from './product_information/productInfo';
@@ -22,7 +22,8 @@ import StyleSelector from './style_selector/styleSelector';
 
 export default function ProductDetail() {
   // test------
-  const [productId, setProductId] = useId();
+  const productId = useId();
+  const updateProduct = updateId();
 
   return (
     <>

@@ -2,7 +2,7 @@ import React from 'react';
 import { useId } from '../../../context/GlobalStore';
 
 export default function ProductInfo() {
-  const [productId, setProductId] = useId();
+  const productId = useId();
   return (
     <>
       <h1>product info? {productId}</h1>

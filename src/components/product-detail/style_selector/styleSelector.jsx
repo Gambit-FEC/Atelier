@@ -2,7 +2,7 @@ import React from 'react';
 import { useId } from '../../../context/GlobalStore';
 
 export default function StyleSelector() {
-  const [productId, setProductId] = useId();
+  const productId = useId();
   return (
     <>
       <h1>style selector? {productId}</h1>
