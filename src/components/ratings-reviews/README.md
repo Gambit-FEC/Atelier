@@ -12,21 +12,23 @@
 
 ## Components
 
-- Review list
-  - Review
-    - Rating
-    - Date & User
-    - Title
-    - Content
-    - Response
-    - Feedback
-      - Helpful? *I*
-      - Report *I*
 - Ratings
   - Overall rating
   - Bars *I*
   - Spec bars
-- Overview and sort options *I*
-- More/add reviews
-  - More Reviews *I*
-  - Add Reviews *I*
+
+- Reviews
+  - Overview and sort options *I*
+  - Reviews list
+    - Review
+      - Rating
+      - Date & User
+      - Title
+      - Content
+      - Response
+      - Feedback
+        - Helpful? *I*
+        - Report *I*
+  - More/add reviews
+    - More Reviews *I*
+    - Add Reviews *I*

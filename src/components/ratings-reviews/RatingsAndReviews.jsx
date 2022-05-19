@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import GlobalContext from '../../context/GlobalStore';
 
 export default function RatingsAndReviews() {
