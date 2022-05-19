@@ -1,7 +1,5 @@
 import React, { createContext } from 'react';
 
-const GlobalContext = createContext({
-  productId: 1,
-});
+const GlobalContext = createContext();
 
 export default GlobalContext;
