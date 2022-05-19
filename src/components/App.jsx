@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import GlobalContext from '../context/GlobalStore';
+import GlobalContext from '../context/GlobalStore.jsx';
 import RatingsAndReviews from './ratings-reviews/RatingsAndReviews';
 
 function App() {

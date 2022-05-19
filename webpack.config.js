@@ -3,7 +3,7 @@ const path = require('path');
 
 const config = {
   entry: [
-    './src/index.js',
+    './src/index.jsx',
   ],
   output: {
     path: path.resolve(__dirname, 'dist'),
