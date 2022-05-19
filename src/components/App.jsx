@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import GlobalContext from '../context/GlobalStore.jsx';
-import RatingsAndReviews from './ratings-reviews/RatingsAndReviews.jsx';
+import React, { useState } from 'react';
+import GlobalContext from '../context/GlobalStore';
+import RatingsAndReviews from './ratings-reviews/RatingsAndReviews';
 
 function App() {
   // state item id
