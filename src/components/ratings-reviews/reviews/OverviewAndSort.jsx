@@ -1,18 +1,10 @@
 import React, { useState } from 'react';
-import { useSort } from '../context/RatingsAndReviewsContext';
 
 export default function OverviewAndSort() {
-  const sortState = useSort();
-  console.log(sortState);
-
-  const handleSortChange = (event) => {
-    setSort(event.target.value);
-  };
-
   return (
     <div>
       <span>246 reviews </span>
-      <select value={sort} onChange={handleSortChange}>
+      <select value onChange>
         <option value="Sort By">Sort By</option>
         <option value="Newest">Newest</option>
         <option value="Helpful">Helpful</option>
