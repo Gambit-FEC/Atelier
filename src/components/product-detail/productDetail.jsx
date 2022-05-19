@@ -1,6 +1,6 @@
 import React from 'react';
 import { useId } from '../../context/GlobalStore';
-// import AddToCart from './add_to_cart/addToCart';
+import AddToCart from './add_to_cart/addToCart';
 // import ImageGallery from './product_information/imageGallery';
 // import ProductInfo from './product_information/productInfo';
 // import StyleSelector from './style_selecor/styleSelector';
@@ -26,10 +26,11 @@ export default function ProductDetail() {
 
   return (
     <>
-      <h1>{productId}</h1>
+      <h1>prodDetail {productId}</h1>
       <h2>productDetail</h2>
       <div>wow productsss</div>
       <p>hello productsss</p>
+      <AddToCart />
     </>
 
   // <Wrapper>

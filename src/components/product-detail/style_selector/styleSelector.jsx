@@ -1,7 +1,5 @@
 import React from 'react';
 
-function StyleSelector() {
+export default function StyleSelector() {
 
 }
-
-export default StyleSelector;
