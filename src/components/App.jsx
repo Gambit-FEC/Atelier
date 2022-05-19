@@ -1,16 +1,15 @@
-import React from "react";
-import RatingsAndReviews from './ratings-reviews';
+import React from 'react';
+import { IdContextProvider } from '../context/GlobalStore';
+import RatingsAndReviews from './ratings-reviews/RatingsAndReviews';
 
 function App() {
-  // state item id
-
   return (
-    <>
-      <EsthersWidget />
-      <DanikasWidget />
-      <AndysWidget />
+    <IdContextProvider>
+      {/* <ProductDetail />
+      <RelatedItems />
+      <QuestionsAndAnswers /> */}
       <RatingsAndReviews />
-    </>
+    </IdContextProvider>
   );
 }
 
