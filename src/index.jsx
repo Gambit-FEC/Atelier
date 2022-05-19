@@ -1,7 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './components/App.jsx';
+import { createRoot } from 'react-dom/client';
+import App from './components/App';
 import './styles.css';
 
-const mountNode = document.getElementById('app');
-ReactDOM.render(<App />, mountNode);
+const root = createRoot(document.getElementById('app'));
+root.render(<App />);
