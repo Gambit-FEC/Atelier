@@ -1,19 +1,17 @@
-import React, { createContext, useState } from 'react';
-import axios from 'axios';
-import { useCallback } from 'react/cjs/react.production.min';
+import React, { createContext, useState, useContext } from 'react';
 
 const IdContext = createContext();
-const fetchByIdContext = createContext();
 
-export default function IdContextProvider({ children }) {
-  const [id, setId] = useState(40348);
-  const fetchById = useCallback((route, config) => axios.get(route, config));
+export function useId() {
+  return useContext(IdContext);
+}
+
+export function IdContextProvider({ children }) {
+  const idState = useState(40348);
 
   return (
-    <IdContext.Provider value={id}>
-      <fetchByIdContext.Provider value={fetchById}>
-        {children}
-      </fetchByIdContext.Provider>
+    <IdContext.Provider value={idState}>
+      {children}
     </IdContext.Provider>
   );
 }
