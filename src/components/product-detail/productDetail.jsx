@@ -1,10 +1,10 @@
 import React from 'react';
+import axios from 'axios';
 import { useId } from '../../context/GlobalStore';
 import AddToCart from './add_to_cart/addToCart';
-// import ImageGallery from './product_information/imageGallery';
-// import ProductInfo from './product_information/productInfo';
-// import StyleSelector from './style_selecor/styleSelector';
-// import axios from 'axios';
+import ImageGallery from './image_gallery/imageGallery';
+import ProductInfo from './product_information/productInfo';
+import StyleSelector from './style_selector/styleSelector';
 // import styled from 'styled-components';
 
 // //styled-components ex
@@ -26,11 +26,17 @@ export default function ProductDetail() {
 
   return (
     <>
-      <h1>prodDetail {productId}</h1>
+      <h1>
+        prodDetail
+        {productId}
+      </h1>
       <h2>productDetail</h2>
       <div>wow productsss</div>
       <p>hello productsss</p>
       <AddToCart />
+      <ImageGallery />
+      <ProductInfo />
+      <StyleSelector />
     </>
 
   // <Wrapper>
