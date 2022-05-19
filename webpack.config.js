@@ -1,9 +1,9 @@
-const webpack = require('webpack');
+// const webpack = require('webpack');
 const path = require('path');
 
 const config = {
   entry: [
-    './src/index.jsx',
+    './src/index.js',
   ],
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -14,16 +14,16 @@ const config = {
       {
         test: /\.(js|jsx)$/,
         use: 'babel-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.css$/,
         use: [
           'style-loader',
-          'css-loader'
-        ]
-      }
-    ]
+          'css-loader',
+        ],
+      },
+    ],
   },
   devServer: {
     static: {

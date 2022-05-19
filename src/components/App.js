@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import GlobalContext from '../context/GlobalStore.jsx';
-import RatingsAndReviews from './ratings-reviews/index.jsx';
+import GlobalContext from '../context/GlobalStore';
+import RatingsAndReviews from './ratings-reviews/RatingsAndReviews';
 
 function App() {
   // state item id
-  const [id] = useState(() => 1);
+  const [id, setId] = useState(() => 1);
 
   return (
     <GlobalContext.Provider value={id}>
