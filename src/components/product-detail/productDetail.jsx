@@ -24,8 +24,8 @@ export default function ProductDetail() {
     <>
       <h1>{productId}</h1>
       <h2>productDetail</h2>
-      <div>wow</div>
-      <p>hello</p>
+      <div>wow productsss</div>
+      <p>hello productsss</p>
     </>
 
   // <Wrapper>
