@@ -8,7 +8,13 @@ const app = express();
 app.use(express.static(path.join(__dirname, '..', 'dist')));
 app.use(express.json());
 
-app.get('/reviews/averageRating', ctrl.reviews.getAll);
+app.use((req, res, next) => {
+  req.headers.auth = API_KEY;
+  next();
+});
+
+app.get('/reviews', ctrl.reviews.getAll);
+app.get('/reviews/averageRating/:id', ctrl.reviews.getAverageRating);
 
 // app.get('/products/', ctrl.products);
 
