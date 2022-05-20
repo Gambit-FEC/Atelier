@@ -1,11 +1,12 @@
 import React from 'react';
 // import { RatingsAndReviewsProvider } from './context/RatingsAndReviewsContext';
 import Reviews from './reviews/Reviews';
+import Ratings from './ratings/Ratings';
 
 export default function RatingsAndReviews() {
   return (
     <div className="ratings-and-reviews">
-      {/* <Ratings /> */}
+      <Ratings />
       <Reviews />
     </div>
   );
