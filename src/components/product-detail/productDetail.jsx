@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useId, updateId } from '../../context/GlobalStore';
-import configData from '../../../config.json';
+import configData from '../../../config.js';
 import AddToCart from './add_to_cart/addToCart';
 import ImageGallery from './image_gallery/imageGallery';
 import ProductInfo from './product_information/productInfo';
