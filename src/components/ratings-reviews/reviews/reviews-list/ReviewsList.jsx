@@ -9,7 +9,7 @@ export default function ReviewsList() {
   const id = useId();
   const [reviews, setReviews] = useState();
   const fetchReviewsById = (product_id) => (
-    axios.get(`${API_URL}reviews/`, { params: { product_id }, headers: { Authorization: API_KEY } })
+    axios.get(`/reviews`)
       .catch((err) => {
         console.log('error fetching reviews', err);
       })
