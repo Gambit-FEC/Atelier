@@ -1,13 +1,12 @@
-// import React from 'react';
-// import { useId } from '../../context/GlobalStore';
+import React from 'react';
+// import { RatingsAndReviewsProvider } from './context/RatingsAndReviewsContext';
+import Reviews from './reviews/Reviews';
 
-// export default function RatingsAndReviews() {
-//   const [productId, setProductId] = useId();
-//   return (
-//     <>
-//       <h1>{productId}</h1>
-//       <button type="button" onClick={() => setProductId(productId + 1)}>Increment</button>
-//       <div className="Ratings" />
-//     </>
-//   );
-// }
+export default function RatingsAndReviews() {
+  return (
+    <div className="ratings-and-reviews">
+      {/* <Ratings /> */}
+      <Reviews />
+    </div>
+  );
+}

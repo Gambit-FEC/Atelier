@@ -14,4 +14,5 @@ node_modules/
 .Trashes
 ehthumbs.db
 Thumbs.db
-congfig.json
+
+config.js
