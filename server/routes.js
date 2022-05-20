@@ -1,10 +1,17 @@
-const router = require('express').Router();
+const express = require('express');
+const path = require('path');
 const ctrl = require('./controllers');
-const { API_KEY, API_URL } = require('../config');
+const { API_KEY } = require('../config');
 
-router.use((req, res, next) => {
-  req.headers.Authorization = API_KEY;
-  next();
+const app = express();
+
+app.use(express.static(path.join(__dirname, '..', 'dist')));
+app.use(express.json());
+
+app.get('/reviews/averageRating', ctrl.reviews.getAll);
+
+// app.get('/products/', ctrl.products);
+
+app.listen(3000, () => {
+  console.log('listening on port 3000');
 });
-
-router.get(`${API_URL}reviews/`, ctrl.reviews.get);

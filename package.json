@@ -7,6 +7,7 @@
   "scripts": {
     "clean": "rm dist/bundle.js",
     "start": "npx live-server dist --port=3000 --no-browser",
+    "server-dev": "nodemon server/routes.js",
     "build-dev": "webpack --mode development --watch",
     "build-prod": "webpack --mode production",
     "test": "jest"
@@ -15,6 +16,8 @@
     "axios": "^0.27.2",
     "express": "^4.18.1",
     "live-server": "^1.2.2",
+    "nodemon": "^2.0.16",
+    "path": "^0.12.7",
     "react": "^18.1.0",
     "react-dom": "^18.1.0"
   },
