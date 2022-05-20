@@ -6,8 +6,8 @@ import ReviewTile from './ReviewTile';
 export default function ReviewsList() {
   const id = useId();
   const [reviews, setReviews] = useState([]);
-  const fetchReviewsById = (id) => (
-    axios.get(`/reviews/${id}`)
+  const fetchReviewsById = (prodId) => (
+    axios.get(`/reviews/${prodId}`)
       .catch((err) => {
         console.log('error fetching reviews', err);
       })

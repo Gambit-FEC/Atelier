@@ -16,8 +16,6 @@ app.use((req, res, next) => {
 app.get('/reviews/:product_id', ctrl.reviews.getById);
 app.get('/reviews/averageRating/:product_id', ctrl.reviews.getAverageRating);
 
-// app.get('/products/', ctrl.products);
-
 app.listen(3000, () => {
   // eslint-disable-next-line no-console
   console.log('listening on port 3000');
