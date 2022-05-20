@@ -7,7 +7,7 @@ export default function ReviewTile({ review }) {
   }
 
   return (
-    <div className="review-tile">
+    <div className="reviews-tile">
       <div>{review.rating}</div>
       <div>{review.summary}</div>
       <button type="button" onClick={handleReadMoreClick}>Read more</button>
