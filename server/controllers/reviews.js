@@ -19,9 +19,14 @@ function averageRatings(ratings) {
 }
 
 exports.getById = (req, res) => {
-  axios.get(`${API_URL}reviews`, { params: req.params, headers: { Authorization: req.headers.Authorization } });
-  res.sendStatus(200);
-  // axios.get('/api_url' );
+  console.log(req.params)
+  axios.get(`${API_URL}reviews`, { params: req.params, headers: { Authorization: req.headers.Authorization } })
+    .then(({data}) => {
+      res.status(200).send(data);
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    });
 };
 
 exports.getAverageRating = (req, res) => {
@@ -30,6 +35,6 @@ exports.getAverageRating = (req, res) => {
       res.status(200).send(averageRatings(data.ratings));
     })
     .catch((err) => {
-      res.sendStatus(400);
+      res.status(400).send(err);
     });
 };

@@ -6,8 +6,8 @@ import ReviewTile from './ReviewTile';
 export default function ReviewsList() {
   const id = useId();
   const [reviews, setReviews] = useState([]);
-  const fetchReviewsById = (product_id) => (
-    axios.get(`/reviews`)
+  const fetchReviewsById = (id) => (
+    axios.get(`/reviews/${id}`)
       .catch((err) => {
         console.log('error fetching reviews', err);
       })
@@ -16,13 +16,13 @@ export default function ReviewsList() {
   useEffect(() => {
     fetchReviewsById(id)
       .then(({ data }) => {
-        setReviews(data);
+        setReviews(data.results);
       });
   }, []);
 
   return (
     <div className="reviews-list">
-      {reviews.results.map((review) => <ReviewTile key={review.id} review={review} />)}
+      {reviews.map((review, idx) => <ReviewTile key={idx} review={review} />)}
     </div>
   );
 }
