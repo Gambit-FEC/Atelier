@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { API_KEY, API_URL } from '../../../../../config.json';
-import Review from './Review';
 import { useId } from '../../../../context/GlobalStore';
+import ReviewTile from './ReviewTile';
 
 export default function ReviewsList() {
   const id = useId();
@@ -20,11 +20,8 @@ export default function ReviewsList() {
         setReviews(data);
       });
   }, []);
-  console.log(reviews);
 
   return (
-    <>
-      {reviews?.results.map((review, index) => <Review key={index} review={review} />)}
-    </>
+      {reviews ? reviews.results.map((review, index) => <ReviewTile key={index} review={review} />) : undefined}
   );
 }
