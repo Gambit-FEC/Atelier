@@ -10,8 +10,9 @@ app.use(express.json());
 
 app.get('/reviews/averageRating', ctrl.reviews.getAll);
 
-// app.get('/products/', ctrl.products);
+app.get('/products/:productId', ctrl.products.getProductInfo);
 
 app.listen(3000, () => {
+  // eslint-disable-next-line no-console
   console.log('listening on port 3000');
 });
