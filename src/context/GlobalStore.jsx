@@ -5,15 +5,6 @@ const GlobalContext = createContext();
 export function useGlobalContext() {
   return useContext(GlobalContext);
 }
-<<<<<<< HEAD
-export function updateId() {
-  return useContext(IdUpdateContext);
-}
-
-export function IdContextProvider({ children }) {
-  const [productId, updateProductId] = useState(40344);
-=======
->>>>>>> master
 
 export function GlobalContextProvider({ children }) {
   const [productId, setProductId] = useState(40348);

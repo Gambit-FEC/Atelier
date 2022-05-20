@@ -20,7 +20,7 @@ function averageRatings(ratings) {
 
 exports.getById = (req, res) => {
   axios.get(`${API_URL}reviews`, { params: req.params, headers: { Authorization: req.headers.Authorization } })
-    .then(({data}) => {
+    .then(({ data }) => {
       res.status(200).send(data);
     })
     .catch((err) => {

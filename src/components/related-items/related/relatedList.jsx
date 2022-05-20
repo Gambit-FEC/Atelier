@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import RelatedCard from './relatedCard';
-import { useId, updateId } from '../../../context/GlobalStore';
+import { useGlobalContext } from '../../../context/GlobalStore';
 
 export default function relatedList() {
+  const { productId } = useGlobalContext();
   let allProductInfo = [];
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [relatedInfo, setRelatedInfo] = useState([]);
-  const productId = useId();
 
   function getRelatedProducts() {
     // console.log(productId);
