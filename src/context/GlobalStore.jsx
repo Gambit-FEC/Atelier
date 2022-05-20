@@ -22,7 +22,7 @@ export function updateId() {
 }
 
 export function IdContextProvider({ children }) {
-  const [productId, updateProductId] = useState(40348);
+  const [productId, updateProductId] = useState(40344);
 
   return (
     <IdContext.Provider value={productId}>
