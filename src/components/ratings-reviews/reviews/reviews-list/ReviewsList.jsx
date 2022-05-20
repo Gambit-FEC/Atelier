@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useId } from '../../../../context/GlobalStore';
 import ReviewTile from './ReviewTile';
-import config from '../../../../../config';
-const {API_URL, API_KEY} = config;
 
 export default function ReviewsList() {
   const id = useId();

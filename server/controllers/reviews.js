@@ -18,14 +18,18 @@ function averageRatings(ratings) {
   return JSON.stringify(Math.floor((sum / totalRatings) * 2) / 2);
 }
 
-exports.getAll = (req, res) => {
+exports.getById = (req, res) => {
+  axios.get(`${API_URL}reviews`, { params: req.params, headers: { Authorization: req.headers.Authorization } });
   res.sendStatus(200);
   // axios.get('/api_url' );
 };
 
 exports.getAverageRating = (req, res) => {
-  axios.get(`${API_URL}reviews/meta`, { params: { product_id: req.params.id }, headers: { Authorization: req.headers.auth } })
+  axios.get(`${API_URL}reviews/meta`, { params: req.params, headers: { Authorization: req.headers.Authorization } })
     .then(({ data }) => {
       res.status(200).send(averageRatings(data.ratings));
+    })
+    .catch((err) => {
+      res.sendStatus(400);
     });
 };

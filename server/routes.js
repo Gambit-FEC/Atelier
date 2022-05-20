@@ -9,12 +9,12 @@ app.use(express.static(path.join(__dirname, '..', 'dist')));
 app.use(express.json());
 
 app.use((req, res, next) => {
-  req.headers.auth = API_KEY;
+  req.headers.Authorization = API_KEY;
   next();
 });
 
-app.get('/reviews', ctrl.reviews.getAll);
-app.get('/reviews/averageRating/:id', ctrl.reviews.getAverageRating);
+app.get('/reviews', ctrl.reviews.getById);
+app.get('/reviews/averageRating/:product_id', ctrl.reviews.getAverageRating);
 
 // app.get('/products/', ctrl.products);
 
