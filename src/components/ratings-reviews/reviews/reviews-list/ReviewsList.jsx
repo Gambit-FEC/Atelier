@@ -7,7 +7,7 @@ const {API_URL, API_KEY} = config;
 
 export default function ReviewsList() {
   const id = useId();
-  const [reviews, setReviews] = useState();
+  const [reviews, setReviews] = useState([]);
   const fetchReviewsById = (product_id) => (
     axios.get(`${API_URL}reviews/`, { params: { product_id }, headers: { Authorization: API_KEY } })
       .catch((err) => {
@@ -24,7 +24,7 @@ export default function ReviewsList() {
 
   return (
     <div className="reviews-list">
-      {reviews?.results.map((review, index) => <ReviewTile key={index} review={review} />)}
+      {reviews.results.map((review, index) => <ReviewTile key={index} review={review} />)}
     </div>
   );
 }
