@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useId } from '../../../../context/GlobalStore';
+import { useGlobalContext } from '../../../../context/GlobalStore';
 import ReviewTile from './ReviewTile';
 
 export default function ReviewsList() {
-  const id = useId();
+  const { productId } = useGlobalContext();
   const [reviews, setReviews] = useState([]);
   const fetchReviewsById = (prodId) => (
     axios.get(`/reviews/${prodId}`)
@@ -14,7 +14,7 @@ export default function ReviewsList() {
   );
 
   useEffect(() => {
-    fetchReviewsById(id)
+    fetchReviewsById(productId)
       .then(({ data }) => {
         setReviews(data.results);
       });
