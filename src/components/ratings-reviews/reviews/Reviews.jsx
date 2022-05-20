@@ -5,7 +5,7 @@ import MoreAndAddReview from './MoreAndAdd';
 
 export default function Reviews() {
   return (
-    <div className="reviews-list">
+    <div className="reviews">
       <OverviewAndSort />
       <ReviewsList />
       <MoreAndAddReview />

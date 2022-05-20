@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 export default function OverviewAndSort() {
-
   return (
-    <div>
+    <div className="overview-and-sort">
       <span>246 reviews </span>
       <select>
         <option value="Sort By">Sort By</option>
