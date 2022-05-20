@@ -8,12 +8,19 @@ const app = express();
 app.use(express.static(path.join(__dirname, '..', 'dist')));
 app.use(express.json());
 
-app.get('/reviews/averageRating', ctrl.reviews.getAll);
+app.use((req, res, next) => {
+  req.headers.Authorization = API_KEY;
+  next();
+});
+
+app.get('/reviews/:product_id', ctrl.reviews.getById);
+app.get('/reviews/averageRating/:product_id', ctrl.reviews.getAverageRating);
+app.get('/related/productList', ctrl.related.getAllRelated);
+app.get('/related/productInfo', ctrl.related.getRelatedInfo);
 
 // app.get('/products/', ctrl.products);
 
-app.get('/products/related', ctrl.related.getAllRelated);
-
 app.listen(3000, () => {
+  // eslint-disable-next-line no-console
   console.log('listening on port 3000');
 });
