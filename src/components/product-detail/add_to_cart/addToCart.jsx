@@ -1,8 +1,8 @@
 import React from 'react';
-import { useId } from '../../../context/GlobalStore';
+import { useGlobalContext } from '../../../context/GlobalStore';
 
 export default function AddToCart() {
-  const productId = useId();
+  const { productId } = useGlobalContext();
   return (
     <>
       <h1>
