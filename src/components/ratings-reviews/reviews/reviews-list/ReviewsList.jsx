@@ -24,7 +24,7 @@ export default function ReviewsList() {
 
   return (
     <div className="reviews-list">
-      {reviews.results.map((review, index) => <ReviewTile key={index} review={review} />)}
+      {reviews.results.map((review) => <ReviewTile key={review.id} review={review} />)}
     </div>
   );
 }
