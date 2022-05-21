@@ -1,11 +1,17 @@
 import React from 'react';
 
-export default function relatedCard() {
+export default function relatedCard(info) {
   return (
-    <>
-      <div>Related Products Card 1</div>
-      <div>Related Products Card 2</div>
-      <div>Related Products Card 3</div>
-    </>
+    <div className="related-items-card">
+      <p className="card-category">
+        { info.category }
+      </p>
+      <p className="card-name">
+        { info.name }
+      </p>
+      <p className="card-cost">
+        { info.default_price }
+      </p>
+    </div>
   );
 }
