@@ -8,7 +8,9 @@
   "rules": {
     "react/prop-types": 0,
     "react/no-array-index-key": 0,
+    "react/jsx-no-constructed-context-values": 0,
     "no-console": "off",
-    "no-plusplus":"off"
+    "no-plusplus": "off",
+    "no-unused-expressions": "off"
   }
 }
