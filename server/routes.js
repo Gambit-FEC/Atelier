@@ -13,7 +13,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/reviews/:product_id', ctrl.reviews.getById);
+app.get('/reviews/:product_id/:count/:sort', ctrl.reviews.getById);
 app.get('/reviews/averageRating/:product_id', ctrl.reviews.getAverageRating);
 
 app.listen(3000, () => {
