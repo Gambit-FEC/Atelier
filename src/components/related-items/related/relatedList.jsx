@@ -17,12 +17,16 @@ export default function relatedList() {
       return result.data;
     }).then((relatedIDs) => {
       // console.log(relatedIDs);
-      relatedIDs.forEach((elementID) => {
-        console.log(elementID);
-        axios.get('/related/productInfo', { params: { ID: elementID } }).then((result) => {
-          console.log(result.data);
-          allProductInfo.push(result);
-        });
+      relatedIDs.map((id) => (
+        allProductInfo.push(axios.get('/related/productInfo', { params: { ID: id } }))
+      ));
+      // console.log('ALL PRODUCT INFO: ', allProductInfo);
+      const allPromise = Promise.all(allProductInfo);
+      allPromise.then((values) => {
+        // console.log('VALUES FROM PROMISE ALL: ', values);
+        setRelatedInfo(values);
+      }).catch((error) => {
+        console.log(error);
       });
     });
   }
@@ -36,11 +40,11 @@ export default function relatedList() {
   return (
     <div className="related-items-list">
       <h3>Related Products</h3>
-      {/* {
-        allProductInfo.map((info) => (
-          <RelatedCard info={info} key={info.id} />
+      {
+        relatedInfo.map((info) => (
+          <RelatedCard info={info.data} key={info.data.id} />
         ))
-      } */}
+      }
     </div>
   );
 }

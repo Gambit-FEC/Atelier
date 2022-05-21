@@ -15,7 +15,7 @@ exports.getAllRelated = (req, res) => {
 exports.getRelatedInfo = (req, res) => {
   axios.get(`${API_URL}products/${req.query.ID}`, { headers: { Authorization: API_KEY } })
     .then((result) => {
-      console.log(result.data);
+      // console.log(result.data);
       res.status(200);
       res.send(result.data);
     });
