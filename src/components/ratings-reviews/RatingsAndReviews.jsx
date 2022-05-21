@@ -1,13 +1,21 @@
-// import React from 'react';
-// import { useId } from '../../context/GlobalStore';
+import React, { createContext, useState } from 'react';
+import Reviews from './reviews/Reviews';
+import Ratings from './ratings/Ratings';
 
-// export default function RatingsAndReviews() {
-//   const [productId, setProductId] = useId();
-//   return (
-//     <>
-//       <h1>{productId}</h1>
-//       <button type="button" onClick={() => setProductId(productId + 1)}>Increment</button>
-//       <div className="Ratings" />
-//     </>
-//   );
-// }
+export const RatingsAndReviewsContext = createContext();
+
+export default function RatingsAndReviews() {
+  const [reviewsCount, setReviewsCount] = useState(() => 5);
+  const [reviewsSort, setReviewsSort] = useState(() => 'relevant');
+  const value = {
+    reviewsCount, setReviewsCount
+  };
+  return (
+    <RatingsAndReviewsContext.Provider value={value}>
+      <div className="ratings-and-reviews">
+        <Ratings />
+        <Reviews />
+      </div>
+    </RatingsAndReviewsContext.Provider>
+  );
+}
