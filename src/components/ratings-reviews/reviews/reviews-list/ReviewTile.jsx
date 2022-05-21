@@ -9,8 +9,10 @@ export default function ReviewTile({ review }) {
   return (
     <div className="reviews-tile">
       <div>{review.rating}</div>
-      <div>{review.summary}</div>
-      <button type="button" onClick={handleReadMoreClick}>Read more</button>
+      <div>{review.date}</div>
+      {!readMore && <div>{review.summary}</div>}
+      {readMore && <div>{review.body}</div>}
+      {!readMore && <button type="button" onClick={handleReadMoreClick}>Read more</button>}
     </div>
   );
 }
