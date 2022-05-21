@@ -6,15 +6,15 @@ import { useGlobalContext } from '../../../context/GlobalStore';
 
 
 const onFacebookClick = () => {
-  window.open('https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fparse.com', 'Facebook', 'popup');
+  window.open('https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fparse.com', 'Facebook');
 };
 
 const onTwitterClick = () => {
-  window.open('https://twitter.com/intent/tweet', 'Twitter', 'popup');
+  window.open('https://twitter.com/intent/tweet', 'Twitter');
 };
 
 const onPinterestClick = () => {
-  window.open('https://www.pinterest.com/pin-builder/', 'Pinterest', 'popup');
+  window.open('https://www.pinterest.com/pin-builder/', 'Pinterest');
 };
 
 
