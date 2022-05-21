@@ -8,7 +8,7 @@ function App() {
   return (
     <GlobalContextProvider>
       <ProductDetail />
-      <QuestionsAndAnswers />
+      {/* <QuestionsAndAnswers /> */}
       <RelatedItems />
       <RatingsAndReviews />
     </GlobalContextProvider>
