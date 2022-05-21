@@ -15,6 +15,8 @@ app.use((req, res, next) => {
 
 app.get('/reviews/:product_id/:count/:sort', ctrl.reviews.getById);
 app.get('/reviews/averageRating/:product_id', ctrl.reviews.getAverageRating);
+app.get('/related/productList', ctrl.related.getAllRelated);
+app.get('/related/productInfo', ctrl.related.getRelatedInfo);
 
 app.listen(3000, () => {
   // eslint-disable-next-line no-console
