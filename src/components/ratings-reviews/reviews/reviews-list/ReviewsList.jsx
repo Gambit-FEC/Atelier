@@ -7,8 +7,7 @@ import { RatingsAndReviewsContext } from '../../RatingsAndReviews';
 export default function ReviewsList() {
   const { productId } = useGlobalContext();
   const [reviews, setReviews] = useState([]);
-  const { reviewsSort } = useContext(RatingsAndReviewsContext);
-  const { reviewsCount } = useContext(RatingsAndReviewsContext);
+  const { reviewsSort, reviewsCount, setShowAdd } = useContext(RatingsAndReviewsContext);
   const fetchReviewsById = (prodId) => (
     axios.get(`/reviews/${prodId}/${reviewsCount}/${reviewsSort}`)
       .catch((err) => {
@@ -20,6 +19,9 @@ export default function ReviewsList() {
     fetchReviewsById(productId)
       .then(({ data }) => {
         setReviews(data.results);
+        if (data.results.length < reviewsCount) {
+          setShowAdd(false);
+        }
       });
   }, [reviewsCount]);
 
