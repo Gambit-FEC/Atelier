@@ -8,10 +8,12 @@ export default function RatingsAndReviews() {
   const [reviewsCount, setReviewsCount] = useState(() => 2);
   const [reviewsSort, setReviewsSort] = useState(() => 'relevant');
   const [showAdd, setShowAdd] = useState(() => true);
+  const [reviewsMeta, setReviewsMeta] = useState(() => {});
   const value = {
     reviewsCount, setReviewsCount,
     reviewsSort, setReviewsSort,
     showAdd, setShowAdd,
+    reviewsMeta, setReviewsMeta,
   };
   return (
     <RatingsAndReviewsContext.Provider value={value}>
