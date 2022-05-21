@@ -18,7 +18,7 @@ export default function relatedList() {
     }).then((relatedIDs) => {
       // console.log(relatedIDs);
       relatedIDs.forEach((elementID) => {
-        console.log(elementID);
+        // console.log(elementID);
         axios.get('/related/productInfo', { params: { ID: elementID } }).then((result) => {
           console.log(result.data);
           allProductInfo.push(result);
