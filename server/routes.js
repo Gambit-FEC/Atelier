@@ -18,6 +18,8 @@ app.get('/reviews/averageRating/:product_id', ctrl.reviews.getAverageRating);
 app.get('/related/productList', ctrl.related.getAllRelated);
 app.get('/related/productInfo', ctrl.related.getRelatedInfo);
 
+app.get('/products/:productId', ctrl.products.getProductInfo);
+
 app.listen(3000, () => {
   // eslint-disable-next-line no-console
   console.log('listening on port 3000');

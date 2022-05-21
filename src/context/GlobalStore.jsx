@@ -9,9 +9,13 @@ export function useGlobalContext() {
 export function GlobalContextProvider({ children }) {
   const [productId, setProductId] = useState(40344);
   const [avgRating, setAvgRating] = useState(0);
+  // eslint-disable-next-line react/jsx-no-constructed-context-values
   const value = {
-    productId, setProductId,
-    avgRating, setAvgRating };
+    productId,
+    setProductId,
+    avgRating,
+    setAvgRating,
+  };
   return (
     <GlobalContext.Provider value={value}>
       {children}
