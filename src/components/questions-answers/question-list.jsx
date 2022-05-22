@@ -59,7 +59,7 @@ function ListQA() {
   return (
     <div>
       <div>{q.map((question) => <Question key={question.question_id} question={question} />)}</div>
-      <button type="button" onClick={handleExpandQuestions}>Expand Questions</button>
+      {questions.length > 4 ? <button type="button" onClick={handleExpandQuestions}>Expand Questions</button> : null }
     </div>
   );
 }
