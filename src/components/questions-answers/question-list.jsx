@@ -10,14 +10,21 @@ function ListQA() {
   // organizes data into QA tiles and passes data into a QA-Tile component for each tile
   const { productId } = useGlobalContext();
   const [questions, setQuestions] = useState([]);
+  const [q, setQ] = useState([]);
+  const [expandClicked, setExpandClicked] = useState(false);
 
   const getData = () => {
     axios.get(`${API_URL}qa/questions`, { params: { product_id: productId }, headers: { Authorization: API_KEY } })
       .then((res) => {
-        // console.log(res.data, 'res.data');
-        // console.log(res.data.results, 'res.data.results');
-        // setQuestions(res.data.results); // set new value of questions
-        setQuestions(res.data.results);
+        const qs = res.data.results;
+        const sortedQs = qs.sort((a, b) => a.question_helpfulness + b.question_helpfulness);
+        setQuestions(sortedQs);
+        return sortedQs;
+      })
+      .then((data) => {
+        // console.log(data, 'data in question list');
+        const slicedQs = data.slice(0, 4);
+        setQ(slicedQs);
       })
       .catch((err) => {
         alert(err);
@@ -28,14 +35,32 @@ function ListQA() {
     getData();
   }, []);
 
-  // const sortQuestions = (questions) => {
-  //   // sort by helpfulness ratings
-  // };
+  useEffect(() => {
+    if (questions && expandClicked) {
+      setQ(questions);
+    } else if (questions) {
+      const slicedQs = questions.slice(0, 4);
+      setQ(slicedQs);
+    }
+  }, [expandClicked]);
 
-  console.log(questions, 'questions');
+  const handleExpandQuestions = (e) => {
+    e.preventDefault();
+    if (questions && expandClicked) {
+      setExpandClicked(true);
+    } else if (questions) {
+      setExpandClicked(false);
+    }
+  };
+
+  // console.log(questions, 'questions');
+  // console.log(q, 'q in question list');
 
   return (
-    <div>{questions.map((q) => <Question key={q.question_id} question={q} />)}</div>
+    <div>
+      <div>{q.map((question) => <Question key={question.question_id} question={question} />)}</div>
+      <button type="button" onClick={handleExpandQuestions}>Expand Questions</button>
+    </div>
   );
 }
 

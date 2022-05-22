@@ -6,19 +6,19 @@ import Answer from './answer-tile';
 function Question({ question }) {
   const [answers, setAnswers] = useState([]);
   const [a, setA] = useState([]);
-  // const [la, setLA] = useState([]);
   const [expandClicked, setExpandClicked] = useState(false);
-  console.log(expandClicked, 'expandClicked ... should be false?');
+  // console.log(expandClicked, 'expandClicked ... should be false?');
 
   const getData = () => {
     axios.get(`${API_URL}qa/questions/${question.question_id}/answers`, { headers: { Authorization: API_KEY } })
       .then((res) => {
-        // const answers = res.data.results.sort()
-        setAnswers(res.data.results);
-        return res.data.results;
+        const sortedAnswers = res.data.results.sort((x, y) => x.helpfulness + y.helpfulness);
+        // console.log(sortedAnswers, 'sortedAnswers');
+        setAnswers(sortedAnswers);
+        return sortedAnswers;
       })
       .then((data) => {
-        console.log(data, 'data');
+        // console.log(data, 'data');
         const slicedAnswers = data.slice(0, 2);
         console.log(slicedAnswers);
         setA(slicedAnswers);
@@ -40,13 +40,10 @@ function Question({ question }) {
     }
   }, [expandClicked]);
 
-  console.log(question, 'question in TileQA');
-  console.log(answers, 'answers in TileQA');
-  console.log(a, 'a in TileQA');
+  // console.log(question, 'question in TileQA');
+  // console.log(answers, 'answers in TileQA');
+  // console.log(a, 'a in TileQA');
 
-  // display info for question only eg body, helpfulness, etc
-  // also, only display 4 questions unless button is clicked to display more
-  // map answers info for this particular question into a div for answers
   const handleExpandAnswers = (e) => {
     e.preventDefault();
     if (!expandClicked) {
