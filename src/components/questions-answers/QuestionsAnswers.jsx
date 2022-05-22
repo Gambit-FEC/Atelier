@@ -2,7 +2,7 @@ import React from 'react';
 // import {useContext} from 'react';
 // import { useId } from '../../context/GlobalStore';
 
-import ListQA from './qa-list';
+import ListQA from './question-list';
 // import AnswerForm from './answer-form';
 // import QuestionForm from './question-form';
 
