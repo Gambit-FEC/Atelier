@@ -12,7 +12,15 @@ function averageRatings(ratings) {
     total += ratingNums[i];
     sum += ratingNums[i] * i;
   }
-  return { average: JSON.stringify(Math.floor((sum / total) * 2) / 2), totalReviews: total };
+  return Math.floor((sum / total) * 2) / 2;
+}
+
+function totalReviews(ratings) {
+  let total = 0;
+  for (let key in Object.keys(ratings)) {
+    total += parseInt(ratings[key]) || 0;
+  }
+  return total;
 }
 
 exports.getById = (req, res) => {
@@ -26,24 +34,18 @@ exports.getById = (req, res) => {
     });
 };
 
-exports.getAverageRating = (req, res) => {
-  axios.get(`${API_URL}reviews/meta`, { params: req.params, headers: { Authorization: req.headers.Authorization } })
-    .then(({ data }) => {
-      res.status(200).send(averageRatings(data.ratings));
-    })
-    .catch((err) => {
-      console.log('error fetching average ratings from reviews API:', err);
-      res.sendStatus(400);
-    });
-};
-
 exports.getMeta = (req, res) => {
   axios.get(`${API_URL}reviews/meta`, { params: req.params, headers: { Authorization: req.headers.Authorization } })
     .then(({ data }) => {
-      res.status(200).send(data);
+      res.status(200).send(
+        Object.assign(data, {
+          averageRating: averageRatings(data.ratings),
+          totalReviews: totalReviews(data.ratings),
+        }),
+      );
     })
     .catch((err) => {
-      console.log('error fetching meta data from reviews API:', err);
+      console.log('error fetching average ratings from reviews API:', err);
       res.sendStatus(400);
     });
 };

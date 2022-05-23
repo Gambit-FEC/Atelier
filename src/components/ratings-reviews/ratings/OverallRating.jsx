@@ -5,13 +5,14 @@ import { RatingsAndReviewsContext } from '../RatingsAndReviews';
 
 export default function OverAllRating() {
   const { totalReviews, setTotalReviews } = useContext(RatingsAndReviewsContext);
-  const { productId, avgRating, setAvgRating } = useGlobalContext();
+  const { productId, setAvgRating } = useGlobalContext();
   useEffect(() => {
-    axios.get(`/reviews/averageRating/${productId}`)
+    axios.get(`/reviews/meta/${productId}`)
       .then(({data}) => {
-        console.log('fetched average')
+        console.log('fetched average');
+        console.log(data);
         setTotalReviews(data.totalReviews);
-        setAvgRating(data.average);
+        setAvgRating(data.averageRating);
       })
       .catch((err) => {
         console.log('Error fetching average ratings:', err);
