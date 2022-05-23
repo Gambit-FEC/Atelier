@@ -9,24 +9,42 @@ exports.getAllRelated = (req, res) => {
       // console.log(result.data);
       res.status(200);
       res.send(result.data);
+    })
+    .catch((err) => {
+      res.status(500);
+      res.send(err);
     });
 };
 
 exports.getRelatedInfo = (req, res) => {
-  console.log(req.params);
+  // console.log(req.params);
   axios.get(`${API_URL}products/${req.params.product_id}`, { headers: { Authorization: API_KEY } })
     .then((result) => {
-      // console.log(result.data);
+      const data = {
+        id: result.data.id,
+        name: result.data.name,
+        category: result.data.category,
+        price: result.data.default_price,
+      };
+      // console.log(data);
       res.status(200);
-      res.send(result.data);
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500);
+      res.send(err);
     });
 };
 
 exports.getRelatedStyle = (req, res) => {
   axios.get(`${API_URL}products/${req.params.product_id}/styles`, { headers: { Authorization: API_KEY } })
     .then((result) => {
-    // console.log(result.data);
+      // console.log(result.data.results);
       res.status(200);
-      res.send(result.data);
+      res.send(result.data.results[0].photos[0]);
+    })
+    .catch((err) => {
+      res.status(500);
+      res.send(err);
     });
 };
