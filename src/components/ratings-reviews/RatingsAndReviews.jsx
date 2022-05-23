@@ -24,9 +24,8 @@ export default function RatingsAndReviews() {
   useEffect(() => {
     axios.get(`/reviews/${productId}/${page}/${reviewsSort}`)
       .then(({ data }) => {
-        console.log('fetched reviews', data);
+        if (data.results.length < 2) setShowAdd(false);
         setReviews(reviews.concat(...data.results));
-        (data.results < 2) ? setShowAdd(false) : setShowAdd(true);
       })
       .catch((err) => {
         console.log('error fetching reviews', err);
