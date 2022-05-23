@@ -37,10 +37,10 @@ export default function ProductDetail() {
       <h2>productDetail</h2>
       <div>wow productsss</div>
       <p>hello productsss</p>
-      <AddToCart />
-      <ImageGallery />
       <ProductInfo />
       <StyleSelector />
+      <AddToCart />
+      <ImageGallery />
     </div>
 
   // <Wrapper>
