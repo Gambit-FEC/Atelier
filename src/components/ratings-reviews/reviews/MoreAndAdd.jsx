@@ -2,9 +2,9 @@ import React, { useContext } from 'react';
 import { RatingsAndReviewsContext } from '../RatingsAndReviews';
 
 export default function MoreAndAddReview() {
-  const { reviewsShown, setReviewsShown, showAdd } = useContext(RatingsAndReviewsContext);
+  const { page, setPage, showAdd } = useContext(RatingsAndReviewsContext);
   const handleMoreClick = () => {
-    setReviewsShown(() => reviewsShown + 2);
+    setPage(page + 1);
   };
   return (
     <div className="reviews-more-add">
