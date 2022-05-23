@@ -23,7 +23,23 @@ h1 {
 
 
 /* ratings & reviews */
+.review-photo-modal-bg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.625);
+}
 
+.review-photo-modal {
+  height: 40rem;
+  width: 40rem;
+  object-fit: scale-down;
+}
 
 
 
