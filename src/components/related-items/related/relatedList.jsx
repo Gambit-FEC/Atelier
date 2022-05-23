@@ -20,6 +20,9 @@ export default function relatedList() {
       relatedIDs.map((id) => (
         allProductInfo.push(axios.get('/related/productInfo', { params: { ID: id } }))
       ));
+      relatedIDs.map((id) => (
+        allProductInfo.push(axios.get('/related/productStyle', { params: { ID: id } }))
+      ));
       // console.log('ALL PRODUCT INFO: ', allProductInfo);
       const allPromise = Promise.all(allProductInfo);
       allPromise.then((values) => {
@@ -41,8 +44,8 @@ export default function relatedList() {
     <div className="related-items-list">
       <h3>Related Products</h3>
       {
-        relatedInfo.map((info) => (
-          <RelatedCard info={info.data} key={info.data.id} />
+        relatedInfo.map((info, index) => (
+          <RelatedCard info={info.data} key={index} />
         ))
       }
     </div>

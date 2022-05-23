@@ -20,3 +20,12 @@ exports.getRelatedInfo = (req, res) => {
       res.send(result.data);
     });
 };
+
+exports.getRelatedStyle = (req, res) => {
+  axios.get(`${API_URL}products/${req.query.ID}/styles`, { headers: { Authorization: API_KEY } })
+    .then((result) => {
+    // console.log(result.data);
+      res.status(200);
+      res.send(result.data);
+    });
+};
