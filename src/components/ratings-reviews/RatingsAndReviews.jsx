@@ -15,11 +15,12 @@ export default function RatingsAndReviews() {
   const [totalRatings, setTotalRatings] = useState(() => 0);
   const [reviews, setReviews] = useState(() => []);
   const [page, setPage] = useState(() => 1);
+  console.log('ratings and reviews [rendered]');
 
   useEffect(() => {
     setPage(1);
     setReviews([]);
-  }, [productId]);
+  }, [productId, reviewsSort]);
 
   useEffect(() => {
     axios.get(`/reviews/${productId}/${page}/${reviewsSort}`)
@@ -30,7 +31,7 @@ export default function RatingsAndReviews() {
       .catch((err) => {
         console.log('error fetching reviews', err);
       });
-  }, [page, reviewsSort]);
+  }, [page]);
 
   const value = {
     reviewsSort,
