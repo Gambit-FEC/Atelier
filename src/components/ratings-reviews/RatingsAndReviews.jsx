@@ -20,7 +20,7 @@ export default function RatingsAndReviews() {
   useEffect(() => {
     setPage(1);
     setReviews([]);
-  }, [productId, reviewsSort]);
+  }, [reviewsSort]);
 
   useEffect(() => {
     axios.get(`/reviews/${productId}/${page}/${reviewsSort}`)
