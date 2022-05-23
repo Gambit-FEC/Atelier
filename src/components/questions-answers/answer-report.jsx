@@ -7,7 +7,7 @@ function AnswerReport({ answer }) {
     e.preventDefault();
     if (clicked === false) {
       setClicked(true);
-      // answer.helpfulness += 1;
+      answer.helpfulness += 1;
       // modify helpfulness rating of answer including
       // sending a patch request?
     }
