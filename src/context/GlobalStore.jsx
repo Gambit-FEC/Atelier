@@ -7,9 +7,8 @@ export function useGlobalContext() {
 }
 
 export function GlobalContextProvider({ children }) {
-  const [productId, setProductId] = useState(40344);
+  const [productId, setProductId] = useState(40350);
   const [avgRating, setAvgRating] = useState(0);
-  // eslint-disable-next-line react/jsx-no-constructed-context-values
   const value = {
     productId,
     setProductId,
