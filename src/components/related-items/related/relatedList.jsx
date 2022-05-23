@@ -11,14 +11,16 @@ export default function relatedList() {
 
   function getRelatedProducts() {
     // console.log(productId);
-    axios.get('/related/productList', { params: { ID: productId } }).then((result) => {
+    axios.get(`/related/productList/${productId}`).then((result) => {
+    // axios.get('/related/productList', { params: { ID: productId } }).then((result) => {
       // console.log(result.data);
       setRelatedProducts(result.data);
       return result.data;
     }).then((relatedIDs) => {
       // console.log(relatedIDs);
       relatedIDs.map((id) => (
-        allProductInfo.push(axios.get('/related/productInfo', { params: { ID: id } }))
+        console.log(id)
+        // allProductInfo.push(axios.get(`/related/productInfo`, { params: { ID: id } }))
       ));
       relatedIDs.map((id) => (
         allProductInfo.push(axios.get('/related/productStyle', { params: { ID: id } }))
