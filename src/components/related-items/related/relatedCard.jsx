@@ -1,16 +1,17 @@
 import React from 'react';
 
 export default function relatedCard(info) {
+  console.log(info);
   return (
     <div className="related-items-card">
       <p className="card-category">
-        { info.category }
+        { info.info.category }
       </p>
       <p className="card-name">
-        { info.name }
+        { info.info.name }
       </p>
       <p className="card-cost">
-        { info.default_price }
+        { info.info.default_price }
       </p>
     </div>
   );
