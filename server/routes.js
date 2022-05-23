@@ -14,7 +14,7 @@ app.use((req, res, next) => {
 });
 
 // Reviews Routes
-app.get('/reviews/:product_id/:count/:sort', ctrl.reviews.getById);
+app.get('/reviews/:product_id/:page/:sort', ctrl.reviews.getById);
 app.get('/reviews/meta/:product_id', ctrl.reviews.getMeta);
 
 // Related Items Routes

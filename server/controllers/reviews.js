@@ -15,16 +15,16 @@ function averageRatings(ratings) {
   return Math.floor((sum / total) * 2) / 2;
 }
 
-function totalReviews(ratings) {
+function totalRatings(ratings) {
   let total = 0;
-  for (let key in Object.keys(ratings)) {
+  for (let key in ratings) {
     total += parseInt(ratings[key]) || 0;
   }
   return total;
 }
 
 exports.getById = (req, res) => {
-  axios.get(`${API_URL}reviews`, { params: req.params, headers: { Authorization: req.headers.Authorization } })
+  axios.get(`${API_URL}reviews`, { params: Object.assign(req.params, { count: 2 }), headers: { Authorization: req.headers.Authorization } })
     .then(({ data }) => {
       res.status(200).send(data);
     })
@@ -40,7 +40,7 @@ exports.getMeta = (req, res) => {
       res.status(200).send(
         Object.assign(data, {
           averageRating: averageRatings(data.ratings),
-          totalReviews: totalReviews(data.ratings),
+          totalRatings: totalRatings(data.ratings),
         }),
       );
     })

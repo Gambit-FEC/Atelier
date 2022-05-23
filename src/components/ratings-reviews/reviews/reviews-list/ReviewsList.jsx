@@ -4,6 +4,7 @@ import { RatingsAndReviewsContext } from '../../RatingsAndReviews';
 
 export default function ReviewsList() {
   const { reviews } = useContext(RatingsAndReviewsContext);
+  console.log(reviews);
   return (
     <div className="reviews-list">
       {reviews.map((review, idx) => <ReviewTile key={idx} review={review} />)}

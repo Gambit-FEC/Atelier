@@ -9,42 +9,43 @@ export const RatingsAndReviewsContext = createContext();
 export default function RatingsAndReviews() {
   const { productId } = useGlobalContext();
 
-  const [reviewsShown, setReviewsShown] = useState(() => 2);
   const [reviewsSort, setReviewsSort] = useState(() => 'relevant');
   const [showAdd, setShowAdd] = useState(() => true);
   const [reviewsMeta, setReviewsMeta] = useState(() => { });
-  const [totalReviews, setTotalReviews] = useState(() => 0);
+  const [totalRatings, setTotalRatings] = useState(() => 0);
   const [reviews, setReviews] = useState(() => []);
+  const [page, setPage] = useState(() => 1);
 
   useEffect(() => {
-    setReviewsShown(2);
+    setPage(1);
+    setReviews([]);
   }, [productId]);
 
   useEffect(() => {
-    axios.get(`/reviews/${productId}/${reviewsShown}/${reviewsSort}`)
+    axios.get(`/reviews/${productId}/${page}/${reviewsSort}`)
       .then(({ data }) => {
-        console.log('fetched reviews');
-        setReviews(data.results);
-        (reviewsShown < totalReviews) ? setShowAdd(true) : setShowAdd(false);
+        console.log('fetched reviews', data);
+        setReviews(reviews.concat(...data.results));
+        (data.results < 2) ? setShowAdd(false) : setShowAdd(true);
       })
       .catch((err) => {
         console.log('error fetching reviews', err);
       });
-  }, [productId, reviewsShown, reviewsSort]);
+  }, [page, reviewsSort]);
 
   const value = {
-    reviewsShown,
-    setReviewsShown,
     reviewsSort,
     setReviewsSort,
     showAdd,
     setShowAdd,
     reviewsMeta,
     setReviewsMeta,
-    totalReviews,
-    setTotalReviews,
+    totalRatings,
+    setTotalRatings,
     reviews,
     setReviews,
+    page,
+    setPage,
   };
 
   return (
