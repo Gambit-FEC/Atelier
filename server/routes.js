@@ -20,6 +20,9 @@ app.get('/related/productInfo', ctrl.related.getRelatedInfo);
 
 app.get('/products/:productId', ctrl.products.getProductInfo);
 
+// DP
+app.get('/qa/questions/:productId', ctrl.questions.getAllQuestions);
+
 app.listen(3000, () => {
   // eslint-disable-next-line no-console
   console.log('listening on port 3000');

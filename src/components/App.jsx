@@ -1,17 +1,17 @@
 import React from 'react';
 import { GlobalContextProvider } from '../context/GlobalStore';
-import RatingsAndReviews from './ratings-reviews/RatingsAndReviews';
-import RelatedItems from './related-items/RelatedItems';
+// import RatingsAndReviews from './ratings-reviews/RatingsAndReviews';
+// import RelatedItems from './related-items/RelatedItems';
 import QuestionsAnswers from './questions-answers/QuestionsAnswers';
-import ProductDetail from './product-detail/productDetail';
+// import ProductDetail from './product-detail/productDetail';
 
 function App() {
   return (
     <GlobalContextProvider>
       {/* <ProductDetail /> */}
-      {/* <QuestionsAndAnswers /> */}
-      <RelatedItems />
-      <RatingsAndReviews />
+      <QuestionsAnswers />
+      {/* <RelatedItems /> */}
+      {/* <RatingsAndReviews /> */}
     </GlobalContextProvider>
   );
 }
