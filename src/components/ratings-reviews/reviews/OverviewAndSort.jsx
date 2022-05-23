@@ -1,7 +1,5 @@
-import React, { useEffect, useContext } from 'react';
-import axios from 'axios';
+import React, { useContext } from 'react';
 import { RatingsAndReviewsContext } from '../RatingsAndReviews';
-import { useGlobalContext } from '../../../context/GlobalStore';
 
 export default function OverviewAndSort() {
   const { reviewsSort, setReviewsSort, totalRatings } = useContext(RatingsAndReviewsContext);
@@ -10,7 +8,12 @@ export default function OverviewAndSort() {
   };
   return (
     <div className="reviews-overview-and-sort">
-      <span>{ totalRatings } total reviews** sort by: </span>
+      <span>
+        {totalRatings}
+        {' '}
+        total reviews** sort by:
+        {' '}
+      </span>
       <select value={reviewsSort} onChange={onChange}>
         <option value="relevant">relevant</option>
         <option value="newest">newest</option>
