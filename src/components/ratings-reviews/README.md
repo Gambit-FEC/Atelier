@@ -11,6 +11,7 @@
 5. Product Breakdown
 
 ## Components
+*I* - Interactible
 
 - Ratings
   - Overall rating
