@@ -10,7 +10,7 @@ export default function OverviewAndSort() {
   };
   return (
     <div className="reviews-overview-and-sort">
-      <span>{ totalRatings } total reviews sort by: </span>
+      <span>{ totalRatings } total reviews** sort by: </span>
       <select value={reviewsSort} onChange={onChange}>
         <option value="relevant">relevant</option>
         <option value="newest">newest</option>
