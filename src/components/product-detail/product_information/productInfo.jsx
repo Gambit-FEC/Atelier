@@ -30,9 +30,9 @@ export default function ProductInfo() {
       <h4>product info test</h4>
       <div>wow product info</div>
       <p>hello product info</p>
-      <button src="./logoPhotos/facebook.png" onClick={() => onFacebookClick()} >FB</button>
-      <button src="./logoPhotos/twitter.png" onClick={() => onTwitterClick()} >Twitter</button>
-      <button src="./logoPhotos/interest.png" onClick={() => onPinterestClick()} >Pin</button>
+      <button src="/logoPhotos/facebook.png" onClick={() => onFacebookClick()} >FB</button>
+      <button src="/logoPhotos/twitter.png" onClick={() => onTwitterClick()} >Twitter</button>
+      <button src="/logoPhotos/pinterest.png" onClick={() => onPinterestClick()} >Pin</button>
     </>
   );
 }
