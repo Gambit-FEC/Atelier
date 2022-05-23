@@ -10,7 +10,6 @@ export default function OverAllRating() {
     axios.get(`/reviews/meta/${productId}`)
       .then(({data}) => {
         console.log('fetched average');
-        console.log(data);
         setTotalReviews(data.totalReviews);
         setAvgRating(data.averageRating);
       })

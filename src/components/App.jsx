@@ -7,9 +7,9 @@ import ProductDetail from './product-detail/productDetail';
 function App() {
   return (
     <GlobalContextProvider>
-      <ProductDetail />
+      {/* <ProductDetail /> */}
       {/* <QuestionsAndAnswers /> */}
-      <RelatedItems />
+      {/* <RelatedItems /> */}
       <RatingsAndReviews />
     </GlobalContextProvider>
   );

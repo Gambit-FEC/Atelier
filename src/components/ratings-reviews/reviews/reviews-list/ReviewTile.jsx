@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { format, parseISO } from 'date-fns';
 
 export default function ReviewTile({ review }) {
-  const [readMore, setReadMore] = useState(() => false);
+  const [readMore, setReadMore] = useState(false);
+  console.log('reviewtile rendered')
   function handleReadMoreClick() {
     setReadMore(!readMore);
   }
-  console.log(review);
   function showPhotos() {
     return review.photos.map((item) => <img key={item.id} src={item.url} alt={`review-${item.id}`} />);
   }

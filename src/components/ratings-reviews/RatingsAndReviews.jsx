@@ -17,10 +17,6 @@ export default function RatingsAndReviews() {
   const [reviews, setReviews] = useState(() => []);
 
   useEffect(() => {
-    setReviewsShown(2);
-  }, [productId]);
-
-  useEffect(() => {
     axios.get(`/reviews/${productId}/${reviewsShown}/${reviewsSort}`)
       .then(({ data }) => {
         console.log('fetched reviews');
@@ -30,7 +26,7 @@ export default function RatingsAndReviews() {
       .catch((err) => {
         console.log('error fetching reviews', err);
       });
-  }, [productId, reviewsShown, reviewsSort]);
+  }, [reviewsShown, reviewsSort]);
 
   const value = {
     reviewsShown,
