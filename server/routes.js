@@ -13,12 +13,17 @@ app.use((req, res, next) => {
   next();
 });
 
+// Reviews Routes
 app.get('/reviews/:product_id/:count/:sort', ctrl.reviews.getById);
 app.get('/reviews/averageRating/:product_id', ctrl.reviews.getAverageRating);
+app.get('/reviews/meta/:product_id', ctrl.reviews.getMeta);
+
+// Related Items Routes
 app.get('/related/productList', ctrl.related.getAllRelated);
 app.get('/related/productInfo', ctrl.related.getRelatedInfo);
 app.get('/related/productStyle', ctrl.related.getRelatedStyle);
 
+// Product Info Routes
 app.get('/products/:productId', ctrl.products.getProductInfo);
 
 app.listen(3000, () => {
