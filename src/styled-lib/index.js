@@ -9,9 +9,10 @@ function ratingToPercent(rating) {
 const StyledRatingStars = styled.div`
   display: inline-block;
   font-size: ${({ size }) => size};
-  background: linear-gradient(to right, black ${({ rating }) => ratingToPercent(rating)}, lightgrey ${({ rating }) => ratingToPercent(rating)});
+  background: linear-gradient(to right, purple ${({ rating }) => ratingToPercent(rating)}, black ${({ rating }) => ratingToPercent(rating)});
   background-clip: text;
   -webkit-background-clip: text;
+  -webkit-text-stroke: 1px black;
   color: transparent;
 `;
 
