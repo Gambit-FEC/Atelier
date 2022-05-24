@@ -27,8 +27,8 @@ export default function ProductDetail() {
   // const updateProduct = updateId();
 
   return (
-    <div className="productDetail">
-      <h1 className="pretty-header">
+    <div id="productDetail">
+      <h1 id="pretty-header">
         prodDetail
         {' '}
         {productId}
