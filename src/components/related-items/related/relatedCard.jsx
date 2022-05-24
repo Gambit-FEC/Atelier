@@ -1,69 +1,100 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { FcNext, FcPrevious} from 'react-icons/fc';
+import '../carousel/Carousel.css';
 import styled from 'styled-components';
-import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs';
-import { useGlobalContext } from '../../../context/GlobalStore';
+import StyledRatingStars from '../../../styled-lib';
 
-function relatedCard(info) {
-  // console.log('INFO: ', info);
+function relatedCard(data) {
   const placeholder = 'http://placecorgi.com/260/180';
+  const [current, setCurrent] = useState(0);
+  const display = data.data.slice(current, (current + 4));
+  const maxDisplay = data.data.length - 4;
+  // const length = data.data.length;
 
-  // const { productInfo } = useGlobalContext();
+  console.log(data.data);
+  // console.log(length);
+
+  const nextSlide = () => {
+    setCurrent(current === maxDisplay ? current : current + 1);
+  };
+  const prevSlide = () => {
+    setCurrent(current === 0 ? 0 : current - 1);
+  };
+
+  useEffect(() => {
+    setCurrent(0);
+  }, [data.data]);
+
   return (
-    <StyledBox>
-      <StyledCard>
-        <StyledImage
-          src={info.info.style.url === null ? placeholder : info.info.style.thumbnail_url}
-          alt="product-img"
-        />
-        <StyledCategory>
-          { info.info.product.category.toUpperCase() }
-        </StyledCategory>
-        <StyledName>
-          { info.info.product.name }
-        </StyledName>
-        <StyledCost>
-          { `$${info.info.product.price}` }
-        </StyledCost>
-        <p className="card-rating">
-          { info.info.rating.averageRating }
-          <BsStarFill />
-          <BsStarHalf />
-          <BsStar />
-        </p>
-      </StyledCard>
-    </StyledBox>
+    <section className="slider">
+      {/* <FcPrevious className="left-arrow" />
+      <FcNext className="right-arrow" /> */}
+      {
+        current !== 0
+          ? <FcPrevious className="left-arrow" onClick={prevSlide} />
+          : null
+      }
+      {
+        current !== maxDisplay
+          ? <FcNext className="right-arrow" onClick={nextSlide} />
+          : null
+      }
+      {
+        display.map((info, index) => {
+          return (
+            <StyledCard key={index}>
+            <StyleImg src={
+              info.style.thumbnail_url === null ? placeholder : info.style.thumbnail_url
+            }/>
+            <p>{info.product.category}</p>
+            <p>{info.product.name}</p>
+            <p>${info.product.price}</p>
+            {/* <p> {info.rating.averageRating}</p> */}
+            <StyledRatingStars rating={info.rating.averageRating} />
+            ★★★★★
+            </StyledCard>
+          )
+        })
+      }
+    </section>
   );
 }
 
-const StyledBox = styled.div`
-  display: flex;
-  align-item: stretch;
-`;
+export default relatedCard;
 
 const StyledCard = styled.div`
-  background-color: white;
-  padding: 10px;
-  margin: 10px;
-  border-radius: 5px;
-  color: black;
-  height: auto;
-  width: 200px;
-  border-style: solid;
-  border-width: thick;
+    display: flex;
+    border-radius: 10px;
+    padding: 15px;
+    border-width: 5px;
+    border-style: solid;
+    max-width: 300px;
+    width: 20%;
+    height: 420px;
+    margin: 10px;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
 `;
 
-const StyledImage = styled.img`
-  width: 200px;
-  height: 200px;
+const StyleImg = styled.img`
+  max-width: 100%;
+  max-height: 200px;
+  display: block;
+  margin: 0 auto;
 `;
-const StyledCategory = styled.p`
-  font-weight: normal;
-`;
-const StyledName = styled.p`
-  font-weight: bold;
-`;
-const StyledCost = styled.p`
-  font-weight: normal;
-`;
-
-export default relatedCard;
+// .container .box {
+//   width:540px;
+//   margin:50px;
+//   display:table;
+// }
+// .container .box .box-row {
+//   display:table-row;
+// }
+// .container .box .box-cell {
+//   display:table-cell;
+//   border:1px solid black;
+//   width:25%;
+//   padding:10px;
+// }
