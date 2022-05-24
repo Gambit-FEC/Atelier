@@ -1,29 +1,69 @@
 import React from 'react';
+import styled from 'styled-components';
+import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs';
 import { useGlobalContext } from '../../../context/GlobalStore';
 
-export default function relatedCard(info) {
-  console.log('INFO: ', info.info);
+function relatedCard(info) {
+  // console.log('INFO: ', info);
   const placeholder = 'http://placecorgi.com/260/180';
 
   // const { productInfo } = useGlobalContext();
   return (
-    <div className="related-items-card">
-      <img
-        src={info.info.style.url === null ? placeholder : info.info.style.thumbnail_url}
-        alt="product-img"
-      />
-      <p className="card-category">
-        { info.info.product.category }
-      </p>
-      <p className="card-name">
-        { info.info.product.name }
-      </p>
-      <p className="card-cost">
-        { info.info.product.price }
-      </p>
-      <p className="card-rating">
-        { info.info.rating.averageRating }
-      </p>
-    </div>
+    <StyledBox>
+      <StyledCard>
+        <StyledImage
+          src={info.info.style.url === null ? placeholder : info.info.style.thumbnail_url}
+          alt="product-img"
+        />
+        <StyledCategory>
+          { info.info.product.category.toUpperCase() }
+        </StyledCategory>
+        <StyledName>
+          { info.info.product.name }
+        </StyledName>
+        <StyledCost>
+          { `$${info.info.product.price}` }
+        </StyledCost>
+        <p className="card-rating">
+          { info.info.rating.averageRating }
+          <BsStarFill />
+          <BsStarHalf />
+          <BsStar />
+        </p>
+      </StyledCard>
+    </StyledBox>
   );
 }
+
+const StyledBox = styled.div`
+  display: flex;
+  align-item: stretch;
+`;
+
+const StyledCard = styled.div`
+  background-color: white;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  color: black;
+  height: auto;
+  width: 200px;
+  border-style: solid;
+  border-width: thick;
+`;
+
+const StyledImage = styled.img`
+  width: 200px;
+  height: 200px;
+`;
+const StyledCategory = styled.p`
+  font-weight: normal;
+`;
+const StyledName = styled.p`
+  font-weight: bold;
+`;
+const StyledCost = styled.p`
+  font-weight: normal;
+`;
+
+export default relatedCard;
