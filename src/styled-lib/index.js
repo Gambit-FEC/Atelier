@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 function avgRatingToPercent(rating) {
+  console.log(rating);
   return [`${rating * 20}%`, `${100 - rating * 20}%`];
 }
 

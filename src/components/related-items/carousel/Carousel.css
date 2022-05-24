@@ -1,15 +1,8 @@
 .slider{
   position: relative;
-  height: 100vh;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-}
-
-.image {
-  width: 250px;
-  height: 100px;
-  border-radius: 10px;
 }
 
 .right-arrow {
@@ -30,4 +23,10 @@
   z-index: 10;
   cursor: pointer;
   user-select: none;
+}
+
+.product {
+  text-align: center;
+  width: 250px;
+  height: auto;
 }
