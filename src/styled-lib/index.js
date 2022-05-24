@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 function ratingToPercent(rating) {
+  console.log(rating)
   return `${rating * 20}%`;
 }
 

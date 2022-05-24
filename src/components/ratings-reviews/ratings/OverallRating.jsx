@@ -28,7 +28,7 @@ export default function OverallRating() {
   return (
     <div className="ratings-overall">
       <span style={{ fontSize: '48px' }}>{avgRating}</span>
-      <StyledRatingStars size="xxx-large" rating={avgRating}>☆☆☆☆☆</StyledRatingStars>
+      <StyledRatingStars size="xxx-large" rating={avgRating}>★★★★★</StyledRatingStars>
       {recommended && <div>{`${Math.floor((recommended.true / (recommended.true + recommended.false)) * 100)}% of reviews recommend this product`}</div>}
     </div>
   );
