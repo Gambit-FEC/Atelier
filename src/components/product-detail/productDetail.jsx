@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
 import { useGlobalContext } from '../../context/GlobalStore';
 import configData from '../../../config.js';
 import AddToCart from './add_to_cart/addToCart';
@@ -8,19 +9,17 @@ import ProductInfo from './product_information/productInfo';
 import StyleSelector from './style_selector/styleSelector';
 
 // //styled-components ex
-// import styled from 'styled-components';
-// // Create a Title component that'll render an <h1> tag with some styles
-// const ProductDetailContainer = styled.h1`
-//   font-size: 1.5em;
-//   text-align: center;
-//   color: palevioletred;
-// `;
-// // Create a Wrapper component that'll render a <section> tag with some styles
-// const Wrapper = styled.section`
-//   padding: 4em;
-//   background: papayawhip;
-// `;
-// axios.get(`${API_URL}reviews/`, { params: { product_id }, headers: { Authorization: API_KEY } })
+// Create a Title component that'll render an <h1> tag with some styles
+const ProductDetailContainer = styled.h2`
+  font-size: 1.5em;
+  text-align: center;
+  color: palevioletred;
+`;
+// Create a Wrapper component that'll render a <section> tag with some styles
+const Wrapper = styled.section`
+  padding: 4em;
+  background: papayawhip;
+`;
 
 export default function ProductDetail() {
   // test------
@@ -28,31 +27,26 @@ export default function ProductDetail() {
   // const updateProduct = updateId();
 
   return (
-    <div className="productDetail">
-      <h1 className="pretty-header">
+    <div id="productDetail">
+      <h1 id="pretty-header">
         prodDetail
         {' '}
         {productId}
       </h1>
-      <h2>productDetail</h2>
-      <div>wow productsss</div>
-      <p>hello productsss</p>
-      <AddToCart />
-      <ImageGallery />
+      {/* <Wrapper>
+        <ProductDetailContainer>
+          <div>
+            <div>productDetail</h2>
+            <div>wow</div>
+            <p>hello</p>
+          </div>
+          </ProductDetailContainer>
+        </Wrapper> */}
+
       <ProductInfo />
-      <StyleSelector />
+      {/* <StyleSelector />
+      <AddToCart />
+      <ImageGallery /> */}
     </div>
-
-  // <Wrapper>
-  //   <ProductDetailContainer>
-
-  // <div>
-  // <h2>productDetail</h2>
-  // <div>wow</div>
-  // <p>hello</p>
-  // </div>
-
-  //   </ProductDetailContainer>
-  // </Wrapper>
   );
 }
