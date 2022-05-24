@@ -15,12 +15,18 @@ export default function RatingsAndReviews() {
   const [totalRatings, setTotalRatings] = useState(() => 0);
   const [reviews, setReviews] = useState(() => []);
   const [page, setPage] = useState(() => 1);
-  const [reviewsFilter, setReviewsFilter] = useState(() => '');
+  const [reviewsFilter, setReviewsFilter] = useState({
+    1: false,
+    2: false,
+    3: false,
+    4: false,
+    5: false
+  });
   console.log('ratings and reviews [rendered]');
 
   useEffect(() => {
     if (page === 1) {
-      axios.get(`/reviews/${productId}/${page}/${reviewsSort}?filter=${reviewsFilter}`)
+      axios.get(`/reviews/${productId}/${page}/${reviewsSort}`)
         .then(({ data }) => {
           if (data.results.length < 2) setShowAdd(false);
           setReviews(data.results);
@@ -36,7 +42,7 @@ export default function RatingsAndReviews() {
   }, [reviewsSort]);
 
   useEffect(() => {
-    axios.get(`/reviews/${productId}/${page}/${reviewsSort}?filter=${reviewsFilter}`)
+    axios.get(`/reviews/${productId}/${page}/${reviewsSort}`)
       .then(({ data }) => {
         if (data.results.length < 2) setShowAdd(false);
         setReviews(reviews.concat(...data.results));
@@ -45,10 +51,6 @@ export default function RatingsAndReviews() {
         console.log('error fetching reviews', err);
       });
   }, [page]);
-
-  useEffect(() => {
-
-  }, [reviewsFilter])
 
   const value = {
     reviewsSort,

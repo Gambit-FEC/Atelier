@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { RatingBar } from '../../../styled-lib';
+import { RatingBar, StarButton } from '../../../styled-lib';
 import { RatingsAndReviewsContext } from '../RatingsAndReviews';
 
 export default function StarBars() {
@@ -15,20 +15,29 @@ export default function StarBars() {
     }
     return percents.map((item) => Math.floor((item / highestStar) * 100));
   }
-  function handleRatingClick(star) {
-    if (star === reviewsFilter) setReviewsFilter('');
-    else setReviewsFilter(star);
+  function handleRatingClick(star, id) {
+    setReviewsFilter(Object.assign({}, reviewsFilter, reviewsFilter[star] = !reviewsFilter[star]));
+  }
+  function whichColor(index) {
+    return reviewsFilter[index] ? 'purple' : '#069';
   }
   return (
     <div className="ratings-star-bars">
       {reviewsMeta && (
         <>
           {calcPercents(reviewsMeta.ratings).map((item, index) => (
-            <div id={`star-bar-${index}`} key={index} onClick={() => handleRatingClick(index.toString())}>
+            <StarButton
+              color={whichColor(index)}
+              id={`star-bar-${index}`}
+              key={index}
+              onClick={(e) =>
+                handleRatingClick(index.toString(), `star-bar-${index}`)
+              }
+            >
               {index === 1 && <div>{`${index} Star`}</div>}
               {index !== 1 && <div>{`${index} Stars`}</div>}
               <RatingBar percent={item} />
-            </div>
+            </StarButton>
           ))}
         </>
       )}

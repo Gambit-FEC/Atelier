@@ -15,9 +15,19 @@ const StyledRatingStars = styled.div`
 `;
 
 const RatingBar = styled.div`
-background: linear-gradient(to right, black ${({ percent }) => percent + '%'}, lightgrey ${({ percent }) => percent + '%'});
-width: 125px;
-height: 8px;
+  background: linear-gradient(to right, black ${({ percent }) => percent + '%'}, lightgrey ${({ percent }) => percent + '%'});
+  width: 125px;
+  height: 8px;
 `;
 
-export { StyledRatingStars, RatingBar };
+const StarButton = styled.div`
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: ${({ color }) => color};
+  text-decoration: underline;
+  cursor: pointer;
+`
+
+export { StyledRatingStars, RatingBar, StarButton };
