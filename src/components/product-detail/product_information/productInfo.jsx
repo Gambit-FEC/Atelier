@@ -1,18 +1,7 @@
 import axios from 'axios';
 import React, { useState, useContext, useEffect } from 'react';
+import styled from 'styled-components';
 import { useGlobalContext } from '../../../context/GlobalStore';
-import OverAllRating from '../../ratings-reviews/ratings/OverallRating';
-
-// Stars and Reviews
-// const Stars = () => {
-//   const totalStars = 5;
-//   const activeStars = 3;
-//   const filledStars = '&#9733';
-//   const unfilledStars = '&#9734';
-//   [...new Array(totalStars)].map((arr, index) => {
-//     return index < activeStars ? <filledStars /> : <unfilledStars />;
-//   })
-// }
 
 // Share on social media------------------------------
 const onFacebookClick = () => {
@@ -27,41 +16,50 @@ const onPinterestClick = () => {
   window.open('https://www.pinterest.com/pin-builder/', 'Pinterest');
 };
 
-const totalReviews = (event) => {
-  axios.get(`/reviews/averageRating/${40344}`)
-  // axios.get(`/reviews/averageRating/${productId}`)
-    .then((results) => {
-      console.log('total reviews results??', results.data.totalReviews);
-      return results.data.totalReviews;
-    })
-    .catch((err) => { console.log('onclickreviews error', err); });
-};
-
 export default function ProductInfo() {
   const { productId } = useGlobalContext();
   const [productInfo, setProductInfo] = useState([]);
   const [allReviews, setAllReviews] = useState([]);
+  const [avgReviews, setAvgReviews] = useState([]);
+
 
   const totalStars = 5;
   // const totalFilled = avgRating;
   // console.log('cant call the fxn totalFilled', totalFilled);
-  const reviewAmount = 10;
+  const reviewAmount = avgReviews;
+  console.log('review amount??', reviewAmount / 5 * 100);
 
   // Reviews and stars---------------------------------
-  // const reviewsLine = event.currentTarget;
-  //   console.log('reviews click works?', reviewsLine);
-  //   // need to send client to the reviews section
-  //   axios.get(`/reviews/averageRating/${productId}`)
-  //   // axios.get(`/reviews/averageRating/${productId}`)
-  //     .then((results) => {
-  //       console.log('results??', results.data);
-  //       setAllReviews(results.data);
-  //     })
-  //     .catch((err) => { console.log('onclickreviews error', err); });
+  useEffect(() => {
+    // const reviewsLine = event.currentTarget;
+    console.log('reviews click works?');
+    // need to send client to the reviews section
+    axios.get(`/reviews/meta/${productId}`)
+    // axios.get(`/reviews/averageRating/${productId}`)
+      .then((results) => {
+        console.log('results??', results.data.totalRatings);
+        setAllReviews(results.data.totalRatings);
+        setAvgReviews(results.data.averageRating);
+      })
+      .catch((err) => { console.log('onclickreviews error', err); });
+  }, [productId]);
 
-  const onClickReviews = (event) => {
-
-  };
+  // // eslint-disable-next-line no-undef
+  // starRating(() => {
+  //   [...Array(totalStars)].map((star, index) => {
+  //     index += 1;
+  //     return (
+  //       <button
+  //         type="button"
+  //         key={index}
+  //         className={index <= rating ? 'on' : 'off'}
+  //         onClick={() => setRating(index)}
+  //       >
+  //         <span className="star">&#9733;</span>
+  //       </button>
+  //     );
+  //   });
+  // });
 
   // Grabs item data from server-------------------------
   useEffect(() => {
@@ -76,12 +74,6 @@ export default function ProductInfo() {
       })
       .catch((err) => { console.log('getproduct didnt work', err); });
   }, [productId]);
-  // console.log('outside prodInfo', productInfo);
-  // const [overview, styles] = productInfo;
-  // console.log('overview', overview);
-  // console.log('styles', styles);
-
-
 
   return (
     <>
@@ -90,32 +82,35 @@ export default function ProductInfo() {
         {' '}
         {productId}
       </h1>
-      <div id="star-rating">
-        {/* {[...Array(totalStars).keys()].map((key) => (
-          <span key={key} isFilled={key < totalFilled} />
-        ))} */}
-        {[...Array(totalStars)].map((star) => (
-          <span id="star">&#9733;</span>
-        ))}
-      </div>
-      <a href="#ratings-and-reviews" id="see-reviews">
-        Read all
-        {' '}
-        {reviewAmount}
-        {' '}
-        reviews
-      </a>
-      <div id="product-category">{productInfo[0] ? productInfo[0].category : null}</div>
-      <p id="product-name">{productInfo[0] ? productInfo[0].name : null}</p>
-      {/* <p id="price">{productInfo[1] ? productInfo[1].results[0].sale_price : productInfo[1].results[0].original_price}</p> */}
-      <p id="product-description">{productInfo[0] ? productInfo[0].description : null}</p>
-      <div id="social-media">
-        <p>Share this item!</p>
-        <button src="/logoPhotos/facebook.png" onClick={() => onFacebookClick()}>FB</button>
-        <button src="/logoPhotos/twitter.png" onClick={() => onTwitterClick()}>Twitter</button>
-        <button src="/logoPhotos/pinterest.png" onClick={() => onPinterestClick()}>Pin</button>
+      <div>
+        <Stars average={Math.floor(reviewAmount * 2) / 2}>☆☆☆☆☆</Stars>
+        {/* <Stars average={Math.floor(reviewAmount * 2) / 2}>★★★★★</Stars> */}
+        <a href="#ratings-and-reviews" id="see-reviews">
+          Read all
+          {' '}
+          {allReviews || 'no ratings'}
+          {' '}
+          reviews
+        </a>
+        <div id="product-category">{productInfo[0] ? productInfo[0].category : null}</div>
+        <p id="product-name">{productInfo[0] ? productInfo[0].name : null}</p>
+        {/* <p id="price">{productInfo[1] ? productInfo[1].results[0].sale_price : productInfo[1].results[0].original_price}</p> */}
+        <p id="product-description">{productInfo[0] ? productInfo[0].description : null}</p>
+        <div id="social-media">
+          <p>Share this item!</p>
+          <button src="/logoPhotos/facebook.png" onClick={() => onFacebookClick()}>FB</button>
+          <button src="/logoPhotos/twitter.png" onClick={() => onTwitterClick()}>Twitter</button>
+          <button src="/logoPhotos/pinterest.png" onClick={() => onPinterestClick()}>Pin</button>
+        </div>
       </div>
 
     </>
   );
 }
+
+// CSS styled-components ----------------------
+const Stars = styled.div`
+    background: linear-gradient(90deg, #FDCC0D 0 ${(totalStars) => totalStars.average / 5 * 100}%, grey ${(reviewAmount) => reviewAmount.average / 5 * 100}% 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  `;
