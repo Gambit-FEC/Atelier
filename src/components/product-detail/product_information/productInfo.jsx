@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { useGlobalContext } from '../../../context/GlobalStore';
-import StyledRatingStars from '../../../styled-lib';
+import { StyledRatingStars } from '../../../styled-lib';
 
 // Share on social media------------------------------
 const onFacebookClick = () => {
