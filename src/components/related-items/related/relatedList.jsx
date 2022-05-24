@@ -55,18 +55,7 @@ export default function relatedList() {
   return (
     <div className="related-items-list">
       <h3>Related Products</h3>
-      <StyledBox>
-        {
-          relatedInfo.map((info, index) => (
-            <RelatedCard info={info} key={index} />
-          ))
-        }
-      </StyledBox>
+      <RelatedCard data={relatedInfo} />
     </div>
   );
 }
-
-const StyledBox = styled.div`
-  display: flex;
-  align-item: stretch;
-`;
