@@ -18,9 +18,20 @@ export default function RatingsAndReviews() {
   console.log('ratings and reviews [rendered]');
 
   useEffect(() => {
-    setPage(1);
-    setReviews([]);
-    setShowAdd(true);
+    if (page === 1) {
+      axios.get(`/reviews/${productId}/${page}/${reviewsSort}`)
+        .then(({ data }) => {
+          if (data.results.length < 2) setShowAdd(false);
+          setReviews(data.results);
+        })
+        .catch((err) => {
+          console.log('error fetching reviews', err);
+        });
+    } else {
+      setPage(1);
+      setReviews([]);
+      setShowAdd(true);
+    }
   }, [reviewsSort]);
 
   useEffect(() => {
