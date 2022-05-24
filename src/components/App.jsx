@@ -8,9 +8,9 @@ function App() {
   console.log('app [rerendered]');
   return (
     <GlobalContextProvider>
-      {/* <ProductDetail /> */}
+      <ProductDetail />
       {/* <QuestionsAndAnswers /> */}
-      {/* <RelatedItems /> */}
+      <RelatedItems />
       <RatingsAndReviews />
     </GlobalContextProvider>
   );
