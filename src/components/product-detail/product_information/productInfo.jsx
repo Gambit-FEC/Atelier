@@ -27,20 +27,6 @@ const onPinterestClick = () => {
   window.open('https://www.pinterest.com/pin-builder/', 'Pinterest');
 };
 
-// Reviews and stars---------------------------------
-const onClickReviews = (event) => {
-  const reviewsLine = event.currentTarget;
-  console.log('reviews click works?', reviewsLine);
-  // need to send client to the reviews section
-  axios.get(`/reviews/averageRating/${40344}`)
-  // axios.get(`/reviews/averageRating/${productId}`)
-    .then((results) => {
-      console.log('results??', results.data.average);
-      return results.data.average;
-    })
-    .catch((err) => { console.log('onclickreviews error', err); });
-};
-
 const totalReviews = (event) => {
   axios.get(`/reviews/averageRating/${40344}`)
   // axios.get(`/reviews/averageRating/${productId}`)
@@ -51,34 +37,33 @@ const totalReviews = (event) => {
     .catch((err) => { console.log('onclickreviews error', err); });
 };
 
-// const avgRating = () => {
-//   axios.get(`/reviews/averageRating/${40344}`)
-//     .then((results) => {
-//       console.log('avg rating results??', results.data.average);
-//       return results.data.average
-//     })
-//     .catch((err) => { console.log('onclickreviews error', err); });
-// };
-
 export default function ProductInfo() {
   const { productId } = useGlobalContext();
   const [productInfo, setProductInfo] = useState([]);
+  const [allReviews, setAllReviews] = useState([]);
+
   const totalStars = 5;
   // const totalFilled = avgRating;
   // console.log('cant call the fxn totalFilled', totalFilled);
   const reviewAmount = 10;
 
-  // function getProduct() {
-  //   axios.get(`/products/${productId}`)
-  //     .then((result) => {
-  //       console.log('does getProduct work???', result.data);
-  //       setProductInfo(result.data);
-  //       console.log('productinfo?', productInfo);
-  //       // if (productInfo[2][2].original_price)
+  // Reviews and stars---------------------------------
+  // const reviewsLine = event.currentTarget;
+  //   console.log('reviews click works?', reviewsLine);
+  //   // need to send client to the reviews section
+  //   axios.get(`/reviews/averageRating/${productId}`)
+  //   // axios.get(`/reviews/averageRating/${productId}`)
+  //     .then((results) => {
+  //       console.log('results??', results.data);
+  //       setAllReviews(results.data);
   //     })
-  //     .catch((err) => { console.log('getproduct didnt work', err); });
-  // }
+  //     .catch((err) => { console.log('onclickreviews error', err); });
 
+  const onClickReviews = (event) => {
+
+  };
+
+  // Grabs item data from server-------------------------
   useEffect(() => {
     console.log('useEffect working?');
     // getProduct();
@@ -91,10 +76,10 @@ export default function ProductInfo() {
       })
       .catch((err) => { console.log('getproduct didnt work', err); });
   }, [productId]);
-  console.log('outside prodInfo', productInfo);
-  const [overview, styles] = productInfo;
-  console.log('overview', overview);
-  console.log('styles', styles);
+  // console.log('outside prodInfo', productInfo);
+  // const [overview, styles] = productInfo;
+  // console.log('overview', overview);
+  // console.log('styles', styles);
 
 
 
@@ -105,33 +90,26 @@ export default function ProductInfo() {
         {' '}
         {productId}
       </h1>
-      <div className="star-rating">
+      <div id="star-rating">
         {/* {[...Array(totalStars).keys()].map((key) => (
           <span key={key} isFilled={key < totalFilled} />
         ))} */}
         {[...Array(totalStars)].map((star) => (
-          <span className="star">&#9733;</span>
+          <span id="star">&#9733;</span>
         ))}
       </div>
-      <div className="see-reviews" onClick={onClickReviews}>
-        View all
+      <a href="#ratings-and-reviews" id="see-reviews">
+        Read all
         {' '}
         {reviewAmount}
         {' '}
         reviews
-      </div>
-      {/* {
-        !productId.length ? null :
-          productId.map((details) => {
-            console.log('PRODUCT ID???', productId),
-            <p>{details}</p>
-          })
-      } */}
-      <div className="product-category">{productInfo[0] ? productInfo[0].category : null}</div>
-      <p className="product-name">{productInfo[0] ? productInfo[0].name : null}</p>
-      <p className="price">{productInfo[0] ? productInfo[0].category : null}</p>
-      <p className="product-description">product overview</p>
-      <div className="social-media">
+      </a>
+      <div id="product-category">{productInfo[0] ? productInfo[0].category : null}</div>
+      <p id="product-name">{productInfo[0] ? productInfo[0].name : null}</p>
+      {/* <p id="price">{productInfo[1] ? productInfo[1].results[0].sale_price : productInfo[1].results[0].original_price}</p> */}
+      <p id="product-description">{productInfo[0] ? productInfo[0].description : null}</p>
+      <div id="social-media">
         <p>Share this item!</p>
         <button src="/logoPhotos/facebook.png" onClick={() => onFacebookClick()}>FB</button>
         <button src="/logoPhotos/twitter.png" onClick={() => onTwitterClick()}>Twitter</button>
