@@ -75,13 +75,12 @@ export default function ProductInfo() {
         <Price>{productInfo[1] ? productInfo[1].results[0].original_price : null}</Price>
         <SalePrice>{productInfo[1] ? productInfo[1].results[0].sale_price : null}</SalePrice>
 
-        <div id="social-media">
+        <Share id="social-media">
           <p>Share this item!</p>
-          <button id="fb" src="/logoPhotos/facebook.png" onClick={() => onFacebookClick()}>FB</button>
-          <button id="twitter" src="/logoPhotos/twitter.png" onClick={() => onTwitterClick()}>Twitter</button>
-          {/* <TwitterShare src="./logoPhotos/twitter.png" onClick={() => onTwitterClick()} /> */}
-          <button id="pin" src="/logoPhotos/pinterest.png" onClick={() => onPinterestClick()}>Pin</button>
-        </div>
+          <Facebook src="logoPhotos/facebook.png" onClick={() => onFacebookClick()} />
+          <Twitter src="logoPhotos/twitter.png" onClick={() => onTwitterClick()} />
+          <Pin src="logoPhotos/pinterest.png" onClick={() => onPinterestClick()} />
+        </Share>
       </div>
 
     </Wrapper>
@@ -101,7 +100,7 @@ const Wrapper = styled.div`
 
 const Category = styled.div`
   font-weight: lighter;
-  color: purple;
+  color: rgba(102, 91, 165, 1);
   text-transform: uppercase;
 `;
 
@@ -117,8 +116,25 @@ const Price = styled.h4`
 const SalePrice = styled.h4`
   color: red;
 `
-// const TwitterShare = styled.img`
-//     width: 25px;
-//     height: 25px;
-//     padding-right: 5px;
-//   `;
+
+const Share = styled.h3`
+  font-weight: bold;
+  justify-content: center;
+`
+
+const Facebook = styled.img`
+    width: 25px;
+    height: 25px;
+    padding-right: 10px;
+  `;
+
+const Twitter = styled.img`
+    width: 25px;
+    height: 25px;
+    padding-right: 10px;
+  `;
+const Pin = styled.img`
+    width: 25px;
+    height: 25px;
+    padding-right: 10px;
+  `;
