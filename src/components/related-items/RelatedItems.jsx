@@ -8,7 +8,7 @@ export default function RelatedItems() {
   const { setProductId } = useGlobalContext();
 
   return (
-    <div className="related-products-module">
+    <div id="related-products-module">
       <h1>RELATED ITEMS MODULE ITEM ID: {productId}</h1>
       <button type="button" onClick={() => setProductId(productId + 1)}>Increment</button>
       <RelatedList />
