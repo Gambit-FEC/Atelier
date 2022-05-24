@@ -19,7 +19,6 @@ export default function RatingsAndReviews() {
 
   useEffect(() => {
     if (page === 1) {
-      console.log('page was already 1')
       axios.get(`/reviews/${productId}/${page}/${reviewsSort}`)
         .then(({ data }) => {
           if (data.results.length < 2) setShowAdd(false);
