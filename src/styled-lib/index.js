@@ -6,10 +6,11 @@ function avgRatingToPercent(rating) {
 
 const StyledRatingStars = styled.div`
   display: inline-block;
-  font-size: xxx-large;
-  background: linear-gradient(to right, black ${({ rating }) => avgRatingToPercent(rating)[0]}, lightgrey ${({ rating }) => avgRatingToPercent(rating)[1]});
+  font-size: ${({ size }) => size };
+  background: linear-gradient(to right, purple ${({ rating }) => avgRatingToPercent(rating)[0]}, black ${({ rating }) => avgRatingToPercent(rating)[1]});
   background-clip: text;
   -webkit-background-clip: text;
+  -webkit-text-stroke: 1px black;
   color: transparent;
 `;
 
