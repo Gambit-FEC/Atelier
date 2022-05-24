@@ -23,10 +23,10 @@ export default function relatedList() {
   function getRelatedProducts() {
     const listOfPromises = [];
     axios.get(`/related/productList/${productId}`).then((productIdsResponse) => {
-      console.log(productIdsResponse);
+      // console.log(productIdsResponse);
       const listOfIds = productIdsResponse.data;
       listOfIds.forEach((id) => {
-        console.log('IDs: ', id);
+        // console.log('IDs: ', id);
         const promise = Promise.all([getRelatedInfo(id),
           getRelatedStyle(id), getRelatedRating(id)]);
         listOfPromises.push(promise);
