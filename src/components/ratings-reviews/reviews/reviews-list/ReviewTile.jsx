@@ -17,24 +17,26 @@ export default function ReviewTile({ review }) {
   }
   return (
     <>
-      {!showModal.show && (
-        <div className="reviews-tile">
-          <div>
-            {review.rating}
-            ⭐
-          </div>
-          <div>{format(parseISO(review.date), 'MMM dd, yyyy')}</div>
-          <div style={{ fontWeight: 'bold' }}>{review.summary}</div>
-          {readMore && <p>{`${review.body.slice(0, 247)}...`}</p>}
-          {!readMore && <p>{review.body}</p>}
-          {readMore && <button type="button" onClick={handleReadMoreClick}>Read more</button>}
-          {showPhotos()}
+      <div className="reviews-tile">
+        <div>
+          {review.rating}
+          ⭐
         </div>
-      )}
+        <div>{format(parseISO(review.date), 'MMM dd, yyyy')}</div>
+        <div style={{ fontWeight: 'bold' }}>{review.summary}</div>
+        {readMore && <p>{`${review.body.slice(0, 247)}...`}</p>}
+        {!readMore && <p>{review.body}</p>}
+        {readMore && <button type="button" onClick={handleReadMoreClick}>Read more</button>}
+        {showPhotos()}
+      </div>
       {showModal.show && (
-        <div className='review-photo-modal-bg' onClick={handlePhotoClick}>
-          <div className='review-photo-modal'>
-            <img style={{ maxWidth: '100%', maxHeight: '100%' }} src={showModal.src} onClick={(e) => {e.stopPropagation()}} />
+        <div className="review-photo-modal-bg" onClick={handlePhotoClick}>
+          <div className="review-photo-modal">
+            <img
+              style={{ maxWidth: '100%', maxHeight: '100%' }}
+              src={showModal.src}
+              onClick={(e) => { e.stopPropagation(); }}
+            />
           </div>
         </div>
       )}

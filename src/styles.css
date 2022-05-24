@@ -36,9 +36,11 @@ h1 {
 }
 
 .review-photo-modal {
-  height: 40rem;
-  width: 40rem;
-  object-fit: scale-down;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40%;
+  width: 40%;
 }
 
 
