@@ -32,6 +32,13 @@ h1 {
   width: 60%;
 }
 
+/* .rating-stars {
+  display: inline-block;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+} */
+
 /* product detail */
 
 
