@@ -44,23 +44,6 @@ export default function ProductInfo() {
       .catch((err) => { console.log('onclickreviews error', err); });
   }, [productId]);
 
-  // // eslint-disable-next-line no-undef
-  // starRating(() => {
-  //   [...Array(totalStars)].map((star, index) => {
-  //     index += 1;
-  //     return (
-  //       <button
-  //         type="button"
-  //         key={index}
-  //         className={index <= rating ? 'on' : 'off'}
-  //         onClick={() => setRating(index)}
-  //       >
-  //         <span className="star">&#9733;</span>
-  //       </button>
-  //     );
-  //   });
-  // });
-
   // Grabs item data from server-------------------------
   useEffect(() => {
     console.log('useEffect working?');
@@ -68,9 +51,8 @@ export default function ProductInfo() {
     axios.get(`/products/${productId}`)
       .then((result) => {
         console.log('does getProduct work???', result.data);
-        setProductInfo(result.data);
         // console.log('productinfo?', productInfo);
-        // if (productInfo[2][2].original_price)
+        setProductInfo(result.data);
       })
       .catch((err) => { console.log('getproduct didnt work', err); });
   }, [productId]);
@@ -94,8 +76,9 @@ export default function ProductInfo() {
         </a>
         <div id="product-category">{productInfo[0] ? productInfo[0].category : null}</div>
         <p id="product-name">{productInfo[0] ? productInfo[0].name : null}</p>
-        {/* <p id="price">{productInfo[1] ? productInfo[1].results[0].sale_price : productInfo[1].results[0].original_price}</p> */}
-        <p id="product-description">{productInfo[0] ? productInfo[0].description : null}</p>
+        <p id="price">{productInfo[1] ? productInfo[1].results[0].original_price : null}</p>
+        <p id="price">{productInfo[1] ? productInfo[1].results[0].sale_price : null}</p>
+
         <div id="social-media">
           <p>Share this item!</p>
           <button src="/logoPhotos/facebook.png" onClick={() => onFacebookClick()}>FB</button>
