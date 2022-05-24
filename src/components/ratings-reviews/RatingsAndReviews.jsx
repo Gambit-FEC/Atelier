@@ -15,11 +15,12 @@ export default function RatingsAndReviews() {
   const [totalRatings, setTotalRatings] = useState(() => 0);
   const [reviews, setReviews] = useState(() => []);
   const [page, setPage] = useState(() => 1);
+  const [reviewsFilter, setReviewsFilter] = useState(() => '');
   console.log('ratings and reviews [rendered]');
 
   useEffect(() => {
     if (page === 1) {
-      axios.get(`/reviews/${productId}/${page}/${reviewsSort}`)
+      axios.get(`/reviews/${productId}/${page}/${reviewsSort}?filter=${reviewsFilter}`)
         .then(({ data }) => {
           if (data.results.length < 2) setShowAdd(false);
           setReviews(data.results);
@@ -35,7 +36,7 @@ export default function RatingsAndReviews() {
   }, [reviewsSort]);
 
   useEffect(() => {
-    axios.get(`/reviews/${productId}/${page}/${reviewsSort}`)
+    axios.get(`/reviews/${productId}/${page}/${reviewsSort}?filter=${reviewsFilter}`)
       .then(({ data }) => {
         if (data.results.length < 2) setShowAdd(false);
         setReviews(reviews.concat(...data.results));
@@ -44,6 +45,10 @@ export default function RatingsAndReviews() {
         console.log('error fetching reviews', err);
       });
   }, [page]);
+
+  useEffect(() => {
+
+  }, [reviewsFilter])
 
   const value = {
     reviewsSort,
@@ -58,12 +63,14 @@ export default function RatingsAndReviews() {
     setReviews,
     page,
     setPage,
+    reviewsFilter,
+    setReviewsFilter,
   };
 
   return (
     <RatingsAndReviewsContext.Provider value={value}>
       <div id="ratings-and-reviews">
-        <button onClick={() => setProductId(productId + 1)}></button>
+        <button onClick={() => setProductId(productId + 1)} />
         <Ratings />
         <Reviews />
       </div>

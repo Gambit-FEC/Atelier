@@ -1,16 +1,23 @@
 import styled from 'styled-components';
 
-function avgRatingToPercent(rating) {
-  return [`${rating * 20}%`, `${100 - rating * 20}%`];
+function ratingToPercent(rating) {
+  return `${rating * 20}%`;
 }
 
+// takes rating and size props
 const StyledRatingStars = styled.div`
   display: inline-block;
-  font-size: xxx-large;
-  background: linear-gradient(to right, black ${({ rating }) => avgRatingToPercent(rating)[0]}, lightgrey ${({ rating }) => avgRatingToPercent(rating)[1]});
+  font-size: ${({ size }) => size};
+  background: linear-gradient(to right, black ${({ rating }) => ratingToPercent(rating)}, lightgrey ${({ rating }) => ratingToPercent(rating)});
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
 `;
 
-export default StyledRatingStars;
+const RatingBar = styled.div`
+background: linear-gradient(to right, black ${({ percent }) => percent + '%'}, lightgrey ${({ percent }) => percent + '%'});
+width: 125px;
+height: 8px;
+`;
+
+export { StyledRatingStars, RatingBar };
