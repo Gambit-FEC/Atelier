@@ -1,17 +1,32 @@
-.carousel {
-  overflow: hidden;
-}
-
-.inner {
-  white-space: nowrap;
-  transition: transform 0.3s;
-}
-
-.carousel-item {
-  display: inline-flex;
+.slider{
+  position: relative;
+  display: flex;
+  justify-content: space-evenly;
   align-items: center;
-  justify-content: center;
-  height: 100px;
-  background-color: blue;
-  color: #fff;
+}
+
+.right-arrow {
+  position: absolute;
+  top: 50%;
+  right: 32px;
+  font-size: 3rem;
+  z-index: 10;
+  cursor: pointer;
+  user-select: none;
+}
+
+.left-arrow {
+  position: absolute;
+  top: 50%;
+  left: 32px;
+  font-size: 3rem;
+  z-index: 10;
+  cursor: pointer;
+  user-select: none;
+}
+
+.product {
+  text-align: center;
+  width: 250px;
+  height: auto;
 }
