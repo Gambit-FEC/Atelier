@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { useGlobalContext } from '../../../context/GlobalStore';
+import { StyledRatingStars } from '../../../styled-lib';
 
 // Share on social media------------------------------
 const onFacebookClick = () => {
@@ -17,17 +18,13 @@ const onPinterestClick = () => {
 };
 
 export default function ProductInfo() {
-  const { productId } = useGlobalContext();
+  const { productId, avgRating } = useGlobalContext();
   const [productInfo, setProductInfo] = useState([]);
   const [allReviews, setAllReviews] = useState([]);
   const [avgReviews, setAvgReviews] = useState([]);
 
-
-  const totalStars = 5;
-  // const totalFilled = avgRating;
-  // console.log('cant call the fxn totalFilled', totalFilled);
-  const reviewAmount = avgReviews;
-  console.log('review amount??', reviewAmount / 5 * 100);
+  // const reviewAmount = avgReviews;
+  // console.log('review amount??', reviewAmount / 5 * 100);
 
   // Reviews and stars---------------------------------
   useEffect(() => {
@@ -44,23 +41,6 @@ export default function ProductInfo() {
       .catch((err) => { console.log('onclickreviews error', err); });
   }, [productId]);
 
-  // // eslint-disable-next-line no-undef
-  // starRating(() => {
-  //   [...Array(totalStars)].map((star, index) => {
-  //     index += 1;
-  //     return (
-  //       <button
-  //         type="button"
-  //         key={index}
-  //         className={index <= rating ? 'on' : 'off'}
-  //         onClick={() => setRating(index)}
-  //       >
-  //         <span className="star">&#9733;</span>
-  //       </button>
-  //     );
-  //   });
-  // });
-
   // Grabs item data from server-------------------------
   useEffect(() => {
     console.log('useEffect working?');
@@ -68,23 +48,21 @@ export default function ProductInfo() {
     axios.get(`/products/${productId}`)
       .then((result) => {
         console.log('does getProduct work???', result.data);
-        setProductInfo(result.data);
         // console.log('productinfo?', productInfo);
-        // if (productInfo[2][2].original_price)
+        setProductInfo(result.data);
       })
       .catch((err) => { console.log('getproduct didnt work', err); });
   }, [productId]);
 
   return (
-    <>
+    <Wrapper>
       <h1>
         product info?
         {' '}
         {productId}
       </h1>
       <div>
-        <Stars average={Math.floor(reviewAmount * 2) / 2}>☆☆☆☆☆</Stars>
-        {/* <Stars average={Math.floor(reviewAmount * 2) / 2}>★★★★★</Stars> */}
+        <StyledRatingStars size="medium" rating={avgRating}>★★★★★</StyledRatingStars>
         <a href="#ratings-and-reviews" id="see-reviews">
           Read all
           {' '}
@@ -92,25 +70,71 @@ export default function ProductInfo() {
           {' '}
           reviews
         </a>
-        <div id="product-category">{productInfo[0] ? productInfo[0].category : null}</div>
-        <p id="product-name">{productInfo[0] ? productInfo[0].name : null}</p>
-        {/* <p id="price">{productInfo[1] ? productInfo[1].results[0].sale_price : productInfo[1].results[0].original_price}</p> */}
-        <p id="product-description">{productInfo[0] ? productInfo[0].description : null}</p>
-        <div id="social-media">
+        <Category>{productInfo[0] ? productInfo[0].category : null}</Category>
+        <ProductName>{productInfo[0] ? productInfo[0].name : null}</ProductName>
+        <Price>{productInfo[1] ? productInfo[1].results[0].original_price : null}</Price>
+        <SalePrice>{productInfo[1] ? productInfo[1].results[0].sale_price : null}</SalePrice>
+
+        <Share id="social-media">
           <p>Share this item!</p>
-          <button src="/logoPhotos/facebook.png" onClick={() => onFacebookClick()}>FB</button>
-          <button src="/logoPhotos/twitter.png" onClick={() => onTwitterClick()}>Twitter</button>
-          <button src="/logoPhotos/pinterest.png" onClick={() => onPinterestClick()}>Pin</button>
-        </div>
+          <Facebook src="logoPhotos/facebook.png" onClick={() => onFacebookClick()} />
+          <Twitter src="logoPhotos/twitter.png" onClick={() => onTwitterClick()} />
+          <Pin src="logoPhotos/pinterest.png" onClick={() => onPinterestClick()} />
+        </Share>
       </div>
 
-    </>
+    </Wrapper>
   );
 }
 
 // CSS styled-components ----------------------
-const Stars = styled.div`
-    background: linear-gradient(90deg, #FDCC0D 0 ${(totalStars) => totalStars.average / 5 * 100}%, grey ${(reviewAmount) => reviewAmount.average / 5 * 100}% 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+const Wrapper = styled.div`
+  padding: 4em;
+  align-items: flex-end;
+`;
+
+// const Reviews = styled.div`
+//   justify-content: center;
+
+// `
+
+const Category = styled.div`
+  font-weight: lighter;
+  color: rgba(102, 91, 165, 1);
+  text-transform: uppercase;
+`;
+
+const ProductName = styled.h2`
+  color: purple;
+  font-weight: bold;
+  text-transform: uppercase;
+`;
+
+const Price = styled.h4`
+`;
+
+const SalePrice = styled.h4`
+  color: red;
+`
+
+const Share = styled.h3`
+  font-weight: bold;
+  justify-content: center;
+`
+
+const Facebook = styled.img`
+    width: 25px;
+    height: 25px;
+    padding-right: 10px;
+  `;
+
+const Twitter = styled.img`
+    width: 25px;
+    height: 25px;
+    padding-right: 10px;
+  `;
+const Pin = styled.img`
+    width: 25px;
+    height: 25px;
+    padding-right: 10px;
   `;
