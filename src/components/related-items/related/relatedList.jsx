@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
 import RelatedCard from './relatedCard';
 import { useGlobalContext } from '../../../context/GlobalStore';
 
@@ -26,7 +27,6 @@ export default function relatedList() {
       // console.log(productIdsResponse);
       const listOfIds = productIdsResponse.data;
       listOfIds.forEach((id) => {
-        // console.log('IDs: ', id);
         const promise = Promise.all([getRelatedInfo(id),
           getRelatedStyle(id), getRelatedRating(id)]);
         listOfPromises.push(promise);
@@ -40,7 +40,10 @@ export default function relatedList() {
           product.rating = element[2].data;
           allProductList.push(product);
         });
+        // console.log(allProductList);
         setRelatedInfo(allProductList);
+      }).catch((err) => {
+        console.log(err);
       });
     });
   }
@@ -52,11 +55,18 @@ export default function relatedList() {
   return (
     <div className="related-items-list">
       <h3>Related Products</h3>
-      {
-        relatedInfo.map((info, index) => (
-          <RelatedCard info={info} key={index} />
-        ))
-      }
+      <StyledBox>
+        {
+          relatedInfo.map((info, index) => (
+            <RelatedCard info={info} key={index} />
+          ))
+        }
+      </StyledBox>
     </div>
   );
 }
+
+const StyledBox = styled.div`
+  display: flex;
+  align-item: stretch;
+`;

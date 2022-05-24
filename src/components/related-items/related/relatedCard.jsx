@@ -1,33 +1,44 @@
 import React from 'react';
 import styled from 'styled-components';
+import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs';
 import { useGlobalContext } from '../../../context/GlobalStore';
 
 function relatedCard(info) {
-  // console.log('INFO: ', info.info);
+  // console.log('INFO: ', info);
   const placeholder = 'http://placecorgi.com/260/180';
 
   // const { productInfo } = useGlobalContext();
   return (
-    <StyledCard>
-      <StyledImage
-        src={info.info.style.url === null ? placeholder : info.info.style.thumbnail_url}
-        alt="product-img"
-      />
-      <StyledCategory>
-        { info.info.product.category.toUpperCase() }
-      </StyledCategory>
-      <StyledName>
-        { info.info.product.name }
-      </StyledName>
-      <StyledCost>
-        { `$${info.info.product.price}` }
-      </StyledCost>
-      <p className="card-rating">
-        { info.info.rating.averageRating }
-      </p>
-    </StyledCard>
+    <StyledBox>
+      <StyledCard>
+        <StyledImage
+          src={info.info.style.url === null ? placeholder : info.info.style.thumbnail_url}
+          alt="product-img"
+        />
+        <StyledCategory>
+          { info.info.product.category.toUpperCase() }
+        </StyledCategory>
+        <StyledName>
+          { info.info.product.name }
+        </StyledName>
+        <StyledCost>
+          { `$${info.info.product.price}` }
+        </StyledCost>
+        <p className="card-rating">
+          { info.info.rating.averageRating }
+          <BsStarFill />
+          <BsStarHalf />
+          <BsStar />
+        </p>
+      </StyledCard>
+    </StyledBox>
   );
 }
+
+const StyledBox = styled.div`
+  display: flex;
+  align-item: stretch;
+`;
 
 const StyledCard = styled.div`
   background-color: white;
