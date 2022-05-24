@@ -2,11 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FcNext, FcPrevious} from 'react-icons/fc';
 import '../carousel/Carousel.css';
 import styled from 'styled-components';
-<<<<<<< HEAD
-import {StyledRatingStars} from '../../../styled-lib';
-=======
 import { StyledRatingStars } from '../../../styled-lib';
->>>>>>> master
 
 function relatedCard(data) {
   const placeholder = 'http://placecorgi.com/260/180';
