@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function relatedCard(info) {
-  console.log(info);
+  // console.log(info);
   return (
     <div className="related-items-card">
       <p className="card-category">
