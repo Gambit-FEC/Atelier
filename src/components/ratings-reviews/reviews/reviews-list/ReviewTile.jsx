@@ -30,8 +30,8 @@ export default function ReviewTile({ review }) {
         {showPhotos()}
       </div>
       {showModal.show && (
-        <div className="review-photo-modal-bg" onClick={handlePhotoClick}>
-          <div className="review-photo-modal">
+        <div className="modal-bg" onClick={handlePhotoClick}>
+          <div className="modal-main">
             <img
               style={{ maxWidth: '100%', maxHeight: '100%' }}
               src={showModal.src}

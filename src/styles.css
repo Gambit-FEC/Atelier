@@ -9,6 +9,25 @@ h1 {
   color: blue;
 }
 
+.modal-bg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.625);
+}
+
+.modal-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40%;
+  width: 40%;
+}
 
 /* product detail */
 
@@ -23,25 +42,6 @@ h1 {
 
 
 /* ratings & reviews */
-.review-photo-modal-bg {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.625);
-}
-
-.review-photo-modal {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40%;
-  width: 40%;
-}
 
 
 
