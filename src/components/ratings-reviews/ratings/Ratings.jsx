@@ -4,6 +4,7 @@ import StarBars from './StarBars';
 import SpecBars from './SpecBars';
 
 export default function Ratings() {
+
   return (
     <div className="ratings">
       <OverAllRating />

@@ -4,7 +4,7 @@ import { format, parseISO } from 'date-fns';
 export default function ReviewTile({ review }) {
   const [readMore, setReadMore] = useState(review.body.length > 250);
   const [showModal, setShowModal] = useState({ show: false, src: '' });
-  console.log('reviewtile rendered:', review);
+  console.log('reviewtile [rendered]');
   function handleReadMoreClick() {
     setReadMore(!readMore);
   }
