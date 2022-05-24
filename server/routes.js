@@ -14,14 +14,13 @@ app.use((req, res, next) => {
 });
 
 // Reviews Routes
-app.get('/reviews/:product_id/:count/:sort', ctrl.reviews.getById);
-app.get('/reviews/averageRating/:product_id', ctrl.reviews.getAverageRating);
+app.get('/reviews/:product_id/:page/:sort', ctrl.reviews.getById);
 app.get('/reviews/meta/:product_id', ctrl.reviews.getMeta);
 
 // Related Items Routes
-app.get('/related/productList', ctrl.related.getAllRelated);
-app.get('/related/productInfo', ctrl.related.getRelatedInfo);
-app.get('/related/productStyle', ctrl.related.getRelatedStyle);
+app.get('/related/productList/:product_id', ctrl.related.getAllRelated);
+app.get('/related/productInfo/:product_id', ctrl.related.getRelatedInfo);
+app.get('/related/productStyle/:product_id', ctrl.related.getRelatedStyle);
 
 // Product Info Routes
 // app.get('/products/:productId', ctrl.products.getProductInfo);

@@ -5,6 +5,7 @@ import RelatedItems from './related-items/RelatedItems';
 import ProductDetail from './product-detail/productDetail';
 
 function App() {
+  console.log('app [rerendered]');
   return (
     <GlobalContextProvider>
       <ProductDetail />
