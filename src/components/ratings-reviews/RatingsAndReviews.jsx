@@ -15,6 +15,13 @@ export default function RatingsAndReviews() {
   const [totalRatings, setTotalRatings] = useState(() => 0);
   const [reviews, setReviews] = useState(() => []);
   const [page, setPage] = useState(() => 1);
+  const [reviewsFilter, setReviewsFilter] = useState({
+    1: false,
+    2: false,
+    3: false,
+    4: false,
+    5: false
+  });
   console.log('ratings and reviews [rendered]');
 
   useEffect(() => {
@@ -58,12 +65,14 @@ export default function RatingsAndReviews() {
     setReviews,
     page,
     setPage,
+    reviewsFilter,
+    setReviewsFilter,
   };
 
   return (
     <RatingsAndReviewsContext.Provider value={value}>
       <div id="ratings-and-reviews">
-        <button onClick={() => setProductId(productId + 1)}></button>
+        <button onClick={() => setProductId(productId + 1)} />
         <Ratings />
         <Reviews />
       </div>
