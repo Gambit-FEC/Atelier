@@ -4,7 +4,7 @@ import { format, parseISO } from 'date-fns';
 export default function ReviewTile({ review }) {
   const [readMore, setReadMore] = useState(review.body.length > 250);
   const [showModal, setShowModal] = useState({ show: false, src: '' });
-  console.log('reviewtile rendered:', review);
+  console.log('reviewtile [rendered]');
   function handleReadMoreClick() {
     setReadMore(!readMore);
   }
@@ -12,7 +12,7 @@ export default function ReviewTile({ review }) {
     setShowModal({ show: !showModal.show, src: event.target.src });
   }
   function showPhotos() {
-    return review.photos.map((item) => <img style={{ height: '100px' }} key={item.id} src={item.url} alt={`review-${item.id}`} onClick={handlePhotoClick} />);
+    return review.photos.map((item) => <img style={{ cursor: 'pointer', height: '100px' }} key={item.id} src={item.url} alt={`review-${item.id}`} onClick={handlePhotoClick} />);
   }
   function handleHelpfulClick(e) {
     e.target.classList.add('clicked-link-button');
