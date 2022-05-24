@@ -1,6 +1,7 @@
 {
   "extends": [
-    "airbnb"
+    "airbnb-base",
+    "airbnb/rules/react"
   ],
   "env": {
     "browser": true
