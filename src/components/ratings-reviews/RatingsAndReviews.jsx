@@ -7,7 +7,7 @@ import { useGlobalContext } from '../../context/GlobalStore';
 export const RatingsAndReviewsContext = createContext();
 
 export default function RatingsAndReviews() {
-  const { productId } = useGlobalContext();
+  const { productId, setProductId } = useGlobalContext();
 
   const [reviewsSort, setReviewsSort] = useState(() => 'relevant');
   const [showAdd, setShowAdd] = useState(() => true);
@@ -20,6 +20,7 @@ export default function RatingsAndReviews() {
   useEffect(() => {
     setPage(1);
     setReviews([]);
+    setShowAdd(true);
   }, [reviewsSort]);
 
   useEffect(() => {
@@ -51,6 +52,7 @@ export default function RatingsAndReviews() {
   return (
     <RatingsAndReviewsContext.Provider value={value}>
       <div className="ratings-and-reviews">
+        <button onClick={() => setProductId(productId + 1)}></button>
         <Ratings />
         <Reviews />
       </div>

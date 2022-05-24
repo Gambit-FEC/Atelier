@@ -12,7 +12,7 @@ function averageRatings(ratings) {
     total += ratingNums[i];
     sum += ratingNums[i] * i;
   }
-  return Math.floor((sum / total) * 2) / 2;
+  return Math.floor((sum / total) * 4) / 4;
 }
 
 function totalRatings(ratings) {

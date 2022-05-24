@@ -8,7 +8,7 @@ export default function OverAllRating() {
   const { productId, setAvgRating } = useGlobalContext();
   useEffect(() => {
     axios.get(`/reviews/meta/${productId}`)
-      .then(({data}) => {
+      .then(({ data }) => {
         console.log('fetched average');
         setTotalRatings(data.totalRatings);
         setAvgRating(data.averageRating);
