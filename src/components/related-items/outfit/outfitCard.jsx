@@ -8,7 +8,7 @@ function outfitCard(data) {
   const placeholder = 'http://placecorgi.com/260/180';
   const [current, setCurrent] = useState(0);
   const display = data.data.slice(current, (current + 4));
-  const maxDisplay = data.data.length - 2;
+  const maxDisplay = data.data.length - 1;
   console.log(data);
 
   const nextSlide = () => {
