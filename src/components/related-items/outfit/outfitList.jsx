@@ -6,6 +6,7 @@ import { useGlobalContext } from '../../../context/GlobalStore';
 
 export default function outfitList() {
   let outfitList = [];
+  let outfitArray = [];
   const { productId } = useGlobalContext();
   const [outfitInfo, setOutfitInfo] = useState([]);
   const [ cardList, setCardList ] = useState(false);
@@ -57,7 +58,7 @@ export default function outfitList() {
     <div className="outfit-items-list">
       <h2>YOUR OUTFIT</h2>
       {
-        cardList ?  <OutfitCard data={outfitInfo} /> : <EmptyCard addCard={addCard}/>
+        cardList ?  <OutfitCard data={outfitInfo} addCard={addCard}/> : <EmptyCard addCard={addCard}/>
       }
     </div>
   );

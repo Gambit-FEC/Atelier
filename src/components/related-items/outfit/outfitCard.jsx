@@ -3,7 +3,8 @@ import { FcNext, FcPrevious} from 'react-icons/fc';
 import styled from 'styled-components';
 import { StyledRatingStars } from '../../../styled-lib';
 
-export function EmptyCard(addCard) {
+export function EmptyCard({addCard}) {
+  console.log(addCard)
   return (
   <CardWrapper>
         <StyledCard onClick={(e) => addCard(e)}>
@@ -15,7 +16,7 @@ export function EmptyCard(addCard) {
   )
 }
 
-export function OutfitCard(data) {
+export function OutfitCard({data, addCard}) {
   const placeholder = 'http://placecorgi.com/260/180';
   const [current, setCurrent] = useState(0);
   const display = data.data.slice(current, (current + 4));
