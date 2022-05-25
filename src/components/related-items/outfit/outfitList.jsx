@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import OutfitCard from './outfitCard';
+import { OutfitCard, EmptyCard } from './outfitCard';
 import { useGlobalContext } from '../../../context/GlobalStore';
 
 export default function outfitList() {
   let outfitList = [];
   const { productId } = useGlobalContext();
   const [outfitInfo, setOutfitInfo] = useState([]);
+  const [ cardList, setCardList ] = useState(false);
+
+  function addCard(e) {
+    console.log(!cardList);
+    setCardList(!cardList);
+  }
 
   function getRelatedInfo(id) {
     return axios.get(`/related/productInfo/${id}`);
@@ -50,7 +56,9 @@ export default function outfitList() {
   return (
     <div className="outfit-items-list">
       <h2>YOUR OUTFIT</h2>
-      <OutfitCard data={outfitInfo} />
+      {
+        cardList ?  <OutfitCard data={outfitInfo} /> : <EmptyCard addCard={addCard}/>
+      }
     </div>
   );
 }

@@ -3,7 +3,19 @@ import { FcNext, FcPrevious} from 'react-icons/fc';
 import styled from 'styled-components';
 import { StyledRatingStars } from '../../../styled-lib';
 
-function outfitCard(data) {
+export function EmptyCard(addCard) {
+  return (
+  <CardWrapper>
+        <StyledCard onClick={(e) => addCard(e)}>
+        <InfoWrapper>
+          EMPTY CARD
+        </InfoWrapper>
+        </StyledCard>
+  </CardWrapper>
+  )
+}
+
+export function OutfitCard(data) {
   const placeholder = 'http://placecorgi.com/260/180';
   const [current, setCurrent] = useState(0);
   const display = data.data.slice(current, (current + 4));
@@ -62,7 +74,6 @@ function outfitCard(data) {
   );
 }
 
-export default outfitCard;
 
 const Container = styled.div`
   position: relative;
