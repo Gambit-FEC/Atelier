@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 function ratingToPercent(rating) {
-  console.log(rating)
   return `${rating * 20}%`;
 }
 
@@ -9,10 +8,10 @@ function ratingToPercent(rating) {
 const StyledRatingStars = styled.div`
   display: inline-block;
   font-size: ${({ size }) => size};
-  background: linear-gradient(to right, purple ${({ rating }) => ratingToPercent(rating)}, black ${({ rating }) => ratingToPercent(rating)});
+  background: linear-gradient(to right, purple ${({ rating }) => ratingToPercent(rating)}, white ${({ rating }) => ratingToPercent(rating)});
   background-clip: text;
   -webkit-background-clip: text;
-  -webkit-text-stroke: 1px black;
+  -webkit-text-stroke: ${({border}) => (border || '1') + 'px'} black;
   color: transparent;
 `;
 
