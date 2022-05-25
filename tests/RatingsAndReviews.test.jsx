@@ -1,12 +1,11 @@
-import React, { createContext } from 'react';
+import React from 'react';
 import { createRoot } from 'react-dom/client';
+import { act } from 'react-dom/test-utils';
 import '@testing-library/jest-dom';
 import OverallRating from '../src/components/ratings-reviews/ratings/OverallRating';
-import { act } from 'react-dom/test-utils';
 import { GlobalContextProvider } from '../src/context/GlobalStore';
+import { RAndRContextProvider } from '../src/context/RAndRContext';
 
-const RatingsAndReviewsContext = createContext();
-export { RatingsAndReviewsContext };
 const container = document.createElement('div');
 document.body.appendChild(container);
 const root = createRoot(container)
@@ -32,9 +31,9 @@ describe('Ratings and Reviews widget', () => {
     act(() => {
       root.render(
         <GlobalContextProvider>
-          <RatingsAndReviewsContext.Provider value={value}>
+          <RAndRContextProvider>
             <OverallRating />
-          </RatingsAndReviewsContext.Provider>
+          </RAndRContextProvider>
         </GlobalContextProvider>,
       );
     });
