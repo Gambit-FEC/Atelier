@@ -44,8 +44,8 @@ export default function ProductDetail() {
         </Wrapper> */}
 
       <ProductInfo />
-      {/* <StyleSelector /> */}
-      <AddToCart />
+      <StyleSelector />
+      {/* <AddToCart /> */}
       {/* <ImageGallery /> */}
     </div>
   );

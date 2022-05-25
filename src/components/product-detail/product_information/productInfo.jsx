@@ -34,7 +34,7 @@ export default function ProductInfo() {
     axios.get(`/reviews/meta/${productId}`)
     // axios.get(`/reviews/averageRating/${productId}`)
       .then((results) => {
-        console.log('results??', results.data.totalRatings);
+        console.log('reviews??', results.data.totalRatings);
         setAllReviews(results.data.totalRatings);
         setAvgReviews(results.data.averageRating);
       })
@@ -43,12 +43,9 @@ export default function ProductInfo() {
 
   // Grabs item data from server-------------------------
   useEffect(() => {
-    console.log('useEffect working?');
-    // getProduct();
     axios.get(`/products/${productId}`)
       .then((result) => {
-        console.log('does getProduct work???', result.data);
-        // console.log('productinfo?', productInfo);
+        // console.log('does getProduct work???', result.data);
         setProductInfo(result.data);
       })
       .catch((err) => { console.log('getproduct didnt work', err); });
@@ -77,9 +74,9 @@ export default function ProductInfo() {
 
         <Share id="social-media">
           <p>Share this item!</p>
-          <Facebook src="logoPhotos/facebook.png" onClick={() => onFacebookClick()} />
-          <Twitter src="logoPhotos/twitter.png" onClick={() => onTwitterClick()} />
-          <Pin src="logoPhotos/pinterest.png" onClick={() => onPinterestClick()} />
+          <Facebook src="https://img.icons8.com/fluency/344/facebook-new.png" onClick={() => onFacebookClick()} />
+          <Twitter src="https://img.icons8.com/color/344/twitter--v1.png" onClick={() => onTwitterClick()} />
+          <Pin src="https://img.icons8.com/color/344/pinterest--v1.png" onClick={() => onPinterestClick()} />
         </Share>
       </div>
 
