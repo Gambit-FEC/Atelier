@@ -9,8 +9,6 @@ export default function RelatedItems() {
 
   return (
     <div id="related-products-module">
-      <h1>RELATED ITEMS MODULE ITEM ID: {productId}</h1>
-      <button type="button" onClick={() => setProductId(productId + 1)}>Increment</button>
       <RelatedList />
       <OutfitList />
     </div>
