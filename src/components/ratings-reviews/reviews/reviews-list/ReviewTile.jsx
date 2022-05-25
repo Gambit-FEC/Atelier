@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { format, parseISO } from 'date-fns';
+import { StyledRatingStars } from '../../../../styled-lib';
 
 export default function ReviewTile({ review }) {
   const [readMore, setReadMore] = useState(review.body.length > 250);
   const [showModal, setShowModal] = useState({ show: false, src: '' });
-  console.log('reviewtile [rendered]');
   function handleReadMoreClick() {
     setReadMore(!readMore);
   }
@@ -29,10 +29,7 @@ export default function ReviewTile({ review }) {
   return (
     <>
       <div className="reviews-tile">
-        <div>
-          {review.rating}
-          ⭐
-        </div>
+        <StyledRatingStars rating={review.rating} >★★★★★</StyledRatingStars>
         <div>{format(parseISO(review.date), 'MMM dd, yyyy')}</div>
         <div style={{ fontWeight: 'bold' }}>{review.summary}</div>
         {readMore && <p>{`${review.body.slice(0, 247)}...`}</p>}

@@ -7,7 +7,7 @@ import { useGlobalContext } from '../../context/GlobalStore';
 export const RatingsAndReviewsContext = createContext();
 
 export default function RatingsAndReviews() {
-  const { productId, setProductId } = useGlobalContext();
+  const { productId, setProductId, setAvgRating } = useGlobalContext();
 
   const [reviewsSort, setReviewsSort] = useState(() => 'relevant');
   const [showAdd, setShowAdd] = useState(() => true);
@@ -23,6 +23,18 @@ export default function RatingsAndReviews() {
     5: false
   });
   console.log('ratings and reviews [rendered]');
+
+  useEffect(() => {
+    axios.get(`/reviews/meta/${productId}`)
+      .then(({ data }) => {
+        console.log('meta', data)
+        setReviewsMeta(data);
+        setAvgRating(data.averageRating);
+      })
+      .catch((err) => {
+        console.log('Error fetching average ratings:', err);
+      });
+  }, []);
 
   useEffect(() => {
     if (page === 1) {
