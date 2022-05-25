@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { RatingBar, StarButton } from '../../../styled-lib';
 import { RatingsAndReviewsContext } from '../RatingsAndReviews';
 
-export default function StarBars() {
+export default function RatingBreakdown() {
   const { reviewsMeta, setReviewsFilter, reviewsFilter } = useContext(RatingsAndReviewsContext);
   function calcPercents(ratings) {
     var percents = [];
@@ -15,29 +15,29 @@ export default function StarBars() {
     }
     return percents.map((item) => Math.floor((item / highestStar) * 100));
   }
-  function handleRatingClick(star, id) {
+  function handleRatingClick(star) {
     setReviewsFilter(Object.assign({}, reviewsFilter, reviewsFilter[star] = !reviewsFilter[star]));
   }
   function whichColor(index) {
     return reviewsFilter[index] ? 'purple' : '#069';
   }
   return (
-    <div className="ratings-star-bars">
+    <div className="rating-breakdown">
       {reviewsMeta && (
         <>
           {calcPercents(reviewsMeta.ratings).map((item, index) => (
-            <StarButton
-              color={whichColor(index)}
-              id={`star-bar-${index}`}
-              key={index}
-              onClick={(e) =>
-                handleRatingClick(index.toString(), `star-bar-${index}`)
-              }
-            >
-              {index === 1 && <div>{`${index} Star`}</div>}
-              {index !== 1 && <div>{`${index} Stars`}</div>}
+            <div id={`${index}-star`} key={index}>
+              <StarButton
+                color={whichColor(index)}
+                onClick={(e) =>
+                  handleRatingClick(index.toString())
+                }
+              >
+                {`${index} ★`}
+              </StarButton>
+              <span style={{color: '#4a4a4a'}}>{` ${reviewsMeta.ratings[index]}`}</span>
               <RatingBar percent={item} />
-            </StarButton>
+            </div>
           ))}
         </>
       )}

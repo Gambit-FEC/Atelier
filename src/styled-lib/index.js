@@ -21,7 +21,7 @@ const RatingBar = styled.div`
   height: 8px;
 `;
 
-const StarButton = styled.div`
+const StarButton = styled.span`
   background: none;
   border: none;
   padding: 0;
