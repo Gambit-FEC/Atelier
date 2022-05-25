@@ -24,7 +24,6 @@ export default function relatedList() {
   function getRelatedProducts() {
     const listOfPromises = [];
     axios.get(`/related/productList/${productId}`).then((productIdsResponse) => {
-      // console.log(productIdsResponse);
       const listOfIds = productIdsResponse.data;
       listOfIds.forEach((id) => {
         const promise = Promise.all([getRelatedInfo(id),
@@ -54,7 +53,7 @@ export default function relatedList() {
 
   return (
     <div className="related-items-list">
-      <h3>Related Products</h3>
+      <h2>RELATED PRODUCTS</h2>
       <RelatedCard data={relatedInfo} />
     </div>
   );

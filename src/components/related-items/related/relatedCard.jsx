@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FcNext, FcPrevious} from 'react-icons/fc';
-import '../carousel/Carousel.css';
+import '../../../../src/styles.css'
 import styled from 'styled-components';
 import { StyledRatingStars } from '../../../styled-lib';
 
@@ -26,7 +26,7 @@ function relatedCard(data) {
   }, [data.data]);
 
   return (
-    <section className="slider">
+    <Container>
       {/* <FcPrevious className="left-arrow" />
       <FcNext className="right-arrow" /> */}
       {
@@ -40,54 +40,96 @@ function relatedCard(data) {
           : null
       }
       {
+       <CardWrapper>{
         display.map((info, index) => {
           return (
             <StyledCard key={index}>
             <StyleImg src={
               info.style.thumbnail_url === null ? placeholder : info.style.thumbnail_url
             }/>
-            <p>{info.product.category}</p>
-            <p>{info.product.name}</p>
-            <p>${info.product.price}</p>
-            {/* <p> {info.rating.averageRating}</p> */}
-            <StyledRatingStars rating={info.rating.averageRating} />
+          <InfoWrapper>
+            <CategoryWrapper>
+            {info.product.category}
+            </CategoryWrapper>
+            <NameWrapper>
+            {info.product.name}
+            </NameWrapper>
+            <PriceWrapper>
+            ${info.product.price}
+            </PriceWrapper>
+            <StyledRatingStars rating={info.rating.averageRating} >
             ★★★★★
+            </StyledRatingStars>
+          </InfoWrapper>
             </StyledCard>
           )
-        })
+        })}
+        </CardWrapper>
       }
-    </section>
+    </Container>
   );
 }
 
 export default relatedCard;
 
+const Container = styled.div`
+position: relative;
+display:flex;
+justify-content: space-evenly;
+align-items: center;
+`
+
+const CardWrapper = styled.div`
+display:flex;
+object-fit:cover;
+`
+
 const StyledCard = styled.div`
-    display: flex;
-    border-radius: 10px;
-    padding: 15px;
-    border-width: 5px;
-    border-style: solid;
-    max-width: 300px;
-    width: 20%;
-    height: 420px;
-    margin: 10px;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-items: center;
-    justify-content: space-between;
+display: flex;
+border-radius: 10px;
+padding: 15px;
+border-width: 5px;
+border-style: solid;
+max-width: 300px;
+width: 20%;
+height: 420px;
+margin: 10px;
+flex-direction: column;
+flex-wrap: nowrap;
+align-items: center;
+justify-content: space-between;
+&:hover {
+  box-shadow: 0 0 10px rgba(90, 90, 90, 0.8)
+}
 `;
 
 const StyleImg = styled.img`
-  max-width: 100%;
-  max-height: 200px;
-  display: block;
-  margin: 0 auto;
+width: 100%;
+height: 250px;
+background-style: contain;
 `;
+
+const InfoWrapper = styled.div`
+  background-color: white;
+`
+
+const CategoryWrapper = styled.p`
+font-weight: normal;
+text-transform: uppercase;
+font-size: 16px;
+`
+const NameWrapper = styled.p`
+font-weight: bold;
+font-size: 18px;
+`
+const PriceWrapper = styled.p`
+font-weight: normal;
+font-size: 16px;
+`
 // .container .box {
-//   width:540px;
-//   margin:50px;
-//   display:table;
+  //   width:540px;
+  //   margin:50px;
+  //   display:table;
 // }
 // .container .box .box-row {
 //   display:table-row;
