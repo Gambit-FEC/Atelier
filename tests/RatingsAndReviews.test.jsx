@@ -1,14 +1,12 @@
-import React, { createContext, useContext } from 'react';
+import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { fireEvent, waitFor } from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
 import '@testing-library/jest-dom';
 import OverallRating from '../src/components/ratings-reviews/ratings/OverallRating';
-import { act } from 'react-dom/test-utils';
+import { GlobalContextProvider } from '../src/context/GlobalStore';
+import { RAndRContextProvider } from '../src/context/RAndRContext';
 
-const RatingsAndReviewsContext = createContext();
-const GlobalContext = createContext();
-
-let container = document.createElement('div');
+const container = document.createElement('div');
 document.body.appendChild(container);
 const root = createRoot(container)
 
@@ -26,19 +24,22 @@ const value = {
     recommended: { false: '8', true: '21' },
     totalRatings: 29,
   },
-}
+};
 
 describe('Ratings and Reviews widget', () => {
   test('widget should render on screen', () => {
-    // const { container, getByText } = await render(<OverallRating />);
-    // await expect(getByText('★★★★★')).toBeInTheDocument();
-    // console.log('DONE');
     act(() => {
       root.render(
-        <RatingsAndReviewsContext.Provider value={value}>
-          <OverallRating />
-        </RatingsAndReviewsContext.Provider>
+        <GlobalContextProvider>
+          <RAndRContextProvider>
+            <OverallRating />
+          </RAndRContextProvider>
+        </GlobalContextProvider>,
       );
     });
   });
 });
+
+          // const { container, getByText } = await render(<OverallRating />);
+          // await expect(getByText('★★★★★')).toBeInTheDocument();
+          // console.log('DONE');

@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import ReviewTile from './ReviewTile';
-import { RatingsAndReviewsContext } from '../../RatingsAndReviews';
+import { useRAndRContext } from '../../../../context/RAndRContext';
 
 export default function ReviewsList() {
-  const { reviews, reviewsFilter } = useContext(RatingsAndReviewsContext);
+  const { reviews, reviewsFilter } = useRAndRContext();
   return (
     <div className="reviews-list">
       {reviews.map((review, idx) => {

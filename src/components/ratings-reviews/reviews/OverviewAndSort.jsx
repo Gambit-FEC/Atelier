@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
-import { RatingsAndReviewsContext } from '../RatingsAndReviews';
+import React from 'react';
+import { useRAndRContext } from '../../../context/RAndRContext';
 
 export default function OverviewAndSort() {
-  const { reviewsSort, setReviewsSort, reviewsMeta } = useContext(RatingsAndReviewsContext);
+  const { reviewsSort, setReviewsSort, reviewsMeta } = useRAndRContext();
   const onChange = (event) => {
     setReviewsSort(event.target.value);
   };
