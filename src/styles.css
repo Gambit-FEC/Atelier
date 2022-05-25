@@ -51,8 +51,11 @@ h1 {
 #ratings-and-reviews {
   display: flex;
   flex-flow: row nowrap;
-  justify-content: space-around;
   margin-top: 20px;
+}
+
+.ratings {
+  margin-right: 40px;
 }
 
 .reviews-tile {

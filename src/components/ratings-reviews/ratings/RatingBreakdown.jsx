@@ -38,7 +38,6 @@ export default function RatingBreakdown() {
           {calcPercents(reviewsMeta.ratings).map((item, index) => (
             <div id={`${index}-star`} key={index}>
               <StarButton
-                color={whichColor(index)}
                 onClick={(e) =>
                   handleRatingClick(index.toString())
                 }

@@ -9,6 +9,7 @@ export default function ReviewTile({ review }) {
     setReadMore(!readMore);
   }
   function handlePhotoClick(event) {
+    showModal.show ? document.body.style.overflow = 'auto' : document.body.style.overflow = 'hidden';
     setShowModal({ show: !showModal.show, src: event.target.src });
   }
   function showPhotos() {
