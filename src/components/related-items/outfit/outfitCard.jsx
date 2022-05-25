@@ -23,7 +23,7 @@ function outfitCard(data) {
   }, [data.data]);
 
   return (
-    <section className="slider">
+    <Container>
       {/* <FcPrevious className="left-arrow" />
       <FcNext className="right-arrow" /> */}
       {
@@ -37,28 +37,44 @@ function outfitCard(data) {
           : null
       }
       {
+      <CardWrapper>{
         display.map((info, index) => {
           return (
             <StyledCard key={index}>
+            <ImageWrapper>
             <StyleImg src={
               info.style.thumbnail_url === null ? placeholder : info.style.thumbnail_url
             }/>
-            <p>{info.product.category}</p>
-            <p>{info.product.name}</p>
-            <p>${info.product.price}</p>
-            {/* <p> {info.rating.averageRating}</p> */}
+            </ImageWrapper>
+            <InfoWrapper>
+            {info.product.category}
+            {info.product.name}
+            ${info.product.price}
             <StyledRatingStars rating={info.rating.averageRating} >
             ★★★★★
             </StyledRatingStars>
+            </InfoWrapper>
             </StyledCard>
           )
-        })
+        })}
+      </CardWrapper>
       }
-    </section>
+    </Container>
   );
 }
 
 export default outfitCard;
+
+const Container = styled.div`
+  position: relative;
+  justify-content: space-evenly;
+  align-items: center;
+`
+
+const CardWrapper = styled.div`
+  display:flex;
+  object-fit:cover;
+`
 
 const StyledCard = styled.div`
     display: flex;
@@ -74,11 +90,20 @@ const StyledCard = styled.div`
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
+    &:hover {
+      box-shadow: 0 0 10px rgba(90, 90, 90, 0.8)
+    }
 `;
 
 const StyleImg = styled.img`
-  max-width: 100%;
-  max-height: 200px;
-  display: block;
-  margin: 0 auto;
+  width: 100%;
+  height: 250px;
+  background-style: contain;
 `;
+
+const InfoWrapper = styled.div`
+  background-color: white;
+`
+const ImageWrapper = styled.div`
+  background-color: grey;
+`

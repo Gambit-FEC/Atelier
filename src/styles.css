@@ -72,13 +72,6 @@ h1 {
 
 /* related */
 
-.slider{
-  position: relative;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
 .right-arrow {
   position: absolute;
   top: 50%;

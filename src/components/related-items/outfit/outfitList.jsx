@@ -48,8 +48,8 @@ export default function outfitList() {
   }, []);
 
   return (
-    <div className="related-items-list">
-      <h3>Your Outfit</h3>
+    <div className="outfit-items-list">
+      <h2>YOUR OUTFIT</h2>
       <OutfitCard data={outfitInfo} />
     </div>
   );
