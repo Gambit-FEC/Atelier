@@ -48,7 +48,8 @@ export default function ProductInfo() {
         // console.log('does getProduct work???', result.data);
         setProductInfo(result.data);
       })
-      .catch((err) => { console.log('getproduct didnt work', err); });
+      .catch((err) => { return err; });
+      // .catch((err) => { console.log('getproduct didnt work', err); });
   }, [productId]);
 
   return (
@@ -61,21 +62,18 @@ export default function ProductInfo() {
       <div>
         <StyledRatingStars size="medium" rating={avgRating}>★★★★★</StyledRatingStars>
         <a href="#ratings-and-reviews" id="see-reviews">
-          Read all
-          {' '}
-          {allReviews || 'no ratings'}
-          {' '}
-          reviews
+          {allReviews ? 'Read all ' + allReviews + ' reviews' : 'No Rewiews'}
         </a>
         <Category>{productInfo[0] ? productInfo[0].category : null}</Category>
         <ProductName>{productInfo[0] ? productInfo[0].name : null}</ProductName>
         <Price>{productInfo[1] ? productInfo[1].results[0].original_price : null}</Price>
         <SalePrice>{productInfo[1] ? productInfo[1].results[0].sale_price : null}</SalePrice>
+        <ProductOverview>{productInfo[0] ? productInfo[0].description : null}</ProductOverview>
 
         <Share id="social-media">
           <p>Share this item!</p>
           <Facebook src="https://img.icons8.com/fluency/344/facebook-new.png" onClick={() => onFacebookClick()} />
-          <Twitter src="https://img.icons8.com/color/344/twitter--v1.png" onClick={() => onTwitterClick()} />
+          <Twitter id="Twitter" src="https://img.icons8.com/color/344/twitter--v1.png" onClick={() => onTwitterClick()} />
           <Pin src="https://img.icons8.com/color/344/pinterest--v1.png" onClick={() => onPinterestClick()} />
         </Share>
       </div>
@@ -113,6 +111,10 @@ const Price = styled.h4`
 const SalePrice = styled.h4`
   color: red;
 `
+
+const ProductOverview = styled.h4`
+color: purple;
+`;
 
 const Share = styled.h3`
   font-weight: bold;
