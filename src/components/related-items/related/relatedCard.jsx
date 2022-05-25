@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { FcNext, FcPrevious} from 'react-icons/fc';
+import { AiFillStar, AiOutlineStar} from 'react-icons/ai';
 import styled from 'styled-components';
+import CompareModal from './compareModal';
 import { StyledRatingStars } from '../../../styled-lib';
 
 function relatedCard(data) {
@@ -8,10 +10,35 @@ function relatedCard(data) {
   const [current, setCurrent] = useState(0);
   const display = data.data.slice(current, (current + 4));
   const maxDisplay = data.data.length - 4;
-  // const length = data.data.length;
+  const [showModal, setModal] = useState(false);
+  const [currentItem, setCurrentItem] = useState(0);
+  const [favorite, setFavorite] = useState({selectedId: null, isFavorited: false});
 
-  console.log(data.data);
-  // console.log(length);
+
+  // save data coming as a variable
+  // set that variable as a state
+  // on click favorite -> change that variable data favorite to the clicked favorite
+  // set state as the new data
+
+  function showDisplay(e, value) {
+    setModal(!showModal);
+    setCurrentItem(value);
+    var modal = document.getElementById("myModal");
+
+    modal.style.display = "block";
+  }
+
+  function closeDisplay() {
+    var modal = document.getElementById("myModal");
+    setModal(!showModal);
+    setCurrentItem(0);
+    modal.style.display = "none";
+  }
+
+  function favoriteClick(value, isFavorited) {
+    var favObj = {selectedId: value, isFavorited: isFavorited}
+    setFavorite(favObj);
+  }
 
   const nextSlide = () => {
     setCurrent(current === maxDisplay ? current : current + 1);
@@ -22,7 +49,7 @@ function relatedCard(data) {
 
   useEffect(() => {
     setCurrent(0);
-  }, [data.data]);
+  }, [data.data, favorite]);
 
   return (
     <Container>
@@ -38,15 +65,33 @@ function relatedCard(data) {
           ? <FcNext className="right-arrow" onClick={nextSlide} />
           : null
       }
+
+
+        {
+        <div id="myModal" className="modal">
+          <div className="modal-content">
+            <span className="close"
+            onClick={closeDisplay}
+            >&times;</span>
+            {showModal ? <CompareModal value={currentItem}/> : null}
+          </div>
+        </div>
+        }
       {
        <CardWrapper>{
         display.map((info, index) => {
           return (
-            <StyledCard key={index}>
+            <StyledCard>
+              {
+              (favorite.selectedId === info.product.id && favorite.isFavorited) ? <AiFillStar onClick={() => favoriteClick(info.product.id, false) }/> : <AiOutlineStar onClick={() => favoriteClick(info.product.id, true)}/>
+              // console.log(favorite.isFavorited)
+              // console.log(info.favorite)
+              }
+            <div key={index} value={info.product.id} onClick={(e) => showDisplay(e, info.product.id)}>
             <StyleImg src={
               info.style.thumbnail_url === null ? placeholder : info.style.thumbnail_url
             }/>
-          <InfoWrapper>
+          <InfoWrapper value={info.product.id}>
             <CategoryWrapper>
             {info.product.category}
             </CategoryWrapper>
@@ -60,7 +105,8 @@ function relatedCard(data) {
             ★★★★★
             </StyledRatingStars>
           </InfoWrapper>
-            </StyledCard>
+            </div>
+          </StyledCard>
           )
         })}
         </CardWrapper>

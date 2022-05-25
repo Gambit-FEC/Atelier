@@ -37,6 +37,7 @@ export default function relatedList() {
           product.product = element[0].data;
           product.style = element[1].data;
           product.rating = element[2].data;
+          product.favorite = false;
           allProductList.push(product);
         });
         // console.log(allProductList);
@@ -54,7 +55,7 @@ export default function relatedList() {
   return (
     <div className="related-items-list">
       <h2>RELATED PRODUCTS</h2>
-      <RelatedCard data={relatedInfo} />
+      <RelatedCard data={relatedInfo}/>
     </div>
   );
 }
