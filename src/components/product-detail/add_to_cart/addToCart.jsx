@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import { useGlobalContext } from '../../../context/GlobalStore';
 
 export default function AddToCart() {
