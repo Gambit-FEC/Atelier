@@ -21,6 +21,15 @@ export default function RatingBreakdown() {
   function whichColor(index) {
     return reviewsFilter[index] ? 'purple' : '#069';
   }
+  function handleResetClick() {
+    setReviewsFilter({
+      1: false,
+      2: false,
+      3: false,
+      4: false,
+      5: false,
+    })
+  }
   return (
     <div className="rating-breakdown">
       {reviewsMeta && (
@@ -39,6 +48,7 @@ export default function RatingBreakdown() {
               <RatingBar percent={item} />
             </div>
           ))}
+          {Object.values(reviewsFilter).some((item) => item === true) && <button onClick={handleResetClick}>Reset Filters</button>}
         </>
       )}
     </div>
