@@ -5,13 +5,13 @@ import { OutfitCard, EmptyCard } from './outfitCard';
 import { useGlobalContext } from '../../../context/GlobalStore';
 
 export default function outfitList() {
-  let outfitList = [];
-  let outfitArray = [];
+  const outfitList = [];
+  const outfitArray = [];
   const { productId } = useGlobalContext();
   const [outfitInfo, setOutfitInfo] = useState([]);
-  const [ cardList, setCardList ] = useState(false);
+  const [cardList, setCardList] = useState(false);
 
-  function addCard(e) {
+  function addCard() {
     console.log(!cardList);
     setCardList(!cardList);
   }
@@ -32,7 +32,7 @@ export default function outfitList() {
     const listOfPromises = [];
 
     const promise = Promise.all([getRelatedInfo(productId),
-    getRelatedStyle(productId), getRelatedRating(productId)]);
+      getRelatedStyle(productId), getRelatedRating(productId)]);
     listOfPromises.push(promise);
 
     Promise.all(listOfPromises).then((promiseResults) => {
@@ -58,9 +58,9 @@ export default function outfitList() {
     <div className="outfit-items-list">
       <h2>YOUR OUTFIT</h2>
       {
-        cardList ?  <OutfitCard data={outfitInfo} addCard={addCard}/> : <EmptyCard addCard={addCard}/>
+        cardList ? <OutfitCard data={outfitInfo} addCard={addCard}/>
+          : <EmptyCard addCard={addCard}/>
       }
     </div>
   );
 }
-

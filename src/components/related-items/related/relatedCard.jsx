@@ -23,20 +23,20 @@ function relatedCard(data) {
   function showDisplay(e, value) {
     setModal(!showModal);
     setCurrentItem(value);
-    var modal = document.getElementById("myModal");
+    const modal = document.getElementById('myModal');
 
-    modal.style.display = "block";
+    modal.style.display = 'block';
   }
 
   function closeDisplay() {
-    var modal = document.getElementById("myModal");
+    const modal = document.getElementById('myModal');
     setModal(!showModal);
     setCurrentItem(0);
-    modal.style.display = "none";
+    modal.style.display = 'none';
   }
 
   function favoriteClick(value, isFavorited) {
-    var favObj = {selectedId: value, isFavorited: isFavorited}
+    const favObj = { selectedId: value, isFavorited: isFavorited };
     setFavorite(favObj);
   }
 
