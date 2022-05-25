@@ -12,7 +12,7 @@ export default function StyleSelector() {
 
   // Grab item data from server----------------------
   useEffect(() => {
-    console.log('useEffect working?');
+    // console.log('useEffect working?');
     axios.get(`/products/${productId}`)
       .then((result) => {
         console.log('item styles!!', result.data[1].results);
@@ -33,22 +33,35 @@ export default function StyleSelector() {
         {productId}
       </h1>
       <h4>style name</h4>
-      <Thumbnails
-        src={productInfo.map((item, index) => {
-          return item.photos[index].thumbnail_url;
+      <AllThumbnails>
+        {productInfo.map((item, index) => {
+          console.log('map?', item.photos[index].thumbnail_url);
+          return (
+            <Thumbnails src={item.photos[index].thumbnail_url}>
+            </Thumbnails>
+          )
         })}
-      >
-      </Thumbnails>
+      </AllThumbnails>
+
       <div>wow style selectors</div>
       <p>hello styleselector</p>
     </>
   );
 }
 
+const AllThumbnails = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: space-around;
+`
+// grid-template-columns: 25% 25% 25% 25%;
+
 const Thumbnails = styled.img`
+  display: flex;
   clip-path: circle();
-  width: 25px;
+  width: 25%;
   height: 25px;
-  display: grid;
-  grid-template-columns: 25% 25% 25% 25%;
+  box-sizing: border-box;
+  display: grid | inline-grid;
 `

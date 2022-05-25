@@ -25,7 +25,7 @@ const fakeData = {
   ]
 }
 
-test('renders on page', async () => {
+test('product info page renders', async () => {
   render(
   <GlobalContextProvider>
     <ProductInfo />
@@ -35,9 +35,9 @@ test('renders on page', async () => {
   // expect(value).toBeInTheDocument();
 })
 
-// test('main app renders', () => {
-//   render(<App />);
-// })
+test('main app renders', () => {
+  render(<App />);
+})
 
 // test('should navigate to website when link is clicked', async () => {
 //   const { getByTestId } = await render(
