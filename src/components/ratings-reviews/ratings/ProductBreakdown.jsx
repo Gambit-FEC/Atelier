@@ -11,8 +11,8 @@ export default function ProductBreakdown() {
   console.log(calcPercent(reviewsMeta?.characteristics.Comfort.value))
   return (
     <div className="ratings-product-breakdown">
-      {reviewsMeta && Object.keys(reviewsMeta.characteristics).map((item) => (
-        <div id={`${item}-breakdown`}>
+      {reviewsMeta && Object.keys(reviewsMeta.characteristics).map((item, index) => (
+        <div key={index} id={`${item}-breakdown`}>
           <div>{item}</div>
           <CharacteristicsBar>
             <CharacteristicsPointer position={calcPercent(reviewsMeta.characteristics[item].value)}>

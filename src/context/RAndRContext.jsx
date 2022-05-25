@@ -7,12 +7,10 @@ export function useRAndRContext() {
 }
 
 export function RAndRContextProvider({ children }) {
-  const [reviewsSort, setReviewsSort] = useState(() => 'relevant');
-  const [showAdd, setShowAdd] = useState(() => true);
-  const [reviewsMeta, setReviewsMeta] = useState(() => { });
-  const [totalRatings, setTotalRatings] = useState(() => 0);
   const [reviews, setReviews] = useState(() => []);
+  const [reviewsMeta, setReviewsMeta] = useState(() => { });
   const [page, setPage] = useState(() => 1);
+  const [reviewsSort, setReviewsSort] = useState(() => 'relevant');
   const [reviewsFilter, setReviewsFilter] = useState({
     1: false,
     2: false,
@@ -20,6 +18,10 @@ export function RAndRContextProvider({ children }) {
     4: false,
     5: false,
   });
+  const [totalRatings, setTotalRatings] = useState(() => 0);
+  const [showAdd, setShowAdd] = useState(() => true);
+  const [showWriteReview, setShowWriteReview] = useState(() => false);
+
   const value = {
     reviewsSort,
     setReviewsSort,
@@ -35,6 +37,8 @@ export function RAndRContextProvider({ children }) {
     setPage,
     reviewsFilter,
     setReviewsFilter,
+    showWriteReview,
+    setShowWriteReview,
   };
   return (
     <RAndRContext.Provider value={value}>

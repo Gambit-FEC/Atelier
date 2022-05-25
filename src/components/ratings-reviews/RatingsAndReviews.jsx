@@ -2,8 +2,10 @@ import React, { createContext, useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import Reviews from './reviews/Reviews';
 import Ratings from './ratings/Ratings';
+import WriteReview from './write-review/WriteReview';
 import { useGlobalContext } from '../../context/GlobalStore';
 import { useRAndRContext } from '../../context/RAndRContext';
+
 
 export default function RatingsAndReviews() {
   const { productId, setAvgRating } = useGlobalContext();
@@ -15,6 +17,7 @@ export default function RatingsAndReviews() {
     reviewsSort,
     reviews,
     page,
+    showWriteReview,
   } = useRAndRContext();
   console.log('ratings and reviews [rendered]');
 
@@ -62,6 +65,7 @@ export default function RatingsAndReviews() {
     <div id="ratings-and-reviews">
       <Ratings />
       <Reviews />
+      {showWriteReview && <WriteReview />}
     </div>
   );
 }

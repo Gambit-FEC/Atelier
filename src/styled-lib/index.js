@@ -45,4 +45,10 @@ const CharacteristicsPointer = styled(GoTriangleDown)`
   left: ${({ position }) => position * 2 + 'px'};
 `;
 
-export { StyledRatingStars, RatingBar, StarButton, CharacteristicsBar, CharacteristicsPointer };
+export {
+  StyledRatingStars,
+  RatingBar,
+  StarButton,
+  CharacteristicsBar,
+  CharacteristicsPointer,
+};

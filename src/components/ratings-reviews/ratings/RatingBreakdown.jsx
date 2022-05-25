@@ -18,9 +18,9 @@ export default function RatingBreakdown() {
   function handleRatingClick(star) {
     setReviewsFilter(Object.assign({}, reviewsFilter, reviewsFilter[star] = !reviewsFilter[star]));
   }
-  function whichColor(index) {
-    return reviewsFilter[index] ? 'purple' : '#069';
-  }
+  // function whichColor(index) {
+  //   return reviewsFilter[index] ? 'purple' : '#069';
+  // }
   function handleResetClick() {
     setReviewsFilter({
       1: false,
@@ -52,11 +52,11 @@ export default function RatingBreakdown() {
             <>
               <div>Filters applied: </div>
               <div id="rating-filters">
-              {Object.values(reviewsFilter).map((item, index) => {
-                if (item === true) {
-                  return <div key={index + 1}>{`${index + 1} ★`}</div>
-                }
-              })}
+                {Object.values(reviewsFilter).map((item, index) => {
+                  if (item === true) {
+                    return <div key={index + 1}>{`${index + 1} ★`}</div>
+                  }
+                })}
               </div>
               <button onClick={handleResetClick}>Reset Filters</button>
             </>
