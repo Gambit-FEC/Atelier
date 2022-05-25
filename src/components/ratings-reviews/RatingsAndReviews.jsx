@@ -84,7 +84,6 @@ export default function RatingsAndReviews() {
   return (
     <RatingsAndReviewsContext.Provider value={value}>
       <div id="ratings-and-reviews">
-        <button onClick={() => setProductId(productId + 1)} />
         <Ratings />
         <Reviews />
       </div>

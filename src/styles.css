@@ -48,6 +48,13 @@ h1 {
 
 /* ratings & reviews */
 
+#ratings-and-reviews {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
 .reviews-tile {
   margin-top: 30px
 }
@@ -68,6 +75,11 @@ h1 {
 
 .clicked-link-button {
   color: purple;
+}
+
+#rating-filters {
+  display: flex;
+  flex-flow: row nowrap;
 }
 
 

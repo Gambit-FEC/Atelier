@@ -28,8 +28,9 @@ export default function RatingBreakdown() {
       3: false,
       4: false,
       5: false,
-    })
+    });
   }
+
   return (
     <div className="rating-breakdown">
       {reviewsMeta && (
@@ -44,11 +45,23 @@ export default function RatingBreakdown() {
               >
                 {`${index} ★`}
               </StarButton>
-              <span style={{color: '#4a4a4a'}}>{` ${reviewsMeta.ratings[index]}`}</span>
+              <span style={{ color: '#4a4a4a' }}>{` ${reviewsMeta.ratings[index]}`}</span>
               <RatingBar percent={item} />
             </div>
           ))}
-          {Object.values(reviewsFilter).some((item) => item === true) && <button onClick={handleResetClick}>Reset Filters</button>}
+          {Object.values(reviewsFilter).some((item) => item === true) && (
+            <>
+              <div>Filters applied: </div>
+              <div id="rating-filters">
+              {Object.values(reviewsFilter).map((item, index) => {
+                if (item === true) {
+                  return <div key={index + 1}>{`${index + 1} ★`}</div>
+                }
+              })}
+              </div>
+              <button onClick={handleResetClick}>Reset Filters</button>
+            </>
+          )}
         </>
       )}
     </div>
