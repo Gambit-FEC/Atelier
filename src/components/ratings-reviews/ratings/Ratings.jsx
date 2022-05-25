@@ -1,15 +1,14 @@
 import React from 'react';
-import { RatingBar } from '../../../styled-lib';
 import OverallRating from './OverallRating';
-import StarBars from './StarBars';
-import SpecBars from './SpecBars';
+import RatingBreakdown from './RatingBreakdown';
+import ProductBreakdown from './ProductBreakdown';
 
 export default function Ratings() {
   return (
     <div className="ratings">
       <OverallRating />
-      <StarBars />
-      <SpecBars />
+      <RatingBreakdown />
+      <ProductBreakdown />
     </div>
   );
 }

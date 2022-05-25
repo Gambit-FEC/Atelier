@@ -9,6 +9,7 @@ export default function ReviewTile({ review }) {
     setReadMore(!readMore);
   }
   function handlePhotoClick(event) {
+    showModal.show ? document.body.style.overflow = 'auto' : document.body.style.overflow = 'hidden';
     setShowModal({ show: !showModal.show, src: event.target.src });
   }
   function showPhotos() {
@@ -50,11 +51,11 @@ export default function ReviewTile({ review }) {
       </div>
       {showModal.show && (
         <div className="modal-bg" onClick={handlePhotoClick}>
-          <div className="modal-main">
+          <div className="modal-image" onClick={(e) => e.stopPropagation()}>
             <img
-              style={{ maxWidth: '100%', maxHeight: '100%' }}
+              style={{ width: '100%', height: '100%', objectFit: 'contain' }}
               src={showModal.src}
-              onClick={(e) => { e.stopPropagation(); }}
+
             />
           </div>
         </div>
