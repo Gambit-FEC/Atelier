@@ -1,13 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { FcNext, FcPrevious} from 'react-icons/fc';
+import { FcNext, FcPrevious } from 'react-icons/fc';
+import { GiCancel } from 'react-icons/gi';
 import styled from 'styled-components';
 import { StyledRatingStars } from '../../../styled-lib';
 
-function outfitCard(data) {
+export function EmptyCard({ addCard }) {
+  console.log(addCard);
+  return (
+    <CardWrapper>
+      <StyledCard onClick={(e) => addCard(e)}>
+        <InfoWrapper>
+          EMPTY CARD
+        </InfoWrapper>
+      </StyledCard>
+    </CardWrapper>
+  );
+}
+
+export function OutfitCard({ data, addCard }) {
   const placeholder = 'http://placecorgi.com/260/180';
   const [current, setCurrent] = useState(0);
-  const display = data.data.slice(current, (current + 4));
-  const maxDisplay = data.data.length - 1;
+  const display = data.slice(current, (current + 4));
+  const maxDisplay = data.length - 1;
   console.log(data);
 
   const nextSlide = () => {
@@ -35,11 +49,12 @@ function outfitCard(data) {
           ? <FcNext className="right-arrow" onClick={nextSlide} />
           : null
       }
-      {
-      <CardWrapper>{
-        display.map((info, index) => {
-          return (
-            <StyledCard key={index}>
+      <CardWrapper>
+        {
+          display.map((info, index) => {
+            return (
+              <StyledCard key={index}>
+              <GiCancel onClick={(e) => addCard(e)}/>
             <ImageWrapper>
             <StyleImg src={
               info.style.thumbnail_url === null ? placeholder : info.style.thumbnail_url
@@ -55,14 +70,13 @@ function outfitCard(data) {
             </InfoWrapper>
             </StyledCard>
           )
-        })}
+          })
+        }
       </CardWrapper>
-      }
     </Container>
   );
 }
 
-export default outfitCard;
 
 const Container = styled.div`
   position: relative;
