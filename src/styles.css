@@ -1,4 +1,8 @@
 /* main */
+* {
+  font-family: Tahoma, Verdana, sans-serif;
+}
+
 body {
   margin: 50px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif

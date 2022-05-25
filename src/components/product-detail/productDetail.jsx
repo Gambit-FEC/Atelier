@@ -25,6 +25,7 @@ export default function ProductDetail() {
   // test------
   const { productId } = useGlobalContext();
   // const updateProduct = updateId();
+  console.log('productDetail [rendered]');
 
   return (
     <div id="productDetail">
@@ -44,8 +45,8 @@ export default function ProductDetail() {
         </Wrapper> */}
 
       <ProductInfo />
-      {/* <StyleSelector /> */}
-      <AddToCart />
+      <StyleSelector />
+      {/* <AddToCart /> */}
       {/* <ImageGallery /> */}
     </div>
   );
