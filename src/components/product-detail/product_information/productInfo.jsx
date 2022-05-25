@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useGlobalContext } from '../../../context/GlobalStore';
 import { StyledRatingStars } from '../../../styled-lib';
