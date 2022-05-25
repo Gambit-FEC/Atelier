@@ -1,33 +1,30 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import Reviews from './reviews/Reviews';
 import Ratings from './ratings/Ratings';
+import WriteReview from './write-review/WriteReview';
 import { useGlobalContext } from '../../context/GlobalStore';
+import { useRAndRContext } from '../../context/RAndRContext';
 
-export const RatingsAndReviewsContext = createContext();
 
 export default function RatingsAndReviews() {
-  const { productId, setProductId, setAvgRating } = useGlobalContext();
-
-  const [reviewsSort, setReviewsSort] = useState(() => 'relevant');
-  const [showAdd, setShowAdd] = useState(() => true);
-  const [reviewsMeta, setReviewsMeta] = useState(() => { });
-  const [totalRatings, setTotalRatings] = useState(() => 0);
-  const [reviews, setReviews] = useState(() => []);
-  const [page, setPage] = useState(() => 1);
-  const [reviewsFilter, setReviewsFilter] = useState({
-    1: false,
-    2: false,
-    3: false,
-    4: false,
-    5: false
-  });
+  const { productId, setAvgRating } = useGlobalContext();
+  const {
+    setReviewsMeta,
+    setReviews,
+    setShowAdd,
+    setPage,
+    reviewsSort,
+    reviews,
+    page,
+    showWriteReview,
+  } = useRAndRContext();
   console.log('ratings and reviews [rendered]');
 
   useEffect(() => {
     axios.get(`/reviews/meta/${productId}`)
       .then(({ data }) => {
-        console.log('meta', data)
+        console.log('meta', data);
         setReviewsMeta(data);
         setAvgRating(data.averageRating);
       })
@@ -64,30 +61,11 @@ export default function RatingsAndReviews() {
       });
   }, [page]);
 
-  const value = {
-    reviewsSort,
-    setReviewsSort,
-    showAdd,
-    setShowAdd,
-    reviewsMeta,
-    setReviewsMeta,
-    totalRatings,
-    setTotalRatings,
-    reviews,
-    setReviews,
-    page,
-    setPage,
-    reviewsFilter,
-    setReviewsFilter,
-  };
-
   return (
-    <RatingsAndReviewsContext.Provider value={value}>
-      <div id="ratings-and-reviews">
-        <button onClick={() => setProductId(productId + 1)} />
-        <Ratings />
-        <Reviews />
-      </div>
-    </RatingsAndReviewsContext.Provider>
+    <div id="ratings-and-reviews">
+      <Ratings />
+      <Reviews />
+      {showWriteReview && <WriteReview />}
+    </div>
   );
 }
