@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
-import { RatingsAndReviewsContext } from '../RatingsAndReviews';
+import React from 'react';
 import { CharacteristicsBar, CharacteristicsPointer } from '../../../styled-lib';
+import { useRAndRContext } from '../../../context/RAndRContext';
 
 export default function ProductBreakdown() {
-  const { reviewsMeta } = useContext(RatingsAndReviewsContext)
+  const { reviewsMeta } = useRAndRContext();
   console.log('reviews meta:', reviewsMeta);
   function calcPercent(value) {
     return Math.floor(parseFloat(value) * 20);

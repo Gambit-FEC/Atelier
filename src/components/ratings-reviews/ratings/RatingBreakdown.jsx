@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useRAndRContext } from '../../../context/RAndRContext';
 import { RatingBar, StarButton } from '../../../styled-lib';
-import { RatingsAndReviewsContext } from '../RatingsAndReviews';
 
 export default function RatingBreakdown() {
-  const { reviewsMeta, setReviewsFilter, reviewsFilter } = useContext(RatingsAndReviewsContext);
+  const { reviewsMeta, setReviewsFilter, reviewsFilter } = useRAndRContext();
   function calcPercents(ratings) {
     var percents = [];
     let highestStar = 0;

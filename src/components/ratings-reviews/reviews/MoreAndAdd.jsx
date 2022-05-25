@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
-import { RatingsAndReviewsContext } from '../RatingsAndReviews';
+import React from 'react';
+import { useRAndRContext } from '../../../context/RAndRContext';
 
 export default function MoreAndAddReview() {
-  const { page, setPage, showAdd } = useContext(RatingsAndReviewsContext);
+  const { page, setPage, showAdd } = useRAndRContext();
   const handleMoreClick = () => {
     setPage(page + 1);
   };

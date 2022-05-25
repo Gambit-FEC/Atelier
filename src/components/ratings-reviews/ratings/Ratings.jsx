@@ -1,5 +1,4 @@
 import React from 'react';
-import { RatingBar } from '../../../styled-lib';
 import OverallRating from './OverallRating';
 import RatingBreakdown from './RatingBreakdown';
 import ProductBreakdown from './ProductBreakdown';

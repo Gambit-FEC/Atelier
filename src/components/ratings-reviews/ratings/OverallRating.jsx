@@ -1,11 +1,10 @@
-import React, { useContext, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
 import { useGlobalContext } from '../../../context/GlobalStore';
-import { RatingsAndReviewsContext } from '../../../../tests/RatingsAndReviews.test';
 import { StyledRatingStars } from '../../../styled-lib';
+import { useRAndRContext } from '../../../context/RAndRContext';
 
 export default function OverallRating() {
-  const { reviewsMeta } = useContext(RatingsAndReviewsContext);
+  const { reviewsMeta } = useRAndRContext();
   const { avgRating } = useGlobalContext();
   let recommended;
   if (reviewsMeta) {
