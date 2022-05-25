@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import axios from 'axios';
 import { useGlobalContext } from '../../../context/GlobalStore';
-import { RatingsAndReviewsContext } from '../RatingsAndReviews';
+import { RatingsAndReviewsContext } from '../../../../tests/RatingsAndReviews.test';
 import { StyledRatingStars } from '../../../styled-lib';
 
 export default function OverallRating() {
