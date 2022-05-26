@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { FcNext, FcPrevious} from 'react-icons/fc';
-import { AiFillStar, AiOutlineStar} from 'react-icons/ai';
+import { FcNext, FcPrevious } from 'react-icons/fc';
+import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import styled from 'styled-components';
 import CompareModal from './compareModal';
 import { StyledRatingStars } from '../../../styled-lib';
@@ -12,8 +12,7 @@ function relatedCard(data) {
   const maxDisplay = data.data.length - 4;
   const [showModal, setModal] = useState(false);
   const [currentItem, setCurrentItem] = useState(0);
-  const [favorite, setFavorite] = useState({selectedId: null, isFavorited: false});
-
+  const [currentRelatedProducts, setCurrentRelatedProducts] = useState([]);
 
   // save data coming as a variable
   // set that variable as a state
@@ -35,9 +34,13 @@ function relatedCard(data) {
     modal.style.display = 'none';
   }
 
-  function favoriteClick(value, isFavorited) {
-    const favObj = { selectedId: value, isFavorited: isFavorited };
-    setFavorite(favObj);
+  function favoriteClick(selectedId, isFavorited) {
+    const copyOfRelatedProducts = [...currentRelatedProducts];
+    const foundIndex = copyOfRelatedProducts.findIndex((p) => p.product.id === selectedId);
+    if (foundIndex > -1) {
+      copyOfRelatedProducts[foundIndex].favorite = isFavorited;
+      setCurrentRelatedProducts(copyOfRelatedProducts);
+    }
   }
 
   const nextSlide = () => {
@@ -49,12 +52,11 @@ function relatedCard(data) {
 
   useEffect(() => {
     setCurrent(0);
-  }, [data.data, favorite]);
+    setCurrentRelatedProducts(display);
+  }, [data.data]);
 
   return (
     <Container>
-      {/* <FcPrevious className="left-arrow" />
-      <FcNext className="right-arrow" /> */}
       {
         current !== 0
           ? <FcPrevious className="left-arrow" onClick={prevSlide} />
@@ -66,51 +68,55 @@ function relatedCard(data) {
           : null
       }
 
-
-        {
-        <div id="myModal" className="modal">
-          <div className="modal-content">
-            <span className="close"
+      <div id="myModal" className="modal">
+        <div className="modal-content">
+          <span
+            className="close"
             onClick={closeDisplay}
-            >&times;</span>
-            {showModal ? <CompareModal value={currentItem}/> : null}
-          </div>
+          >
+            &times;
+          </span>
+          {showModal ? <CompareModal value={currentItem} /> : null}
         </div>
-        }
-      {
-       <CardWrapper>{
-        display.map((info, index) => {
-          return (
-            <StyledCard>
-              {
-              (favorite.selectedId === info.product.id && favorite.isFavorited) ? <AiFillStar onClick={() => favoriteClick(info.product.id, false) }/> : <AiOutlineStar onClick={() => favoriteClick(info.product.id, true)}/>
-              // console.log(favorite.isFavorited)
-              // console.log(info.favorite)
+      </div>
+
+      <CardWrapper>
+        {
+        currentRelatedProducts.map((info, index) => (
+          <StyledCard key={index}>
+            {
+              (info.favorite)
+                ? <AiFillStar onClick={() => favoriteClick(info.product.id, false)} />
+                : <AiOutlineStar onClick={() => favoriteClick(info.product.id, true)} />
               }
-            <div key={index} value={info.product.id} onClick={(e) => showDisplay(e, info.product.id)}>
-            <StyleImg src={
+            <div
+              key={index}
+              value={info.product.id}
+              onClick={(e) => showDisplay(e, info.product.id)}
+            >
+              <StyleImg src={
               info.style.thumbnail_url === null ? placeholder : info.style.thumbnail_url
-            }/>
-          <InfoWrapper value={info.product.id}>
-            <CategoryWrapper>
-            {info.product.category}
-            </CategoryWrapper>
-            <NameWrapper>
-            {info.product.name}
-            </NameWrapper>
-            <PriceWrapper>
-            ${info.product.price}
-            </PriceWrapper>
-            <StyledRatingStars rating={info.rating.averageRating} >
-            ★★★★★
-            </StyledRatingStars>
-          </InfoWrapper>
+            } />
+              <InfoWrapper value={info.product.id}>
+                <CategoryWrapper>
+                  {info.product.category}
+                </CategoryWrapper>
+                <NameWrapper>
+                  {info.product.name}
+                </NameWrapper>
+                <PriceWrapper>
+                  $
+                  { info.product.price }
+                </PriceWrapper>
+                <StyledRatingStars rating={info.rating.averageRating}>
+                  ★★★★★
+                </StyledRatingStars>
+              </InfoWrapper>
             </div>
           </StyledCard>
-          )
-        })}
-        </CardWrapper>
-      }
+        ))
+        }
+      </CardWrapper>
     </Container>
   );
 }
@@ -122,12 +128,12 @@ position: relative;
 display:flex;
 justify-content: space-evenly;
 align-items: center;
-`
+`;
 
 const CardWrapper = styled.div`
 display:flex;
 object-fit:cover;
-`
+`;
 
 const StyledCard = styled.div`
 display: flex;
@@ -156,32 +162,18 @@ background-style: contain;
 
 const InfoWrapper = styled.div`
   background-color: white;
-`
+`;
 
 const CategoryWrapper = styled.p`
 font-weight: normal;
 text-transform: uppercase;
 font-size: 16px;
-`
+`;
 const NameWrapper = styled.p`
 font-weight: bold;
 font-size: 18px;
-`
+`;
 const PriceWrapper = styled.p`
 font-weight: normal;
 font-size: 16px;
-`
-// .container .box {
-  //   width:540px;
-  //   margin:50px;
-  //   display:table;
-// }
-// .container .box .box-row {
-//   display:table-row;
-// }
-// .container .box .box-cell {
-//   display:table-cell;
-//   border:1px solid black;
-//   width:25%;
-//   padding:10px;
-// }
+`;
