@@ -5,7 +5,7 @@ export default function WriteReview() {
   const { setShowWriteReview, reviewsMeta } = useRAndRContext();
   const [formData, setFormData] = useState(() => {
     const data = {
-      overallRating: 0,
+      overallRating: '0',
       recommend: undefined,
       characteristics: {},
       summary: '', // optional
@@ -19,7 +19,6 @@ export default function WriteReview() {
       data.characteristics[item].id = reviewsMeta.characteristics[item].id;
       data.characteristics[item].value = '0';
     });
-    console.log('formData', data);
     return data;
   });
   const characteristicsMeaning = {
@@ -35,8 +34,21 @@ export default function WriteReview() {
     document.body.style.overflow = 'auto';
     setShowWriteReview(false);
   }
-  function handleSubmitReview() {
+  function handleSubmitReview(e) {
+    e.preventDefault();
+    if (formData.overallRating === '0') {
+      // window.alert('No rating was selected!');
+      // render rating popup
+      const popup = document.createElement('div');
+      popup.className = 'popup-prompt';
+      popup.innerText = '⚠️ Please fill out this field.';
+      document.getElementById('star-buttons').append(popup);
+      setTimeout(() => { popup.parentNode.removeChild(popup); }, 5000);
+      return;
+    }
     console.log(formData);
+    window.alert('Review submitted');
+    handleExitView();
   }
   function updateFormData(e) {
     const newData = { ...formData };
@@ -45,13 +57,12 @@ export default function WriteReview() {
   }
   function handleStarClick(e) {
     if (formData.overallRating === e.target.id) {
-      setFormData({ ...formData, overallRating: 0 });
+      setFormData({ ...formData, overallRating: '0' });
     } else {
       setFormData({ ...formData, overallRating: e.target.id });
     }
   }
   function handleRecommended(e) {
-    console.log(e.target.value);
     if (e.target.value === 'yes') {
       setFormData({ ...formData, recommend: true });
     } else if (e.target.value === 'no') {
@@ -59,7 +70,6 @@ export default function WriteReview() {
     }
   }
   function handleCharacteristics(e) {
-    console.log(e.target.name, e.target.value);
     const newData = { ...formData };
     newData.characteristics[e.target.name].value = e.target.value;
     setFormData(newData);
@@ -68,29 +78,28 @@ export default function WriteReview() {
     const spans = [];
     for (let i = 0; i < 5; i++) {
       if (i < formData.overallRating) {
-        spans.push(<span key={i} id={i + 1} style={{ cursor: 'pointer' }} onClick={handleStarClick}>★</span>);
+        spans.push(<input type="button" key={i} id={i + 1} value="★" style={{ fontSize: 'x-large', cursor: 'pointer', padding: '0px', border: 'none', backgroundColor: 'transparent' }} onClick={handleStarClick} required />);
       } else {
-        spans.push(<span key={i} id={i + 1} style={{ cursor: 'pointer' }} onClick={handleStarClick}>☆</span>);
+        spans.push(<input type="button" key={i} id={i + 1} value="☆" style={{ fontSize: 'x-large', cursor: 'pointer', padding: '0px', border: 'none', backgroundColor: 'transparent' }} onClick={handleStarClick} required />);
       }
     }
     return (
-      <div>
+      <div id="star-buttons">
         {spans}
       </div>
     );
   }
+
   function characteristicsRender() {
     const allRadios = [];
-    console.log(reviewsMeta);
     // eslint-disable-next-line no-restricted-syntax
     for (const key in reviewsMeta.characteristics) {
-      console.log(key);
       const radios = [];
       for (let i = 0; i < 5; i++) {
         radios.push(
           <>
             <label key={`${key}-${i}-label`}>{`${i + 1}: `}</label>
-            <input key={`${key}-${i}-radio`} type="radio" id={`${key}-${i + 1}`} name={key} value={i + 1} style={i < 4 ? { marginRight: '10px' } : {}} />
+            <input key={`${key}-${i}-radio`} type="radio" id={`${key}-${i + 1}`} name={key} value={i + 1} style={i < 4 ? { marginRight: '10px' } : {}} required />
           </>,
         );
       }
@@ -98,7 +107,7 @@ export default function WriteReview() {
         <div key={key} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
           <label>{`${key}:`}</label>
           {formData.characteristics[key].value - 1 >= 0
-          && <label>{characteristicsMeaning[key][formData.characteristics[key].value - 1]}</label>}
+            && <label>{characteristicsMeaning[key][formData.characteristics[key].value - 1]}</label>}
           <div>
             {radios}
           </div>
@@ -112,32 +121,33 @@ export default function WriteReview() {
     <div className="write-review modal-bg">
       <form className="modal-form" onSubmit={handleSubmitReview}>
         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+          <span className="required-guide" style={{ minWidth: 'fit-content' }}>= required</span>
           <h3 style={{ textAlign: 'center', width: '100%' }}>Write A Review</h3>
           <div className="modal-exit-button" onClick={handleExitView}>[X]</div>
         </div>
-        <label>Overall Rating:</label>
+        <label id="overall-rating-prompt" className="required">Overall Rating</label>
         {starRender()}
-        <label>Do you recommend this product?</label>
+        <label className="required">Do you recommend this product?</label>
         <div onChange={handleRecommended}>
           <label>yes</label>
-          <input type="radio" id="yes" name="recommend" value="yes" />
+          <input type="radio" id="yes" name="recommend" value="yes" required />
           <label>no</label>
-          <input type="radio" id="no" name="recommend" value="no" />
+          <input type="radio" id="no" name="recommend" value="no" required />
         </div>
-        <label>Characteristics:</label>
+        <label className="required">Characteristics</label>
         <div onChange={handleCharacteristics}>
           {characteristicsRender()}
         </div>
-        <label>Summary:</label>
-        <textarea id="summary" placeholder="optional" onChange={updateFormData} />
-        <label>Body:</label>
-        <textarea id="body" onChange={updateFormData} />
-        <label>Photos:</label>
+        <label>Summary</label>
+        <textarea id="summary" placeholder="Example: Best purchase ever!" maxLength="60" onChange={updateFormData} />
+        <label className="required">Body</label>
+        <textarea id="body" placeholder="Why did you like the product or not?" minLength="50" onChange={updateFormData} required />
+        <label>Photos</label>
         <textarea id="photos" />
-        <label>Username:</label>
-        <input type="text" id="username" onChange={updateFormData} />
-        <label>Email:</label>
-        <input type="email" id="email" onChange={updateFormData} />
+        <label className="required">Username</label>
+        <input type="text" id="username" onChange={updateFormData} required />
+        <label className="required">Email</label>
+        <input type="email" id="email" onChange={updateFormData} required />
         <input type="submit" value="Submit Review" />
       </form>
     </div>
