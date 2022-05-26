@@ -34,12 +34,12 @@ export default function StyleSelector() {
       </h1>
       <h4>style name</h4>
       <AllThumbnails>
-        {productInfo.map((item, index) => {
-          console.log('map?', item.photos[index].thumbnail_url);
+        {productInfo.map((item) => {
+          console.log('map?', item.photos[0].thumbnail_url);
           return (
-            <Thumbnails src={item.photos[index].thumbnail_url}>
-            </Thumbnails>
-          )
+            // <Thumbnails src={item.photos[index].thumbnail_url} />
+            <Thumbnails src={item.photos[0].thumbnail_url ? item.photos[0].thumbnail_url : 'https://img.icons8.com/stickers/344/gambit.png'} />
+          );
         })}
       </AllThumbnails>
 
@@ -51,10 +51,15 @@ export default function StyleSelector() {
 
 const AllThumbnails = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-content: space-around;
+  flex-flow: row wrap;
+  justify-content: flex-start;
 `
+// const AllThumbnails = styled.div`
+//   display: flex;
+//   flex-wrap: wrap;
+//   justify-content: space-around;
+//   align-content: space-around;
+// `
 // grid-template-columns: 25% 25% 25% 25%;
 
 const Thumbnails = styled.img`
