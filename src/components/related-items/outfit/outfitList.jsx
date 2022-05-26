@@ -4,16 +4,22 @@ import styled from 'styled-components';
 import { OutfitCard, EmptyCard } from './outfitCard';
 import { useGlobalContext } from '../../../context/GlobalStore';
 
+let outfitArray = [];
+
 export default function outfitList() {
-  const outfitList = [];
-  const outfitArray = [];
   const { productId } = useGlobalContext();
   const [outfitInfo, setOutfitInfo] = useState([]);
   const [cardList, setCardList] = useState(false);
 
-  function addCard() {
-    console.log(!cardList);
-    setCardList(!cardList);
+  function saveToLocalStorage(outfitId) {
+    const localStorageItem = localStorage.getItem('outfits');
+    if (localStorageItem === null) {
+      localStorage.setItem('outfits', JSON.stringify([outfitId]));
+    } else {
+      const productIDs = JSON.parse(localStorageItem);
+      productIDs.push(outfitId);
+      localStorage.setItem('outfits', JSON.stringify(productIDs));
+    }
   }
 
   function getRelatedInfo(id) {
@@ -28,11 +34,11 @@ export default function outfitList() {
     return axios.get(`/reviews/meta/${id}`);
   }
 
-  function getRelatedProducts() {
+  function getRelatedProducts(currentProductId) {
     const listOfPromises = [];
-
-    const promise = Promise.all([getRelatedInfo(productId),
-      getRelatedStyle(productId), getRelatedRating(productId)]);
+    console.log('before: ', outfitArray);
+    const promise = Promise.all([getRelatedInfo(currentProductId),
+      getRelatedStyle(currentProductId), getRelatedRating(currentProductId)]);
     listOfPromises.push(promise);
 
     Promise.all(listOfPromises).then((promiseResults) => {
@@ -41,25 +47,72 @@ export default function outfitList() {
         product.product = element[0].data;
         product.style = element[1].data;
         product.rating = element[2].data;
-        outfitList.push(product);
+        outfitArray.push(product);
       });
-      // console.log(allProductList);
-      setOutfitInfo(outfitList);
+      console.log('after :', outfitArray);
+      setOutfitInfo([...outfitArray]);
     }).catch((err) => {
       console.log(err);
     });
   }
 
+  function removeCard(currentProductId) {
+    const localStorageItem = JSON.parse(localStorage.getItem('outfits'));
+    if (localStorageItem.length > 0) {
+      const currentIndex = localStorageItem
+        .findIndex((productID) => productID === currentProductId);
+      console.log(currentIndex);
+      console.log('length ', localStorageItem.length);
+      if (currentIndex === 0 && localStorageItem.length === 1) {
+        localStorage.removeItem('outfits');
+        outfitArray = [];
+        setOutfitInfo([]);
+        setCardList(!cardList);
+      } else {
+        localStorageItem.splice(currentIndex, 1);
+        localStorage.setItem('outfits', JSON.stringify(localStorageItem));
+
+        const index = outfitArray.findIndex((p) => p.product.id === currentProductId);
+        outfitArray.splice(index, 1);
+        setOutfitInfo([...outfitArray]);
+      }
+    }
+  }
+  function addCard() {
+    setCardList(true);
+    if (typeof (Storage) !== 'undefined') {
+      // Code for localStorage
+      saveToLocalStorage(productId);
+      getRelatedProducts(productId);
+    } else {
+      // No web storage Support.
+      console.log('BROWSER DOES NOT SUPPORT');
+    }
+  }
+
+  function getSavedProductOutfits() {
+    const localStorageItem = localStorage.getItem('outfits');
+    if (localStorageItem !== null) {
+      const productIDs = JSON.parse(localStorageItem);
+      setCardList(!cardList);
+      productIDs.forEach((Ids) => {
+        getRelatedProducts(Ids);
+      });
+    }
+  }
+
   useEffect(() => {
-    getRelatedProducts();
+    // getRelatedProductOutfit();
+    getSavedProductOutfits();
   }, []);
 
   return (
     <div className="outfit-items-list">
       <h2>YOUR OUTFIT</h2>
+
       {
-        cardList ? <OutfitCard data={outfitInfo} addCard={addCard}/>
-          : <EmptyCard addCard={addCard}/>
+        cardList ? <OutfitCard data={outfitInfo} addCard={addCard} removeCard={removeCard}/>
+          : <EmptyCard addCard={ addCard }/>
       }
     </div>
   );
