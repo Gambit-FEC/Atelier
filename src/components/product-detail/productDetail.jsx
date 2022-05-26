@@ -10,16 +10,25 @@ import StyleSelector from './style_selector/styleSelector';
 
 // //styled-components ex
 // Create a Title component that'll render an <h1> tag with some styles
-const ProductDetailContainer = styled.h2`
-  font-size: 1.5em;
+const ProductDetailContainer = styled.section`
+  display: flex;
   text-align: center;
   color: palevioletred;
 `;
 // Create a Wrapper component that'll render a <section> tag with some styles
-const Wrapper = styled.section`
-  padding: 4em;
-  background: papayawhip;
+const NotImages = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 40%;
 `;
+
+const Images = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 60%;
+`
 
 export default function ProductDetail() {
   // test------
@@ -34,20 +43,18 @@ export default function ProductDetail() {
         {' '}
         {productId}
       </h1>
-      {/* <Wrapper>
-        <ProductDetailContainer>
-          <div>
-            <div>productDetail</h2>
-            <div>wow</div>
-            <p>hello</p>
-          </div>
-          </ProductDetailContainer>
-        </Wrapper> */}
 
-      <ProductInfo />
-      <StyleSelector />
-      {/* <AddToCart /> */}
-      {/* <ImageGallery /> */}
+      <ProductDetailContainer>
+        <Images>
+          <ImageGallery />
+        </Images>
+        <NotImages>
+          <ProductInfo />
+          <StyleSelector />
+          {/* <AddToCart /> */}
+        </NotImages>
+      </ProductDetailContainer>
     </div>
   );
 }
+
