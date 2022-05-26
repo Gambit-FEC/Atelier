@@ -60,10 +60,12 @@ export default function ProductInfo() {
         {productId}
       </h1>
       <div>
-        <StyledRatingStars size="medium" rating={avgRating}>★★★★★</StyledRatingStars>
-        <a href="#ratings-and-reviews" id="see-reviews">
-          {allReviews ? `Read all ${allReviews} reviews` : 'No Rewiews'}
-        </a>
+        <Reviews>
+          <StyledRatingStars size="medium" rating={avgRating}>★★★★★</StyledRatingStars>
+          <a href="#ratings-and-reviews" id="see-reviews">
+            {allReviews ? `Read all ${allReviews} reviews` : 'No Rewiews'}
+          </a>
+        </Reviews>
         <Category>{productInfo[0] ? productInfo[0].category : null}</Category>
         <ProductName>{productInfo[0] ? productInfo[0].name : null}</ProductName>
         <Price>{productInfo[1] ? productInfo[1].results[0].original_price : null}</Price>
@@ -88,10 +90,10 @@ const Wrapper = styled.div`
   align-items: flex-end;
 `;
 
-// const Reviews = styled.div`
-//   justify-content: center;
+const Reviews = styled.div`
+  justify-content: center;
 
-// `
+`
 
 const Category = styled.div`
   font-weight: lighter;
