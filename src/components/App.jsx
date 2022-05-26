@@ -9,12 +9,12 @@ function App() {
   console.log('app [rerendered]');
   return (
     <GlobalContextProvider>
-      <ProductDetail />
+      {/* <ProductDetail /> */}
       {/* <QuestionsAndAnswers /> */}
       <RelatedItems />
-      <RAndRContextProvider>
+      {/* <RAndRContextProvider>
         <RatingsAndReviews />
-      </RAndRContextProvider>
+      </RAndRContextProvider> */}
     </GlobalContextProvider>
   );
 }

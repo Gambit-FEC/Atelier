@@ -55,7 +55,7 @@ export default function relatedList() {
   return (
     <div className="related-items-list">
       <h2>RELATED PRODUCTS</h2>
-      <RelatedCard data={relatedInfo}/>
+      <RelatedCard data={relatedInfo} />
     </div>
   );
 }
