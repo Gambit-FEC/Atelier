@@ -123,7 +123,7 @@ export default function WriteReview() {
         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
           <span className="required-guide" style={{ minWidth: 'fit-content' }}>= required</span>
           <h3 style={{ textAlign: 'center', width: '100%' }}>Write A Review</h3>
-          <div className="modal-exit-button" onClick={handleExitView}>[X]</div>
+          <div className="modal-exit-button close" onClick={handleExitView}>×</div>
         </div>
         <label id="overall-rating-prompt" className="required">Overall Rating</label>
         {starRender()}
