@@ -17,8 +17,8 @@ function averageRatings(ratings) {
 
 function totalRatings(ratings) {
   let total = 0;
-  for (let key in ratings) {
-    total += parseInt(ratings[key]) || 0;
+  for (const key in ratings) {
+    total += parseInt(ratings[key], 10) || 0;
   }
   return total;
 }
@@ -51,7 +51,6 @@ exports.getMeta = (req, res) => {
 };
 
 exports.addReview = (req, res) => {
-  console.log(typeof req.body);
   axios.post(`${API_URL}reviews`, req.body, { headers: { Authorization: req.headers.Authorization } })
     .then(() => {
       res.sendStatus(201);

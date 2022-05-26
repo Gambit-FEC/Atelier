@@ -48,12 +48,15 @@ export default function WriteReview() {
       setTimeout(() => { popup.parentNode.removeChild(popup); }, 5000);
       return;
     }
-    console.log(formData);
     postForm()
       .then(() => {
         window.alert('Review submitted');
+        handleExitView();
+      })
+      .catch((err) => {
+        console.log('Error submitting review:', err);
+        window.alert('There was an issue submitting your review.');
       });
-    handleExitView();
   }
 
   function postForm() {
@@ -68,12 +71,7 @@ export default function WriteReview() {
       formSubmission.characteristics[char[key].id] = parseInt(char[key].value, 10);
     }
     formSubmission.photos = formSubmission.photos.map(() => `https://placedog.net/${Math.floor(Math.random() * 999) + 1}`);
-    console.log(formSubmission);
-    return axios.post('/reviews', formSubmission)
-      .catch((err) => {
-        console.log('Error submitting review:', err);
-        window.alert('There was an issue submitting your review.');
-      });
+    return axios.post('/reviews', formSubmission);
   }
 
   function updateFormData(e) {
@@ -105,16 +103,13 @@ export default function WriteReview() {
   }
 
   function handlePhotos(e) {
-    console.log(e.target.files.length);
     if (e.target.files.length > 5) {
       window.alert('5 photos max!');
       document.getElementById('photos').value = null;
       return;
     }
     const newPhotos = [];
-    console.log(e.target.files);
     for (let i = 0; i < e.target.files.length; i++) {
-      console.log(e.target.files[i]);
       newPhotos.push(e.target.files[i]);
     }
     setFormData({ ...formData, photos: newPhotos });
