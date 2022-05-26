@@ -48,8 +48,8 @@ export default function ProductInfo() {
         // console.log('does getProduct work???', result.data);
         setProductInfo(result.data);
       })
-      .catch((err) => { return err; });
-      // .catch((err) => { console.log('getproduct didnt work', err); });
+      // .catch((err) => { return err; });
+      .catch((err) => { console.log('getproduct didnt work', err); });
   }, [productId]);
 
   return (
@@ -62,7 +62,7 @@ export default function ProductInfo() {
       <div>
         <StyledRatingStars size="medium" rating={avgRating}>★★★★★</StyledRatingStars>
         <a href="#ratings-and-reviews" id="see-reviews">
-          {allReviews ? 'Read all ' + allReviews + ' reviews' : 'No Rewiews'}
+          {allReviews ? `Read all ${allReviews} reviews` : 'No Rewiews'}
         </a>
         <Category>{productInfo[0] ? productInfo[0].category : null}</Category>
         <ProductName>{productInfo[0] ? productInfo[0].name : null}</ProductName>
@@ -97,6 +97,7 @@ const Category = styled.div`
   font-weight: lighter;
   color: rgba(102, 91, 165, 1);
   text-transform: uppercase;
+  margin: 10px 0 10px;
 `;
 
 const ProductName = styled.h2`
