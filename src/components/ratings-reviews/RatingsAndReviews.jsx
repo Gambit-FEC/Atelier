@@ -6,7 +6,6 @@ import WriteReview from './write-review/WriteReview';
 import { useGlobalContext } from '../../context/GlobalStore';
 import { useRAndRContext } from '../../context/RAndRContext';
 
-
 export default function RatingsAndReviews() {
   const { productId, setAvgRating } = useGlobalContext();
   const {
