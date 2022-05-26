@@ -17,8 +17,8 @@ function averageRatings(ratings) {
 
 function totalRatings(ratings) {
   let total = 0;
-  for (let key in ratings) {
-    total += parseInt(ratings[key]) || 0;
+  for (const key in ratings) {
+    total += parseInt(ratings[key], 10) || 0;
   }
   return total;
 }
@@ -29,7 +29,7 @@ exports.getById = (req, res) => {
       res.status(200).send(data);
     })
     .catch((err) => {
-      console.log('error fetching from reviews API:', err);
+      console.log('Error fetching from reviews API:', err);
       res.sendStatus(400);
     });
 };
@@ -45,7 +45,18 @@ exports.getMeta = (req, res) => {
       );
     })
     .catch((err) => {
-      console.log('error fetching average ratings from reviews API:', err);
+      console.log('Error fetching average ratings from reviews API:', err);
       res.sendStatus(400);
+    });
+};
+
+exports.addReview = (req, res) => {
+  axios.post(`${API_URL}reviews`, req.body, { headers: { Authorization: req.headers.Authorization } })
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch((err) => {
+      console.log('Error posting to reviews API:', err);
+      res.sendStatus(401);
     });
 };

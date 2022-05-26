@@ -15,6 +15,7 @@
     "no-console": "off",
     "no-plusplus": "off",
     "no-unused-expressions": "off",
-    "guard-for-in":"off"
+    "guard-for-in":"off",
+    "no-restricted-syntax":"off"
   }
 }
