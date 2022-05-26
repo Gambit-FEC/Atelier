@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { useRAndRContext } from '../../../context/RAndRContext';
+import { useGlobalContext } from '../../../context/GlobalStore';
 
 export default function WriteReview() {
-  const { setShowWriteReview, reviewsMeta } = useRAndRContext();
+  const { productId } = useGlobalContext();
+  const { setShowWriteReview, reviewsMeta, setPage } = useRAndRContext();
   const [formData, setFormData] = useState(() => {
     const data = {
-      overallRating: '0',
-      recommend: undefined,
-      characteristics: {},
+      rating: '0',
       summary: '', // optional
       body: '',
-      photos: [], // optional
-      username: '',
+      recommend: undefined,
+      name: '',
       email: '',
+      photos: [], // optional
+      characteristics: {},
     };
     Object.keys(reviewsMeta.characteristics).forEach((item) => {
       data.characteristics[item] = {};
@@ -34,11 +37,10 @@ export default function WriteReview() {
     document.body.style.overflow = 'auto';
     setShowWriteReview(false);
   }
+
   function handleSubmitReview(e) {
     e.preventDefault();
-    if (formData.overallRating === '0') {
-      // window.alert('No rating was selected!');
-      // render rating popup
+    if (formData.rating === '0') {
       const popup = document.createElement('div');
       popup.className = 'popup-prompt';
       popup.innerText = '⚠️ Please fill out this field.';
@@ -47,21 +49,47 @@ export default function WriteReview() {
       return;
     }
     console.log(formData);
-    window.alert('Review submitted');
+    postForm()
+      .then(() => {
+        window.alert('Review submitted');
+      });
     handleExitView();
   }
+
+  function postForm() {
+    const formSubmission = {
+      ...formData,
+      rating: parseInt(formData.rating, 10),
+      characteristics: {},
+      product_id: productId,
+    };
+    const char = formData.characteristics;
+    for (const key in char) {
+      formSubmission.characteristics[char[key].id] = parseInt(char[key].value, 10);
+    }
+    formSubmission.photos = formSubmission.photos.map(() => `https://placedog.net/${Math.floor(Math.random() * 999) + 1}`);
+    console.log(formSubmission);
+    return axios.post('/reviews', formSubmission)
+      .catch((err) => {
+        console.log('Error submitting review:', err);
+        window.alert('There was an issue submitting your review.');
+      });
+  }
+
   function updateFormData(e) {
     const newData = { ...formData };
     newData[e.target.id] = e.target.value;
     setFormData(newData);
   }
+
   function handleStarClick(e) {
-    if (formData.overallRating === e.target.id) {
-      setFormData({ ...formData, overallRating: '0' });
+    if (formData.rating === e.target.id) {
+      setFormData({ ...formData, rating: '0' });
     } else {
-      setFormData({ ...formData, overallRating: e.target.id });
+      setFormData({ ...formData, rating: e.target.id });
     }
   }
+
   function handleRecommended(e) {
     if (e.target.value === 'yes') {
       setFormData({ ...formData, recommend: true });
@@ -69,11 +97,13 @@ export default function WriteReview() {
       setFormData({ ...formData, recommend: false });
     }
   }
+
   function handleCharacteristics(e) {
     const newData = { ...formData };
     newData.characteristics[e.target.name].value = e.target.value;
     setFormData(newData);
   }
+
   function handlePhotos(e) {
     console.log(e.target.files.length);
     if (e.target.files.length > 5) {
@@ -81,13 +111,19 @@ export default function WriteReview() {
       document.getElementById('photos').value = null;
       return;
     }
-    const newPhotos = e.target.files;
+    const newPhotos = [];
+    console.log(e.target.files);
+    for (let i = 0; i < e.target.files.length; i++) {
+      console.log(e.target.files[i]);
+      newPhotos.push(e.target.files[i]);
+    }
     setFormData({ ...formData, photos: newPhotos });
   }
+
   function starRender() {
     const spans = [];
     for (let i = 0; i < 5; i++) {
-      if (i < formData.overallRating) {
+      if (i < formData.rating) {
         spans.push(<input type="button" key={i} id={i + 1} value="★" style={{ fontSize: 'x-large', cursor: 'pointer', padding: '0px', border: 'none', backgroundColor: 'transparent' }} onClick={handleStarClick} required />);
       } else {
         spans.push(<input type="button" key={i} id={i + 1} value="☆" style={{ fontSize: 'x-large', cursor: 'pointer', padding: '0px', border: 'none', backgroundColor: 'transparent' }} onClick={handleStarClick} required />);
@@ -158,8 +194,8 @@ export default function WriteReview() {
         <textarea id="body" placeholder="Why did you like the product or not?" minLength="50" onChange={updateFormData} required />
         <label>Photos (5 max)</label>
         <input id="photos" type="file" accept="image/*" onChange={handlePhotos} multiple />
-        <label className="required">Username</label>
-        <input type="text" id="username" onChange={updateFormData} required />
+        <label className="required">Name</label>
+        <input type="text" id="name" onChange={updateFormData} required />
         <label className="required">Email</label>
         <input type="email" id="email" onChange={updateFormData} required />
         <input type="submit" value="Submit Review" />

@@ -51,11 +51,11 @@ export default function ReviewTile({ review }) {
       </div>
       {showModal.show && (
         <div className="modal-bg" onClick={handlePhotoClick}>
-          <div className="modal-image" onClick={(e) => e.stopPropagation()}>
+          <div className="modal-image">
             <img
               style={{ width: '100%', height: '100%', objectFit: 'contain' }}
               src={showModal.src}
-
+              // onClick={(e) => e.stopPropagation()}
             />
           </div>
         </div>
