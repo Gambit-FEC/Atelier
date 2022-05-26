@@ -28,11 +28,11 @@ export default function StyleSelector() {
 
   return (
     <Wrapper>
-      <h1>
+      {/* <h1>
         style selector?
         {' '}
         {productId}
-      </h1>
+      </h1> */}
       <ProductStyle>Style: {productInfo[0] ? productInfo[0].name : 'howdy, this is a style?'}</ProductStyle>
       <AllThumbnails>
         {productInfo.map((item) => (

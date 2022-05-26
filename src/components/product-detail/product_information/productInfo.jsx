@@ -54,11 +54,11 @@ export default function ProductInfo() {
 
   return (
     <Wrapper>
-      <h1>
+      {/* <h1>
         product info?
         {' '}
         {productId}
-      </h1>
+      </h1> */}
       <div>
         <Reviews>
           <StyledRatingStars size="medium" rating={avgRating}>★★★★★</StyledRatingStars>

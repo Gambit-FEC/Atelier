@@ -38,11 +38,11 @@ export default function ProductDetail() {
 
   return (
     <div id="productDetail">
-      <h1 id="pretty-header">
+      {/* <h1 id="pretty-header">
         prodDetail
         {' '}
         {productId}
-      </h1>
+      </h1> */}
 
       <ProductDetailContainer>
         <Images>

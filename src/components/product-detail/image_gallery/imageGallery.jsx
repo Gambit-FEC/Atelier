@@ -5,14 +5,15 @@ export default function ImageGallery() {
   const { productId } = useGlobalContext();
   return (
     <>
-      <h1>
+      {/* <h1>
         imageGallery?
         {' '}
         {productId}
-      </h1>
+      </h1> */}
       <h2>image gallery test</h2>
       <div>wow images</div>
       <p>hello images</p>
+      <img src="http://placecorgi.com/260/180"></img>
     </>
   );
 }
