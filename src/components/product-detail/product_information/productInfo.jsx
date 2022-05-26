@@ -48,8 +48,8 @@ export default function ProductInfo() {
         // console.log('does getProduct work???', result.data);
         setProductInfo(result.data);
       })
-      // .catch((err) => { return err; });
-      .catch((err) => { console.log('getproduct didnt work', err); });
+      .catch((err) => { return err; });
+      // .catch((err) => { console.log('getproduct didnt work', err); });
   }, [productId]);
 
   return (
