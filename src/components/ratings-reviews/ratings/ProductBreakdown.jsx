@@ -4,11 +4,9 @@ import { useRAndRContext } from '../../../context/RAndRContext';
 
 export default function ProductBreakdown() {
   const { reviewsMeta } = useRAndRContext();
-  console.log('reviews meta:', reviewsMeta);
   function calcPercent(value) {
     return Math.floor(parseFloat(value) * 20);
   }
-  console.log(calcPercent(reviewsMeta?.characteristics.Comfort.value))
   return (
     <div className="ratings-product-breakdown">
       {reviewsMeta && Object.keys(reviewsMeta.characteristics).map((item, index) => (
