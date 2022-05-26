@@ -5,7 +5,7 @@ import { useGlobalContext } from '../../../context/GlobalStore';
 
 export default function WriteReview() {
   const { productId } = useGlobalContext();
-  const { setShowWriteReview, reviewsMeta, setPage } = useRAndRContext();
+  const { setShowWriteReview, reviewsMeta } = useRAndRContext();
   const [formData, setFormData] = useState(() => {
     const data = {
       rating: '0',

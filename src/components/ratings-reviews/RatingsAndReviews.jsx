@@ -7,68 +7,34 @@ import { useGlobalContext } from '../../context/GlobalStore';
 import { useRAndRContext } from '../../context/RAndRContext';
 
 export default function RatingsAndReviews() {
-  const { productId, setAvgRating } = useGlobalContext();
+  const { productId, setAvgRating, setTotalReviews } = useGlobalContext();
   const {
     setReviewsMeta,
     setReviews,
-    setShowAdd,
-    setPage,
     reviewsSort,
-    reviews,
-    page,
     showWriteReview,
   } = useRAndRContext();
   console.log('ratings and reviews [rendered]');
 
   useEffect(() => {
+    console.log(productId);
     axios.get(`/reviews/meta/${productId}`)
       .then(({ data }) => {
-        console.log('meta', data);
         setReviewsMeta(data);
         setAvgRating(data.averageRating);
+        axios.get(`/reviews/${productId}/1/${data.totalRatings}/${reviewsSort}`)
+          .then(({ data }) => {
+            setReviews(data.results);
+            setTotalReviews(data.results.length);
+          })
+          .catch((err) => {
+            console.log('error fetching reviews', err);
+          });
       })
       .catch((err) => {
         console.log('Error fetching average ratings:', err);
       });
-  }, []);
-
-  // useEffect(() => {
-  //   if (page === 1) {
-  //     axios.get(`/reviews/${productId}/1/${page * 2}/${reviewsSort}`)
-  //       .then(({ data }) => {
-  //         if (data.results.length < page * 2) setShowAdd(false);
-  //         setReviews(data.results);
-  //       })
-  //       .catch((err) => {
-  //         console.log('error fetching reviews', err);
-  //       });
-  //   } else {
-  //     setPage(1);
-  //     setReviews([]);
-  //     setShowAdd(true);
-  //   }
-  // }, [reviewsSort]);
-
-  useEffect(() => {
-    axios.get(`/reviews/${productId}/1/${page * 2}/${reviewsSort}`)
-      .then(({ data }) => {
-        if (data.results.length < 2) setShowAdd(false);
-        setReviews(data.results);
-      })
-      .catch((err) => {
-        console.log('error fetching reviews', err);
-      });
-  }, [page, reviewsSort]);
-
-  useEffect(() => {
-    axios.get(`/reviews/${productId}/1/${page * 2}/${reviewsSort}`)
-      .then(({ data }) => {
-        setReviews(data.results);
-      })
-      .catch((err) => {
-        console.log('error fetching reviews', err);
-      });
-  }, [showWriteReview]);
+  }, [productId, reviewsSort, showWriteReview]);
 
   return (
     <div id="ratings-and-reviews">
