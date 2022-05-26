@@ -11,10 +11,10 @@ function App() {
     <GlobalContextProvider>
       <ProductDetail />
       {/* <QuestionsAndAnswers /> */}
-      <RelatedItems />
+      {/* <RelatedItems />
       <RAndRContextProvider>
         <RatingsAndReviews />
-      </RAndRContextProvider>
+      </RAndRContextProvider> */}
     </GlobalContextProvider>
   );
 }

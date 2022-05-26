@@ -17,6 +17,10 @@ const onPinterestClick = () => {
   window.open('https://www.pinterest.com/pin-builder/', 'Pinterest');
 };
 
+const fb = 'https://img.icons8.com/fluency/344/facebook-new.png';
+const tw = 'https://img.icons8.com/color/344/twitter--v1.png';
+const pn = 'https://img.icons8.com/color/344/pinterest--v1.png';
+
 export default function ProductInfo() {
   const { productId, avgRating } = useGlobalContext();
   const [productInfo, setProductInfo] = useState([]);
@@ -29,7 +33,6 @@ export default function ProductInfo() {
   // Reviews and stars---------------------------------
   useEffect(() => {
     // const reviewsLine = event.currentTarget;
-    console.log('reviews click works?');
     // need to send client to the reviews section
     axios.get(`/reviews/meta/${productId}`)
     // axios.get(`/reviews/averageRating/${productId}`)
@@ -48,7 +51,7 @@ export default function ProductInfo() {
         // console.log('does getProduct work???', result.data);
         setProductInfo(result.data);
       })
-      .catch((err) => { return err; });
+      .catch((err) => err);
       // .catch((err) => { console.log('getproduct didnt work', err); });
   }, [productId]);
 
@@ -74,9 +77,9 @@ export default function ProductInfo() {
 
         <Share id="social-media">
           <p>Share this item!</p>
-          <Facebook src="https://img.icons8.com/fluency/344/facebook-new.png" onClick={() => onFacebookClick()} />
-          <Twitter id="Twitter" src="https://img.icons8.com/color/344/twitter--v1.png" onClick={() => onTwitterClick()} />
-          <Pin src="https://img.icons8.com/color/344/pinterest--v1.png" onClick={() => onPinterestClick()} />
+          <Facebook src={fb} onClick={() => onFacebookClick()} />
+          <Twitter src={tw} onClick={() => onTwitterClick()} />
+          <Pin src={pn} onClick={() => onPinterestClick()} />
         </Share>
       </div>
 

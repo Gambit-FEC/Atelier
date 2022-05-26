@@ -12,6 +12,7 @@ import StyleSelector from './style_selector/styleSelector';
 // Create a Title component that'll render an <h1> tag with some styles
 const ProductDetailContainer = styled.section`
   display: flex;
+  flex-direction: row;
   text-align: center;
   color: palevioletred;
 `;
@@ -38,12 +39,6 @@ export default function ProductDetail() {
 
   return (
     <div id="productDetail">
-      {/* <h1 id="pretty-header">
-        prodDetail
-        {' '}
-        {productId}
-      </h1> */}
-
       <ProductDetailContainer>
         <Images>
           <ImageGallery />
