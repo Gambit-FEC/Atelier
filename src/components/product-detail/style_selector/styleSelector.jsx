@@ -70,7 +70,7 @@ const Thumbnails = styled.img`
   display: flex;
   clip-path: circle();
   width: 25%;
-  height: 40px;
+  height: 50px;
   margin: 10px 0 10px;
   box-sizing: border-box;
   `;
