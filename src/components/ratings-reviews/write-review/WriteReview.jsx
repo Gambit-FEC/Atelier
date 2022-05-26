@@ -74,6 +74,16 @@ export default function WriteReview() {
     newData.characteristics[e.target.name].value = e.target.value;
     setFormData(newData);
   }
+  function handlePhotos(e) {
+    console.log(e.target.files.length);
+    if (e.target.files.length > 5) {
+      window.alert('5 photos max!');
+      document.getElementById('photos').value = null;
+      return;
+    }
+    const newPhotos = e.target.files;
+    setFormData({ ...formData, photos: newPhotos });
+  }
   function starRender() {
     const spans = [];
     for (let i = 0; i < 5; i++) {
@@ -107,7 +117,11 @@ export default function WriteReview() {
         <div key={key} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
           <label>{`${key}:`}</label>
           {formData.characteristics[key].value - 1 >= 0
-            && <label>{characteristicsMeaning[key][formData.characteristics[key].value - 1]}</label>}
+            && (
+              <label>
+                {characteristicsMeaning[key][formData.characteristics[key].value - 1]}
+              </label>
+            )}
           <div>
             {radios}
           </div>
@@ -122,7 +136,7 @@ export default function WriteReview() {
       <form className="modal-form" onSubmit={handleSubmitReview}>
         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
           <span className="required-guide" style={{ minWidth: 'fit-content' }}>= required</span>
-          <h3 style={{ textAlign: 'center', width: '100%' }}>Write A Review</h3>
+          <h3 style={{ textAlign: 'center', width: '100%', marginRight: '80px' }}>Write A Review</h3>
           <div className="modal-exit-button close" onClick={handleExitView}>×</div>
         </div>
         <label id="overall-rating-prompt" className="required">Overall Rating</label>
@@ -142,8 +156,8 @@ export default function WriteReview() {
         <textarea id="summary" placeholder="Example: Best purchase ever!" maxLength="60" onChange={updateFormData} />
         <label className="required">Body</label>
         <textarea id="body" placeholder="Why did you like the product or not?" minLength="50" onChange={updateFormData} required />
-        <label>Photos</label>
-        <textarea id="photos" />
+        <label>Photos (5 max)</label>
+        <input id="photos" type="file" accept="image/*" onChange={handlePhotos} multiple />
         <label className="required">Username</label>
         <input type="text" id="username" onChange={updateFormData} required />
         <label className="required">Email</label>
