@@ -24,7 +24,7 @@ function totalRatings(ratings) {
 }
 
 exports.getById = (req, res) => {
-  axios.get(`${API_URL}reviews`, { params: Object.assign(req.params, { count: 2 }), headers: { Authorization: req.headers.Authorization } })
+  axios.get(`${API_URL}reviews`, { params: Object.assign(req.params), headers: { Authorization: req.headers.Authorization } })
     .then(({ data }) => {
       res.status(200).send(data);
     })

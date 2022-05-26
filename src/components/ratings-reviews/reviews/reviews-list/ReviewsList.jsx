@@ -7,8 +7,11 @@ export default function ReviewsList() {
   return (
     <div className="reviews-list">
       {reviews.map((review, idx) => {
-        if (Object.values(reviewsFilter).every((item) => item === false) || reviewsFilter[review.rating]) {
-          return <ReviewTile key={idx} review={review} />
+        if (Object.values(reviewsFilter).every((item) => item === false)
+        || reviewsFilter[review.rating]) {
+          return <ReviewTile key={idx} review={review} />;
+        } else {
+          return <ReviewTile key={idx} review={review} hidden="true" />;
         }
       })}
     </div>

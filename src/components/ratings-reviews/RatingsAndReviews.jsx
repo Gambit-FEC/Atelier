@@ -32,33 +32,43 @@ export default function RatingsAndReviews() {
       });
   }, []);
 
-  useEffect(() => {
-    if (page === 1) {
-      axios.get(`/reviews/${productId}/${page}/${reviewsSort}`)
-        .then(({ data }) => {
-          if (data.results.length < 2) setShowAdd(false);
-          setReviews(data.results);
-        })
-        .catch((err) => {
-          console.log('error fetching reviews', err);
-        });
-    } else {
-      setPage(1);
-      setReviews([]);
-      setShowAdd(true);
-    }
-  }, [reviewsSort]);
+  // useEffect(() => {
+  //   if (page === 1) {
+  //     axios.get(`/reviews/${productId}/1/${page * 2}/${reviewsSort}`)
+  //       .then(({ data }) => {
+  //         if (data.results.length < page * 2) setShowAdd(false);
+  //         setReviews(data.results);
+  //       })
+  //       .catch((err) => {
+  //         console.log('error fetching reviews', err);
+  //       });
+  //   } else {
+  //     setPage(1);
+  //     setReviews([]);
+  //     setShowAdd(true);
+  //   }
+  // }, [reviewsSort]);
 
   useEffect(() => {
-    axios.get(`/reviews/${productId}/${page}/${reviewsSort}`)
+    axios.get(`/reviews/${productId}/1/${page * 2}/${reviewsSort}`)
       .then(({ data }) => {
         if (data.results.length < 2) setShowAdd(false);
-        setReviews(reviews.concat(...data.results));
+        setReviews(data.results);
       })
       .catch((err) => {
         console.log('error fetching reviews', err);
       });
-  }, [page]);
+  }, [page, reviewsSort]);
+
+  useEffect(() => {
+    axios.get(`/reviews/${productId}/1/${page * 2}/${reviewsSort}`)
+      .then(({ data }) => {
+        setReviews(data.results);
+      })
+      .catch((err) => {
+        console.log('error fetching reviews', err);
+      });
+  }, [showWriteReview]);
 
   return (
     <div id="ratings-and-reviews">
