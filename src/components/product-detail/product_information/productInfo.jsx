@@ -97,6 +97,7 @@ const Category = styled.div`
   font-weight: lighter;
   color: rgba(102, 91, 165, 1);
   text-transform: uppercase;
+  margin: 10px 0 10px;
 `;
 
 const ProductName = styled.h2`
