@@ -12,22 +12,22 @@ import StyleSelector from './style_selector/styleSelector';
 // Create a Title component that'll render an <h1> tag with some styles
 const ProductDetailContainer = styled.section`
   display: flex;
-  text-align: center;
-  color: palevioletred;
+  flex-direction: row;
+  width: 90vw;
+  margin: 0 auto;
 `;
+
 // Create a Wrapper component that'll render a <section> tag with some styles
 const NotImages = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  width: 40%;
+  max-width: 800px;
 `;
 
 const Images = styled.section`
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 60%;
+  width: 70%;
 `
 
 export default function ProductDetail() {
@@ -38,12 +38,6 @@ export default function ProductDetail() {
 
   return (
     <div id="productDetail">
-      <h1 id="pretty-header">
-        prodDetail
-        {' '}
-        {productId}
-      </h1>
-
       <ProductDetailContainer>
         <Images>
           <ImageGallery />
@@ -51,7 +45,7 @@ export default function ProductDetail() {
         <NotImages>
           <ProductInfo />
           <StyleSelector />
-          {/* <AddToCart /> */}
+          <AddToCart />
         </NotImages>
       </ProductDetailContainer>
     </div>

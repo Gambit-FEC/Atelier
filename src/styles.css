@@ -56,7 +56,9 @@ h1 {
 
 
 /* product detail */
-
+.inactive {
+  display: none;
+}
 
 
 
