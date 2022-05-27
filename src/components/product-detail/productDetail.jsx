@@ -27,7 +27,7 @@ const NotImages = styled.section`
 
 const Images = styled.section`
   display: flex;
-  width: 60%;
+  width: 70%;
 `
 
 export default function ProductDetail() {
