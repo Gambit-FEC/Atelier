@@ -9,7 +9,7 @@ export default function ReviewsList() {
   useEffect(() => {
     setShownReviews(
       reviews.filter((review, idx) => (Object.values(reviewsFilter).every((item) => item === false)
-        || reviewsFilter[review.rating]) && idx < count)
+        || reviewsFilter[review.rating]) && true /* search filter */ && idx < count)
         .map((review) => <ReviewTile key={review.review_id} review={review} />),
     );
   }, [reviews, count, reviewsFilter]);
