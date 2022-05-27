@@ -5,7 +5,7 @@ import { RatingBar, StarButton } from '../../../styled-lib';
 export default function RatingBreakdown() {
   const { reviewsMeta, setReviewsFilter, reviewsFilter } = useRAndRContext();
   function calcPercents(ratings) {
-    var percents = [];
+    const percents = [];
     let highestStar = 0;
     for (let i = 1; i <= 5; i++) {
       percents[i] = parseInt(ratings[i], 10) || 0;
@@ -18,9 +18,6 @@ export default function RatingBreakdown() {
   function handleRatingClick(star) {
     setReviewsFilter(Object.assign({}, reviewsFilter, reviewsFilter[star] = !reviewsFilter[star]));
   }
-  // function whichColor(index) {
-  //   return reviewsFilter[index] ? 'purple' : '#069';
-  // }
   function handleResetClick() {
     setReviewsFilter({
       1: false,
@@ -38,9 +35,7 @@ export default function RatingBreakdown() {
           {calcPercents(reviewsMeta.ratings).map((item, index) => (
             <div id={`${index}-star`} key={index}>
               <StarButton
-                onClick={(e) =>
-                  handleRatingClick(index.toString())
-                }
+                onClick={() => handleRatingClick(index.toString())}
               >
                 {`${index} ★`}
               </StarButton>

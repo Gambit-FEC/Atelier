@@ -13,8 +13,9 @@ export default function ProductBreakdown() {
         <div key={index} id={`${item}-breakdown`}>
           <div>{item}</div>
           <CharacteristicsBar>
-            <CharacteristicsPointer position={calcPercent(reviewsMeta.characteristics[item].value)}>
-            </CharacteristicsPointer>
+            <CharacteristicsPointer
+              position={calcPercent(reviewsMeta.characteristics[item].value)}
+            />
           </CharacteristicsBar>
         </div>
       ))}

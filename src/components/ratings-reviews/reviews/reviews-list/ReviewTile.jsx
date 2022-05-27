@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { format, parseISO } from 'date-fns';
 import { StyledRatingStars } from '../../../../styled-lib';
 
-export default function ReviewTile({ review }) {
+export default function ReviewTile({ review, hidden }) {
   const [readMore, setReadMore] = useState(review.body.length > 250);
   const [showModal, setShowModal] = useState({ show: false, src: '' });
   function handleReadMoreClick() {
@@ -29,14 +29,16 @@ export default function ReviewTile({ review }) {
 
   return (
     <>
-      <div className="reviews-tile">
-        <StyledRatingStars rating={review.rating} >★★★★★</StyledRatingStars>
+      <div className="reviews-tile" hidden={hidden}>
+        <StyledRatingStars rating={review.rating}>★★★★★</StyledRatingStars>
         <div>{format(parseISO(review.date), 'MMM dd, yyyy')}</div>
         <div style={{ fontWeight: 'bold' }}>{review.summary}</div>
         {readMore && <p>{`${review.body.slice(0, 247)}...`}</p>}
         {!readMore && <p>{review.body}</p>}
         {readMore && <button type="button" onClick={handleReadMoreClick}>Read more</button>}
-        {showPhotos()}
+        <div>
+          {showPhotos()}
+        </div>
         {review.recommend && <div>I recommend this product ✔️</div>}
         <div>{review.reviewer_name}</div>
         {review.response && <div style={{ fontStyle: 'italic' }}>{`Response from seller: ${review.response}`}</div>}
@@ -55,7 +57,6 @@ export default function ReviewTile({ review }) {
             <img
               style={{ width: '100%', height: '100%', objectFit: 'contain' }}
               src={showModal.src}
-              // onClick={(e) => e.stopPropagation()}
             />
           </div>
         </div>

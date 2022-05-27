@@ -1,20 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRAndRContext } from '../../../context/RAndRContext';
 
 export default function MoreAndAddReview() {
   const {
-    page,
-    setPage,
+    reviews,
+    count,
+    setCount,
     showAdd,
+    setShowAdd,
     setShowWriteReview,
   } = useRAndRContext();
   const handleMoreClick = () => {
-    setPage(page + 1);
+    setCount(count + 2);
   };
   const handleAddClick = () => {
     document.body.style.overflow = 'hidden';
     setShowWriteReview(true);
-  }
+  };
+  useEffect(() => {
+    setShowAdd((count < reviews.length));
+  }, [count, reviews]);
+
   return (
     <div className="reviews-more-add">
       {showAdd && <button type="button" onClick={handleMoreClick}>Show more</button>}

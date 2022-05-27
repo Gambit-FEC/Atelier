@@ -9,11 +9,14 @@ export function useGlobalContext() {
 export function GlobalContextProvider({ children }) {
   const [productId, setProductId] = useState(40351);
   const [avgRating, setAvgRating] = useState(0);
+  const [totalReviews, setTotalReviews] = useState(0);
   const value = {
     productId,
     setProductId,
     avgRating,
     setAvgRating,
+    totalReviews,
+    setTotalReviews,
   };
   return (
     <GlobalContext.Provider value={value}>
