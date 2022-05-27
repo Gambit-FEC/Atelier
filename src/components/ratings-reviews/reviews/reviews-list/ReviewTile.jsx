@@ -35,19 +35,20 @@ export default function ReviewTile({ review, hidden }) {
         <div style={{ fontWeight: 'bold' }}>{review.summary}</div>
         {readMore && <p>{`${review.body.slice(0, 247)}...`}</p>}
         {!readMore && <p>{review.body}</p>}
-        {readMore && <button type="button" onClick={handleReadMoreClick}>Read more</button>}
         <div>
           {showPhotos()}
         </div>
         {review.recommend && <div>I recommend this product ✔️</div>}
         <div>{review.reviewer_name}</div>
         {review.response && <div style={{ fontStyle: 'italic' }}>{`Response from seller: ${review.response}`}</div>}
-        <div>
-          <span>Was this review helpful? </span>
-          <button className="link-button" type="button" onClick={handleHelpfulClick}> Yes </button>
-          <span>{` ( ${review.helpfulness} ) `}</span>
-          <span> | </span>
-          <button className="link-button" type="button" onClick={handleReportClick}>Report</button>
+        <div className="helpful-report-readmore">
+          <div>
+            <span>Was this review helpful? </span>
+            <button className="link-button" type="button" onClick={handleHelpfulClick}> Yes </button>
+            <span>{` ( ${review.helpfulness} ) `}</span>
+          </div>
+          {!readMore && <button className="link-button" type="button" onClick={handleReportClick}>Report</button>}
+          {readMore && <button type="button" className="reviews-readmore" onClick={handleReadMoreClick}>Read more</button>}
         </div>
 
       </div>

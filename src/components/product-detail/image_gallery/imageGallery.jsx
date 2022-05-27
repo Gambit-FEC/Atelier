@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { useGlobalContext } from '../../../context/GlobalStore';
-import { FaArrowRight, FaArrowLeft } from 'react-icons/Fa';
+import { FaArrowRight, FaArrowLeft } from 'react-icons/fa';
 import { set } from 'date-fns';
 
 
