@@ -20,7 +20,7 @@ export default function StyleSelector() {
     axios.get(`/products/${productId}`)
       .then((result) => {
         console.log('item styles!!', result.data[1].results);
-        console.log('data:', result.data);
+        console.log('item data:', result.data);
         setProductInfo(result.data[1].results);
       })
       .catch((err) => { console.log('getproduct in addtocart didnt work', err); });
@@ -28,15 +28,10 @@ export default function StyleSelector() {
 
   return (
     <Wrapper>
-      <h1>
-        style selector?
-        {' '}
-        {productId}
-      </h1>
       <ProductStyle>Style: {productInfo[0] ? productInfo[0].name : 'howdy, this is a style?'}</ProductStyle>
       <AllThumbnails>
-        {productInfo.map((item) => (
-          <Thumbnails src={item.photos[0].thumbnail_url ? item.photos[0].thumbnail_url : 'https://img.icons8.com/stickers/344/gambit.png'} onClick={() => onStyleClick()} />
+        {productInfo.map((item, index) => (
+          <Thumbnails key={index} src={item.photos[0].thumbnail_url ? item.photos[0].thumbnail_url : 'https://img.icons8.com/stickers/344/gambit.png'} onClick={() => onStyleClick()} />
         ))}
       </AllThumbnails>
     </Wrapper>
