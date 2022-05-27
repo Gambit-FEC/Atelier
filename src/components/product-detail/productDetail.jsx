@@ -45,7 +45,7 @@ export default function ProductDetail() {
         <NotImages>
           <ProductInfo />
           <StyleSelector />
-          {/* <AddToCart /> */}
+          <AddToCart />
         </NotImages>
       </ProductDetailContainer>
     </div>
