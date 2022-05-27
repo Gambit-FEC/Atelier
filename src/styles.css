@@ -13,10 +13,6 @@ h1 {
   background-color: black;
 }
 
-.pretty-header {
-  color: blue;
-}
-
 .modal-bg {
   display: flex;
   justify-content: center;
@@ -45,6 +41,7 @@ h1 {
   background-color: white;
   flex-direction: column;
   padding: 5%;
+  padding-top: 1.5%;
   border: 3px solid black;
   border-radius: .5%;
 }
@@ -81,19 +78,10 @@ h1 {
   margin-top: 20px;
 }
 
-.flex-form {
-  display: flex;
-  flex-flow: column nowrap;
-}
-
 .ratings {
-  margin-right: 40px;
+  margin-right: 100px;
   min-height: 665px;
   min-width: fit-content;
-}
-
-.reviews {
-  width: 80%;
 }
 
 .reviews-list {
