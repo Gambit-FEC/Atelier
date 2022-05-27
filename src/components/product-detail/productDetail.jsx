@@ -13,21 +13,20 @@ import StyleSelector from './style_selector/styleSelector';
 const ProductDetailContainer = styled.section`
   display: flex;
   flex-direction: row;
-  text-align: center;
-  color: palevioletred;
+  width: 90vw;
+  margin: 0 auto;
 `;
+
 // Create a Wrapper component that'll render a <section> tag with some styles
 const NotImages = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  width: 40%;
+  max-width: 800px;
 `;
 
 const Images = styled.section`
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
   width: 60%;
 `
 

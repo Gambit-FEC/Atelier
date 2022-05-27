@@ -11,8 +11,8 @@ function App() {
     <GlobalContextProvider>
       <ProductDetail />
       {/* <QuestionsAndAnswers /> */}
-      {/* <RelatedItems />
-      <RAndRContextProvider>
+      {/* <RelatedItems /> */}
+      {/* <RAndRContextProvider>
         <RatingsAndReviews />
       </RAndRContextProvider> */}
     </GlobalContextProvider>

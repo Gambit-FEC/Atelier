@@ -10,7 +10,8 @@ export default function ImageGallery() {
   const { productId } = useGlobalContext();
   const [images, setImages] = useState([]);
   const [currentImage, setCurrentImage] = useState(0);
-  const {length} = images;
+  const [selectedImage, setSelectedImage] = useState(0);
+  const { length } = images;
 
   // onClick functionalities for slides -------------
   const onLeftClick = () => {
@@ -44,22 +45,58 @@ export default function ImageGallery() {
       .catch((err) => { console.log('getproduct in imageGallery didnt work', err); });
   }, [productId]);
 
+  // image carousel menu sidebar --------------------
+  const onStyleImageClick = (event) => {
+  }
+
+  const showSelectedImage = (index) => {
+    // eslint-disable-next-line no-lone-blocks
+    console.log('need functionality to change style!! :C');
+    // {
+    //   images[index].map((slide, i) => (
+    //     <Image>
+    //       {i === currentImage && (
+    //         <Wrapper>
+    //           <img src={slide.url} width={10 * (length + 1)} alt="style-photo" />
+    //         </Wrapper>
+    //       )}
+    //     </Image>
+    //   ));
+    // }
+  };
+
+  // const showSelectedImage = (index) => {
+  //   {images.map((slide, index) => (
+  //     <Image className={index === currentImage ? 'slide active' : 'slide inactive'} key={index}>
+  //       {index === currentImage && (
+  //         <Wrapper>
+  //           <img src={slide.url} width={10 * (length + 1)} alt="style-photo" />
+  //         </Wrapper>
+  //       )}
+  //     </Image>
+  //   ))}
+  // };
+
   return (
     <>
       {/* <img src="http://placecorgi.com/260/180" /> */}
+      <ImagesBar>
+        {images.map((slide, index) => (
+          <ImageSelections key={index} src={slide.url} onClick={() => showSelectedImage()} />
+        ))}
+      </ImagesBar>
       <Container>
         <ArrowLeft onClick={onLeftClick} />
-        <Slides>
-          <Image>
-            {images.map((slide, index) => (
-              <div className={index === currentImage ? 'side active' : 'slide'} key={index}>
-                {index === currentImage && (
-                  <img src={slide.url} alt="style-photo" />
-                )}
-              </div>
-            ))}
+        {/* {showSelectedImage(0)} */}
+        {/* {images.map((slide, index) => (
+          <Image className={index === currentImage ? 'slide active' : 'slide inactive'} key={index}>
+            {index === currentImage && (
+              <Wrapper>
+                <img src={slide.url} width={10 * (length + 1)} alt="style-photo" />
+              </Wrapper>
+            )}
           </Image>
-        </Slides>
+        ))} */}
         <ArrowRight onClick={onRightClick} />
       </Container>
     </>
@@ -67,46 +104,47 @@ export default function ImageGallery() {
 }
 
 const Container = styled.section`
+  border: white;
   display: flex;
-  justify-content: flex-end;
-  width: 40%;
+  flex-direction: row;
 `
 
-const Slides = styled.section`
-  position: relative;
-  height: 100vh;
+const Wrapper = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
-  width: 50px;
-  height: 100px;
-  border-radius: 10px;
+  position: relative;
 `;
+// width: ${({ width }) => width + 'px'}
 
 const Image = styled.section`
   display: flex;
   width: 50px;
-  height: 60px;
 `;
 
+const ImagesBar = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+`
+
+const ImageSelections = styled.img`
+  display: flex;
+  margin: 10px 0 10px;
+  width: 30px;
+  height: 30px;
+
+`
+
 const ArrowLeft = styled(FaArrowLeft)`
-  position: absolute;
-  top: 50%;
-  left: 32px;
   font-size: 3rem;
-  z-index: 10;
   cursor: pointer;
   user-select: none;
-  color: black;
+  color: green;
 `;
 
 const ArrowRight = styled(FaArrowRight)`
-  position: absolute;
-  top: 50%;
-  right: 32px;
   font-size: 3rem;
-  z-index: 10;
   cursor: pointer;
   user-select: none;
-  color: black;
+  color: green;
 `;
