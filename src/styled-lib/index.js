@@ -18,7 +18,7 @@ const StyledRatingStars = styled.div`
 
 const RatingBar = styled.div`
   background: linear-gradient(to right, black ${({ percent }) => percent + '%'}, lightgrey ${({ percent }) => percent + '%'});
-  width: 125px;
+  width: 200px;
   height: 8px;
 `;
 
@@ -42,7 +42,7 @@ const CharacteristicsBar = styled.div`
 const CharacteristicsPointer = styled(GoTriangleDown)`
   position: relative;
   top: -11px;
-  left: ${({ position }) => position * 2 + 'px'};
+  left: ${({ position }) => `${position}%`};
 `;
 
 export {

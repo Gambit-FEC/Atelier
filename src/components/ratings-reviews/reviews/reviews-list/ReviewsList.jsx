@@ -20,7 +20,7 @@ export default function ReviewsList() {
     setShownReviews(
       reviews.filter((review) => (Object.values(reviewsFilter).every((item) => item === false)
         || reviewsFilter[review.rating]) && searchFilter(review))
-        .map((review) => <ReviewTile key={review.review_id} review={review} />),
+        .map((review) => <ReviewTile key={review.review_id} review={review} search={reviewSearch === '' ? null : reviewSearch} />),
     );
   }, [reviews, count, reviewsFilter, reviewSearch]);
 

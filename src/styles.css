@@ -100,6 +100,7 @@ h1 {
 
 .reviews-tile>* {
   margin: 0px;
+  word-break: break-word;
 }
 
 .helpful-report-readmore {
@@ -125,7 +126,7 @@ h1 {
   font: inherit;
   color: purple;
   text-decoration: underline;
-  cursor: pointer;
+  cursor: default;
 }
 
 #rating-filters {

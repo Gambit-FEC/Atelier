@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { format, parseISO } from 'date-fns';
 import { StyledRatingStars } from '../../../../styled-lib';
 
-export default function ReviewTile({ review, hidden }) {
+export default function ReviewTile({ review, hidden, search }) {
   const [readMore, setReadMore] = useState(review.body.length > 250);
   const [showModal, setShowModal] = useState({ show: false, src: '' });
   function handleReadMoreClick() {
@@ -33,14 +33,24 @@ export default function ReviewTile({ review, hidden }) {
         <StyledRatingStars rating={review.rating}>★★★★★</StyledRatingStars>
         <div>{format(parseISO(review.date), 'MMM dd, yyyy')}</div>
         <div style={{ fontWeight: 'bold' }}>{review.summary}</div>
-        {readMore && <p>{`${review.body.slice(0, 247)}...`}</p>}
-        {!readMore && <p>{review.body}</p>}
+        {readMore && (
+          <div>
+            <HighlightText text={review.body.slice(0, 247)} highlight={search} />
+            <span>...</span>
+          </div>
+        )}
+        {!readMore && <HighlightText text={review.body} highlight={search} />}
         <div>
           {showPhotos()}
         </div>
         {review.recommend && <div>I recommend this product ✔️</div>}
-        <div>{review.reviewer_name}</div>
-        {review.response && <div style={{ fontStyle: 'italic' }}>{`Response from seller: ${review.response}`}</div>}
+        <HighlightText text={review.reviewer_name} highlight={search} />
+        {review.response && (
+          <div>
+            <span>Response from seller: </span>
+            <HighlightText style={{ fontStyle: 'italic' }} text={review.response} highlight={search} />
+          </div>
+        )}
         <div className="helpful-report-readmore">
           <div>
             <span>Was this review helpful? </span>
@@ -50,7 +60,6 @@ export default function ReviewTile({ review, hidden }) {
           {!readMore && <button className="link-button" type="button" onClick={handleReportClick}>Report</button>}
           {readMore && <button type="button" className="reviews-readmore" onClick={handleReadMoreClick}>Read more</button>}
         </div>
-
       </div>
       {showModal.show && (
         <div className="modal-bg" onClick={handlePhotoClick}>
@@ -63,5 +72,27 @@ export default function ReviewTile({ review, hidden }) {
         </div>
       )}
     </>
+  );
+}
+
+function HighlightText({ text, highlight }) {
+  if (highlight === '' || highlight === null) {
+    return (
+      <span>{text}</span>
+    );
+  }
+  const regex = new RegExp(`(${highlight})`, 'gi');
+  const parts = text.split(regex);
+  console.log('parts:', parts);
+  return (
+    <span>
+      {parts.filter((part) => part).map((part, index) => {
+        console.log('part:', part, 'highlight:', highlight);
+        if (part.toLowerCase() === highlight.toLowerCase()) {
+          return <mark key={index}>{part}</mark>;
+        }
+        return <span key={index}>{part}</span>;
+      })}
+    </span>
   );
 }
