@@ -89,6 +89,7 @@ h1 {
 .ratings {
   margin-right: 40px;
   min-height: 665px;
+  min-width: fit-content;
 }
 
 .reviews {
@@ -98,7 +99,7 @@ h1 {
 .reviews-list {
   max-height: 600px;
   width: 650px;
-  overflow-y: auto;
+  overflow-y: overlay;
 }
 
 .reviews-tile {
