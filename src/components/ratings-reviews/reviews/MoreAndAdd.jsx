@@ -17,9 +17,6 @@ export default function MoreAndAddReview() {
     document.body.style.overflow = 'hidden';
     setShowWriteReview(true);
   };
-  useEffect(() => {
-    setShowAdd((count < reviews.length));
-  }, [count, reviews]);
 
   return (
     <div className="reviews-more-add">
