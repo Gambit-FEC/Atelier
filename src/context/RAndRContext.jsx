@@ -9,7 +9,7 @@ export function useRAndRContext() {
 export function RAndRContextProvider({ children }) {
   const [reviews, setReviews] = useState(() => []);
   const [reviewsMeta, setReviewsMeta] = useState(() => { });
-  const [page, setPage] = useState(() => 1);
+  const [count, setCount] = useState(() => 2);
   const [reviewsSort, setReviewsSort] = useState(() => 'relevant');
   const [reviewsFilter, setReviewsFilter] = useState({
     1: false,
@@ -33,8 +33,8 @@ export function RAndRContextProvider({ children }) {
     setTotalRatings,
     reviews,
     setReviews,
-    page,
-    setPage,
+    count,
+    setCount,
     reviewsFilter,
     setReviewsFilter,
     showWriteReview,

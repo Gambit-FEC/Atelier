@@ -6,7 +6,6 @@ import RelatedItems from './related-items/RelatedItems';
 import RatingsAndReviews from './ratings-reviews/RatingsAndReviews';
 
 function App() {
-  console.log('app [rerendered]');
   return (
     <GlobalContextProvider>
       <ProductDetail />

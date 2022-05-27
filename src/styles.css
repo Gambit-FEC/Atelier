@@ -71,6 +71,10 @@ h1 {
 
 /* ratings & reviews */
 
+[hidden]{
+  display:none !important;
+}
+
 #ratings-and-reviews {
   display: flex;
   flex-flow: row nowrap;
@@ -86,8 +90,21 @@ h1 {
   margin-right: 40px;
 }
 
+.reviews {
+  width: 80%
+}
+
+.reviews-list {
+  max-height: 600px;
+  width: 80%;
+  overflow-y: auto;
+}
+
 .reviews-tile {
-  margin-top: 30px
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 30px;
 }
 
 .reviews-tile>* {
