@@ -14,10 +14,7 @@ export default function RatingsAndReviews() {
     reviewsSort,
     showWriteReview,
   } = useRAndRContext();
-  console.log('ratings and reviews [rendered]');
-
   useEffect(() => {
-    console.log(productId);
     axios.get(`/reviews/meta/${productId}`)
       .then(({ data }) => {
         setReviewsMeta(data);
@@ -35,7 +32,6 @@ export default function RatingsAndReviews() {
         console.log('Error fetching average ratings:', err);
       });
   }, [productId, reviewsSort, showWriteReview]);
-
   return (
     <div id="ratings-and-reviews">
       <Ratings />

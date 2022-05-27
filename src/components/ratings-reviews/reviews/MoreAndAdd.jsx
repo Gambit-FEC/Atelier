@@ -4,22 +4,22 @@ import { useRAndRContext } from '../../../context/RAndRContext';
 export default function MoreAndAddReview() {
   const {
     reviews,
-    page,
-    setPage,
+    count,
+    setCount,
     showAdd,
     setShowAdd,
     setShowWriteReview,
   } = useRAndRContext();
   const handleMoreClick = () => {
-    setPage(page + 1);
+    setCount(count + 2);
   };
   const handleAddClick = () => {
     document.body.style.overflow = 'hidden';
     setShowWriteReview(true);
   };
   useEffect(() => {
-    setShowAdd((page * 2 < reviews.length));
-  }, [page, reviews]);
+    setShowAdd((count < reviews.length));
+  }, [count, reviews]);
 
   return (
     <div className="reviews-more-add">

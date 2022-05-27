@@ -38,6 +38,21 @@ export default function WriteReview() {
     setShowWriteReview(false);
   }
 
+  function postForm() {
+    const formSubmission = {
+      ...formData,
+      rating: parseInt(formData.rating, 10),
+      characteristics: {},
+      product_id: productId,
+    };
+    const char = formData.characteristics;
+    for (const key in char) {
+      formSubmission.characteristics[char[key].id] = parseInt(char[key].value, 10);
+    }
+    formSubmission.photos = formSubmission.photos.map(() => `https://placedog.net/${Math.floor(Math.random() * 999) + 1}`);
+    return axios.post('/reviews', formSubmission);
+  }
+
   function handleSubmitReview(e) {
     e.preventDefault();
     if (formData.rating === '0') {
@@ -54,24 +69,8 @@ export default function WriteReview() {
         handleExitView();
       })
       .catch((err) => {
-        console.log('Error submitting review:', err);
         window.alert('There was an issue submitting your review.');
       });
-  }
-
-  function postForm() {
-    const formSubmission = {
-      ...formData,
-      rating: parseInt(formData.rating, 10),
-      characteristics: {},
-      product_id: productId,
-    };
-    const char = formData.characteristics;
-    for (const key in char) {
-      formSubmission.characteristics[char[key].id] = parseInt(char[key].value, 10);
-    }
-    formSubmission.photos = formSubmission.photos.map(() => `https://placedog.net/${Math.floor(Math.random() * 999) + 1}`);
-    return axios.post('/reviews', formSubmission);
   }
 
   function updateFormData(e) {

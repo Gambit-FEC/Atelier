@@ -19,7 +19,6 @@ export default function OverallRating() {
       );
     }
   }, [reviewsMeta]);
-  console.log(recommended);
   return (
     <div className="ratings-overall">
       <StyledRatingStars size="xxx-large" rating={avgRating} border="2">★★★★★</StyledRatingStars>

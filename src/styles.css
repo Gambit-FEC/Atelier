@@ -88,6 +88,16 @@ h1 {
   margin-right: 40px;
 }
 
+.reviews {
+  width: 80%
+}
+
+.reviews-list {
+  max-height: 600px;
+  width: 80%;
+  overflow-y: auto;
+}
+
 .reviews-tile {
   display: flex;
   flex-direction: column;
