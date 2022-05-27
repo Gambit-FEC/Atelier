@@ -167,6 +167,14 @@ h1 {
 }
 
 /* related */
+.transparent-arrow {
+  cursor: default !important
+}
+
+.transparent-arrow polygon{
+  fill: transparent;
+}
+
 
 .right-arrow {
   position: absolute;
@@ -176,6 +184,7 @@ h1 {
   z-index: 10;
   cursor: pointer;
   user-select: none;
+  align-self: flex-end;
 }
 
 .left-arrow {

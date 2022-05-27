@@ -17,8 +17,10 @@ export default function outfitList() {
       localStorage.setItem('outfits', JSON.stringify([outfitId]));
     } else {
       const productIDs = JSON.parse(localStorageItem);
-      productIDs.push(outfitId);
-      localStorage.setItem('outfits', JSON.stringify(productIDs));
+      if (productIDs.indexOf(outfitId) < 0) {
+        productIDs.push(outfitId);
+        localStorage.setItem('outfits', JSON.stringify(productIDs));
+      }
     }
   }
 
@@ -35,25 +37,34 @@ export default function outfitList() {
   }
 
   function getRelatedProducts(currentProductId) {
-    const listOfPromises = [];
-    console.log('before: ', outfitArray);
-    const promise = Promise.all([getRelatedInfo(currentProductId),
-      getRelatedStyle(currentProductId), getRelatedRating(currentProductId)]);
-    listOfPromises.push(promise);
-
-    Promise.all(listOfPromises).then((promiseResults) => {
-      promiseResults.forEach((element) => {
-        const product = {};
-        product.product = element[0].data;
-        product.style = element[1].data;
-        product.rating = element[2].data;
-        outfitArray.push(product);
-      });
-      console.log('after :', outfitArray);
-      setOutfitInfo([...outfitArray]);
-    }).catch((err) => {
-      console.log(err);
+    let currentIndex = -1;
+    const localStorageItem = JSON.parse(localStorage.getItem('outfits'));
+    const index = localStorageItem.indexOf(currentProductId);
+    outfitArray.forEach((element) => {
+      if (element.product.id === currentProductId) {
+        currentIndex = index;
+      }
     });
+    if (currentIndex < 0) {
+      const listOfPromises = [];
+      const promise = Promise.all([getRelatedInfo(currentProductId),
+        getRelatedStyle(currentProductId), getRelatedRating(currentProductId)]);
+      listOfPromises.push(promise);
+
+      Promise.all(listOfPromises).then((promiseResults) => {
+        promiseResults.forEach((element) => {
+          const product = {};
+          product.product = element[0].data;
+          product.style = element[1].data;
+          product.rating = element[2].data;
+          outfitArray.push(product);
+        });
+        console.log('after :', outfitArray);
+        setOutfitInfo([...outfitArray]);
+      }).catch((err) => {
+        console.log(err);
+      });
+    }
   }
 
   function removeCard(currentProductId) {
@@ -81,11 +92,9 @@ export default function outfitList() {
   function addCard() {
     setCardList(true);
     if (typeof (Storage) !== 'undefined') {
-      // Code for localStorage
       saveToLocalStorage(productId);
       getRelatedProducts(productId);
     } else {
-      // No web storage Support.
       console.log('BROWSER DOES NOT SUPPORT');
     }
   }
@@ -102,7 +111,6 @@ export default function outfitList() {
   }
 
   useEffect(() => {
-    // getRelatedProductOutfit();
     getSavedProductOutfits();
   }, []);
 
