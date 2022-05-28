@@ -1,6 +1,7 @@
 /* main */
 * {
   font-family: Tahoma, Verdana, sans-serif;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -84,7 +85,7 @@ h1 {
   min-width: fit-content;
 }
 
-.reviews-list {
+#reviews-list {
   max-height: 600px;
   width: 650px;
   overflow-y: overlay;

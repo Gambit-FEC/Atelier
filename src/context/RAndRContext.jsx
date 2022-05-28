@@ -27,6 +27,7 @@ export function RAndRContextProvider({ children }) {
     reported: [],
   });
   const [showCollapse, setShowCollapse] = useState(false);
+  const [shownReviews, setShownReviews] = useState(() => []);
 
   const value = {
     reviewsSort,
@@ -51,6 +52,8 @@ export function RAndRContextProvider({ children }) {
     setReviewFeedback,
     showCollapse,
     setShowCollapse,
+    shownReviews,
+    setShownReviews,
   };
   return (
     <RAndRContext.Provider value={value}>

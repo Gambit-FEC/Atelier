@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRAndRContext } from '../../../context/RAndRContext';
 
 export default function MoreAndAddReview() {
@@ -8,6 +8,7 @@ export default function MoreAndAddReview() {
     showAdd,
     setShowWriteReview,
     showCollapse,
+    shownReviews,
   } = useRAndRContext();
   const handleMoreClick = () => {
     setCount(count + 2);
@@ -19,6 +20,13 @@ export default function MoreAndAddReview() {
   const handleCollapse = () => {
     setCount(2);
   };
+
+  useEffect(() => {
+    if (count !== 2) {
+      const lastReview = document.getElementById(`review-${shownReviews[count - 1].key}`);
+      lastReview.scrollIntoView();
+    }
+  }, [count]);
 
   return (
     <div className="reviews-more-add">
