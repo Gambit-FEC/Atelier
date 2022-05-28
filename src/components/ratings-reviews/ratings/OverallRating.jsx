@@ -21,7 +21,7 @@ export default function OverallRating() {
   }, [reviewsMeta]);
   return (
     <div className="ratings-overall">
-      <StyledRatingStars size="xxx-large" rating={avgRating} border="2">★★★★★</StyledRatingStars>
+      <StyledRatingStars size="38px" rating={avgRating} border="2">★★★★★</StyledRatingStars>
       <span style={{ marginLeft: '20px', fontSize: '48px' }}>{avgRating}</span>
       <div>{`${recommended}% of reviews recommend this product`}</div>
     </div>

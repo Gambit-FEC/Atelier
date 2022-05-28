@@ -21,7 +21,7 @@ export default function RatingsAndReviews() {
         setAvgRating(data.averageRating);
         axios.get(`/reviews/${productId}/1/${data.totalRatings}/${reviewsSort}`)
           .then(({ data }) => {
-            setReviews(data.results);
+            setReviews(data.results.map((item) => ({ ...item, response: item.response || '' })));
             setTotalReviews(data.results.length);
           })
           .catch((err) => {
