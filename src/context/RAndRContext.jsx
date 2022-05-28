@@ -26,6 +26,7 @@ export function RAndRContextProvider({ children }) {
     helpful: [],
     reported: [],
   });
+  const [showCollapse, setShowCollapse] = useState(false);
 
   const value = {
     reviewsSort,
@@ -48,6 +49,8 @@ export function RAndRContextProvider({ children }) {
     setReviewSearch,
     reviewFeedback,
     setReviewFeedback,
+    showCollapse,
+    setShowCollapse,
   };
   return (
     <RAndRContext.Provider value={value}>

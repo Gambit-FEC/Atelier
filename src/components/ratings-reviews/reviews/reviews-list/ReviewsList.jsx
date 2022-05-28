@@ -3,7 +3,14 @@ import ReviewTile from './ReviewTile';
 import { useRAndRContext } from '../../../../context/RAndRContext';
 
 export default function ReviewsList() {
-  const { reviews, reviewsFilter, count, reviewSearch, setShowAdd } = useRAndRContext();
+  const {
+    reviews,
+    reviewsFilter,
+    count,
+    reviewSearch,
+    setShowAdd,
+    setShowCollapse,
+  } = useRAndRContext();
   const [shownReviews, setShownReviews] = useState(() => [<div />]);
 
   function searchFilter(review) {
@@ -26,6 +33,8 @@ export default function ReviewsList() {
 
   useEffect(() => {
     setShowAdd(shownReviews.length > count);
+    console.log(shownReviews.slice(0, count).length);
+    setShowCollapse(shownReviews.slice(0, count).length > 2);
   }, [shownReviews]);
 
   return (
