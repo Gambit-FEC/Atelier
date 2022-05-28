@@ -22,6 +22,7 @@ export function RAndRContextProvider({ children }) {
   const [showAdd, setShowAdd] = useState(() => true);
   const [showWriteReview, setShowWriteReview] = useState(() => false);
   const [reviewSearch, setReviewSearch] = useState(() => '');
+  const [reviewFeedback, setReviewFeedback] = useState([]);
 
   const value = {
     reviewsSort,
@@ -42,6 +43,8 @@ export function RAndRContextProvider({ children }) {
     setShowWriteReview,
     reviewSearch,
     setReviewSearch,
+    reviewFeedback,
+    setReviewFeedback,
   };
   return (
     <RAndRContext.Provider value={value}>
