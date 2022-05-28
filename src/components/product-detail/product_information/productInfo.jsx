@@ -21,23 +21,37 @@ const fb = 'https://img.icons8.com/fluency/344/facebook-new.png';
 const tw = 'https://img.icons8.com/color/344/twitter--v1.png';
 const pn = 'https://img.icons8.com/color/344/pinterest--v1.png';
 
-export default function ProductInfo({ productInfo }) {
+export default function ProductInfo({ productInfo, currentStyle }) {
   const { avgRating, totalReviews } = useGlobalContext();
+
+  console.log("NOT ANDY", productInfo)
 
   return (
     <Wrapper>
       <div>
         <Reviews>
-          <StyledRatingStars size="medium" rating={avgRating}>★★★★★</StyledRatingStars>
+          <StyledRatingStars size="medium" rating={avgRating}>
+            ★★★★★
+          </StyledRatingStars>
           <a href="#ratings-and-reviews" id="see-reviews">
             {totalReviews ? `Read all ${totalReviews} reviews` : 'No Rewiews'}
           </a>
         </Reviews>
-        <Category>{productInfo[0] ? productInfo[0].category : null}</Category>
-        <ProductName>{productInfo[0] ? productInfo[0].name : null}</ProductName>
-        <Price>{productInfo[1] ? productInfo[1].results[0].original_price : null}</Price>
-        <SalePrice>{productInfo[1] ? productInfo[1].results[0].sale_price : null}</SalePrice>
-        <ProductOverview>{productInfo[0] ? productInfo[0].description : null}</ProductOverview>
+        <Category>
+          {productInfo[0] ? productInfo[0].category : null}
+        </Category>
+        <ProductName>
+          {productInfo[0] ? productInfo[0].name : null}
+        </ProductName>
+        <Price>
+          {productInfo[1] ? productInfo[1].results[currentStyle].original_price : null}
+        </Price>
+        <SalePrice>
+          {productInfo[1] ? productInfo[1].results[currentStyle].sale_price : null}
+        </SalePrice>
+        <ProductOverview>
+          {productInfo[0] ? productInfo[0].description : null}
+        </ProductOverview>
 
         <Share id="social-media">
           <p>Share this item!</p>

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { useGlobalContext } from '../../context/GlobalStore';
-import configData from '../../../config.js';
 import AddToCart from './add_to_cart/addToCart';
 import ImageGallery from './image_gallery/imageGallery';
 import ProductInfo from './product_information/productInfo';
@@ -29,6 +28,7 @@ const NotImages = styled.div`
 const Images = styled.div`
   display: flex;
   width: 70%;
+  align-items: center;
 `
 
 export default function ProductDetail() {
@@ -41,10 +41,9 @@ export default function ProductDetail() {
 
   // Grab item data from server----------------------
   useEffect(() => {
-    // console.log('useEffect working?');
     axios.get(`/products/${productId}`)
       .then((result) => {
-        console.log('results', result.data)
+        console.log('results', result.data);
         setProductInfo(result.data);
       })
       .catch((err) => { console.log('getproduct didnt work', err); });
@@ -53,18 +52,18 @@ export default function ProductDetail() {
   return (
     <div id="productDetail">
       {productInfo.length && (
-        <ProductDetailContainer>
-          <Images>
+        <ProductDetailContainer className="Product-Detail">
+          <Images className="prodDetail-imaages">
             <ImageGallery productInfo={productInfo[1].results} currentStyle={currentStyle} />
           </Images>
-          <NotImages>
-            <ProductInfo productInfo={productInfo} />
+          <NotImages className="prodDetail-notImages">
+            <ProductInfo productInfo={productInfo} currentStyle={currentStyle} />
             <StyleSelector
               productInfo={productInfo[1].results}
               currentStyle={currentStyle}
               setCurrentStyle={setCurrentStyle}
             />
-            {/* <AddToCart /> */}
+            <AddToCart />
           </NotImages>
         </ProductDetailContainer>
       )}

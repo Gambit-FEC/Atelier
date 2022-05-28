@@ -46,8 +46,7 @@ export default function ImageGallery({productInfo, currentStyle}) {
       </ImagesBar>
       <Container>
         <ArrowLeft onClick={onLeftClick} />
-        <img src={images[currentImage]?.url} style={{width: "80%", objectFit: "contain"}}/>
-        {/* {console.log('images:', images[currentImage])} */}
+        <img src={images[currentImage]?.url} style={{width: "80%", objectFit: "contain", maxHeight: "100%"}}/>
         <ArrowRight onClick={onRightClick} />
       </Container>
     </>
@@ -78,6 +77,7 @@ const ImagesBar = styled.div`
   display: flex;
   flex-direction: column;
   align-content: space-between;
+  justify-content: center;
 `
 
 const ImageSelections = styled.img`
@@ -92,12 +92,18 @@ const ArrowLeft = styled(FaArrowLeft)`
   font-size: 3rem;
   cursor: pointer;
   user-select: none;
-  color: green;
+  color: purple;
+  z-index: 10;
+  position: relative;
+  left: 70px;
 `;
 
 const ArrowRight = styled(FaArrowRight)`
   font-size: 3rem;
   cursor: pointer;
   user-select: none;
-  color: green;
+  color: purple;
+  z-index: 10;
+  position: relative;
+  right: 70px;
 `;
