@@ -21,39 +21,8 @@ const fb = 'https://img.icons8.com/fluency/344/facebook-new.png';
 const tw = 'https://img.icons8.com/color/344/twitter--v1.png';
 const pn = 'https://img.icons8.com/color/344/pinterest--v1.png';
 
-export default function ProductInfo() {
-  const { productId, avgRating } = useGlobalContext();
-  const [productInfo, setProductInfo] = useState([]);
-  const [allReviews, setAllReviews] = useState([]);
-  const [avgReviews, setAvgReviews] = useState([]);
-
-  // const reviewAmount = avgReviews;
-  // console.log('review amount??', reviewAmount / 5 * 100);
-
-  // Reviews and stars---------------------------------
-  useEffect(() => {
-    // const reviewsLine = event.currentTarget;
-    // need to send client to the reviews section
-    axios.get(`/reviews/meta/${productId}`)
-    // axios.get(`/reviews/averageRating/${productId}`)
-      .then((results) => {
-        console.log('reviews??', results.data.totalRatings);
-        setAllReviews(results.data.totalRatings);
-        setAvgReviews(results.data.averageRating);
-      })
-      .catch((err) => { console.log('onclickreviews error', err); });
-  }, [productId]);
-
-  // Grabs item data from server-------------------------
-  useEffect(() => {
-    axios.get(`/products/${productId}`)
-      .then((result) => {
-        // console.log('does getProduct work???', result.data);
-        setProductInfo(result.data);
-      })
-      .catch((err) => err);
-      // .catch((err) => { console.log('getproduct didnt work', err); });
-  }, [productId]);
+export default function ProductInfo({ productInfo }) {
+  const { avgRating, totalReviews } = useGlobalContext();
 
   return (
     <Wrapper>
@@ -61,7 +30,7 @@ export default function ProductInfo() {
         <Reviews>
           <StyledRatingStars size="medium" rating={avgRating}>★★★★★</StyledRatingStars>
           <a href="#ratings-and-reviews" id="see-reviews">
-            {allReviews ? `Read all ${allReviews} reviews` : 'No Rewiews'}
+            {totalReviews ? `Read all ${totalReviews} reviews` : 'No Rewiews'}
           </a>
         </Reviews>
         <Category>{productInfo[0] ? productInfo[0].category : null}</Category>
@@ -77,7 +46,6 @@ export default function ProductInfo() {
           <Pin src={pn} onClick={() => onPinterestClick()} />
         </Share>
       </div>
-
     </Wrapper>
   );
 }
