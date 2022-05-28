@@ -6,9 +6,17 @@ export default function AddToCart() {
   const { productId } = useGlobalContext();
   return (
     <>
-      <h2>add to cart test</h2>
-      <div>wow carts</div>
-      <p>hello carts</p>
+      <Wrapper>
+        <h2>add to cart test</h2>
+        <div>wow carts</div>
+        <p>hello carts</p>
+
+      </Wrapper>
     </>
   );
 }
+
+const Wrapper = styled.div`
+  padding: 4em;
+  align-items: flex-end;
+`;

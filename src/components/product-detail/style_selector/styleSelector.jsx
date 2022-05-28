@@ -5,36 +5,28 @@ import styled from 'styled-components';
 // import Thumbnail from './thumbnails';
 import { useGlobalContext } from '../../../context/GlobalStore';
 
-// Click a style
-const onStyleClick = () => {
-  console.log('hello i need functionality! :D')
-};
-
-export default function StyleSelector() {
+export default function StyleSelector({productInfo, currentStyle, setCurrentStyle}) {
   const { productId } = useGlobalContext();
-  const [productInfo, setProductInfo] = useState([]);
 
-  // Grab item data from server----------------------
-  useEffect(() => {
-    // console.log('useEffect working?');
-    axios.get(`/products/${productId}`)
-      .then((result) => {
-        console.log('item styles!!', result.data[1].results);
-        console.log('item data:', result.data);
-        setProductInfo(result.data[1].results);
-      })
-      .catch((err) => { console.log('getproduct in addtocart didnt work', err); });
-  }, [productId]);
+  // console.log("prod info?", productInfo)
+
+  // Click a style
+  const onStyleClick = (index) => {
+    console.log('onclick index', index);
+    setCurrentStyle(index);
+  };
 
   return (
-    <Wrapper>
-      <ProductStyle>Style: {productInfo[0] ? productInfo[0].name : 'howdy, this is a style?'}</ProductStyle>
-      <AllThumbnails>
-        {productInfo.map((item, index) => (
-          <Thumbnails key={index} src={item.photos[0].thumbnail_url ? item.photos[0].thumbnail_url : 'https://img.icons8.com/stickers/344/gambit.png'} onClick={() => onStyleClick()} />
-        ))}
-      </AllThumbnails>
-    </Wrapper>
+    <>
+      {productInfo.length && <Wrapper>
+        <ProductStyle>Style: {productInfo[currentStyle] ? productInfo[currentStyle].name : 'howdy, this is a style?'}</ProductStyle>
+        <AllThumbnails>
+          {productInfo.map((item, index) => (
+            <Thumbnails key={index} src={item.photos[0].thumbnail_url ? item.photos[0].thumbnail_url : 'https://img.icons8.com/stickers/344/gambit.png'} onClick={() => onStyleClick(index)} />
+          ))}
+        </AllThumbnails>
+      </Wrapper>}
+    </>
   );
 }
 
@@ -47,6 +39,7 @@ const AllThumbnails = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
+  max-width: 350px;
 `;
 
 const ProductStyle = styled.h2`
@@ -62,10 +55,11 @@ const ProductStyle = styled.h2`
 // grid-template-columns: 25% 25% 25% 25%;
 
 const Thumbnails = styled.img`
-  display: flex;
-  clip-path: circle();
-  width: 25%;
-  height: 50px;
-  margin: 10px 0 10px;
+  border-radius: 50%;
+  width: 18%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border: 2px solid purple;
   box-sizing: border-box;
+  margin: 10px;
   `;

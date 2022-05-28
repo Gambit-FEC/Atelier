@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { useGlobalContext } from '../../context/GlobalStore';
@@ -10,7 +10,7 @@ import StyleSelector from './style_selector/styleSelector';
 
 // //styled-components ex
 // Create a Title component that'll render an <h1> tag with some styles
-const ProductDetailContainer = styled.section`
+const ProductDetailContainer = styled.div`
   display: flex;
   flex-direction: row;
   width: 90vw;
@@ -18,14 +18,15 @@ const ProductDetailContainer = styled.section`
 `;
 
 // Create a Wrapper component that'll render a <section> tag with some styles
-const NotImages = styled.section`
+const NotImages = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   max-width: 800px;
+  min-width: 500px;
 `;
 
-const Images = styled.section`
+const Images = styled.div`
   display: flex;
   width: 70%;
 `
@@ -33,21 +34,40 @@ const Images = styled.section`
 export default function ProductDetail() {
   // test------
   const { productId } = useGlobalContext();
-  // const updateProduct = updateId();
-  console.log('productDetail [rendered]');
+  const [productInfo, setProductInfo] = useState([]);
+  const [currentStyle, setCurrentStyle] = useState(0);
+
+
+
+  // Grab item data from server----------------------
+  useEffect(() => {
+    // console.log('useEffect working?');
+    axios.get(`/products/${productId}`)
+      .then((result) => {
+        console.log('results', result.data)
+        setProductInfo(result.data);
+      })
+      .catch((err) => { console.log('getproduct didnt work', err); });
+  }, [productId]);
 
   return (
     <div id="productDetail">
-      <ProductDetailContainer>
-        <Images>
-          <ImageGallery />
-        </Images>
-        <NotImages>
-          <ProductInfo />
-          <StyleSelector />
-          <AddToCart />
-        </NotImages>
-      </ProductDetailContainer>
+      {productInfo.length && (
+        <ProductDetailContainer>
+          <Images>
+            <ImageGallery productInfo={productInfo[1].results} currentStyle={currentStyle} />
+          </Images>
+          <NotImages>
+            <ProductInfo productInfo={productInfo} />
+            <StyleSelector
+              productInfo={productInfo[1].results}
+              currentStyle={currentStyle}
+              setCurrentStyle={setCurrentStyle}
+            />
+            {/* <AddToCart /> */}
+          </NotImages>
+        </ProductDetailContainer>
+      )}
     </div>
   );
 }
