@@ -35,12 +35,13 @@ export default function RatingBreakdown() {
           {calcPercents(reviewsMeta.ratings).map((item, index) => (
             <div id={`${index}-star`} key={index}>
               <StarButton
+                id={`${index}-star-filter-button`}
                 onClick={() => handleRatingClick(index.toString())}
               >
                 {`${index} ★`}
               </StarButton>
               <span style={{ color: '#4a4a4a' }}>{` ${reviewsMeta.ratings[index]}`}</span>
-              <RatingBar percent={item} />
+              <RatingBar id={`${index}-star-bar`} percent={item} />
             </div>
           ))}
           {Object.values(reviewsFilter).some((item) => item === true) && (

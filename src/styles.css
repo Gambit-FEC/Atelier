@@ -90,7 +90,7 @@ h1 {
   overflow-y: overlay;
 }
 
-.reviews-tile {
+.review-tile {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -98,7 +98,7 @@ h1 {
   width: 95%
 }
 
-.reviews-tile>* {
+.review-tile>* {
   margin: 0px;
   word-break: break-word;
 }

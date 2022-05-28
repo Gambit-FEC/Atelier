@@ -29,8 +29,8 @@ export default function ReviewTile({ review, hidden, search }) {
 
   return (
     <>
-      <div className="reviews-tile" hidden={hidden}>
-        <StyledRatingStars rating={review.rating}>★★★★★</StyledRatingStars>
+      <div className="review-tile" hidden={hidden}>
+        <StyledRatingStars className="review-tile-rating" rating={review.rating}>★★★★★</StyledRatingStars>
         <div>{format(parseISO(review.date), 'MMM dd, yyyy')}</div>
         <div style={{ fontWeight: 'bold' }}>{review.summary}</div>
         {readMore && (
