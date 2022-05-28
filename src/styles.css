@@ -103,6 +103,10 @@ h1 {
   word-break: break-word;
 }
 
+.review-summary {
+  font-weight: bold;
+}
+
 .helpful-report-readmore {
   display: flex;
   width: 100%;

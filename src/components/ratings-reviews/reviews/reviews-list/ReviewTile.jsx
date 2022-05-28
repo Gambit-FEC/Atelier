@@ -4,6 +4,28 @@ import { format, parseISO } from 'date-fns';
 import { StyledRatingStars } from '../../../../styled-lib';
 import { useRAndRContext } from '../../../../context/RAndRContext';
 
+function HighlightText({ text, highlight, summary = false }) {
+  if (highlight === '' || highlight === null) {
+    return (
+      <span style={summary ? {fontWeight: 'bold'} : {}}>{text}</span>
+    );
+  }
+  const regex = new RegExp(`(${highlight})`, 'gi');
+  const parts = text.split(regex);
+  console.log('parts:', parts);
+  return (
+    <span style={summary ? {fontWeight: 'bold'} : {}}>
+      {parts.filter((part) => part).map((part, index) => {
+        console.log('part:', part, 'highlight:', highlight);
+        if (part.toLowerCase() === highlight.toLowerCase()) {
+          return <mark key={index}>{part}</mark>;
+        }
+        return <span key={index}>{part}</span>;
+      })}
+    </span>
+  );
+}
+
 export default function ReviewTile({ review, hidden, search }) {
   const [readMore, setReadMore] = useState(review.body.length > 250);
   const [showModal, setShowModal] = useState({ show: false, src: '' });
@@ -71,7 +93,7 @@ export default function ReviewTile({ review, hidden, search }) {
       <div className="review-tile" hidden={hidden}>
         <StyledRatingStars className="review-tile-rating" rating={review.rating}>★★★★★</StyledRatingStars>
         <div>{format(parseISO(review.date), 'MMM dd, yyyy')}</div>
-        <div style={{ fontWeight: 'bold' }}>{review.summary}</div>
+        <HighlightText summary text={review.summary} highlight={search} />
         {readMore && (
           <div>
             <HighlightText text={review.body.slice(0, 247)} highlight={search} />
@@ -114,24 +136,4 @@ export default function ReviewTile({ review, hidden, search }) {
   );
 }
 
-function HighlightText({ text, highlight }) {
-  if (highlight === '' || highlight === null) {
-    return (
-      <span>{text}</span>
-    );
-  }
-  const regex = new RegExp(`(${highlight})`, 'gi');
-  const parts = text.split(regex);
-  console.log('parts:', parts);
-  return (
-    <span>
-      {parts.filter((part) => part).map((part, index) => {
-        console.log('part:', part, 'highlight:', highlight);
-        if (part.toLowerCase() === highlight.toLowerCase()) {
-          return <mark key={index}>{part}</mark>;
-        }
-        return <span key={index}>{part}</span>;
-      })}
-    </span>
-  );
-}
+
