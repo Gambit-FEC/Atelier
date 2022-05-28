@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { format, parseISO } from 'date-fns';
 import { StyledRatingStars } from '../../../../styled-lib';
+import { useRAndRContext } from '../../../../context/RAndRContext';
 
 export default function ReviewTile({ review, hidden, search }) {
   const [readMore, setReadMore] = useState(review.body.length > 250);
   const [showModal, setShowModal] = useState({ show: false, src: '' });
+  const { reviewFeedback, setReviewFeedback } = useRAndRContext();
   function handleReadMoreClick() {
     setReadMore(!readMore);
   }
@@ -18,13 +20,35 @@ export default function ReviewTile({ review, hidden, search }) {
   function handleHelpfulClick(e) {
     e.target.classList.add('clicked-link-button');
     e.target.removeAttribute('onClick');
+    setReviewFeedback({
+      reported: reviewFeedback.reported,
+      helpful: [...reviewFeedback.helpful, review.review_id],
+    });
     // PUT /reviews/:review_id/helpful
     console.log(e.target);
   }
   function handleReportClick(e) {
     e.target.classList.add('clicked-link-button');
+    setReviewFeedback({
+      helpful: reviewFeedback.helpful,
+      reported: [...reviewFeedback.reported, review.review_id],
+    });
     // PUT /reviews/:review_id/report
     console.log(e.target);
+  }
+
+  function whichButton(name) {
+    if (name === 'helpful') {
+      return reviewFeedback.helpful.includes(review.review_id)
+        ? <button className="link-button clicked-link-button" type="button"> Yes </button>
+        : <button className="link-button" type="button" onClick={handleHelpfulClick}> Yes </button>;
+    }
+    if (name === 'report') {
+      return reviewFeedback.reported.includes(review.review_id)
+        ? <button className="link-button clicked-link-button" type="button">Report</button>
+        : <button className="link-button" type="button" onClick={handleReportClick}>Report</button>;
+    }
+    return <div />;
   }
 
   return (
@@ -54,10 +78,10 @@ export default function ReviewTile({ review, hidden, search }) {
         <div className="helpful-report-readmore">
           <div>
             <span>Was this review helpful? </span>
-            <button className="link-button" type="button" onClick={handleHelpfulClick}> Yes </button>
+            {whichButton('helpful')}
             <span>{` ( ${review.helpfulness} ) `}</span>
           </div>
-          {!readMore && <button className="link-button" type="button" onClick={handleReportClick}>Report</button>}
+          {!readMore && whichButton('report')}
           {readMore && <button type="button" className="reviews-readmore" onClick={handleReadMoreClick}>Read more</button>}
         </div>
       </div>
