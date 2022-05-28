@@ -59,3 +59,26 @@ exports.addReview = (req, res) => {
       res.sendStatus(401);
     });
 };
+
+exports.updateHelpful = (req, res) => {
+  console.log(req.params);
+  axios.put(`${API_URL}reviews/${req.params.review_id}/helpful`, undefined, { headers: { Authorization: req.headers.Authorization } })
+    .then(() => {
+      res.sendStatus(203);
+    })
+    .catch((err) => {
+      console.log('Error updating helpful status:', err);
+      res.sendStatus(403);
+    });
+};
+
+exports.report = (req, res) => {
+  axios.put(`${API_URL}reviews/${req.params.review_id}/report`, undefined, { headers: { Authorization: req.headers.Authorization } })
+    .then(() => {
+      res.sendStatus(205);
+    })
+    .catch((err) => {
+      console.log('Error reporting review:', err);
+      res.sendStatus(405);
+    });
+};
