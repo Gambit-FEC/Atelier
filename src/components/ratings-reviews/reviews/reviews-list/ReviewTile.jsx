@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { format, parseISO } from 'date-fns';
 import { StyledRatingStars } from '../../../../styled-lib';
 import { useRAndRContext } from '../../../../context/RAndRContext';
@@ -20,12 +21,17 @@ export default function ReviewTile({ review, hidden, search }) {
   function handleHelpfulClick(e) {
     e.target.classList.add('clicked-link-button');
     e.target.removeAttribute('onClick');
-    setReviewFeedback({
-      reported: reviewFeedback.reported,
-      helpful: [...reviewFeedback.helpful, review.review_id],
-    });
     // PUT /reviews/:review_id/helpful
-    console.log(e.target);
+    axios.put(`/reviews/${review.review_id}/helpful`)
+      .then(() => {
+        setReviewFeedback({
+          reported: reviewFeedback.reported,
+          helpful: [...reviewFeedback.helpful, review.review_id],
+        });
+      })
+      .catch((err) => {
+        console.log('Error trying to mark review as helpful:', err);
+      });
   }
   function handleReportClick(e) {
     e.target.classList.add('clicked-link-button');
@@ -34,18 +40,27 @@ export default function ReviewTile({ review, hidden, search }) {
       reported: [...reviewFeedback.reported, review.review_id],
     });
     // PUT /reviews/:review_id/report
-    console.log(e.target);
+    axios.put(`/reviews/${review.review_id}/report`)
+      .then(() => {
+        setReviewFeedback({
+          helpful: reviewFeedback.helpful,
+          reported: [...reviewFeedback.reported, review.review_id],
+        });
+      })
+      .catch((err) => {
+        console.log('Error trying to report review:', err);
+      });
   }
 
   function whichButton(name) {
     if (name === 'helpful') {
       return reviewFeedback.helpful.includes(review.review_id)
-        ? <button className="link-button clicked-link-button" type="button"> Yes </button>
+        ? <button className="feedback-helpful" type="button"> 👍 </button>
         : <button className="link-button" type="button" onClick={handleHelpfulClick}> Yes </button>;
     }
     if (name === 'report') {
       return reviewFeedback.reported.includes(review.review_id)
-        ? <button className="link-button clicked-link-button" type="button">Report</button>
+        ? <button className="feedback-report" type="button">Thank you for your feedback</button>
         : <button className="link-button" type="button" onClick={handleReportClick}>Report</button>;
     }
     return <div />;
