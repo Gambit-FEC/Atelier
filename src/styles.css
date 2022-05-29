@@ -17,6 +17,8 @@ body {
 
 @media screen and (max-width:1199px) {
   #ratings-and-reviews { margin-left:auto !important; }
+  #productDetail { margin-left:auto !important; }
+  #related-products-module { margin-left:auto !important; }
 }
 
 h1 {
