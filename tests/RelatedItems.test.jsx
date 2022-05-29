@@ -1,32 +1,52 @@
 import React from 'react';
-import { useGlobalContext, GlobalContextProvider, GlobalContext } from '../src/context/GlobalStore';
-import { render, container, waitFor, fireEvent } from '@testing-library/react';
-import App from '../src/components/App';
-import RelatedCard from '../src/components/related-items/related/RelatedCard'
+import { createRoot } from 'react-dom/client';
+import { GlobalContextProvider } from '../src/context/GlobalStore';
+import '@testing-library/jest-dom';
+import RelatedCard from '../src/components/related-items/related/relatedCard';
 
-const value = [
-  {product: {id: 40344, name: 'Camo Onesie', category: 'Jackets', price: '140.00'}},
-  {rating: {averageRating: 3.75}},
-  {style: {url: null}}
+const container = document.createElement('div');
+document.body.appendChild(container);
+const root = createRoot(container);
+
+const value = [{
+  product: {
+    category: 'Accessories',
+    id: 40325,
+    name: 'Bright Future Sunglasses',
+    price: '69.00',
+  },
+  rating: {
+    averageRating: 3.5,
+  },
+  style: {
+    thumbnail_url: null,
+    url: null,
+  },
+  favorite: false,
+}, {
+  product: {
+    category: 'Accessories',
+    id: 40325,
+    name: 'Bright Future Sunglasses',
+    price: '69.00',
+  },
+  rating: {
+    averageRating: 3.5,
+  },
+  style: {
+    thumbnail_url: null,
+    url: null,
+  },
+  favorite: false,
+},
 ];
 
-describe("App testing", () => {
-  test('renders the landing page', () => {
-    render(<App />);
+describe('Related Card component', () => {
+  test('related card should render', () => {
+      root.render(
+        <GlobalContextProvider>
+          <RelatedCard value={value} />
+        </GlobalContextProvider>,
+    );
   });
-})
-
-// describe("Component Test", () => {
-//   test('Related Items component in React', () => {
-//     const {container} = render(<RelatedItems />)
-//   })
-// })
-
-it('should render related items', () => {
-  test('Related Item Render', async () => {
-    const {container} =  await render(
-
-        <RelatedCard value={value}/>
-    )
-  })
-})
+});
