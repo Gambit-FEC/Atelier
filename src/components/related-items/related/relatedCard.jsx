@@ -63,6 +63,9 @@ function relatedCard(data) {
           {showModal ? <CompareModal value={currentItem} /> : null}
         </div>
       </div>
+      {
+        console.log(display)
+      }
 
       <CardWrapper>
         {
