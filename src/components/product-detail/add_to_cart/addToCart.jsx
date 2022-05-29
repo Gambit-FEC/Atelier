@@ -2,17 +2,20 @@ import React from 'react';
 import styled from 'styled-components';
 import { useGlobalContext } from '../../../context/GlobalStore';
 
-export default function AddToCart() {
+export default function AddToCart({ productInfo, currentStyle }) {
   const { productId } = useGlobalContext();
-  return (
-    <>
-      <Wrapper>
-        <h2>add to cart test</h2>
-        <div>wow carts</div>
-        <p>hello carts</p>
 
-      </Wrapper>
-    </>
+  const onAddtoCart = () => {
+    console.log('add me to cart hohoho', productInfo);
+    console.log('add me to cart hohoho with style', productInfo[currentStyle].skus);
+  }
+
+  return (
+    <Wrapper>
+      <select value="Select Style">Select Style</select>
+      <select>Select Size</select>
+      <button value="click-addtocart" onClick={onAddtoCart}>Add to Cart</button>
+    </Wrapper>
   );
 }
 

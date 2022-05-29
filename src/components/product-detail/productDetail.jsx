@@ -63,7 +63,7 @@ export default function ProductDetail() {
               currentStyle={currentStyle}
               setCurrentStyle={setCurrentStyle}
             />
-            <AddToCart />
+            <AddToCart className="prodDetail-addToCart" productInfo={productInfo[1].results} currentStyle={currentStyle} />
           </NotImages>
         </ProductDetailContainer>
       )}
