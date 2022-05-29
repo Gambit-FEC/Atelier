@@ -15,7 +15,6 @@ export default function RatingsAndReviews() {
     showWriteReview,
     reviewFeedback,
   } = useRAndRContext();
-  console.log('RAndR [render]');
   useEffect(() => {
     axios.get(`/reviews/meta/${productId}`)
       .then(({ data }) => {
@@ -27,7 +26,7 @@ export default function RatingsAndReviews() {
             setTotalReviews(data.results.length);
           })
           .catch((err) => {
-            console.log('error fetching reviews', err);
+            console.log('Error fetching reviews', err);
           });
       })
       .catch((err) => {

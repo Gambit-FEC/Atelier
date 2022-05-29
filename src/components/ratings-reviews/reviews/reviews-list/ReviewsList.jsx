@@ -34,7 +34,6 @@ export default function ReviewsList() {
 
   useEffect(() => {
     setShowAdd(shownReviews.length > count);
-    console.log(shownReviews.slice(0, count).length);
     setShowCollapse(shownReviews.slice(0, count).length > 2);
   }, [shownReviews]);
 

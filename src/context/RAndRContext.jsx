@@ -8,7 +8,7 @@ export function useRAndRContext() {
 
 export function RAndRContextProvider({ children }) {
   const [reviews, setReviews] = useState(() => []);
-  const [reviewsMeta, setReviewsMeta] = useState(() => { });
+  const [reviewsMeta, setReviewsMeta] = useState();
   const [count, setCount] = useState(() => 2);
   const [reviewsSort, setReviewsSort] = useState(() => 'relevant');
   const [reviewsFilter, setReviewsFilter] = useState({
@@ -22,12 +22,20 @@ export function RAndRContextProvider({ children }) {
   const [showAdd, setShowAdd] = useState(() => true);
   const [showWriteReview, setShowWriteReview] = useState(() => false);
   const [reviewSearch, setReviewSearch] = useState(() => '');
-  const [reviewFeedback, setReviewFeedback] = useState({
+  const [reviewFeedback, setReviewFeedback] = useState(() => ({
     helpful: [],
     reported: [],
-  });
-  const [showCollapse, setShowCollapse] = useState(false);
+  }));
+  const [showCollapse, setShowCollapse] = useState(() => false);
   const [shownReviews, setShownReviews] = useState(() => []);
+  const [characteristicsMeaning] = useState(() => ({
+    Size: ['A size too small', '½ a size too small', 'Perfect', '½ a size too big', 'A size too wide'],
+    Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
+    Comfort: ['Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comfortable', 'Perfect'],
+    Quality: ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'],
+    Length: ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
+    Fit: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long'],
+  }));
 
   const value = {
     reviewsSort,
@@ -54,6 +62,7 @@ export function RAndRContextProvider({ children }) {
     setShowCollapse,
     shownReviews,
     setShownReviews,
+    characteristicsMeaning,
   };
   return (
     <RAndRContext.Provider value={value}>

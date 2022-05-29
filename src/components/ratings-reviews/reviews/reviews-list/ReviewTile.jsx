@@ -12,11 +12,9 @@ function HighlightText({ text, highlight, summary = false }) {
   }
   const regex = new RegExp(`(${highlight})`, 'gi');
   const parts = text.split(regex);
-  console.log('parts:', parts);
   return (
     <span style={summary ? {fontWeight: 'bold'} : {}}>
       {parts.filter((part) => part).map((part, index) => {
-        console.log('part:', part, 'highlight:', highlight);
         if (part.toLowerCase() === highlight.toLowerCase()) {
           return <mark key={index}>{part}</mark>;
         }
