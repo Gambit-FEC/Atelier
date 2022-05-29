@@ -5,7 +5,7 @@ import styled from 'styled-components';
 // import Thumbnail from './thumbnails';
 import { useGlobalContext } from '../../../context/GlobalStore';
 
-export default function StyleSelector({productInfo, currentStyle, setCurrentStyle}) {
+export default function StyleSelector({ productInfo, currentStyle, setCurrentStyle }) {
   const { productId } = useGlobalContext();
 
   // console.log("prod info?", productInfo)
@@ -17,15 +17,21 @@ export default function StyleSelector({productInfo, currentStyle, setCurrentStyl
   };
 
   return (
+    // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
-      {productInfo.length && <Wrapper>
-        <ProductStyle>Style: {productInfo[currentStyle] ? productInfo[currentStyle].name : 'howdy, this is a style?'}</ProductStyle>
+      {productInfo.length && (
+      <Wrapper>
+        <ProductStyle>
+          Style:
+          {productInfo[currentStyle] ? productInfo[currentStyle].name : 'howdy, this is a style?'}
+        </ProductStyle>
         <AllThumbnails>
           {productInfo.map((item, index) => (
             <Thumbnails key={index} src={item.photos[0].thumbnail_url ? item.photos[0].thumbnail_url : 'https://img.icons8.com/stickers/344/gambit.png'} onClick={() => onStyleClick(index)} />
           ))}
         </AllThumbnails>
-      </Wrapper>}
+      </Wrapper>
+      )}
     </>
   );
 }

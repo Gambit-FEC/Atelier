@@ -9,10 +9,10 @@ export default function ImageGallery({productInfo, currentStyle}) {
   const { productId } = useGlobalContext();
   const [currentImage, setCurrentImage] = useState(0);
   const [images, setImages] = useState(productInfo[currentStyle].photos);
-
   const { length } = images;
 
-  console.log('images', images);
+  // console.log('images', images);
+
   // onClick functionalities for slides -------------
   const onLeftClick = () => {
     console.log('left');

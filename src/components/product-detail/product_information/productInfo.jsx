@@ -24,7 +24,7 @@ const pn = 'https://img.icons8.com/color/344/pinterest--v1.png';
 export default function ProductInfo({ productInfo, currentStyle }) {
   const { avgRating, totalReviews } = useGlobalContext();
 
-  console.log("NOT ANDY", productInfo)
+  // console.log("NOT ANDY", productInfo)
 
   return (
     <Wrapper>

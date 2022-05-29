@@ -1,16 +1,6 @@
 const axios = require('axios');
 const { API_URL } = require('../../config');
 
-// get all products
-// exports.getProductInfo = (req, res) => {
-//   // eslint-disable-next-line no-console
-//   console.log('do i work?');
-//   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${req.params.productId}`, { headers: { Authorization: req.headers.Authorization } })
-//     .then((data) => { res.status(200).send(data.data); })
-//     // eslint-disable-next-line no-console
-//     .catch((err) => { console.log('db getProductInfo error:', err); res.status(500).send(err); });
-// };
-
 // get one product
 exports.getOneProduct = async (req, res) => {
   console.log('get1product server works??')
@@ -26,5 +16,15 @@ exports.getOneProduct = async (req, res) => {
   }
 };
 
-// const related = await axios.get(`${API_URL}products/${req.params.productId}/related`, { headers: { Authorization: req.headers.Authorization }});
-// const reviews = await axios.get(`${API_URL}reviews/?product_id=${req.params.productId}`, { headers: { Authorization: req.headers.Authorization }});
+// add to cart NEED TO FIX!!
+exports.addToCart = async (req, res) => {
+  console.log('addToCart server works??')
+  axios.post(async (req, res) => {
+    try {
+      const response = await axios.post(`${API_URL}cart`, req.body, apiHeaders);
+      res.status(201).send(response.data);
+    } catch (err) {
+      res.send(err);
+    }
+  });
+};
