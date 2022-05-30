@@ -33,16 +33,16 @@ export default function AddToCart({ productInfo, currentStyle }) {
   const [skuIndex, setskuIndex] = useState(0);
   // const [skuID, setSkuID] = useState(0);
 
-
   console.log('add me to cart hohoho', productInfo);
   console.log('add me to cart hohoho with style', productInfo[currentStyle].skus);
 
   // add to cart button --------------------
   const skuID = {
-    sku_id: skuList[skuIndex]
-  }
+    sku_id: skuList[skuIndex],
+  };
+
   const onAddtoCart = (event) => {
-    console.log('i am clicked?', event)
+    console.log('i am clicked?', event);
     axios.post('/cart', skuID)
       .then((result) => {
         console.log('axios post works?', result);
@@ -50,16 +50,28 @@ export default function AddToCart({ productInfo, currentStyle }) {
       .catch((err) => { console.log('add to cart button did not send correctly', err); });
   };
 
+  // selecting size ------------------------
+  const onSelectSize = (e) => {
+    console.log('do i work?', e);
+  };
+
   return (
-    <Wrapper>
-      <SelectSize sizes={sizes} />
-      <SelectQuantity quantities={quantities} />
-      <button onClick={onAddtoCart}>Add to Cart</button>
-    </Wrapper>
+    <>
+      <Selectors>
+        <SelectSize id="select" sizes={sizes} onClick={(e) => onSelectSize(e)} />
+        <SelectQuantity quantities={quantities} />
+      </Selectors>
+      <Add onChange={onAddtoCart}>Add to Cart</Add>
+    </>
   );
 }
 
-const Wrapper = styled.div`
-  padding: 4em;
+const Selectors = styled.div`
   align-items: flex-end;
 `;
+
+const Add = styled.button`
+  max-width: 150px;
+  height: 20px;
+`;
+
