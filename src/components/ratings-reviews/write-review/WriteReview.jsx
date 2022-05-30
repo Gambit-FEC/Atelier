@@ -79,12 +79,6 @@ export default function WriteReview() {
     }
   }
 
-  function handleCharacteristics(e) {
-    const newData = { ...formData };
-    newData.characteristics[e.target.name].value = e.target.value;
-    setFormData(newData);
-  }
-
   function handlePhotos(e) {
     if (e.target.files.length > 5) {
       window.alert('5 photos max!');
@@ -155,17 +149,34 @@ export default function WriteReview() {
       return;
     }
     const popup = document.createElement('div');
-    popup.className = 'popup-characteristic';
     popup.innerText = characteristicsMeaning[e.target.name][e.target.value - 1];
-    e.target.parentNode.append(popup);
+    popup.setAttribute('style', 'margin-right: auto;');
+    e.target.parentNode.parentNode.insertBefore(popup, e.target.parentNode);
   }
 
   function handleCharactericsMouseLeave(e) {
-    if (typeof e.target.parentNode.children[10] === 'undefined') {
+    if (e.target.parentNode.children.length === 2) {
       return;
     }
-    const popup = e.target.parentNode.children[10];
-    e.target.parentNode.removeChild(popup);
+    if (formData.characteristics[e.target.name].value !== '0') {
+      return;
+    }
+    const popup = e.target.parentNode.parentNode.children[1];
+    e.target.parentNode.parentNode.removeChild(popup);
+  }
+
+  function handleCharacteristics(e) {
+    const newData = { ...formData };
+    newData.characteristics[e.target.name].value = e.target.value;
+    setFormData(newData);
+  }
+
+  function removeHoverChar(e) {
+    if (formData.characteristics[e.target.name].value !== '0') {
+      return;
+    }
+    const popup = e.target.parentNode.parentNode.children[1];
+    e.target.parentNode.parentNode.removeChild(popup);
   }
 
   function characteristicsRender() {
@@ -181,7 +192,7 @@ export default function WriteReview() {
         );
       }
       allRadios.push(
-        <div key={key} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+        <div key={key} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }} onChange={removeHoverChar}>
           <label style={{ width: '85px' }}>{`${key}:`}</label>
           {formData.characteristics[key].value - 1 >= 0
             && (
