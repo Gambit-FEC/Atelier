@@ -41,7 +41,6 @@ export default function ReviewTile({ review, hidden, search }) {
   function handleHelpfulClick(e) {
     e.target.classList.add('clicked-link-button');
     e.target.removeAttribute('onClick');
-    // PUT /reviews/:review_id/helpful
     axios.put(`/reviews/${review.review_id}/helpful`)
       .then(() => {
         setReviewFeedback({
@@ -59,7 +58,6 @@ export default function ReviewTile({ review, hidden, search }) {
       helpful: reviewFeedback.helpful,
       reported: [...reviewFeedback.reported, review.review_id],
     });
-    // PUT /reviews/:review_id/report
     axios.put(`/reviews/${review.review_id}/report`)
       .then(() => {
         setReviewFeedback({

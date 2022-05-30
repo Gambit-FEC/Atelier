@@ -14,6 +14,7 @@ export default function RatingsAndReviews() {
     reviewsSort,
     showWriteReview,
     reviewFeedback,
+    setReviewFeedback,
   } = useRAndRContext();
   useEffect(() => {
     axios.get(`/reviews/meta/${productId}`)
@@ -33,6 +34,18 @@ export default function RatingsAndReviews() {
         console.log('Error fetching average ratings:', err);
       });
   }, [productId, reviewsSort, showWriteReview, reviewFeedback.helpful]);
+
+  useEffect(() => {
+    setReviewFeedback({
+      helpful: JSON.parse(localStorage.getItem('helpful')) || [],
+      reported: JSON.parse(localStorage.getItem('reported')) || [],
+    });
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('helpful', JSON.stringify(reviewFeedback.helpful));
+    localStorage.setItem('reported', JSON.stringify(reviewFeedback.reported));
+  }, [reviewFeedback]);
   return (
     <div id="ratings-and-reviews">
       <Ratings />
