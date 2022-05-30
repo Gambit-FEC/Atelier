@@ -51,14 +51,14 @@ export default function AddToCart({ productInfo, currentStyle }) {
   };
 
   // selecting size ------------------------
-  const onSelectSize = (e) => {
+  const onSelectSize = (index) => {
     console.log('do i work?', e);
   };
 
   return (
     <>
       <Selectors>
-        <SelectSize id="select" sizes={sizes} onClick={(e) => onSelectSize(e)} />
+        <SelectSize id="select" sizes={sizes} onClick={onSelectSize} />
         <SelectQuantity quantities={quantities} />
       </Selectors>
       <Add onChange={onAddtoCart}>Add to Cart</Add>
