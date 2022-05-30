@@ -17,6 +17,8 @@ app.use((req, res, next) => {
 app.get('/reviews/:product_id/:page/:count/:sort', ctrl.reviews.getById);
 app.get('/reviews/meta/:product_id', ctrl.reviews.getMeta);
 app.post('/reviews', ctrl.reviews.addReview);
+app.put('/reviews/:review_id/helpful', ctrl.reviews.updateHelpful);
+app.put('/reviews/:review_id/report', ctrl.reviews.report);
 
 // Related Items Routes
 app.get('/related/productList/:product_id', ctrl.related.getAllRelated);

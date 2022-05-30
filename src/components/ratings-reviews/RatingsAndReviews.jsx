@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import Reviews from './reviews/Reviews';
 import Ratings from './ratings/Ratings';
@@ -13,6 +13,8 @@ export default function RatingsAndReviews() {
     setReviews,
     reviewsSort,
     showWriteReview,
+    reviewFeedback,
+    setReviewFeedback,
   } = useRAndRContext();
   useEffect(() => {
     axios.get(`/reviews/meta/${productId}`)
@@ -25,13 +27,25 @@ export default function RatingsAndReviews() {
             setTotalReviews(data.results.length);
           })
           .catch((err) => {
-            console.log('error fetching reviews', err);
+            console.log('Error fetching reviews', err);
           });
       })
       .catch((err) => {
         console.log('Error fetching average ratings:', err);
       });
-  }, [productId, reviewsSort, showWriteReview]);
+  }, [productId, reviewsSort, showWriteReview, reviewFeedback.helpful]);
+
+  useEffect(() => {
+    setReviewFeedback({
+      helpful: JSON.parse(localStorage.getItem('helpful')) || [],
+      reported: JSON.parse(localStorage.getItem('reported')) || [],
+    });
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('helpful', JSON.stringify(reviewFeedback.helpful));
+    localStorage.setItem('reported', JSON.stringify(reviewFeedback.reported));
+  }, [reviewFeedback]);
   return (
     <div id="ratings-and-reviews">
       <Ratings />

@@ -6,8 +6,10 @@ import ProductBreakdown from './ProductBreakdown';
 export default function Ratings() {
   return (
     <div className="ratings">
-      <OverallRating />
-      <RatingBreakdown />
+      <div>
+        <OverallRating />
+        <RatingBreakdown />
+      </div>
       <ProductBreakdown />
     </div>
   );
