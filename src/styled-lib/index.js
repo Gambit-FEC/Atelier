@@ -18,7 +18,6 @@ const StyledRatingStars = styled.div`
 
 const RatingBar = styled.div`
   background: linear-gradient(to right, black ${({ percent }) => percent + '%'}, lightgrey ${({ percent }) => percent + '%'});
-  width: 200px;
   height: 8px;
 `;
 
@@ -34,7 +33,6 @@ const StarButton = styled.span`
 
 const CharacteristicsBar = styled.div`
   background: linear-gradient(to right, lightgrey 24.5%, white 24.5%, white 25.5%, lightgrey 25.5%, lightgrey 49.5%, white 49.5%, white 50.5%, lightgrey 50.5%, lightgrey 74.5%, white 74.5%, white 75.5%, lightgrey 75.5%);
-  width: 200px;
   height: 8px;
   margin-top: 8px;
 `;

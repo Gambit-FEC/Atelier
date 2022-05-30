@@ -1,10 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import ReviewTile from './ReviewTile';
 import { useRAndRContext } from '../../../../context/RAndRContext';
 
 export default function ReviewsList() {
-  const { reviews, reviewsFilter, count, reviewSearch, setShowAdd } = useRAndRContext();
-  const [shownReviews, setShownReviews] = useState(() => [<div />]);
+  const {
+    reviews,
+    reviewsFilter,
+    count,
+    reviewSearch,
+    setShowAdd,
+    setShowCollapse,
+    shownReviews,
+    setShownReviews,
+  } = useRAndRContext();
 
   function searchFilter(review) {
     return (
@@ -26,10 +34,11 @@ export default function ReviewsList() {
 
   useEffect(() => {
     setShowAdd(shownReviews.length > count);
+    setShowCollapse(shownReviews.slice(0, count).length > 2);
   }, [shownReviews]);
 
   return (
-    <div className="reviews-list">
+    <div id="reviews-list">
       {shownReviews.slice(0, count)}
     </div>
   );

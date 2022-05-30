@@ -1,10 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import { format, parseISO } from 'date-fns';
 import { StyledRatingStars } from '../../../../styled-lib';
+import { useRAndRContext } from '../../../../context/RAndRContext';
+
+function HighlightText({ text, highlight, summary = false }) {
+  if (highlight === '' || highlight === null) {
+    return (
+      <span style={summary ? {fontWeight: 'bold'} : {}}>{text}</span>
+    );
+  }
+  const regex = new RegExp(`(${highlight})`, 'gi');
+  const parts = text.split(regex);
+  return (
+    <span style={summary ? {fontWeight: 'bold'} : {}}>
+      {parts.filter((part) => part).map((part, index) => {
+        if (part.toLowerCase() === highlight.toLowerCase()) {
+          return <mark key={index}>{part}</mark>;
+        }
+        return <span key={index}>{part}</span>;
+      })}
+    </span>
+  );
+}
 
 export default function ReviewTile({ review, hidden, search }) {
   const [readMore, setReadMore] = useState(review.body.length > 250);
   const [showModal, setShowModal] = useState({ show: false, src: '' });
+  const { reviewFeedback, setReviewFeedback } = useRAndRContext();
   function handleReadMoreClick() {
     setReadMore(!readMore);
   }
@@ -18,21 +41,55 @@ export default function ReviewTile({ review, hidden, search }) {
   function handleHelpfulClick(e) {
     e.target.classList.add('clicked-link-button');
     e.target.removeAttribute('onClick');
-    // PUT /reviews/:review_id/helpful
-    console.log(e.target);
+    axios.put(`/reviews/${review.review_id}/helpful`)
+      .then(() => {
+        setReviewFeedback({
+          reported: reviewFeedback.reported,
+          helpful: [...reviewFeedback.helpful, review.review_id],
+        });
+      })
+      .catch((err) => {
+        console.log('Error trying to mark review as helpful:', err);
+      });
   }
   function handleReportClick(e) {
     e.target.classList.add('clicked-link-button');
-    // PUT /reviews/:review_id/report
-    console.log(e.target);
+    setReviewFeedback({
+      helpful: reviewFeedback.helpful,
+      reported: [...reviewFeedback.reported, review.review_id],
+    });
+    axios.put(`/reviews/${review.review_id}/report`)
+      .then(() => {
+        setReviewFeedback({
+          helpful: reviewFeedback.helpful,
+          reported: [...reviewFeedback.reported, review.review_id],
+        });
+      })
+      .catch((err) => {
+        console.log('Error trying to report review:', err);
+      });
+  }
+
+  function whichButton(name) {
+    if (name === 'helpful') {
+      return reviewFeedback.helpful.includes(review.review_id)
+        ? <button className="feedback-helpful" type="button"> 👍 </button>
+        : <button className="link-button" type="button" onClick={handleHelpfulClick}> Yes </button>;
+    }
+    if (name === 'report') {
+      return reviewFeedback.reported.includes(review.review_id)
+        ? <button className="feedback-report" type="button">Thank you for your feedback</button>
+        : <button className="link-button" type="button" onClick={handleReportClick}>Report</button>;
+    }
+    return <div />;
   }
 
   return (
     <>
-      <div className="reviews-tile" hidden={hidden}>
-        <StyledRatingStars rating={review.rating}>★★★★★</StyledRatingStars>
+      <div id={`review-${review.review_id}`} className="review-tile" hidden={hidden}>
+        <StyledRatingStars className="review-tile-rating" rating={review.rating}>★★★★★</StyledRatingStars>
         <div>{format(parseISO(review.date), 'MMM dd, yyyy')}</div>
-        <div style={{ fontWeight: 'bold' }}>{review.summary}</div>
+        <HighlightText summary text={review.summary} highlight={search} />
         {readMore && (
           <div>
             <HighlightText text={review.body.slice(0, 247)} highlight={search} />
@@ -54,10 +111,10 @@ export default function ReviewTile({ review, hidden, search }) {
         <div className="helpful-report-readmore">
           <div>
             <span>Was this review helpful? </span>
-            <button className="link-button" type="button" onClick={handleHelpfulClick}> Yes </button>
+            {whichButton('helpful')}
             <span>{` ( ${review.helpfulness} ) `}</span>
           </div>
-          {!readMore && <button className="link-button" type="button" onClick={handleReportClick}>Report</button>}
+          {!readMore && whichButton('report')}
           {readMore && <button type="button" className="reviews-readmore" onClick={handleReadMoreClick}>Read more</button>}
         </div>
       </div>
@@ -75,24 +132,4 @@ export default function ReviewTile({ review, hidden, search }) {
   );
 }
 
-function HighlightText({ text, highlight }) {
-  if (highlight === '' || highlight === null) {
-    return (
-      <span>{text}</span>
-    );
-  }
-  const regex = new RegExp(`(${highlight})`, 'gi');
-  const parts = text.split(regex);
-  console.log('parts:', parts);
-  return (
-    <span>
-      {parts.filter((part) => part).map((part, index) => {
-        console.log('part:', part, 'highlight:', highlight);
-        if (part.toLowerCase() === highlight.toLowerCase()) {
-          return <mark key={index}>{part}</mark>;
-        }
-        return <span key={index}>{part}</span>;
-      })}
-    </span>
-  );
-}
+
