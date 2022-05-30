@@ -71,14 +71,6 @@ export default function WriteReview() {
     setFormData(newData);
   }
 
-  function handleStarClick(e) {
-    if (formData.rating === e.target.id) {
-      setFormData({ ...formData, rating: '0' });
-    } else {
-      setFormData({ ...formData, rating: e.target.id });
-    }
-  }
-
   function handleRecommended(e) {
     if (e.target.value === 'yes') {
       setFormData({ ...formData, recommend: true });
@@ -106,8 +98,44 @@ export default function WriteReview() {
     setFormData({ ...formData, photos: newPhotos });
   }
 
+  function handleStarMouseEnter(e) {
+    if (e.target.id === 'star-buttons') {
+      return;
+    }
+    for (let i = 0; i < parseInt(e.target.id, 10); i++) {
+      e.target.parentNode.children[i].value = '★';
+    }
+  }
+
+  function handleStarMouseLeave(e) {
+    if (e.target.id === 'star-buttons') {
+      return;
+    }
+    for (let i = 0; i < parseInt(e.target.id, 10); i++) {
+      e.target.parentNode.children[i].value = '☆';
+    }
+  }
+
+  function handleStarClick(e) {
+    if (formData.rating === e.target.id) {
+      setFormData({ ...formData, rating: '0' });
+    } else {
+      setFormData({ ...formData, rating: e.target.id });
+    }
+  }
+
   function starRender() {
     const spans = [];
+    if (formData.rating === '0') {
+      for (let i = 0; i < 5; i++) {
+        spans.push(<input type="button" key={i} id={i + 1} value="☆" style={{ fontSize: 'x-large', cursor: 'pointer', padding: '0px', border: 'none', backgroundColor: 'transparent' }} onClick={handleStarClick} onMouseEnter={handleStarMouseEnter} onMouseLeave={handleStarMouseLeave} required />);
+      }
+      return (
+        <div id="star-buttons">
+          {spans}
+        </div>
+      );
+    }
     for (let i = 0; i < 5; i++) {
       if (i < formData.rating) {
         spans.push(<input type="button" key={i} id={i + 1} value="★" style={{ fontSize: 'x-large', cursor: 'pointer', padding: '0px', border: 'none', backgroundColor: 'transparent' }} onClick={handleStarClick} required />);
@@ -122,25 +150,42 @@ export default function WriteReview() {
     );
   }
 
+  function handleCharactericsMouseEnter(e) {
+    if (formData.characteristics[e.target.name].value !== '0') {
+      return;
+    }
+    const popup = document.createElement('div');
+    popup.className = 'popup-characteristic';
+    popup.innerText = characteristicsMeaning[e.target.name][e.target.value - 1];
+    e.target.parentNode.append(popup);
+  }
+
+  function handleCharactericsMouseLeave(e) {
+    if (typeof e.target.parentNode.children[10] === 'undefined') {
+      return;
+    }
+    const popup = e.target.parentNode.children[10];
+    e.target.parentNode.removeChild(popup);
+  }
+
   function characteristicsRender() {
     const allRadios = [];
-    // eslint-disable-next-line no-restricted-syntax
     for (const key in reviewsMeta.characteristics) {
       const radios = [];
       for (let i = 0; i < 5; i++) {
         radios.push(
           <>
             <label key={`${key}-${i}-label`}>{`${i + 1}: `}</label>
-            <input key={`${key}-${i}-radio`} type="radio" id={`${key}-${i + 1}`} name={key} value={i + 1} style={i < 4 ? { marginRight: '10px' } : {}} required />
+            <input key={`${key}-${i}-radio`} type="radio" id={`${key}-${i + 1}`} name={key} value={i + 1} style={i < 4 ? { marginRight: '10px' } : {}} onMouseEnter={handleCharactericsMouseEnter} onMouseLeave={handleCharactericsMouseLeave} required />
           </>,
         );
       }
       allRadios.push(
         <div key={key} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
-          <label>{`${key}:`}</label>
+          <label style={{ width: '85px' }}>{`${key}:`}</label>
           {formData.characteristics[key].value - 1 >= 0
             && (
-              <label>
+              <label style={{ marginRight: 'auto' }}>
                 {characteristicsMeaning[key][formData.characteristics[key].value - 1]}
               </label>
             )}
@@ -167,7 +212,7 @@ export default function WriteReview() {
         <div onChange={handleRecommended}>
           <label>yes</label>
           <input type="radio" id="yes" name="recommend" value="yes" required />
-          <label>no</label>
+          <label style={{ marginLeft: '20px' }}>no</label>
           <input type="radio" id="no" name="recommend" value="no" required />
         </div>
         <label className="required">Characteristics</label>
@@ -177,7 +222,7 @@ export default function WriteReview() {
         <label>Summary</label>
         <textarea id="summary" placeholder="Example: Best purchase ever!" maxLength="60" onChange={updateFormData} />
         <label className="required">Body</label>
-        <textarea id="body" placeholder="Why did you like the product or not?" minLength="50" onChange={updateFormData} required />
+        <textarea id="body" placeholder="Why did you like the product or not?" minLength="50" maxLength="1000" onChange={updateFormData} required />
         <label>Photos (5 max)</label>
         <input id="photos" type="file" accept="image/*" onChange={handlePhotos} multiple />
         <label className="required">Name</label>
