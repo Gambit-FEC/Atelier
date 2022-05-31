@@ -30,6 +30,14 @@ export default function WriteReview() {
     setShowWriteReview(false);
   }
 
+  function cloudPhotoUpload(file) {
+    const imageData = new FormData();
+    imageData.append('file', file);
+    imageData.append('api_key', '939183845857327');
+    imageData.append('upload_preset', 'ml_default');
+    return axios.post('https://api.cloudinary.com/v1_1/gilcohen67/image/upload', imageData);
+  }
+
   function postForm() {
     const formSubmission = {
       ...formData,
@@ -41,8 +49,21 @@ export default function WriteReview() {
     for (const key in char) {
       formSubmission.characteristics[char[key].id] = parseInt(char[key].value, 10);
     }
-    formSubmission.photos = formSubmission.photos.map(() => `https://placedog.net/${Math.floor(Math.random() * 999) + 1}`);
-    return axios.post('/reviews', formSubmission);
+    const photoPromiseArray = [];
+    for (let i = 0; i < formSubmission.photos.length; i++) {
+      photoPromiseArray.push(cloudPhotoUpload(formSubmission.photos[i]));
+    }
+    return Promise.all(photoPromiseArray)
+      .then((result) => {
+        formSubmission.photos = [];
+        result.forEach((item, index) => {
+          formSubmission.photos[index] = item.data.url;
+        });
+        return axios.post('/reviews', formSubmission);
+      })
+      .catch((err) => {
+        console.log('promise all error:', err);
+      });
   }
 
   function handleSubmitReview(e) {
@@ -61,7 +82,7 @@ export default function WriteReview() {
         handleExitView();
       })
       .catch((err) => {
-        window.alert('There was an issue submitting your review.');
+        window.alert('There was an issue submitting your review.', err);
       });
   }
 
