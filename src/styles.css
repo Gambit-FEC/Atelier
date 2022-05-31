@@ -26,6 +26,20 @@ h1 {
   background-color: black;
 }
 
+.underline-button {
+  border-width: 0px;
+  font-size: larger;
+  color: black;
+  background-color: transparent;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.underline-button:hover {
+  color: white;
+  background-color: black;
+}
+
 .modal-bg {
   display: flex;
   justify-content: center;
