@@ -31,8 +31,8 @@ export default function MoreAndAddReview() {
   return (
     <div className="reviews-more-add">
       {showAdd && <button className="underline-button" type="button" onClick={handleMoreClick}>Show more</button>}
-      <button className="underline-button" type="button" onClick={handleAddClick}>Write a Review</button>
       {showCollapse && <button className="underline-button" type="button" onClick={handleCollapse}>Collapse List</button>}
+      <button className="underline-button" type="button" onClick={handleAddClick}>Write a Review</button>
     </div>
   );
 }

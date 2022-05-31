@@ -74,12 +74,12 @@ export default function ReviewTile({ review, hidden, search }) {
     if (name === 'helpful') {
       return reviewFeedback.helpful.includes(review.review_id)
         ? <button className="feedback-helpful" type="button"> 👍 </button>
-        : <button className="link-button" type="button" onClick={handleHelpfulClick}> Yes </button>;
+        : <button className="underline-button grey-button" type="button" onClick={handleHelpfulClick}> Yes </button>;
     }
     if (name === 'report') {
       return reviewFeedback.reported.includes(review.review_id)
         ? <button className="feedback-report" type="button">Thank you for your feedback</button>
-        : <button className="link-button" type="button" onClick={handleReportClick}>Report</button>;
+        : <button className="underline-button grey-button" type="button" onClick={handleReportClick}>Report</button>;
     }
     return <div />;
   }
