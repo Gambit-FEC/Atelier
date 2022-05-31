@@ -2,17 +2,17 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { useGlobalContext } from '../../../context/GlobalStore';
-import { FaArrowRight, FaArrowLeft } from 'react-icons/fa';
+import { BiChevronLeftCircle, BiChevronRightCircle } from 'react-icons/bi';
 import { set } from 'date-fns';
 
 export default function ImageGallery({productInfo, currentStyle}) {
   const { productId } = useGlobalContext();
   const [currentImage, setCurrentImage] = useState(0);
   const [images, setImages] = useState(productInfo[currentStyle].photos);
-
   const { length } = images;
 
-  console.log('images', images);
+  // console.log('images', images);
+
   // onClick functionalities for slides -------------
   const onLeftClick = () => {
     console.log('left');
@@ -46,8 +46,7 @@ export default function ImageGallery({productInfo, currentStyle}) {
       </ImagesBar>
       <Container>
         <ArrowLeft onClick={onLeftClick} />
-        <img src={images[currentImage]?.url} style={{width: "80%", objectFit: "contain"}}/>
-        {/* {console.log('images:', images[currentImage])} */}
+        <img src={images[currentImage]?.url} style={{width: "80%", objectFit: "contain", maxHeight: "100%"}}/>
         <ArrowRight onClick={onRightClick} />
       </Container>
     </>
@@ -78,6 +77,7 @@ const ImagesBar = styled.div`
   display: flex;
   flex-direction: column;
   align-content: space-between;
+  justify-content: center;
 `
 
 const ImageSelections = styled.img`
@@ -88,16 +88,20 @@ const ImageSelections = styled.img`
 
 `
 
-const ArrowLeft = styled(FaArrowLeft)`
+const ArrowLeft = styled(BiChevronLeftCircle)`
   font-size: 3rem;
   cursor: pointer;
   user-select: none;
-  color: green;
+  z-index: 10;
+  position: relative;
+  left: 70px;
 `;
 
-const ArrowRight = styled(FaArrowRight)`
+const ArrowRight = styled(BiChevronRightCircle)`
   font-size: 3rem;
   cursor: pointer;
   user-select: none;
-  color: green;
+  z-index: 10;
+  position: relative;
+  right: 70px;
 `;
