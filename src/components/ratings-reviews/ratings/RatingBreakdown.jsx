@@ -36,18 +36,19 @@ export default function RatingBreakdown() {
             <div id={`${index}-star`} key={index} style={{fontSize: '20px'}}>
               <StarButton
                 id={`${index}-star-filter-button`}
+                className="underline-button"
                 onClick={() => handleRatingClick(index.toString())}
               >
                 {`${index} ★`}
               </StarButton>
-              <span style={{ color: '#4a4a4a' }}>{` ${reviewsMeta.ratings[index]}`}</span>
+              <span style={{ color: '#4a4a4a' }}>{` ${reviewsMeta.ratings[index] || 0}`}</span>
               <RatingBar id={`${index}-star-bar`} percent={item} />
             </div>
           ))}
           {Object.values(reviewsFilter).some((item) => item === true) && (
             <>
               <span>Filters applied </span>
-              <button onClick={handleResetClick}>Reset Filters</button>
+              <button onClick={handleResetClick} className="underline-button">Reset Filters</button>
               <div id="rating-filters" style={{marginTop: '5px'}}>
                 {Object.values(reviewsFilter).map((item, index) => {
                   if (item === true) {

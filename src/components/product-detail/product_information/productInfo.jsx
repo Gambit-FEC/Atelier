@@ -33,8 +33,7 @@ export default function ProductInfo({ productInfo, currentStyle }) {
           <StyledRatingStars size="medium" rating={avgRating}>
             ★★★★★
           </StyledRatingStars>
-          {' '}
-          <a href="#ratings-and-reviews" id="see-reviews" className="underline-button">
+          <a className="underline-button" href="#ratings-and-reviews" id="see-reviews">
             {totalReviews ? `Read all ${totalReviews} reviews` : 'No Rewiews'}
           </a>
         </Reviews>

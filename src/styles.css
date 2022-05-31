@@ -28,16 +28,31 @@ h1 {
 
 .underline-button {
   border-width: 0px;
-  font-size: larger;
   color: black;
   background-color: transparent;
   text-decoration: underline;
   cursor: pointer;
+  transition: ease-in-out 0.1s;
+  user-select: none;
+  padding: 3px;
+}
+
+.grey-button {
+  color: #424242 !important;
+}
+
+.larger-text {
+  font-size: larger;
 }
 
 .underline-button:hover {
-  color: white;
-  background-color: black;
+  color: white !important;
+  background-color: #9F2B68;
+  transition: ease-in-out 0.1s;
+}
+
+select {
+  cursor: pointer;
 }
 
 .modal-bg {
@@ -49,8 +64,8 @@ h1 {
   width: 100vw;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.625);
   z-index: 99;
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .modal-image {
@@ -70,11 +85,10 @@ h1 {
   flex-direction: column;
   padding: 5%;
   padding-top: 1.5%;
-  border: 3px solid black;
-  border-radius: .5%;
+  user-select: none;
 }
 
-.modal-exit-button {
+.form-exit-button {
   font-size: 24px;
   cursor: pointer;
 }
@@ -104,7 +118,7 @@ h1 {
   display: flex;
   flex-flow: row nowrap;
   margin-top: 20px;
-  border: 3px solid;
+  /* border: 3px solid; */
   padding: 20px;
   width: max-content;
 }
@@ -118,12 +132,13 @@ h1 {
   flex-flow: column nowrap;
   justify-content: space-between;
   margin-right: 100px;
-  min-height: 686px;
+  min-height: 700px;
   min-width: fit-content;
+  user-select: none;
 }
 
 #reviews-list {
-  max-height: 601px;
+  max-height: 608px;
   width: 650px;
   overflow-y: overlay;
 }
@@ -132,13 +147,21 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-top: 30px;
-  width: 95%
+  margin-top: 25px;
+  margin-bottom: 5px;
+  width: 91%;
+  padding: 15px;
+  border: 2px solid #9F2B68;
+  box-shadow: 2px 2px 2px #9F2B68;
 }
 
 .review-tile>* {
   margin: 0px;
   word-break: break-word;
+}
+
+.review-tile-rating {
+  user-select: none;
 }
 
 .review-summary {
@@ -149,16 +172,6 @@ h1 {
   display: flex;
   width: 100%;
   justify-content: space-between;
-}
-
-.link-button {
-  background: none;
-  border: none;
-  padding: 0;
-  font: inherit;
-  color: #069;
-  text-decoration: underline;
-  cursor: pointer;
 }
 
 .feedback-report {
@@ -181,6 +194,10 @@ h1 {
 
 .rating-breakdown>* {
   margin-top: 15px;
+}
+
+.ratings-product-breakdown {
+  height: 305px;
 }
 
 .ratings-product-breakdown>* {
@@ -208,6 +225,11 @@ h1 {
   color: red;
 }
 
+.bigger-radio {
+  height: 16px;
+  width: 16px;
+}
+
 .popup-prompt {
   position: absolute;
   background-color: white;
@@ -229,6 +251,11 @@ h1 {
   border-width: 7px;
   border-color: transparent transparent black transparent;
   border-style: solid;
+}
+
+.form-italic {
+  font-style: italic;
+  color: #424242;
 }
 
 /* related */
