@@ -48,7 +48,7 @@ export default function RatingBreakdown() {
           {Object.values(reviewsFilter).some((item) => item === true) && (
             <>
               <span>Filters applied </span>
-              <button onClick={handleResetClick}>Reset Filters</button>
+              <button onClick={handleResetClick} className="underline-button">Reset Filters</button>
               <div id="rating-filters" style={{marginTop: '5px'}}>
                 {Object.values(reviewsFilter).map((item, index) => {
                   if (item === true) {

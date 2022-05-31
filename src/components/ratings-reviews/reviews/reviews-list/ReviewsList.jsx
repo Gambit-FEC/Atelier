@@ -12,7 +12,7 @@ export default function ReviewsList() {
     setShowCollapse,
     shownReviews,
     setShownReviews,
-    setLastId,
+    setLastReviewIdx,
   } = useRAndRContext();
 
   function searchFilter(review) {
@@ -36,11 +36,7 @@ export default function ReviewsList() {
   useEffect(() => {
     setShowAdd(shownReviews.length > count);
     setShowCollapse(shownReviews.slice(0, count).length > 2);
-    if (shownReviews.length) {
-      setLastId(
-        shownReviews[count > shownReviews.length ? shownReviews.length - 1 : count - 1].key
-      );
-    }
+    setLastReviewIdx(count > shownReviews.length ? shownReviews.length - 1 : count - 1);
   }, [shownReviews]);
   return (
     <div id="reviews-list">

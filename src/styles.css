@@ -34,7 +34,7 @@ h1 {
   cursor: pointer;
   transition: ease-in-out 0.1s;
   user-select: none;
-  padding: 4px;
+  padding: 3px;
 }
 
 .grey-button {
@@ -47,7 +47,7 @@ h1 {
 
 .underline-button:hover {
   color: white !important;
-  background-color: black;
+  background-color: #9F2B68;
   transition: ease-in-out 0.1s;
 }
 
@@ -137,7 +137,7 @@ select {
 }
 
 #reviews-list {
-  max-height: 606px;
+  max-height: 608px;
   width: 650px;
   overflow-y: overlay;
 }
@@ -148,9 +148,10 @@ select {
   align-items: flex-start;
   margin-top: 25px;
   margin-bottom: 5px;
-  width: 95%;
-  border: 2px solid purple;
-  box-shadow: 2px 2px 2px purple;
+  width: 91%;
+  padding: 15px;
+  border: 2px solid #9F2B68;
+  box-shadow: 2px 2px 2px #9F2B68;
 }
 
 .review-tile>* {
@@ -170,16 +171,6 @@ select {
   display: flex;
   width: 100%;
   justify-content: space-between;
-}
-
-.link-button {
-  background: none;
-  border: none;
-  padding: 0;
-  font: inherit;
-  color: #069;
-  text-decoration: underline;
-  cursor: pointer;
 }
 
 .feedback-report {

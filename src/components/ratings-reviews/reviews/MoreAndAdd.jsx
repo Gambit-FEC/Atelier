@@ -9,7 +9,7 @@ export default function MoreAndAddReview() {
     setShowWriteReview,
     showCollapse,
     shownReviews,
-    lastId,
+    lastReviewIdx,
   } = useRAndRContext();
   const handleMoreClick = () => {
     setCount(count + 2);
@@ -23,8 +23,8 @@ export default function MoreAndAddReview() {
   };
 
   useEffect(() => {
-    if (count !== 2 && lastId) {
-      const lastReview = document.getElementById(`review-${lastId}`);
+    if (count !== 2 && lastReviewIdx) {
+      const lastReview = document.getElementById(`review-${shownReviews[lastReviewIdx].key}`);
       lastReview.scrollIntoView();
     }
   }, [count]);
