@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { FcNext, FcPrevious } from 'react-icons/fc';
-import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
+import { BiChevronLeftCircle, BiChevronRightCircle } from 'react-icons/bi';
+import { HiEye } from 'react-icons/hi';
 import styled from 'styled-components';
 import CompareModal from './compareModal';
 import { StyledRatingStars } from '../../../styled-lib';
@@ -40,72 +40,79 @@ function relatedCard(data) {
   }, [data.data]);
 
   return (
-    <Container>
+    <RelatedList>
       {
         current !== 0
-          ? <FcPrevious className="left-arrow" onClick={prevSlide} />
-          : <FcPrevious className="left-arrow transparent-arrow" />
+          ? <PrevArrow onClick={prevSlide} />
+          : <PrevArrowTrans />
       }
+      <Container>
+
+        <div id="myModal" className="modal">
+          <div className="modal-content">
+            <span
+              className="close"
+              onClick={closeDisplay}
+            >
+              &times;
+            </span>
+            {showModal ? <CompareModal value={currentItem} /> : null}
+          </div>
+        </div>
+        {
+          console.log(display)
+        }
+
+        <CardWrapper>
+          {
+            display.map((info, index) => (
+              <StyledCard key={index}>
+                <Comparison onClick={(e) => showDisplay(e, info.product.id)} />
+                <StyleImg src={
+                  info.style.thumbnail_url === null ? placeholder : info.style.thumbnail_url
+                }
+                />
+                <InfoWrapper value={info.product.id}>
+                  <CategoryWrapper>
+                    {info.product.category}
+                  </CategoryWrapper>
+                  <NameWrapper>
+                    {info.product.name}
+                  </NameWrapper>
+                  <PriceWrapper>
+                    $
+                    {info.product.price}
+                  </PriceWrapper>
+                  <StyledRatingStars rating={info.rating.averageRating}>
+                    ★★★★★
+                  </StyledRatingStars>
+                </InfoWrapper>
+              </StyledCard>
+            ))
+          }
+        </CardWrapper>
+      </Container>
       {
         current !== maxDisplay
-          ? <FcNext className="right-arrow" onClick={nextSlide} />
-          : <FcNext className="right-arrow transparent-arrow" />
+          ? <NextArrow onClick={nextSlide} />
+          : <NextArrowTrans />
       }
-
-      <div id="myModal" className="modal">
-        <div className="modal-content">
-          <span
-            className="close"
-            onClick={closeDisplay}
-          >
-            &times;
-          </span>
-          {showModal ? <CompareModal value={currentItem} /> : null}
-        </div>
-      </div>
-      {
-        console.log(display)
-      }
-
-      <CardWrapper>
-        {
-          display.map((info, index) => (
-            <StyledCard key={index}>
-              <Comparison onClick={(e) => showDisplay(e, info.product.id)} />
-              <StyleImg src={
-                info.style.thumbnail_url === null ? placeholder : info.style.thumbnail_url
-              }
-              />
-              <InfoWrapper value={info.product.id}>
-                <CategoryWrapper>
-                  {info.product.category}
-                </CategoryWrapper>
-                <NameWrapper>
-                  {info.product.name}
-                </NameWrapper>
-                <PriceWrapper>
-                  $
-                  {info.product.price}
-                </PriceWrapper>
-                <StyledRatingStars rating={info.rating.averageRating}>
-                  ★★★★★
-                </StyledRatingStars>
-              </InfoWrapper>
-            </StyledCard>
-          ))
-        }
-      </CardWrapper>
-    </Container>
+    </RelatedList>
   );
 }
 
 export default relatedCard;
 
+const RelatedList = styled.div`
+display: flex;
+flex-direction: row;
+max-width: 1199px;
+`;
+
 const Container = styled.div`
-position: relative;
-display:flex;
-justify-content: space-evenly;
-align-items: center;
+// position: relative;
+// display:flex;
+// justify-content: space-evenly;
 `;
 
 const CardWrapper = styled.div`
@@ -114,18 +121,15 @@ object-fit:cover;
 `;
 
 const StyledCard = styled.div`
-display: flex;
 border-radius: 10px;
-padding: 15px;
+padding: 20px;
 border-width: 5px;
 border-style: solid;
-width: 20%;
-height: 420px;
-margin: 10px;
+width: 270px;
+height: 450px;
+margin: 15px;
 flex-direction: column;
 flex-wrap: nowrap;
-align-items: center;
-justify-content: space-between;
 &:hover {
   box-shadow: 0 0 10px rgba(90, 90, 90, 0.8)
 }
@@ -134,10 +138,25 @@ justify-content: space-between;
 const StyleImg = styled.img`
 width: 100%;
 height: 250px;
-object-fit: contain;
+object-fit: fill;
+align-items: center;
+position: relative;
+cursor: pointer;
+`;
+
+const Comparison = styled(HiEye)`
+height: 20px;
+width: auto;
+position: relative;
+top: -7px;
+right: -190px;
+margin: 5px;
+padding-bottom: 5px;
+cursor: pointer;
 `;
 
 const InfoWrapper = styled.div`
+text-align:center;
   background-color: white;
 `;
 
@@ -155,7 +174,44 @@ font-weight: normal;
 font-size: 16px;
 `;
 
-const Comparison = styled(AiOutlineStar)`
-right:0;
-top:-15px;
+const NextArrow = styled(BiChevronRightCircle)`
+position relative;
+bottom: 301px;
+left: 1212px;
+height: 50px;
+width: auto;
+user-select: none;
+cursor: pointer;
+`;
+
+const NextArrowTrans = styled(BiChevronRightCircle)`
+position relative;
+bottom: 301px;
+left: 1212px;
+height: 50px;
+width: auto;
+user-select: none;
+cursor: default;
+// opacity: 0.01;
+`;
+
+const PrevArrow = styled(BiChevronLeftCircle)`
+position: relative;
+top: 282px;
+right: 56px;
+height: 50px;
+width: auto;
+user-select: none;
+cursor: pointer;
+`;
+
+const PrevArrowTrans = styled(BiChevronLeftCircle)`
+position: relative;
+top: 282px;
+right: 56px;
+height: 50px;
+width: auto;
+user-select: none;
+cursor: default;
+// opacity: 0.01;
 `;

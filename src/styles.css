@@ -231,6 +231,10 @@ h1 {
 }
 
 /* related */
+.rating-star {
+  align-items: center;
+}
+
 .transparent-arrow {
   cursor: default !important
 }
@@ -239,9 +243,8 @@ h1 {
   fill: transparent;
 }
 
-
-.right-arrow {
-  position: absolute;
+/* .right-arrow {
+  position: relative;
   top: 50%;
   right: 32px;
   font-size: 3rem;
@@ -252,14 +255,14 @@ h1 {
 }
 
 .left-arrow {
-  position: absolute;
-  top: 50%;
-  left: 32px;
+  position: relative;
+  top: 300px;
+  left: -1540px;
   font-size: 3rem;
   z-index: 10;
   cursor: pointer;
   user-select: none;
-}
+} */
 
 .product {
   text-align: center;

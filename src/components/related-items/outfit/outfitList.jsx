@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import { BiChevronLeftCircle, BiChevronRightCircle } from 'react-icons/bi';
 import { OutfitCard, EmptyCard } from './outfitCard';
 import { useGlobalContext } from '../../../context/GlobalStore';
 
@@ -117,11 +118,50 @@ export default function outfitList() {
   return (
     <div className="outfit-items-list">
       <h2>YOUR OUTFIT</h2>
-
       {
-        cardList ? <OutfitCard data={outfitInfo} addCard={addCard} removeCard={removeCard}/>
-          : <EmptyCard addCard={ addCard }/>
+        cardList ? <OutfitCard data={outfitInfo} addCard={addCard} removeCard={removeCard} />
+          : (
+            <OutfitList>
+              <Container>
+                <PrevArrowTrans />
+                <EmptyCard addCard={addCard} />
+                <NextArrowTrans />
+              </Container>
+            </OutfitList>
+          )
       }
     </div>
   );
 }
+
+const Container = styled.div`
+position: relative;
+display: flex;
+justify-content: flex-start;
+`;
+
+const OutfitList = styled.div`
+display: block;
+`;
+
+const NextArrowTrans = styled(BiChevronRightCircle)`
+position relative;
+bottom: 301px;
+left: 1212px;
+height: 50px;
+width: auto;
+user-select: none;
+cursor: default;
+opacity: 0.01;
+`;
+
+const PrevArrowTrans = styled(BiChevronLeftCircle)`
+position: relative;
+top: 282px;
+right: 56px;
+height: 50px;
+width: auto;
+user-select: none;
+cursor: default;
+opacity: 0.01;
+`;
