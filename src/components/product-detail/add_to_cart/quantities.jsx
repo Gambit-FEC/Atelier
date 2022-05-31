@@ -1,8 +1,6 @@
 import React from 'react';
 
 export default function SelectQuantity({ quantities, onChange }) {
-  const max = 15;
-
   return (
 
     (!quantities.length) ? <select disabled>---</select> : (

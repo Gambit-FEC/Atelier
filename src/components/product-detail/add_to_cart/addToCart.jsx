@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import SelectSize from './sizes';
 import SelectQuantity from './quantities';
+import AddButton from './addButton';
 import { useGlobalContext } from '../../../context/GlobalStore';
 import { set } from 'date-fns';
 
@@ -59,6 +60,7 @@ export default function AddToCart({ productInfo, currentStyle }) {
   // selecting size ------------------------
   const onSelectSize = (e) => {
     const index = e.target.selectedIndex - 1;
+
     let quantArray = [];
     if (quantities[index] > 15) {
       quantArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
@@ -78,13 +80,6 @@ export default function AddToCart({ productInfo, currentStyle }) {
     }
   };
 
-  // selecting quantity --------------------
-  const onSelectQuantity = (e) => {
-    console.log('quants?', e.target.value);
-    // console.log('quants?', e.target.value);
-    console.log('do i work?', quantities[e.target.selectedIndex]);
-  };
-
   // useEffect(() => {
   //   setQuantities([]);
   // }, [selectedSize]);
@@ -93,9 +88,9 @@ export default function AddToCart({ productInfo, currentStyle }) {
     <>
       <Selectors>
         <SelectSize id="select" sizes={sizes} onChange={onSelectSize} />
-        <SelectQuantity quantities={quantMax} onChange={onSelectQuantity} />
+        <SelectQuantity quantities={quantMax} />
       </Selectors>
-      <Add onChange={onAddtoCart}>Add to Cart</Add>
+      <AddButton onClick={() => onAddtoCart()} size={selectedSize} quantity={selectedQuantity} />
     </>
   );
 }
@@ -104,8 +99,8 @@ const Selectors = styled.div`
   align-items: flex-end;
 `;
 
-const Add = styled.button`
-  max-width: 150px;
-  height: 20px;
-`;
+// const Add = styled.button`
+//   max-width: 150px;
+//   height: 20px;
+// `;
 
