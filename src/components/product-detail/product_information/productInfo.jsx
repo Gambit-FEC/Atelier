@@ -56,7 +56,11 @@ export default function ProductInfo({ productInfo, currentStyle }) {
           ? <PriceStreak>{productInfo[1].results[currentStyle].original_price}</PriceStreak>
           : <Price>{productInfo[1].results[currentStyle].original_price}</Price>}
         {productInfo[1].results[currentStyle].sale_price
-          ? <SalePrice>{productInfo[1].results[currentStyle].sale_price}</SalePrice>
+          ? (
+            <SalePrice>
+              On Sale: {productInfo[1].results[currentStyle].sale_price}
+            </SalePrice>
+          )
           : null}
 
         <ProductOverview>
@@ -83,7 +87,7 @@ const Wrapper = styled.div`
 const Reviews = styled.div`
   justify-content: center;
 
-`
+`;
 
 const Category = styled.div`
   font-weight: lighter;
@@ -102,10 +106,10 @@ const Price = styled.h4`
 `;
 
 const SalePrice = styled.h4`
+  color: red;
 `;
 
 const PriceStreak = styled.h4`
-  color: red;
   text-decoration: line-through;
 `;
 
@@ -116,7 +120,7 @@ const ProductOverview = styled.h4`
 const Share = styled.h3`
   font-weight: bold;
   justify-content: center;
-`
+`;
 
 const Facebook = styled.img`
     width: 25px;
