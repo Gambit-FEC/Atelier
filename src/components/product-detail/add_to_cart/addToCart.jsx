@@ -1,9 +1,10 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import SelectSize from './sizes';
 import SelectQuantity from './quantities';
 import { useGlobalContext } from '../../../context/GlobalStore';
+import { set } from 'date-fns';
 
 // create arrays for styles --------------
 function AllStyles(styles) {
@@ -36,13 +37,18 @@ export default function AddToCart({ productInfo, currentStyle }) {
   console.log('add me to cart hohoho', productInfo);
   console.log('add me to cart hohoho with style', productInfo[currentStyle].skus);
 
+  const [selectedSize, setSelectedSize] = useState('');
+  const [selectedQuantity, setSelectedQuantity] = useState(0);
+  const [quantMax, setQuantMax] = useState([]);
+  const [selectedSku, setSelectedSku] = useState(0);
+
   // add to cart button --------------------
   const skuID = {
     sku_id: skuList[skuIndex],
   };
 
-  const onAddtoCart = (event) => {
-    console.log('i am clicked?', event);
+  const onAddtoCart = () => {
+    console.log('i am clicked?');
     axios.post('/cart', skuID)
       .then((result) => {
         console.log('axios post works?', result);
@@ -51,15 +57,43 @@ export default function AddToCart({ productInfo, currentStyle }) {
   };
 
   // selecting size ------------------------
-  const onSelectSize = (index) => {
-    console.log('do i work?', e);
+  const onSelectSize = (e) => {
+    const index = e.target.selectedIndex - 1;
+    let quantArray = [];
+    if (quantities[index] > 15) {
+      quantArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+      setQuantMax(quantArray);
+      setSelectedSize(e.target.value);
+      console.log('selected size???', selectedSize);
+    } else {
+      for (let i = 1; i <= quantities[e.target.selectedIndex-1]; i += 1) {
+        quantArray.push(i);
+      }
+      setQuantMax(quantArray);
+      console.log('quantArray = ', quantArray)
+      console.log('quant max??', quantMax);
+      setSelectedSize(e.target.value);
+      console.log('target value: ', e.target.value)
+      console.log('selected size???', selectedSize);
+    }
   };
+
+  // selecting quantity --------------------
+  const onSelectQuantity = (e) => {
+    console.log('quants?', e.target.value);
+    // console.log('quants?', e.target.value);
+    console.log('do i work?', quantities[e.target.selectedIndex]);
+  };
+
+  // useEffect(() => {
+  //   setQuantities([]);
+  // }, [selectedSize]);
 
   return (
     <>
       <Selectors>
-        <SelectSize id="select" sizes={sizes} onClick={onSelectSize} />
-        <SelectQuantity quantities={quantities} />
+        <SelectSize id="select" sizes={sizes} onChange={onSelectSize} />
+        <SelectQuantity quantities={quantMax} onChange={onSelectQuantity} />
       </Selectors>
       <Add onChange={onAddtoCart}>Add to Cart</Add>
     </>

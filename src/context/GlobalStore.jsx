@@ -7,7 +7,7 @@ export function useGlobalContext() {
 }
 
 export function GlobalContextProvider({ children }) {
-  const [productId, setProductId] = useState(() => 40344);
+  const [productId, setProductId] = useState(() => 40347);
   const [avgRating, setAvgRating] = useState(0);
   const [totalReviews, setTotalReviews] = useState(0);
   const value = {

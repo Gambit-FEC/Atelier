@@ -14,6 +14,7 @@ export default function StyleSelector({ productInfo, currentStyle, setCurrentSty
   const onStyleClick = (index) => {
     console.log('onclick index', index);
     setCurrentStyle(index);
+    console.log('what style:', currentStyle)
   };
 
   return (
