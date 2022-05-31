@@ -14,6 +14,7 @@ const ProductDetailContainer = styled.div`
   flex-direction: row;
   width: 90vw;
   margin: 0 auto;
+  user-select: none;
 `;
 
 // Create a Wrapper component that'll render a <section> tag with some styles
@@ -29,6 +30,7 @@ const Images = styled.div`
   display: flex;
   width: 70%;
   align-items: center;
+  justify-content: center;
 `;
 
 export default function ProductDetail() {
@@ -68,4 +70,3 @@ export default function ProductDetail() {
     </div>
   );
 }
-

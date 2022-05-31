@@ -3,6 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { useGlobalContext } from '../../../context/GlobalStore';
 import { BiChevronLeftCircle, BiChevronRightCircle } from 'react-icons/bi';
+import { AiOutlineExpand } from 'react-icons/ai';
 import { set } from 'date-fns';
 
 export default function ImageGallery({productInfo, currentStyle}) {
@@ -10,6 +11,7 @@ export default function ImageGallery({productInfo, currentStyle}) {
   const [currentImage, setCurrentImage] = useState(0);
   const [images, setImages] = useState(productInfo[currentStyle].photos);
   const { length } = images;
+  const [showModel, setShowModel] = useState(false);
 
   // console.log('images', images);
 
@@ -24,8 +26,10 @@ export default function ImageGallery({productInfo, currentStyle}) {
     setCurrentImage(currentImage === length - 1 ? 0 : currentImage + 1);
   };
 
-  // image carousel menu sidebar --------------------
-  const onStyleImageClick = (event) => {
+  // image expansion --------------------
+  const onImageClick = () => {
+    console.log('showModel:', showModel);
+    setShowModel(!showModel);
   }
 
   const showSelectedImage = (image) => {
@@ -46,7 +50,12 @@ export default function ImageGallery({productInfo, currentStyle}) {
       </ImagesBar>
       <Container>
         <ArrowLeft onClick={onLeftClick} />
-        <img src={images[currentImage]?.url} style={{width: "80%", objectFit: "contain", maxHeight: "100%"}}/>
+        <img src={images[currentImage]?.url} style={{width: "80%", objectFit: "contain", maxHeight: "100%"}} />
+        {showModel
+        ? <div className="modal-bg" onClick={onImageClick}><ModalImage src={images[currentImage]?.url} onClick={(e) => e.stopPropagation()}/></div>
+        : <ExpandIcon onClick={onImageClick}></ExpandIcon>
+        }
+
         <ArrowRight onClick={onRightClick} />
       </Container>
     </>
@@ -78,15 +87,15 @@ const ImagesBar = styled.div`
   flex-direction: column;
   align-content: space-between;
   justify-content: center;
-`
+`;
 
 const ImageSelections = styled.img`
   display: flex;
   margin: 10px 0 10px;
   width: 30px;
   height: 30px;
-
-`
+  cursor: pointer;
+`;
 
 const ArrowLeft = styled(BiChevronLeftCircle)`
   font-size: 3rem;
@@ -95,6 +104,7 @@ const ArrowLeft = styled(BiChevronLeftCircle)`
   z-index: 10;
   position: relative;
   left: 70px;
+  &: hover {color: purple;};
 `;
 
 const ArrowRight = styled(BiChevronRightCircle)`
@@ -103,5 +113,32 @@ const ArrowRight = styled(BiChevronRightCircle)`
   user-select: none;
   z-index: 10;
   position: relative;
-  right: 70px;
+  right: 96px;
+  &: hover {color: purple;};
 `;
+
+const ExpandIcon = styled(AiOutlineExpand)`
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10;
+  position: relative;
+  top: -215px;
+  right: 54px;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  border-radius: 5px;
+  &: hover {color: purple;};
+`
+
+const ModalImage = styled.img`
+  margin: auto;
+  position: fixed;
+  display: block;
+  max-height: 70%;
+  max-width: 70%;
+  z-index: 99;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  left: 50%;
+`

@@ -1,11 +1,11 @@
-import axios from 'axios';
+// import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import SelectSize from './sizes';
 import SelectQuantity from './quantities';
 import AddButton from './addButton';
 import { useGlobalContext } from '../../../context/GlobalStore';
-import { set } from 'date-fns';
+// import { set } from 'date-fns';
 
 // create arrays for styles --------------
 function AllStyles(styles) {
@@ -32,11 +32,12 @@ export default function AddToCart({ productInfo, currentStyle }) {
   const [sizes, setSizes] = useState(allStyles[0]);
   const [quantities, setQuantities] = useState(allStyles[1]);
   const [skuList, setSkuList] = useState(allStyles[2]);
-  const [skuIndex, setskuIndex] = useState(0);
+  // const [skuIndex, setskuIndex] = useState(0);
   // const [skuID, setSkuID] = useState(0);
 
   console.log('add me to cart hohoho', productInfo);
   console.log('add me to cart hohoho with style', productInfo[currentStyle].skus);
+  console.log('styleID??', styleID);
 
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedQuantity, setSelectedQuantity] = useState(0);

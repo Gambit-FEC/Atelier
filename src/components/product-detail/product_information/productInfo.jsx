@@ -33,7 +33,8 @@ export default function ProductInfo({ productInfo, currentStyle }) {
           <StyledRatingStars size="medium" rating={avgRating}>
             ★★★★★
           </StyledRatingStars>
-          <a href="#ratings-and-reviews" id="see-reviews">
+          {' '}
+          <a href="#ratings-and-reviews" id="see-reviews" className="underline-button">
             {totalReviews ? `Read all ${totalReviews} reviews` : 'No Rewiews'}
           </a>
         </Reviews>
@@ -114,6 +115,7 @@ const PriceStreak = styled.h4`
 `;
 
 const ProductOverview = styled.h4`
+  width: 70%;
 `;
 // color: purple;
 
@@ -123,18 +125,21 @@ const Share = styled.h3`
 `;
 
 const Facebook = styled.img`
-    width: 25px;
-    height: 25px;
-    padding-right: 10px;
-  `;
+  width: 25px;
+  height: 25px;
+  padding-right: 10px;
+  cursor: pointer;
+`;
 
 const Twitter = styled.img`
-    width: 25px;
-    height: 25px;
-    padding-right: 10px;
-  `;
+  width: 25px;
+  height: 25px;
+  padding-right: 10px;
+  cursor: pointer;
+`;
 const Pin = styled.img`
-    width: 25px;
-    height: 25px;
-    padding-right: 10px;
-  `;
+  width: 25px;
+  height: 25px;
+  padding-right: 10px;
+  cursor: pointer;
+`;

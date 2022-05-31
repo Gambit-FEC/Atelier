@@ -65,5 +65,7 @@ const Thumbnails = styled.img`
   border: 2px solid;
   box-sizing: border-box;
   margin: 10px;
+  &: hover {color: purple;};
+  cursor: pointer;
 `;
 
