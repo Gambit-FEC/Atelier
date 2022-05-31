@@ -10,7 +10,7 @@ export default function SelectSize({ sizes, onChange }) {
       </Size>
     )
   );
-};
+}
 
 const Size = styled.select`
   max-width: 150px;

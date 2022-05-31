@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+// import Thumbnail from './thumbnails';
 import styled from 'styled-components';
 
 // import Thumbnail from './thumbnails';
@@ -23,8 +24,7 @@ export default function StyleSelector({ productInfo, currentStyle, setCurrentSty
       {productInfo.length && (
       <Wrapper>
         <ProductStyle>
-          Style:
-          {productInfo[currentStyle] ? productInfo[currentStyle].name : 'howdy, this is a style?'}
+          Style: {productInfo[currentStyle] ? productInfo[currentStyle].name : null}
         </ProductStyle>
         <AllThumbnails>
           {productInfo.map((item, index) => (
@@ -47,26 +47,23 @@ const AllThumbnails = styled.div`
   flex-flow: row wrap;
   justify-content: flex-start;
   max-width: 350px;
+  &:focus {
+    outline: none;
+    border-color: purple;
+  }
 `;
 
 const ProductStyle = styled.h2`
-  color: pink;
   text-transform: uppercase;
 `;
-// const AllThumbnails = styled.div`
-//   display: flex;
-//   flex-wrap: wrap;
-//   justify-content: space-around;
-//   align-content: space-around;
-// `
-// grid-template-columns: 25% 25% 25% 25%;
 
 const Thumbnails = styled.img`
   border-radius: 50%;
   width: 18%;
   aspect-ratio: 1/1;
   object-fit: cover;
-  border: 2px solid purple;
+  border: 2px solid;
   box-sizing: border-box;
   margin: 10px;
-  `;
+`;
+

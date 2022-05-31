@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { useGlobalContext } from '../../../context/GlobalStore';
-import { FaArrowRight, FaArrowLeft } from 'react-icons/fa';
+import { BiChevronLeftCircle, BiChevronRightCircle } from 'react-icons/bi';
 import { set } from 'date-fns';
 
 export default function ImageGallery({productInfo, currentStyle}) {
@@ -88,21 +88,19 @@ const ImageSelections = styled.img`
 
 `
 
-const ArrowLeft = styled(FaArrowLeft)`
+const ArrowLeft = styled(BiChevronLeftCircle)`
   font-size: 3rem;
   cursor: pointer;
   user-select: none;
-  color: purple;
   z-index: 10;
   position: relative;
   left: 70px;
 `;
 
-const ArrowRight = styled(FaArrowRight)`
+const ArrowRight = styled(BiChevronRightCircle)`
   font-size: 3rem;
   cursor: pointer;
   user-select: none;
-  color: purple;
   z-index: 10;
   position: relative;
   right: 70px;
