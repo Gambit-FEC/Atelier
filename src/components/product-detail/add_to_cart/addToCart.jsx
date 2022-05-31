@@ -43,19 +43,19 @@ export default function AddToCart({ productInfo, currentStyle }) {
   const [quantMax, setQuantMax] = useState([]);
   const [selectedSku, setSelectedSku] = useState(0);
 
-  // add to cart button --------------------
-  const skuID = {
-    sku_id: skuList[skuIndex],
-  };
+  // // add to cart button --------------------
+  // const skuID = {
+  //   sku_id: skuList[skuIndex],
+  // };
 
-  const onAddtoCart = () => {
-    console.log('i am clicked?');
-    axios.post('/cart', skuID)
-      .then((result) => {
-        console.log('axios post works?', result);
-      })
-      .catch((err) => { console.log('add to cart button did not send correctly', err); });
-  };
+  // const onAddtoCart = () => {
+  //   console.log('i am clicked?');
+  //   axios.post('/cart', skuID)
+  //     .then((result) => {
+  //       console.log('axios post works?', result);
+  //     })
+  //     .catch((err) => { console.log('add to cart button did not send correctly', err); });
+  // };
 
   // selecting size ------------------------
   const onSelectSize = (e) => {
@@ -68,14 +68,14 @@ export default function AddToCart({ productInfo, currentStyle }) {
       setSelectedSize(e.target.value);
       console.log('selected size???', selectedSize);
     } else {
-      for (let i = 1; i <= quantities[e.target.selectedIndex-1]; i += 1) {
+      for (let i = 1; i <= quantities[e.target.selectedIndex - 1]; i += 1) {
         quantArray.push(i);
       }
       setQuantMax(quantArray);
-      console.log('quantArray = ', quantArray)
+      console.log('quantArray = ', quantArray);
       console.log('quant max??', quantMax);
       setSelectedSize(e.target.value);
-      console.log('target value: ', e.target.value)
+      console.log('target value: ', e.target.value);
       console.log('selected size???', selectedSize);
     }
   };
@@ -90,7 +90,7 @@ export default function AddToCart({ productInfo, currentStyle }) {
         <SelectSize id="select" sizes={sizes} onChange={onSelectSize} />
         <SelectQuantity quantities={quantMax} />
       </Selectors>
-      <AddButton onClick={() => onAddtoCart()} size={selectedSize} quantity={selectedQuantity} />
+      <AddButton size={selectedSize} quantity={selectedQuantity} />
     </>
   );
 }
@@ -103,4 +103,3 @@ const Selectors = styled.div`
 //   max-width: 150px;
 //   height: 20px;
 // `;
-
