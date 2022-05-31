@@ -237,9 +237,11 @@ export default function WriteReview() {
         <label>Photos (5 max)</label>
         <input id="photos" type="file" accept="image/*" onChange={handlePhotos} multiple />
         <label className="required">Name</label>
-        <input type="text" id="name" onChange={updateFormData} required />
+        <input type="text" id="name" placeholder="Example: jackson11!" maxLength="60" onChange={updateFormData} required />
+        <label style={{ fontStyle: 'italic' }}>For privacy reasons, do not use your full name or email address</label>
         <label className="required">Email</label>
-        <input type="email" id="email" onChange={updateFormData} required />
+        <input type="email" id="email" placeholder="Example: jackson11@email.com" maxLength="60" onChange={updateFormData} required />
+        <label style={{ fontStyle: 'italic' }}>For authentication reasons, you will not be emailed</label>
         <input type="submit" value="Submit Review" />
       </form>
     </div>
