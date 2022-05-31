@@ -7,13 +7,13 @@ import { useRAndRContext } from '../../../../context/RAndRContext';
 function HighlightText({ text, highlight, summary = false }) {
   if (highlight === '' || highlight === null) {
     return (
-      <span style={summary ? {fontWeight: 'bold'} : {}}>{text}</span>
+      <span style={summary ? { fontWeight: 'bold' } : {}}>{text}</span>
     );
   }
   const regex = new RegExp(`(${highlight})`, 'gi');
   const parts = text.split(regex);
   return (
-    <span style={summary ? {fontWeight: 'bold'} : {}}>
+    <span style={summary ? { fontWeight: 'bold' } : {}}>
       {parts.filter((part) => part).map((part, index) => {
         if (part.toLowerCase() === highlight.toLowerCase()) {
           return <mark key={index}>{part}</mark>;
@@ -73,13 +73,13 @@ export default function ReviewTile({ review, hidden, search }) {
   function whichButton(name) {
     if (name === 'helpful') {
       return reviewFeedback.helpful.includes(review.review_id)
-        ? <button className="feedback-helpful" type="button"> 👍 </button>
-        : <button className="link-button" type="button" onClick={handleHelpfulClick}> Yes </button>;
+        ? <button className="feedback-helpful" type="button" style={{ userSelect: 'none' }}> 👍 </button>
+        : <button className="underline-button grey-button" type="button" onClick={handleHelpfulClick}> Yes </button>;
     }
     if (name === 'report') {
       return reviewFeedback.reported.includes(review.review_id)
         ? <button className="feedback-report" type="button">Thank you for your feedback</button>
-        : <button className="link-button" type="button" onClick={handleReportClick}>Report</button>;
+        : <button className="underline-button grey-button" type="button" onClick={handleReportClick}>Report</button>;
     }
     return <div />;
   }
@@ -87,8 +87,11 @@ export default function ReviewTile({ review, hidden, search }) {
   return (
     <>
       <div id={`review-${review.review_id}`} className="review-tile" hidden={hidden}>
+        <div>
+          <HighlightText text={review.reviewer_name} highlight={search} />
+          <span style={{ marginLeft: '20px' }}>{format(parseISO(review.date), 'MMM dd, yyyy')}</span>
+        </div>
         <StyledRatingStars className="review-tile-rating" rating={review.rating}>★★★★★</StyledRatingStars>
-        <div>{format(parseISO(review.date), 'MMM dd, yyyy')}</div>
         <HighlightText summary text={review.summary} highlight={search} />
         {readMore && (
           <div>
@@ -101,7 +104,6 @@ export default function ReviewTile({ review, hidden, search }) {
           {showPhotos()}
         </div>
         {review.recommend && <div>I recommend this product ✔️</div>}
-        <HighlightText text={review.reviewer_name} highlight={search} />
         {review.response && (
           <div>
             <span>Response from seller: </span>
@@ -115,7 +117,7 @@ export default function ReviewTile({ review, hidden, search }) {
             <span>{` ( ${review.helpfulness} ) `}</span>
           </div>
           {!readMore && whichButton('report')}
-          {readMore && <button type="button" className="reviews-readmore" onClick={handleReadMoreClick}>Read more</button>}
+          {readMore && <button type="button" className="reviews-readmore underline-button grey-button larger-text" onClick={handleReadMoreClick}>Read more</button>}
         </div>
       </div>
       {showModal.show && (

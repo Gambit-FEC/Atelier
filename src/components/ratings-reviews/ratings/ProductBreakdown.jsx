@@ -11,7 +11,7 @@ export default function ProductBreakdown() {
     <div className="ratings-product-breakdown">
       {reviewsMeta && Object.keys(reviewsMeta.characteristics).map((item, index) => (
         <div key={index} id={`${item}-breakdown`}>
-          <div>{item}</div>
+          <div style={{fontWeight: 'bold'}}>{`${item}:`}</div>
           <CharacteristicsBar className={`${item}-characteristics-bar`}>
             <CharacteristicsPointer
               className={`${item}-bar-pointer`}
