@@ -36,11 +36,12 @@ export default function RatingBreakdown() {
             <div id={`${index}-star`} key={index} style={{fontSize: '20px'}}>
               <StarButton
                 id={`${index}-star-filter-button`}
+                className="underline-button"
                 onClick={() => handleRatingClick(index.toString())}
               >
                 {`${index} ★`}
               </StarButton>
-              <span style={{ color: '#4a4a4a' }}>{` ${reviewsMeta.ratings[index]}`}</span>
+              <span style={{ color: '#4a4a4a' }}>{` ${reviewsMeta.ratings[index] || 0}`}</span>
               <RatingBar id={`${index}-star-bar`} percent={item} />
             </div>
           ))}

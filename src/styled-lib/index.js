@@ -40,9 +40,9 @@ const CharacteristicsBar = styled.div`
 const CharacteristicsPointer = styled(GoTriangleDown)`
   position: relative;
   top: -11px;
-  left: ${({ position }) => `${position}%`};
-`;
-
+  left: ${({ position }) => `${position - 2.7}%`};
+  `;
+  // left: -2.7%;
 export {
   StyledRatingStars,
   RatingBar,

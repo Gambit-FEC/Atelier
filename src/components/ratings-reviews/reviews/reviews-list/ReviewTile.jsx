@@ -73,7 +73,7 @@ export default function ReviewTile({ review, hidden, search }) {
   function whichButton(name) {
     if (name === 'helpful') {
       return reviewFeedback.helpful.includes(review.review_id)
-        ? <button className="feedback-helpful" type="button"> 👍 </button>
+        ? <button className="feedback-helpful" type="button" style={{userSelect: 'none'}}> 👍 </button>
         : <button className="underline-button grey-button" type="button" onClick={handleHelpfulClick}> Yes </button>;
     }
     if (name === 'report') {
@@ -115,7 +115,7 @@ export default function ReviewTile({ review, hidden, search }) {
             <span>{` ( ${review.helpfulness} ) `}</span>
           </div>
           {!readMore && whichButton('report')}
-          {readMore && <button type="button" className="reviews-readmore" onClick={handleReadMoreClick}>Read more</button>}
+          {readMore && <button type="button" className="reviews-readmore underline-button grey-button larger-text" onClick={handleReadMoreClick}>Read more</button>}
         </div>
       </div>
       {showModal.show && (

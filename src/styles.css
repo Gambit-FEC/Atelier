@@ -28,22 +28,31 @@ h1 {
 
 .underline-button {
   border-width: 0px;
-  font-size: larger;
   color: black;
   background-color: transparent;
   text-decoration: underline;
   cursor: pointer;
   transition: ease-in-out 0.1s;
+  user-select: none;
+  padding: 4px;
 }
 
 .grey-button {
-  color: grey !important;
+  color: #424242 !important;
+}
+
+.larger-text {
+  font-size: larger;
 }
 
 .underline-button:hover {
   color: white !important;
   background-color: black;
   transition: ease-in-out 0.1s;
+}
+
+select {
+  cursor: pointer;
 }
 
 .modal-bg {
@@ -55,7 +64,7 @@ h1 {
   width: 100vw;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.625);
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .modal-image {
@@ -75,11 +84,10 @@ h1 {
   flex-direction: column;
   padding: 5%;
   padding-top: 1.5%;
-  border: 3px solid black;
-  border-radius: .5%;
+  user-select: none;
 }
 
-.modal-exit-button {
+.form-exit-button {
   font-size: 24px;
   cursor: pointer;
 }
@@ -109,7 +117,7 @@ h1 {
   display: flex;
   flex-flow: row nowrap;
   margin-top: 20px;
-  border: 3px solid;
+  /* border: 3px solid; */
   padding: 20px;
   width: max-content;
 }
@@ -123,12 +131,13 @@ h1 {
   flex-flow: column nowrap;
   justify-content: space-between;
   margin-right: 100px;
-  min-height: 686px;
+  min-height: 700px;
   min-width: fit-content;
+  user-select: none;
 }
 
 #reviews-list {
-  max-height: 601px;
+  max-height: 606px;
   width: 650px;
   overflow-y: overlay;
 }
@@ -137,13 +146,20 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-top: 30px;
-  width: 95%
+  margin-top: 25px;
+  margin-bottom: 5px;
+  width: 95%;
+  border: 2px solid purple;
+  box-shadow: 2px 2px 2px purple;
 }
 
 .review-tile>* {
   margin: 0px;
   word-break: break-word;
+}
+
+.review-tile-rating {
+  user-select: none;
 }
 
 .review-summary {
@@ -188,6 +204,10 @@ h1 {
   margin-top: 15px;
 }
 
+.ratings-product-breakdown {
+  height: 305px;
+}
+
 .ratings-product-breakdown>* {
   margin-top: 20px;
 }
@@ -213,6 +233,11 @@ h1 {
   color: red;
 }
 
+.bigger-radio {
+  height: 16px;
+  width: 16px;
+}
+
 .popup-prompt {
   position: absolute;
   background-color: white;
@@ -234,6 +259,11 @@ h1 {
   border-width: 7px;
   border-color: transparent transparent black transparent;
   border-style: solid;
+}
+
+.form-italic {
+  font-style: italic;
+  color: #424242;
 }
 
 /* related */

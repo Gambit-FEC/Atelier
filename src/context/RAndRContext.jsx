@@ -36,6 +36,7 @@ export function RAndRContextProvider({ children }) {
     Length: ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
     Fit: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long'],
   }));
+  const [lastId, setLastId] = useState(() => 0);
 
   const value = {
     reviewsSort,
@@ -63,6 +64,8 @@ export function RAndRContextProvider({ children }) {
     shownReviews,
     setShownReviews,
     characteristicsMeaning,
+    lastId,
+    setLastId,
   };
   return (
     <RAndRContext.Provider value={value}>

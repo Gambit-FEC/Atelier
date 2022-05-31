@@ -9,14 +9,14 @@ export default function OverviewAndSort() {
     setReviewsSort(event.target.value);
   };
   return (
-    <div className="reviews-overview-and-sort">
+    <div className="reviews-overview-and-sort" style={{ userSelect: 'none' }}>
       <span>
-        {`${totalReviews || 0} total reviews sort by: `}
+        {`${totalReviews || 0} Total reviews sort by: `}
       </span>
       <select value={reviewsSort} onChange={onChange}>
-        <option value="relevant">relevant</option>
-        <option value="newest">newest</option>
-        <option value="helpful">helpful</option>
+        <option value="relevant">Relevant</option>
+        <option value="newest">Newest</option>
+        <option value="helpful">Helpful</option>
       </select>
     </div>
   );
