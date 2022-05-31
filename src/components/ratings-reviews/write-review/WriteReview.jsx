@@ -208,7 +208,7 @@ export default function WriteReview() {
         radios.push(
           <>
             <label key={`${key}-${i}-label`}>{`${i + 1}: `}</label>
-            <input key={`${key}-${i}-radio`} type="radio" id={`${key}-${i + 1}`} name={key} value={i + 1} style={i < 4 ? { marginRight: '10px' } : {}} onMouseEnter={handleCharactericsMouseEnter} onMouseLeave={handleCharactericsMouseLeave} required />
+            <input key={`${key}-${i}-radio`} type="radio" id={`${key}-${i + 1}`} className="bigger-radio" name={key} value={i + 1} style={i < 4 ? { marginRight: '10px' } : {}} onMouseEnter={handleCharactericsMouseEnter} onMouseLeave={handleCharactericsMouseLeave} required />
           </>,
         );
       }
@@ -234,18 +234,18 @@ export default function WriteReview() {
     <div className="write-review modal-bg">
       <form className="modal-form" onSubmit={handleSubmitReview}>
         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-          <span className="required-guide" style={{ minWidth: 'fit-content' }}>= required</span>
+          <span className="required-guide form-italic" style={{ minWidth: 'fit-content' }}>= required</span>
           <h3 style={{ textAlign: 'center', width: '100%', marginRight: '80px' }}>Write A Review</h3>
-          <div className="modal-exit-button close" onClick={handleExitView}>×</div>
+          <div className="form-exit-button close" onClick={handleExitView}>×</div>
         </div>
         <label id="overall-rating-prompt" className="required">Overall Rating</label>
         {starRender()}
         <label className="required">Do you recommend this product?</label>
         <div onChange={handleRecommended}>
           <label>yes</label>
-          <input type="radio" id="yes" name="recommend" value="yes" required />
+          <input type="radio" id="yes" className="bigger-radio" name="recommend" value="yes" required />
           <label style={{ marginLeft: '20px' }}>no</label>
-          <input type="radio" id="no" name="recommend" value="no" required />
+          <input type="radio" id="no" className="bigger-radio" name="recommend" value="no" required />
         </div>
         <label className="required">Characteristics</label>
         <div onChange={handleCharacteristics}>
@@ -259,11 +259,11 @@ export default function WriteReview() {
         <input id="photos" type="file" accept="image/*" onChange={handlePhotos} multiple />
         <label className="required">Name</label>
         <input type="text" id="name" placeholder="Example: jackson11!" maxLength="60" onChange={updateFormData} required />
-        <label style={{ fontStyle: 'italic' }}>For privacy reasons, do not use your full name or email address</label>
+        <label className="form-italic">For privacy reasons, do not use your full name or email address</label>
         <label className="required">Email</label>
         <input type="email" id="email" placeholder="Example: jackson11@email.com" maxLength="60" onChange={updateFormData} required />
-        <label style={{ fontStyle: 'italic' }}>For authentication reasons, you will not be emailed</label>
-        <input type="submit" value="Submit Review" />
+        <label className="form-italic">For authentication reasons, you will not be emailed</label>
+        <input type="submit" className="underline-button larger-text" value="Submit Review" />
       </form>
     </div>
   );
