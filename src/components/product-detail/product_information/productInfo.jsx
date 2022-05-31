@@ -43,12 +43,22 @@ export default function ProductInfo({ productInfo, currentStyle }) {
         <ProductName>
           {productInfo[0] ? productInfo[0].name : null}
         </ProductName>
-        <Price>
+
+        {/* <Price>
           {productInfo[1] ? productInfo[1].results[currentStyle].original_price : null}
         </Price>
         <SalePrice>
           {productInfo[1] ? productInfo[1].results[currentStyle].sale_price : null}
-        </SalePrice>
+        </SalePrice> */}
+        {/* <PriceStreak>{productInfo[1].results[currentStyle].original_price}</PriceStreak> */}
+
+        {productInfo[1].results[currentStyle].sale_price
+          ? <PriceStreak>{productInfo[1].results[currentStyle].original_price}</PriceStreak>
+          : <Price>{productInfo[1].results[currentStyle].original_price}</Price>}
+        {productInfo[1].results[currentStyle].sale_price
+          ? <SalePrice>{productInfo[1].results[currentStyle].sale_price}</SalePrice>
+          : null}
+
         <ProductOverview>
           {productInfo[0] ? productInfo[0].description : null}
         </ProductOverview>
@@ -66,7 +76,7 @@ export default function ProductInfo({ productInfo, currentStyle }) {
 
 // CSS styled-components ----------------------
 const Wrapper = styled.div`
-  padding: 4em;
+  padding: 1em;
   align-items: flex-end;
 `;
 
@@ -77,27 +87,31 @@ const Reviews = styled.div`
 
 const Category = styled.div`
   font-weight: lighter;
-  color: rgba(102, 91, 165, 1);
   text-transform: uppercase;
   margin: 10px 0 10px;
 `;
+// color: rgba(102, 91, 165, 1);
 
 const ProductName = styled.h2`
-  color: purple;
   font-weight: bold;
   text-transform: uppercase;
 `;
+// color: purple;
 
 const Price = styled.h4`
 `;
 
 const SalePrice = styled.h4`
+`;
+
+const PriceStreak = styled.h4`
   color: red;
-`
+  text-decoration: line-through;
+`;
 
 const ProductOverview = styled.h4`
-color: purple;
 `;
+// color: purple;
 
 const Share = styled.h3`
   font-weight: bold;

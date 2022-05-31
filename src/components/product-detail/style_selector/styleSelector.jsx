@@ -38,7 +38,7 @@ export default function StyleSelector({ productInfo, currentStyle, setCurrentSty
 }
 
 const Wrapper = styled.div`
-  padding: 4em;
+  padding: 1em;
   align-items: flex-end;
 `;
 

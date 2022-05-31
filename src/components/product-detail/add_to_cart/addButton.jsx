@@ -26,6 +26,6 @@ export default function AddButton({ size, quantity }) {
 }
 
 const Add = styled.button`
-  max-width: 150px;
-  height: 20px;
+  max-width: 200px;
+  height: 30px;
 `;

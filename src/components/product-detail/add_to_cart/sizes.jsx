@@ -1,12 +1,18 @@
 import React from 'react';
+import styled from 'styled-components';
 
 export default function SelectSize({ sizes, onChange }) {
   return (
-    (!sizes.length) ? <select disabled>OUT OF STOCK</select> : (
-      <select name="Select Size" onChange={(e) => onChange(e)}>
+    (!sizes.length) ? <Size disabled>OUT OF STOCK</Size> : (
+      <Size name="Select Size" onChange={(e) => onChange(e)}>
         <option defaultValue>Select Size</option>
         {sizes.map((size, i) => <option value={size} key={i}>{size}</option>)}
-      </select>
+      </Size>
     )
   );
 };
+
+const Size = styled.select`
+  max-width: 150px;
+  height: 30px;
+`;

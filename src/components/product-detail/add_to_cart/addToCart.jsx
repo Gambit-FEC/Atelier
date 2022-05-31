@@ -85,15 +85,20 @@ export default function AddToCart({ productInfo, currentStyle }) {
   // }, [selectedSize]);
 
   return (
-    <>
+    <Wrapper>
       <Selectors>
         <SelectSize id="select" sizes={sizes} onChange={onSelectSize} />
         <SelectQuantity quantities={quantMax} />
       </Selectors>
       <AddButton size={selectedSize} quantity={selectedQuantity} />
-    </>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.div`
+  padding: 1em;
+  align-items: flex-end;
+`;
 
 const Selectors = styled.div`
   align-items: flex-end;

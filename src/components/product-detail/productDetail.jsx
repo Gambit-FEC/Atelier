@@ -29,15 +29,13 @@ const Images = styled.div`
   display: flex;
   width: 70%;
   align-items: center;
-`
+`;
 
 export default function ProductDetail() {
   // test------
   const { productId } = useGlobalContext();
   const [productInfo, setProductInfo] = useState([]);
   const [currentStyle, setCurrentStyle] = useState(0);
-
-
 
   // Grab item data from server----------------------
   useEffect(() => {
