@@ -3,7 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { useGlobalContext } from '../../../context/GlobalStore';
 import { BiChevronLeftCircle, BiChevronRightCircle } from 'react-icons/bi';
-import { AiOutlineExpand } from 'react-icons/ai';
+import { AiOutlineExpand, AiOutlinePlus } from 'react-icons/ai';
 import { set } from 'date-fns';
 
 export default function ImageGallery({productInfo, currentStyle}) {
@@ -52,8 +52,18 @@ export default function ImageGallery({productInfo, currentStyle}) {
         <ArrowLeft onClick={onLeftClick} />
         <img src={images[currentImage]?.url} style={{width: "80%", objectFit: "contain", maxHeight: "100%"}} />
         {showModel
-        ? <div className="modal-bg" onClick={onImageClick}><ModalImage src={images[currentImage]?.url} onClick={(e) => e.stopPropagation()}/></div>
-        : <ExpandIcon onClick={onImageClick}></ExpandIcon>
+        ? <div className="modal-bg" onClick={onImageClick}>
+          <ModalImage src={images[currentImage]?.url} onClick={(e) => e.stopPropagation()}/>
+          <ModalBar id="modal-bar">
+            {images.map((slide, index) => (
+              <ModalImageSelections key={index} src={slide.url} onClick={() => showSelectedImage(index)} />
+              ))}
+          </ModalBar>
+        </div>
+        : <ExpandIcon onClick={onImageClick}>
+          {/* <ExpandedLeft onClick={onLeftClick}/>
+          <ExpandedRight onClick={onRightClick}/> */}
+        </ExpandIcon>
         }
 
         <ArrowRight onClick={onRightClick} />
@@ -61,6 +71,8 @@ export default function ImageGallery({productInfo, currentStyle}) {
     </>
   );
 }
+
+// onClick={(e) => e.stopPropagation()}
 
 const Container = styled.div`
   border: white;
@@ -104,7 +116,7 @@ const ArrowLeft = styled(BiChevronLeftCircle)`
   z-index: 10;
   position: relative;
   left: 70px;
-  &: hover {color: purple;};
+  &: hover {color: #9F2B68;};
 `;
 
 const ArrowRight = styled(BiChevronRightCircle)`
@@ -114,9 +126,10 @@ const ArrowRight = styled(BiChevronRightCircle)`
   z-index: 10;
   position: relative;
   right: 96px;
-  &: hover {color: purple;};
+  &: hover {color: #9F2B68;};
 `;
 
+// expanded view ---------------------------------
 const ExpandIcon = styled(AiOutlineExpand)`
   font-size: 2rem;
   font-weight: bold;
@@ -128,9 +141,10 @@ const ExpandIcon = styled(AiOutlineExpand)`
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   border-radius: 5px;
-  &: hover {color: purple;};
+  &: hover {color: #9F2B68;};
 `
 
+const hoverPhoto = "https://img.icons8.com/external-tanah-basah-glyph-tanah-basah/344/external-plus-user-interface-tanah-basah-glyph-tanah-basah-2.png";
 const ModalImage = styled.img`
   margin: auto;
   position: fixed;
@@ -141,4 +155,50 @@ const ModalImage = styled.img`
   top: 50%;
   transform: translate(-50%, -50%);
   left: 50%;
+  cursor: url(${hoverPhoto}), auto;
+`;
+
+const ModalBar = styled.div`
+  z-index: 100;
+  display: flex;
+  flex-direction: row;
+  align-content: space-between;
+  justify-content: center;
+  position: absolute;
+  bottom: 240px;
 `
+
+const ModalImageSelections = styled.img`
+  display: flex;
+  margin: 0 10px 0;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  height: 70px;
+  width: 70px;
+  cursor: pointer;
+`;
+
+
+// const HoverExpand = styled(AiOutlinePlus)`
+//   cursor: AiOutlinePlus;
+// `
+
+// const ExpandedLeft = styled(BiChevronLeftCircle)`
+//   font-size: 3rem;
+//   cursor: pointer;
+//   user-select: none;
+//   z-index: 10;
+//   position: relative;
+//   left: 70px;
+//   &: hover {color: #9F2B68;};
+// `;
+
+// const ExpandedRight = styled(BiChevronRightCircle)`
+//   font-size: 10rem;
+//   cursor: pointer;
+//   user-select: none;
+//   z-index: 10;
+//   position: relative;
+//   right: 96px;
+//   &: hover {color: #9F2B68;};
+// `;
