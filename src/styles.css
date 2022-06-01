@@ -6,19 +6,22 @@
 
 body {
   margin: 50px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+  margin-top: 110px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow-x: hidden;
 }
 
-body::-webkit-scrollbar {
-  width: 12px;
+body::-webkit-scrollbar, #reviews-list::-webkit-scrollbar {
+  width: 18px;
 }
-body::-webkit-scrollbar-track {
-  background: orange;        /* color of the tracking area */
+body::-webkit-scrollbar-track, #reviews-list::-webkit-scrollbar-track {
+  background: lightgrey;
 }
-body::-webkit-scrollbar-thumb {
-  background-color: blue;    /* color of the scroll thumb */
-  border-radius: 20px;       /* roundness of the scroll thumb */
-  border: 3px solid orange;  /* creates padding around scroll thumb */
+body::-webkit-scrollbar-thumb, #reviews-list::-webkit-scrollbar-thumb {
+  background-color: #9F2B68;
+  border: 3.5px solid lightgrey;
+  border-top-width: 2px;
+  border-bottom-width: 2px;
 }
 
 #app {
@@ -39,6 +42,44 @@ body::-webkit-scrollbar-thumb {
   #related-products-module {
     margin-left: auto !important;
   }
+}
+
+.page-top-bar {
+  position: absolute;
+  top:0;
+  left:0;
+  background-color: #9F2B68;
+  height: 88px;
+  width: 100%;
+  margin: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+}
+
+.page-title {
+  font-size: 60px;
+  font-weight: 800;
+  text-decoration: underline;
+  min-width: fit-content;
+  margin: 10px;
+  margin-left: 30px;
+}
+
+.nav-bar {
+  display: flex;
+  flex-flow: column nowrap;
+  margin-right: 30px;
+}
+
+.nav-bar-item {
+  font-size: larger;
+  margin-right: 10px;
+}
+
+.nav-bar-item:hover {
+  background-color: black !important;
 }
 
 h1 {
