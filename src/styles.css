@@ -16,12 +16,12 @@ body::-webkit-scrollbar, #reviews-list::-webkit-scrollbar {
 }
 
 body::-webkit-scrollbar-track, #reviews-list::-webkit-scrollbar-track {
-  background: lightgrey;
+  background: black;
 }
 
 body::-webkit-scrollbar-thumb, #reviews-list::-webkit-scrollbar-thumb {
   background-color: #9F2B68;
-  border: 3.5px solid lightgrey;
+  border: 3.5px solid black;
   border-top-width: 0px;
   border-bottom-width: 0px;
 }
