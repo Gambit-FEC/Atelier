@@ -8,12 +8,12 @@ import { StyledRatingStars } from '../../../styled-lib';
 export function EmptyCard({ addCard }) {
   return (
     <StyledCard onClick={() => addCard()}>
-      <InfoWrapper>
+      <EmptyInfoWrapper>
         <OutfitText>
           Add to Outfit
         </OutfitText>
         <PlusAddIcon />
-      </InfoWrapper>
+      </EmptyInfoWrapper>
     </StyledCard>
   );
 }
@@ -38,58 +38,49 @@ export function OutfitCard({ data, removeCard, addCard }) {
 
   return (
     <OutfitList>
-      <Container className="Container">
-        {
-          current !== 0
-            ? <PrevArrow onClick={prevSlide} />
-            : <PrevArrowTrans />
-        }
-        <EmptyCard addCard={() => { addCard(); }} />
-        {
-          display.map((info, index) => (
-            <StyledCard key={index}>
-              <Cancel onClick={() => { removeCard(info.product.id); }} />
-              <StyleImg src={
-                info.style.thumbnail_url === null ? placeholder : info.style.thumbnail_url
-              }
-              />
-              <InfoWrapper value={info.product.id}>
-                <CategoryWrapper>
-                  {info.product.category}
-                </CategoryWrapper>
-                <NameWrapper>
-                  {info.product.name}
-                </NameWrapper>
-                <PriceWrapper>
-                  $
-                  {info.product.price}
-                </PriceWrapper>
-                <StyledRatingStars rating={info.rating.averageRating}>
-                  ★★★★★
-                </StyledRatingStars>
-              </InfoWrapper>
-            </StyledCard>
-          ))
-        }
-        {
-          current > 4
-            ? <NextArrow onClick={nextSlide} />
-            : <NextArrowTrans />
-        }
-      </Container>
+      {
+        current !== 0
+          ? <PrevArrow onClick={prevSlide} />
+          : <PrevArrowTrans />
+      }
+      <EmptyCard addCard={() => { addCard(); }} />
+      {
+        display.map((info, index) => (
+          <StyledCard key={index}>
+            <Cancel onClick={() => { removeCard(info.product.id); }} />
+            <StyleImg src={
+              info.style.thumbnail_url === null ? placeholder : info.style.thumbnail_url
+            }
+            />
+            <InfoWrapper value={info.product.id}>
+              <CategoryWrapper>
+                {info.product.category}
+              </CategoryWrapper>
+              <NameWrapper>
+                {info.product.name}
+              </NameWrapper>
+              <PriceWrapper>
+                $
+                {info.product.price}
+              </PriceWrapper>
+              <StyledRatingStars rating={info.rating.averageRating}>
+                ★★★★★
+              </StyledRatingStars>
+            </InfoWrapper>
+          </StyledCard>
+        ))
+      }
+      {
+        current > 4
+          ? <NextArrow onClick={nextSlide} />
+          : <NextArrowTrans />
+      }
     </OutfitList>
   );
 }
 const OutfitList = styled.div`
 display: flex;
 flex-direction: row;
-max-width: 1199px;
-`;
-
-const Container = styled.div`
-position: relative;
-display: flex;
-justify-content: flex-start;
 `;
 
 const StyledCard = styled.div`
@@ -119,6 +110,13 @@ const InfoWrapper = styled.div`
 style: block;
 text-align: center;
 background-color: white;
+cursor: pointer;
+`;
+
+const EmptyInfoWrapper = styled.div`
+style: block;
+text-align: center;
+background-color: white;
 `;
 
 const CategoryWrapper = styled.p`
@@ -142,8 +140,7 @@ const Cancel = styled(GiCancel)`
 height: 20px;
 width: auto;
 position: relative;
-top: -7px;
-right: -270px;
+float: right;
 margin: 5px;
 padding-bottom: 15px;
 cursor: pointer;
@@ -157,44 +154,49 @@ const PlusAddIcon = styled(FiPlusSquare)`
 position: relative;
 height: 300px;
 width: 100%;
+cursor: pointer;
 `;
 
 const NextArrow = styled(BiChevronRightCircle)`
-position relative;
-bottom: 301px;
-left: 1212px;
-height: 50px;
+position: relative;
+height: 30px;
 width: auto;
-user-select: none;
+top: 250px;
 cursor: pointer;
+user-select: none;
+&:hover {
+  box-shadow: 0 0 10px rgba(90, 90, 90, 0.8)
+}
+`;
+
+const NextArrowTrans = styled(BiChevronRightCircle)`
+position: relative;
+height: 30px;
+width: auto;
+top: 250px;
+cursor: default;
+user-select: none;
+opacity: 0.01;
 `;
 
 const PrevArrow = styled(BiChevronLeftCircle)`
 position: relative;
-top: 282px;
-right: 56px;
-height: 50px;
+height: 30px;
 width: auto;
-user-select: none;
+top: 250px;
 cursor: pointer;
-`;
-
-const NextArrowTrans = styled(BiChevronRightCircle)`
-position relative;
-bottom: 301px;
-left: 1212px;
-height: 50px;
-width: auto;
 user-select: none;
-cursor: default;
+&:hover {
+  box-shadow: 0 0 10px rgba(90, 90, 90, 0.8)
+}
 `;
 
 const PrevArrowTrans = styled(BiChevronLeftCircle)`
 position: relative;
-top: 282px;
-right: 56px;
-height: 50px;
+height: 30px;
 width: auto;
-user-select: none;
+top: 250px;
 cursor: default;
+user-select: none;
+opacity: 0.01;
 `;

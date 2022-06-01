@@ -49,7 +49,7 @@ export default function outfitList() {
     if (currentIndex < 0) {
       const listOfPromises = [];
       const promise = Promise.all([getRelatedInfo(currentProductId),
-        getRelatedStyle(currentProductId), getRelatedRating(currentProductId)]);
+      getRelatedStyle(currentProductId), getRelatedRating(currentProductId)]);
       listOfPromises.push(promise);
 
       Promise.all(listOfPromises).then((promiseResults) => {
@@ -122,11 +122,9 @@ export default function outfitList() {
         cardList ? <OutfitCard data={outfitInfo} addCard={addCard} removeCard={removeCard} />
           : (
             <OutfitList>
-              <Container>
-                <PrevArrowTrans />
-                <EmptyCard addCard={addCard} />
-                <NextArrowTrans />
-              </Container>
+              <PrevArrowTrans />
+              <EmptyCard addCard={addCard} />
+              <NextArrowTrans />
             </OutfitList>
           )
       }
@@ -134,34 +132,27 @@ export default function outfitList() {
   );
 }
 
-const Container = styled.div`
-position: relative;
-display: flex;
-justify-content: flex-start;
-`;
-
 const OutfitList = styled.div`
-display: block;
+display: flex;
+flex-direction: row;
 `;
 
 const NextArrowTrans = styled(BiChevronRightCircle)`
-position relative;
-bottom: 301px;
-left: 1212px;
-height: 50px;
+position: relative;
+height: 30px;
 width: auto;
-user-select: none;
+top: 250px;
 cursor: default;
+user-select: none;
 opacity: 0.01;
 `;
 
 const PrevArrowTrans = styled(BiChevronLeftCircle)`
 position: relative;
-top: 282px;
-right: 56px;
-height: 50px;
+height: 30px;
 width: auto;
-user-select: none;
+top: 250px;
 cursor: default;
+user-select: none;
 opacity: 0.01;
 `;

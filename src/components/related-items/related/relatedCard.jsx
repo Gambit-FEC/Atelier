@@ -19,6 +19,8 @@ function relatedCard(data) {
     const modal = document.getElementById('myModal');
 
     modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    document.body.style.height = '100%';
   }
 
   function closeDisplay() {
@@ -26,6 +28,8 @@ function relatedCard(data) {
     setModal(!showModal);
     setCurrentItem(0);
     modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+    document.body.style.height = 'auto';
   }
 
   const nextSlide = () => {
@@ -46,52 +50,49 @@ function relatedCard(data) {
           ? <PrevArrow onClick={prevSlide} />
           : <PrevArrowTrans />
       }
-      <Container>
-
-        <div id="myModal" className="modal">
-          <div className="modal-content">
-            <span
-              className="close"
-              onClick={closeDisplay}
-            >
-              &times;
-            </span>
-            {showModal ? <CompareModal value={currentItem} /> : null}
-          </div>
+      <div id="myModal" className="modal">
+        <div className="modal-content">
+          <span
+            className="close"
+            onClick={closeDisplay}
+          >
+            &times;
+          </span>
+          {showModal ? <CompareModal value={currentItem} /> : null}
         </div>
-        {
-          console.log(display)
-        }
+      </div>
+      {
+        console.log(display)
+      }
 
-        <CardWrapper>
-          {
-            display.map((info, index) => (
-              <StyledCard key={index}>
-                <Comparison onClick={(e) => showDisplay(e, info.product.id)} />
-                <StyleImg src={
-                  info.style.thumbnail_url === null ? placeholder : info.style.thumbnail_url
-                }
-                />
-                <InfoWrapper value={info.product.id}>
-                  <CategoryWrapper>
-                    {info.product.category}
-                  </CategoryWrapper>
-                  <NameWrapper>
-                    {info.product.name}
-                  </NameWrapper>
-                  <PriceWrapper>
-                    $
-                    {info.product.price}
-                  </PriceWrapper>
-                  <StyledRatingStars rating={info.rating.averageRating}>
-                    ★★★★★
-                  </StyledRatingStars>
-                </InfoWrapper>
-              </StyledCard>
-            ))
-          }
-        </CardWrapper>
-      </Container>
+      <CardWrapper>
+        {
+          display.map((info, index) => (
+            <StyledCard key={index}>
+              <Comparison onClick={(e) => showDisplay(e, info.product.id)} />
+              <StyleImg src={
+                info.style.thumbnail_url === null ? placeholder : info.style.thumbnail_url
+              }
+              />
+              <InfoWrapper value={info.product.id}>
+                <CategoryWrapper>
+                  {info.product.category}
+                </CategoryWrapper>
+                <NameWrapper>
+                  {info.product.name}
+                </NameWrapper>
+                <PriceWrapper>
+                  $
+                  {info.product.price}
+                </PriceWrapper>
+                <StyledRatingStars rating={info.rating.averageRating}>
+                  ★★★★★
+                </StyledRatingStars>
+              </InfoWrapper>
+            </StyledCard>
+          ))
+        }
+      </CardWrapper>
       {
         current !== maxDisplay
           ? <NextArrow onClick={nextSlide} />
@@ -106,13 +107,6 @@ export default relatedCard;
 const RelatedList = styled.div`
 display: flex;
 flex-direction: row;
-max-width: 1199px;
-`;
-
-const Container = styled.div`
-// position: relative;
-// display:flex;
-// justify-content: space-evenly;
 `;
 
 const CardWrapper = styled.div`
@@ -148,8 +142,7 @@ const Comparison = styled(HiEye)`
 height: 20px;
 width: auto;
 position: relative;
-top: -7px;
-right: -190px;
+float: right;
 margin: 5px;
 padding-bottom: 5px;
 cursor: pointer;
@@ -175,43 +168,45 @@ font-size: 16px;
 `;
 
 const NextArrow = styled(BiChevronRightCircle)`
-position relative;
-bottom: 301px;
-left: 1212px;
-height: 50px;
+position: relative;
+height: 30px;
 width: auto;
-user-select: none;
+top: 250px;
 cursor: pointer;
+user-select: none;
+&:hover {
+  box-shadow: 0 0 10px rgba(90, 90, 90, 0.8)
+}
 `;
 
 const NextArrowTrans = styled(BiChevronRightCircle)`
-position relative;
-bottom: 301px;
-left: 1212px;
-height: 50px;
+position: relative;
+height: 30px;
 width: auto;
-user-select: none;
+top: 250px;
 cursor: default;
-// opacity: 0.01;
+user-select: none;
+opacity: 0.01;
 `;
 
 const PrevArrow = styled(BiChevronLeftCircle)`
 position: relative;
-top: 282px;
-right: 56px;
-height: 50px;
+height: 30px;
 width: auto;
-user-select: none;
+top: 250px;
 cursor: pointer;
+user-select: none;
+&:hover {
+  box-shadow: 0 0 10px rgba(90, 90, 90, 0.8)
+}
 `;
 
 const PrevArrowTrans = styled(BiChevronLeftCircle)`
 position: relative;
-top: 282px;
-right: 56px;
-height: 50px;
+height: 30px;
 width: auto;
-user-select: none;
+top: 250px;
 cursor: default;
-// opacity: 0.01;
+user-select: none;
+opacity: 0.01;
 `;

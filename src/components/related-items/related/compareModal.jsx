@@ -67,7 +67,7 @@ function compareModal({ value }) {
   }, []);
 
   return (
-    <table className="table-component">
+    <StyledTable className="table-component">
       <thead>
         <tr>
           <th>Related Product</th>
@@ -86,8 +86,27 @@ function compareModal({ value }) {
           ))
         }
       </tbody>
-    </table>
+    </StyledTable>
   );
 }
 
 export default compareModal;
+
+const StyledTable = styled.table`
+width: 100%;
+border: 4px solic black;
+border-collapse: collapse;
+th,
+td {
+  border 2px solid black;
+  border-collapse: collapse;
+}
+th,
+td,
+tr {
+  padding: 10px;
+}
+th {
+  text-align: center;
+}
+`;

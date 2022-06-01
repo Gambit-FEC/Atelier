@@ -270,27 +270,6 @@ select {
   fill: transparent;
 }
 
-/* .right-arrow {
-  position: relative;
-  top: 50%;
-  right: 32px;
-  font-size: 3rem;
-  z-index: 10;
-  cursor: pointer;
-  user-select: none;
-  align-self: flex-end;
-}
-
-.left-arrow {
-  position: relative;
-  top: 300px;
-  left: -1540px;
-  font-size: 3rem;
-  z-index: 10;
-  cursor: pointer;
-  user-select: none;
-} */
-
 .product {
   text-align: center;
   width: 250px;
@@ -320,7 +299,7 @@ select {
   /* Full width */
   height: 100%;
   /* Full height */
-  overflow: auto;
+  overflow: hidden;
   /* Enable scroll if needed */
   background-color: rgb(0, 0, 0);
   /* Fallback color */
