@@ -334,34 +334,16 @@ select {
 }
 
 /* related */
+.rating-star {
+  align-items: center;
+}
+
 .transparent-arrow {
   cursor: default !important
 }
 
 .transparent-arrow polygon {
   fill: transparent;
-}
-
-
-.right-arrow {
-  position: absolute;
-  top: 50%;
-  right: 32px;
-  font-size: 3rem;
-  z-index: 10;
-  cursor: pointer;
-  user-select: none;
-  align-self: flex-end;
-}
-
-.left-arrow {
-  position: absolute;
-  top: 50%;
-  left: 32px;
-  font-size: 3rem;
-  z-index: 10;
-  cursor: pointer;
-  user-select: none;
 }
 
 .product {
@@ -393,7 +375,7 @@ select {
   /* Full width */
   height: 100%;
   /* Full height */
-  overflow: auto;
+  overflow: hidden;
   /* Enable scroll if needed */
   background-color: rgb(0, 0, 0);
   /* Fallback color */

@@ -1,16 +1,18 @@
 import React from 'react';
-import { useGlobalContext } from '../../context/GlobalStore';
+import styled from 'styled-components';
 import RelatedList from './related/relatedList';
 import OutfitList from './outfit/outfitList';
 
 export default function RelatedItems() {
-  const { productId } = useGlobalContext();
-  const { setProductId } = useGlobalContext();
-
   return (
-    <div id="related-products-module">
+    <Container id="related-items">
       <RelatedList />
       <OutfitList />
-    </div>
+    </Container>
   );
 }
+
+const Container = styled.div`
+display: flex;
+flex-direction: column;
+`;
