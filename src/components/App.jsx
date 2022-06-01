@@ -11,9 +11,9 @@ function App() {
     <>
       <NavBar />
       <GlobalContextProvider>
-        {/* <ProductDetail /> */}
+        <ProductDetail />
         {/* <QuestionsAndAnswers /> */}
-        {/* <RelatedItems /> */}
+        <RelatedItems />
         <RAndRContextProvider>
           <RatingsAndReviews />
         </RAndRContextProvider>
