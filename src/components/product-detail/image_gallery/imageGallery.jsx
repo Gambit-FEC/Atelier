@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { useGlobalContext } from '../../../context/GlobalStore';
 import { BiChevronLeftCircle, BiChevronRightCircle } from 'react-icons/bi';
-import { AiOutlineExpand } from 'react-icons/ai';
+import { AiOutlineExpand, AiOutlineMinus } from 'react-icons/ai';
 
 export default function ImageGallery({productInfo, currentStyle}) {
   const { productId } = useGlobalContext();
@@ -49,10 +49,28 @@ export default function ImageGallery({productInfo, currentStyle}) {
   }
   const isDisabled = zoom;
 
+  // //handle mouse hover
+  // const carouselSelect = useRef(null);
+  // const [mouseX, setMouseX] = useState(null);
+  // const [mouseY, setMouseY] = useState(null);
+  // const handleMouseHover = (event) => {
+  //   const DOMRect = carouselSelect.current.getBoundingClientRect();
+  //     const {
+  //       height, width, left: offsetLeft, top: offsetTop,
+  //     } = DOMRect;
+  //     const x = ((event.pageX - offsetLeft) / width) * 100;
+  //     const y = ((event.pageY - offsetTop) / height) * 100;
+  //     setMouseX(x);
+  //     setMouseY(y);
+  // }
+  // const transformOrigin = {
+  //   transformOrigin: `${mouseX}% ${mouseY}%`,
+  // };
+
   return (
     <>
       <ImagesBar>
-        {images.map((slide, index) => (
+        {images.slice(0, 7).map((slide, index) => (
           <ImageSelections key={index} src={slide.url} onClick={() => showSelectedImage(index)} />
         ))}
       </ImagesBar>
@@ -72,6 +90,7 @@ export default function ImageGallery({productInfo, currentStyle}) {
               style={{
                 transform: zoom ? `scale(${zoomScale})` : 'scale(1)',
                 cursor: zoom ? 'zoom-out' : 'crosshair',
+                // ...transformOrigin,
               }}
               />
               <ExpandedRight onClick={onRightClick}/>
@@ -85,6 +104,43 @@ export default function ImageGallery({productInfo, currentStyle}) {
     </>
   );
 }
+
+{/* FOR thumbnail images */}
+{
+  styleList.map((style, index) => {
+    if (index === styleList.indexOf(defaultStyle)) {
+      return (
+        <StyleEntry
+          style={style}
+          handleStyleChange={handleStyleChange}
+          selected
+          key={index}
+          thumbnailImg={thumbList[index]}
+        />
+      );
+    }
+    return (
+      <StyleEntry
+      style={style}
+      key={index}
+      handleStyleChange={handleStyleChange}
+      thumbnailImg={thumbList[index]}
+      />
+    )
+  })}
+
+  const StyleEntry = ({style, handleStyleChange, selected,thumbnailImg}) => (
+    <StyleEntryStyle
+    onClick={() => handleStyleChange(style)}
+    selected={selected}
+    >
+      <span>
+        <BsCheckCircleFill />
+      </span>
+      <img src={thumbnailImg} alt=""/>
+    </StyleEntryStyle>
+  )
+
 
 // onClick={(e) => e.stopPropagation()}
 
@@ -164,7 +220,6 @@ const ModalImage = styled.img`
   max-height: 70%;
   max-width: 70%;
   z-index: 99;
-  cursor: crosshair;
 `;
 
 const ModalBar = styled.div`
