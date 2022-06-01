@@ -28,8 +28,12 @@ export default function ImageGallery({productInfo, currentStyle}) {
   };
 
   const showSelectedImage = (image, e) => {
-    e.stopPropagation();
-    setCurrentImage(image);
+    if (e) {
+      e.stopPropagation();
+      setCurrentImage(image);
+    } else {
+      setCurrentImage(image);
+    }
   }
 
   useEffect(() => {
