@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { useGlobalContext } from '../../../context/GlobalStore';
 import { BiChevronLeftCircle, BiChevronRightCircle } from 'react-icons/bi';
 import { AiOutlineExpand } from 'react-icons/ai';
-import { set } from 'date-fns';
 
 export default function ImageGallery({productInfo, currentStyle}) {
   const { productId } = useGlobalContext();
