@@ -3,7 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { useGlobalContext } from '../../../context/GlobalStore';
 import { BiChevronLeftCircle, BiChevronRightCircle } from 'react-icons/bi';
-import { AiOutlineExpand, AiOutlinePlus } from 'react-icons/ai';
+import { AiOutlineExpand } from 'react-icons/ai';
 import { set } from 'date-fns';
 
 export default function ImageGallery({productInfo, currentStyle}) {
@@ -16,23 +16,20 @@ export default function ImageGallery({productInfo, currentStyle}) {
   // console.log('images', images);
 
   // onClick functionalities for slides -------------
-  const onLeftClick = () => {
+  const onLeftClick = (e) => {
     console.log('left');
+    e.stopPropagation()
     setCurrentImage(currentImage === 0 ? length - 1 : currentImage - 1);
   };
 
-  const onRightClick = () => {
+  const onRightClick = (e) => {
     console.log('right');
+    e.stopPropagation()
     setCurrentImage(currentImage === length - 1 ? 0 : currentImage + 1);
   };
 
-  // image expansion --------------------
-  const onImageClick = () => {
-    console.log('showModel:', showModel);
-    setShowModel(!showModel);
-  }
-
-  const showSelectedImage = (image) => {
+  const showSelectedImage = (image, e) => {
+    e.stopPropagation();
     setCurrentImage(image);
   }
 
@@ -40,6 +37,12 @@ export default function ImageGallery({productInfo, currentStyle}) {
     setImages(productInfo[currentStyle].photos);
     setCurrentImage(0);
   }, [currentStyle])
+
+  // image expansion --------------------
+  const onImageClick = () => {
+    console.log('showModel:', showModel);
+    setShowModel(!showModel);
+  }
 
   return (
     <>
@@ -52,20 +55,21 @@ export default function ImageGallery({productInfo, currentStyle}) {
         <ArrowLeft onClick={onLeftClick} />
         <img src={images[currentImage]?.url} style={{width: "80%", objectFit: "contain", maxHeight: "100%"}} />
         {showModel
-        ? <div className="modal-bg" onClick={onImageClick}>
-          <ModalImage src={images[currentImage]?.url} onClick={(e) => e.stopPropagation()}/>
-          <ModalBar id="modal-bar">
-            {images.map((slide, index) => (
-              <ModalImageSelections key={index} src={slide.url} onClick={() => showSelectedImage(index)} />
-              ))}
-          </ModalBar>
-        </div>
+        ? <ModalBarAndImage id="modal-bar-and-image">
+            <div className="modal-bg modal-prod-detail" onClick={onImageClick}>
+              <ExpandedLeft onClick={onLeftClick}/>
+              <ModalBar id="modal-bar">
+                {images.map((slide, index) => (
+                  <ModalImageSelections key={index} src={slide.url} onClick={(e) => showSelectedImage(index, e)} />
+                  ))}
+              </ModalBar>
+              <ModalImage src={images[currentImage]?.url} onClick={(e) => e.stopPropagation()}/>
+              <ExpandedRight onClick={onRightClick}/>
+            </div>
+          </ModalBarAndImage>
         : <ExpandIcon onClick={onImageClick}>
-          {/* <ExpandedLeft onClick={onLeftClick}/>
-          <ExpandedRight onClick={onRightClick}/> */}
         </ExpandIcon>
         }
-
         <ArrowRight onClick={onRightClick} />
       </Container>
     </>
@@ -104,8 +108,10 @@ const ImagesBar = styled.div`
 const ImageSelections = styled.img`
   display: flex;
   margin: 10px 0 10px;
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
   cursor: pointer;
 `;
 
@@ -143,29 +149,27 @@ const ExpandIcon = styled(AiOutlineExpand)`
   border-radius: 5px;
   &: hover {color: #9F2B68;};
 `
+const ModalBarAndImage = styled.div`
+  display: flex;
+`
 
-const hoverPhoto = "https://img.icons8.com/external-tanah-basah-glyph-tanah-basah/344/external-plus-user-interface-tanah-basah-glyph-tanah-basah-2.png";
 const ModalImage = styled.img`
   margin: auto;
-  position: fixed;
-  display: block;
+  display: flex;
   max-height: 70%;
   max-width: 70%;
   z-index: 99;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  left: 50%;
-  cursor: url(${hoverPhoto}), auto;
+  cursor: crosshair;
 `;
 
 const ModalBar = styled.div`
-  z-index: 100;
   display: flex;
+  z-index: 100;
   flex-direction: row;
   align-content: space-between;
   justify-content: center;
   position: absolute;
-  bottom: 240px;
+  top: 80px;
 `
 
 const ModalImageSelections = styled.img`
@@ -178,27 +182,20 @@ const ModalImageSelections = styled.img`
   cursor: pointer;
 `;
 
+const ExpandedLeft = styled(BiChevronLeftCircle)`
+  display: flex;
+  font-size: 8rem;
+  cursor: pointer;
+  user-select: none;
+  z-index: 110;
+  &: hover {color: #9F2B68;};
+`;
 
-// const HoverExpand = styled(AiOutlinePlus)`
-//   cursor: AiOutlinePlus;
-// `
-
-// const ExpandedLeft = styled(BiChevronLeftCircle)`
-//   font-size: 3rem;
-//   cursor: pointer;
-//   user-select: none;
-//   z-index: 10;
-//   position: relative;
-//   left: 70px;
-//   &: hover {color: #9F2B68;};
-// `;
-
-// const ExpandedRight = styled(BiChevronRightCircle)`
-//   font-size: 10rem;
-//   cursor: pointer;
-//   user-select: none;
-//   z-index: 10;
-//   position: relative;
-//   right: 96px;
-//   &: hover {color: #9F2B68;};
-// `;
+const ExpandedRight = styled(BiChevronRightCircle)`
+  display: flex;
+  font-size: 8rem;
+  cursor: pointer;
+  user-select: none;
+  z-index: 110;
+  &: hover {color: #9F2B68;};
+`;

@@ -99,6 +99,9 @@ select {
   display: none;
 }
 
+.modal-prod-detail {
+  display: flex;
+}
 
 
 
