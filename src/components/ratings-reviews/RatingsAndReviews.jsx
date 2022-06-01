@@ -32,11 +32,11 @@ export default function RatingsAndReviews() {
       .catch((err) => {
         console.log('Error fetching average ratings:', err);
       });
-  }, [productId, reviewsSort, showWriteReview, reviewFeedback.helpful]);
+  }, [productId, reviewsSort, showWriteReview]);
 
   useEffect(() => {
-    localStorage.setItem('helpful', JSON.stringify(reviewFeedback.helpful));
-    localStorage.setItem('reported', JSON.stringify(reviewFeedback.reported));
+    localStorage.setItem(`helpful-${productId}`, JSON.stringify(reviewFeedback.helpful));
+    localStorage.setItem(`reported-${productId}`, JSON.stringify(reviewFeedback.reported));
   }, [reviewFeedback]);
 
   return (

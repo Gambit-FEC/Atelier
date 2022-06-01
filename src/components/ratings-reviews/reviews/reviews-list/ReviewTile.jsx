@@ -43,6 +43,7 @@ export default function ReviewTile({ review, hidden, search }) {
     e.target.removeAttribute('onClick');
     axios.put(`/reviews/${review.review_id}/helpful`)
       .then(() => {
+        review.helpfulness++;
         setReviewFeedback({
           reported: reviewFeedback.reported,
           helpful: [...reviewFeedback.helpful, review.review_id],
