@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import { BiChevronLeftCircle, BiChevronRightCircle } from 'react-icons/bi';
 import { OutfitCard, EmptyCard } from './outfitCard';
 import { useGlobalContext } from '../../../context/GlobalStore';
 
@@ -48,7 +49,7 @@ export default function outfitList() {
     if (currentIndex < 0) {
       const listOfPromises = [];
       const promise = Promise.all([getRelatedInfo(currentProductId),
-        getRelatedStyle(currentProductId), getRelatedRating(currentProductId)]);
+      getRelatedStyle(currentProductId), getRelatedRating(currentProductId)]);
       listOfPromises.push(promise);
 
       Promise.all(listOfPromises).then((promiseResults) => {
@@ -117,11 +118,41 @@ export default function outfitList() {
   return (
     <div className="outfit-items-list">
       <h2>YOUR OUTFIT</h2>
-
       {
-        cardList ? <OutfitCard data={outfitInfo} addCard={addCard} removeCard={removeCard}/>
-          : <EmptyCard addCard={ addCard }/>
+        cardList ? <OutfitCard data={outfitInfo} addCard={addCard} removeCard={removeCard} />
+          : (
+            <OutfitList>
+              <PrevArrowTrans />
+              <EmptyCard addCard={addCard} />
+              <NextArrowTrans />
+            </OutfitList>
+          )
       }
     </div>
   );
 }
+
+const OutfitList = styled.div`
+display: flex;
+flex-direction: row;
+`;
+
+const NextArrowTrans = styled(BiChevronRightCircle)`
+position: relative;
+height: 30px;
+width: auto;
+top: 250px;
+cursor: default;
+user-select: none;
+opacity: 0.01;
+`;
+
+const PrevArrowTrans = styled(BiChevronLeftCircle)`
+position: relative;
+height: 30px;
+width: auto;
+top: 250px;
+cursor: default;
+user-select: none;
+opacity: 0.01;
+`;
