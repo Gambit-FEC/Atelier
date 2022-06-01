@@ -52,10 +52,10 @@ export default function ProductDetail() {
   }, [productId]);
 
   return (
-    <div id="productDetail">
+    <div id="product-detail">
       {productInfo.length && (
         <ProductDetailContainer className="Product-Detail">
-          <Images className="prodDetail-imaages">
+          <Images className="prodDetail-images">
             <ImageGallery productInfo={productInfo[1].results} currentStyle={currentStyle} />
           </Images>
           <NotImages className="prodDetail-notImages">
