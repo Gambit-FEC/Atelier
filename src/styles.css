@@ -26,6 +26,10 @@ body::-webkit-scrollbar-thumb, #reviews-list::-webkit-scrollbar-thumb {
   border-bottom-width: 0px;
 }
 
+body::-webkit-scrollbar-corner, #reviews-list::-webkit-scrollbar-corner {
+  background-color: black;
+}
+
 #app {
   display: flex;
   flex-direction: column;

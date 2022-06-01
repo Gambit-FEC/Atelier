@@ -34,7 +34,10 @@ export default function ReviewTile({ review, hidden, search }) {
   }
 
   function handlePhotoClick(event) {
-    showModal.show ? document.body.style.overflow = 'auto' : document.body.style.overflow = 'hidden';
+    showModal.show ? (
+      document.body.style.overflowX = 'hidden',
+      document.body.style.overflowY = 'auto'
+    ) : document.body.style.overflow = 'hidden';
     setShowModal({ show: !showModal.show, src: event.target.src });
   }
 

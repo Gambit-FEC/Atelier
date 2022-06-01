@@ -26,15 +26,15 @@ export default function WriteReview() {
   });
 
   function handleExitView() {
-    document.body.style.overflow = 'auto';
+    document.body.style.overflowY = 'auto';
+    document.body.style.overflowX = 'hidden';
     setShowWriteReview(false);
   }
 
   function cloudPhotoUpload(file) {
     const imageData = new FormData();
     imageData.append('file', file);
-    imageData.append('api_key', '939183845857327');
-    imageData.append('upload_preset', 'ml_default');
+    imageData.append('upload_preset', 'zghnihfu');
     return axios.post('https://api.cloudinary.com/v1_1/gc7654738/image/upload', imageData);
   }
 
