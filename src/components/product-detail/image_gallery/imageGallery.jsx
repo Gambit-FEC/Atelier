@@ -28,7 +28,9 @@ export default function ImageGallery({productInfo, currentStyle}) {
   };
 
   const showSelectedImage = (image, e) => {
-    e.stopPropagation();
+    if (e) {
+      e.stopPropagation();
+    }
     setCurrentImage(image);
   }
 
