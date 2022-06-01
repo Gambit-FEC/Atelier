@@ -4,14 +4,21 @@ import { HiEye } from 'react-icons/hi';
 import styled from 'styled-components';
 import CompareModal from './compareModal';
 import { StyledRatingStars } from '../../../styled-lib';
+import { GlobalContext, useGlobalContext } from '../../../context/GlobalStore';
 
 function relatedCard(data) {
   const placeholder = 'http://placecorgi.com/260/180';
+  const { setProductId } = useGlobalContext();
   const [current, setCurrent] = useState(0);
   const display = data.data.slice(current, (current + 4));
   const maxDisplay = data.data.length - 4;
   const [showModal, setModal] = useState(false);
   const [currentItem, setCurrentItem] = useState(0);
+
+  function newProduct(value) {
+    console.log('PRODUCT ID: ', value);
+    setProductId(value);
+  }
 
   function showDisplay(e, value) {
     setModal(!showModal);
@@ -68,7 +75,7 @@ function relatedCard(data) {
       <CardWrapper>
         {
           display.map((info, index) => (
-            <StyledCard key={index}>
+            <StyledCard key={index} onClick={() => newProduct(info.product.id)}>
               <Comparison onClick={(e) => showDisplay(e, info.product.id)} />
               <StyleImg src={
                 info.style.thumbnail_url === null ? placeholder : info.style.thumbnail_url
@@ -124,6 +131,7 @@ height: 450px;
 margin: 15px;
 flex-direction: column;
 flex-wrap: nowrap;
+cursor: pointer;
 &:hover {
   box-shadow: 0 0 10px rgba(90, 90, 90, 0.8)
 }

@@ -53,7 +53,7 @@ export default function relatedList() {
 
   return (
     <Container className="related-items-list">
-      <h2>RELATED PRODUCTS</h2>
+      <h2>You may also like...</h2>
       <RelatedCard data={relatedInfo} />
     </Container>
   );
