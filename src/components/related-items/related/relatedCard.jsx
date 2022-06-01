@@ -4,8 +4,10 @@ import { HiEye } from 'react-icons/hi';
 import styled from 'styled-components';
 import CompareModal from './compareModal';
 import { StyledRatingStars } from '../../../styled-lib';
+import { useGlobalContext } from '../../../context/GlobalStore';
 
 function relatedCard(data) {
+  const { setProductId } = useGlobalContext();
   const placeholder = 'http://placecorgi.com/260/180';
   const [current, setCurrent] = useState(0);
   const display = data.data.slice(current, (current + 4));
@@ -39,6 +41,11 @@ function relatedCard(data) {
     setCurrent(current === 0 ? 0 : current - 1);
   };
 
+  function newProductState(value) {
+    console.log('PRODUCT ID: ', value);
+    setProductId(value);
+  }
+
   useEffect(() => {
     setCurrent(0);
   }, [data.data]);
@@ -61,14 +68,11 @@ function relatedCard(data) {
           {showModal ? <CompareModal value={currentItem} /> : null}
         </div>
       </div>
-      {
-        console.log(display)
-      }
 
       <CardWrapper>
         {
           display.map((info, index) => (
-            <StyledCard key={index}>
+            <StyledCard key={index} onClick={() => newProductState(info.product.id)}>
               <Comparison onClick={(e) => showDisplay(e, info.product.id)} />
               <StyleImg src={
                 info.style.thumbnail_url === null ? placeholder : info.style.thumbnail_url
@@ -124,6 +128,7 @@ height: 450px;
 margin: 15px;
 flex-direction: column;
 flex-wrap: nowrap;
+cursor: pointer;
 &:hover {
   box-shadow: 0 0 10px rgba(90, 90, 90, 0.8)
 }

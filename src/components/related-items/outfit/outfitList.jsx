@@ -49,7 +49,7 @@ export default function outfitList() {
     if (currentIndex < 0) {
       const listOfPromises = [];
       const promise = Promise.all([getRelatedInfo(currentProductId),
-      getRelatedStyle(currentProductId), getRelatedRating(currentProductId)]);
+        getRelatedStyle(currentProductId), getRelatedRating(currentProductId)]);
       listOfPromises.push(promise);
 
       Promise.all(listOfPromises).then((promiseResults) => {
@@ -117,7 +117,7 @@ export default function outfitList() {
 
   return (
     <div className="outfit-items-list">
-      <h2>YOUR OUTFIT</h2>
+      <h2>Build Your Outfit</h2>
       {
         cardList ? <OutfitCard data={outfitInfo} addCard={addCard} removeCard={removeCard} />
           : (
