@@ -6,12 +6,13 @@ import { useGlobalContext } from '../../../context/GlobalStore';
 
 export default function StyleSelector({ productInfo, currentStyle, setCurrentStyle }) {
   const { productId } = useGlobalContext();
+  const [currentThumbnail, setCurrentThumbnail] = useState(0);
 
   // Click a style
   const onStyleClick = (index) => {
     console.log('onclick index', index);
     setCurrentStyle(index);
-    console.log('what style:', currentStyle)
+    setCurrentThumbnail(index)
   };
 
   return (

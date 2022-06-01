@@ -49,7 +49,7 @@ export default function ProductInfo({ productInfo, currentStyle }) {
               On Sale: {productInfo[1].results[currentStyle].sale_price}
             </SalePrice>
           )
-          : null}
+          : null }
         <ProductOverview>
           {productInfo[0] ? productInfo[0].description : null}
         </ProductOverview>

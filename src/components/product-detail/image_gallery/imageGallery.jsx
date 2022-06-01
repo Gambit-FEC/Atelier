@@ -40,6 +40,15 @@ export default function ImageGallery({productInfo, currentStyle}) {
     setShowModel(!showModel);
   }
 
+  //handle zoom
+  const [zoom, setZoom] = useState(false);
+  const zoomScale = 2.5;
+  const handleZoom = (e) => {
+    e.stopPropagation();
+    setZoom((prevState) => !prevState)
+  }
+  const isDisabled = zoom;
+
   return (
     <>
       <ImagesBar>
@@ -55,11 +64,16 @@ export default function ImageGallery({productInfo, currentStyle}) {
             <div className="modal-bg modal-prod-detail" onClick={onImageClick}>
               <ExpandedLeft onClick={onLeftClick}/>
               <ModalBar id="modal-bar">
-                {images.map((slide, index) => (
+                {images.slice(0, 7).map((slide, index) => (
                   <ModalImageSelections key={index} src={slide.url} onClick={(e) => showSelectedImage(index, e)} />
                   ))}
               </ModalBar>
-              <ModalImage src={images[currentImage]?.url} onClick={(e) => e.stopPropagation()}/>
+              <ModalImage src={images[currentImage]?.url} onClick={(e) => handleZoom(e)}
+              style={{
+                transform: zoom ? `scale(${zoomScale})` : 'scale(1)',
+                cursor: zoom ? 'zoom-out' : 'crosshair',
+              }}
+              />
               <ExpandedRight onClick={onRightClick}/>
             </div>
           </ModalBarAndImage>
