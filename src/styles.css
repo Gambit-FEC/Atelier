@@ -20,8 +20,8 @@ body::-webkit-scrollbar-track, #reviews-list::-webkit-scrollbar-track {
 body::-webkit-scrollbar-thumb, #reviews-list::-webkit-scrollbar-thumb {
   background-color: #9F2B68;
   border: 3.5px solid lightgrey;
-  border-top-width: 2px;
-  border-bottom-width: 2px;
+  border-top-width: 0px;
+  border-bottom-width: 0px;
 }
 
 #app {
@@ -55,7 +55,7 @@ body::-webkit-scrollbar-thumb, #reviews-list::-webkit-scrollbar-thumb {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-
+  user-select: none;
 }
 
 .page-title {
@@ -71,6 +71,7 @@ body::-webkit-scrollbar-thumb, #reviews-list::-webkit-scrollbar-thumb {
   display: flex;
   flex-flow: column nowrap;
   margin-right: 30px;
+
 }
 
 .nav-bar-item {
