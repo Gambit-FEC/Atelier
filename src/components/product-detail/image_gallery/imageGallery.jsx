@@ -83,36 +83,30 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: 500px;
+  justify-content: center;
+  height: 600px;
   min-width: 500px;
 `
-
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  position: relative;
-`;
-
-const Image = styled.div`
-  display: flex;
-  width: 50px;
-`;
 
 const ImagesBar = styled.div`
   display: flex;
   flex-direction: column;
   align-content: space-between;
   justify-content: center;
+  padding: 30px;git 
 `;
 
 const ImageSelections = styled.img`
   display: flex;
   margin: 10px 0 10px;
-  width: 35px;
-  height: 35px;
+  width: 40px;
+  height: 40px;
   aspect-ratio: 1/1;
   object-fit: cover;
   cursor: pointer;
+  border-radius: 2px;
+  border: 2px solid;
+  &: hover {color: #9F2B68};
 `;
 
 const ArrowLeft = styled(BiChevronLeftCircle)`
@@ -121,7 +115,7 @@ const ArrowLeft = styled(BiChevronLeftCircle)`
   user-select: none;
   z-index: 10;
   position: relative;
-  left: 70px;
+  left: 45px;
   &: hover {color: #9F2B68;};
 `;
 
@@ -131,7 +125,7 @@ const ArrowRight = styled(BiChevronRightCircle)`
   user-select: none;
   z-index: 10;
   position: relative;
-  right: 96px;
+  right: 70px;
   &: hover {color: #9F2B68;};
 `;
 
@@ -142,8 +136,8 @@ const ExpandIcon = styled(AiOutlineExpand)`
   cursor: pointer;
   z-index: 10;
   position: relative;
-  top: -215px;
-  right: 54px;
+  top: -260px;
+  right: 27px;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   border-radius: 5px;
@@ -188,6 +182,7 @@ const ExpandedLeft = styled(BiChevronLeftCircle)`
   cursor: pointer;
   user-select: none;
   z-index: 110;
+  padding: 10px;
   &: hover {color: #9F2B68;};
 `;
 
@@ -197,5 +192,6 @@ const ExpandedRight = styled(BiChevronRightCircle)`
   cursor: pointer;
   user-select: none;
   z-index: 110;
+  padding: 10px;
   &: hover {color: #9F2B68;};
 `;

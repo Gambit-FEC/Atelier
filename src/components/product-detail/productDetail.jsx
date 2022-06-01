@@ -22,7 +22,7 @@ const ProductDetailContainer = styled.div`
 const NotImages = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: flex-start;
   max-width: 800px;
   min-width: 500px;
 `;
@@ -30,7 +30,7 @@ const NotImages = styled.div`
 const Images = styled.div`
   display: flex;
   width: 70%;
-  padding: 0 150px 0;
+  padding: 20px 130px 20px;
   align-items: center;
   justify-content: center;
 `;
