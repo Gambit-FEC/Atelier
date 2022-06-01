@@ -35,7 +35,7 @@ export default function ImageGallery({productInfo, currentStyle}) {
   useEffect(() => {
     setImages(productInfo[currentStyle].photos);
     setCurrentImage(0);
-  }, [currentStyle])
+  }, [currentStyle, productInfo, productId])
 
   // image expansion --------------------
   const onImageClick = () => {
@@ -93,7 +93,7 @@ const ImagesBar = styled.div`
   flex-direction: column;
   align-content: space-between;
   justify-content: center;
-  padding: 30px;git 
+  padding: 30px;git
 `;
 
 const ImageSelections = styled.img`
