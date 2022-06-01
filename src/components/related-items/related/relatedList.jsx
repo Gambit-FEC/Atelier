@@ -53,7 +53,7 @@ export default function relatedList() {
 
   return (
     <Container className="related-items-list">
-      <h2>You may also like...</h2>
+      <h2 className="related">You may also like...</h2>
       <RelatedCard data={relatedInfo} />
     </Container>
   );
@@ -62,4 +62,5 @@ export default function relatedList() {
 const Container = styled.div`
 display: flex;
 flex-direction: column;
+align-items: center;
 `;

@@ -340,6 +340,15 @@ select {
 }
 
 /* related */
+
+.related {
+  text-align: center;
+}
+
+.outfit {
+  text-align: center;
+}
+
 .rating-star {
   align-items: center;
 }
