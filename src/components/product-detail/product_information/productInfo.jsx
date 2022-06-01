@@ -100,7 +100,7 @@ const ProductName = styled.h2`
   font-weight: bold;
   text-transform: uppercase;
 `;
-// color: purple;
+// color: #9F2B68;
 
 const Price = styled.h4`
 `;
@@ -114,8 +114,9 @@ const PriceStreak = styled.h4`
 `;
 
 const ProductOverview = styled.h4`
+  width: 70%;
 `;
-// color: purple;
+// color: #9F2B68;
 
 const Share = styled.h3`
   font-weight: bold;
@@ -123,18 +124,21 @@ const Share = styled.h3`
 `;
 
 const Facebook = styled.img`
-    width: 25px;
-    height: 25px;
-    padding-right: 10px;
-  `;
+  width: 25px;
+  height: 25px;
+  padding-right: 10px;
+  cursor: pointer;
+`;
 
 const Twitter = styled.img`
-    width: 25px;
-    height: 25px;
-    padding-right: 10px;
-  `;
+  width: 25px;
+  height: 25px;
+  padding-right: 10px;
+  cursor: pointer;
+`;
 const Pin = styled.img`
-    width: 25px;
-    height: 25px;
-    padding-right: 10px;
-  `;
+  width: 25px;
+  height: 25px;
+  padding-right: 10px;
+  cursor: pointer;
+`;

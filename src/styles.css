@@ -64,6 +64,7 @@ select {
   width: 100vw;
   top: 0;
   left: 0;
+  z-index: 99;
   background-color: rgba(0, 0, 0, 0.8);
 }
 
@@ -98,6 +99,9 @@ select {
   display: none;
 }
 
+.modal-prod-detail {
+  display: flex;
+}
 
 
 
