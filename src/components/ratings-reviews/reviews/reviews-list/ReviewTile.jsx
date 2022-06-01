@@ -28,16 +28,20 @@ export default function ReviewTile({ review, hidden, search }) {
   const [readMore, setReadMore] = useState(review.body.length > 250);
   const [showModal, setShowModal] = useState({ show: false, src: '' });
   const { reviewFeedback, setReviewFeedback } = useRAndRContext();
+
   function handleReadMoreClick() {
     setReadMore(!readMore);
   }
+
   function handlePhotoClick(event) {
     showModal.show ? document.body.style.overflow = 'auto' : document.body.style.overflow = 'hidden';
     setShowModal({ show: !showModal.show, src: event.target.src });
   }
+
   function showPhotos() {
     return review.photos.map((item) => <img style={{ cursor: 'pointer', height: '100px' }} loading="lazy" key={item.id} src={item.url} alt={`review-${item.id}`} onClick={handlePhotoClick} />);
   }
+
   function handleHelpfulClick(e) {
     e.target.classList.add('clicked-link-button');
     e.target.removeAttribute('onClick');
@@ -53,6 +57,7 @@ export default function ReviewTile({ review, hidden, search }) {
         console.log('Error trying to mark review as helpful:', err);
       });
   }
+
   function handleReportClick(e) {
     e.target.classList.add('clicked-link-button');
     setReviewFeedback({
