@@ -23,8 +23,8 @@ export function RAndRContextProvider({ children }) {
   const [showWriteReview, setShowWriteReview] = useState(() => false);
   const [reviewSearch, setReviewSearch] = useState(() => '');
   const [reviewFeedback, setReviewFeedback] = useState(() => ({
-    helpful: [],
-    reported: [],
+    helpful: JSON.parse(localStorage.getItem('helpful')) || [],
+    reported: JSON.parse(localStorage.getItem('reported')) || [],
   }));
   const [showCollapse, setShowCollapse] = useState(() => false);
   const [shownReviews, setShownReviews] = useState(() => []);
