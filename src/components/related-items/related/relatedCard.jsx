@@ -120,6 +120,7 @@ object-fit:cover;
 `;
 
 const StyledCard = styled.div`
+border-radius: 10px;
 width: 300px;
 height: fit-content;
 margin: 15px;
@@ -127,6 +128,9 @@ flex-direction: column;
 flex-wrap: nowrap;
 align-items: center;
 justify-content: space-between;
+&:hover {
+  box-shadow: 0 0 10px #9F2B68
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -142,8 +146,6 @@ width: 100%;
 height: 100%;
 object-fit: cover;
 border-radius: 10px;
-border-width: 1px;
-border-style: solid;
 cursor: pointer;
 overflow: hidden;
 `;
@@ -156,12 +158,16 @@ float: right;
 margin: 5px;
 padding-bottom: 5px;
 cursor: pointer;
+&:hover {
+  color: #9F2B68
+}
 `;
 
 const InfoWrapper = styled.div`
 padding-top: 30px;
 text-align:center;
 cursor: pointer;
+padding-bottom: 10px;
 `;
 
 const CategoryWrapper = styled.p`
@@ -186,7 +192,7 @@ top: 250px;
 cursor: pointer;
 user-select: none;
 &:hover {
-  box-shadow: 0 0 10px rgba(90, 90, 90, 0.8)
+  color: #9F2B68
 }
 `;
 
@@ -208,7 +214,7 @@ top: 250px;
 cursor: pointer;
 user-select: none;
 &:hover {
-  box-shadow: 0 0 10px rgba(90, 90, 90, 0.8)
+  color: #9F2B68
 }
 `;
 

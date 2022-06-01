@@ -12,9 +12,12 @@ function compareModal({ value }) {
   const [relatedInfo, setRelatedInfo] = useState([]);
   const [currentInfo, setCurrentInfo] = useState([]);
   const [resultData, setResultData] = useState([]);
+  const [currentName, setCurrentName] = useState('');
+  const [relatedName, setRelatedName] = useState('');
 
   async function getRelatedProductInfo() {
     const result = await axios.get(`/products/${value}`);
+    setRelatedName(result.data[0].name);
     for (let i = 0; i < result.data[0].features.length; i++) {
       if (result.data[0].features[i].value !== null) {
         relatedData.push(result.data[0].features[i].value);
@@ -30,6 +33,7 @@ function compareModal({ value }) {
 
   async function getCurrentProductInfo() {
     const result = await axios.get(`/products/${productId}`);
+    setCurrentName(result.data[0].name);
     for (let i = 0; i < result.data[0].features.length; i++) {
       if (result.data[0].features[i].value !== null) {
         currentData.push(result.data[0].features[i].value);
@@ -77,9 +81,9 @@ function compareModal({ value }) {
     <StyledTable className="table-component">
       <thead>
         <tr>
-          <th>Related Product</th>
+          <th>{relatedName}</th>
           <th>Characteristic</th>
-          <th>Current Product</th>
+          <th>{currentName}</th>
         </tr>
       </thead>
       <tbody className="table-body">

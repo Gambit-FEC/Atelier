@@ -112,7 +112,7 @@ export default function outfitList() {
 
   return (
     <div className="outfit-items-list">
-      <h2>Build Your Outfit</h2>
+      <h2 className="outfit">Build Your Outfit</h2>
       {
         cardList ? <OutfitCard data={outfitInfo} addCard={addCard} removeCard={removeCard} />
           : (
