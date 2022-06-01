@@ -5,7 +5,6 @@ import SelectSize from './sizes';
 import SelectQuantity from './quantities';
 import AddButton from './addButton';
 import { useGlobalContext } from '../../../context/GlobalStore';
-// import { set } from 'date-fns';
 
 // create arrays for styles --------------
 function AllStyles(styles) {
@@ -35,9 +34,9 @@ export default function AddToCart({ productInfo, currentStyle }) {
   // const [skuIndex, setskuIndex] = useState(0);
   // const [skuID, setSkuID] = useState(0);
 
-  console.log('add me to cart hohoho', productInfo);
-  console.log('add me to cart hohoho with style', productInfo[currentStyle].skus);
-  console.log('styleID??', styleID);
+  // console.log('add me to cart hohoho', productInfo);
+  // console.log('add me to cart hohoho with style', productInfo[currentStyle].skus);
+  // console.log('styleID??', styleID);
 
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedQuantity, setSelectedQuantity] = useState(0);
@@ -67,7 +66,6 @@ export default function AddToCart({ productInfo, currentStyle }) {
       quantArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
       setQuantMax(quantArray);
       setSelectedSize(e.target.value);
-      console.log('selected size???', selectedSize);
     } else {
       for (let i = 1; i <= quantities[e.target.selectedIndex - 1]; i += 1) {
         quantArray.push(i);
@@ -80,10 +78,6 @@ export default function AddToCart({ productInfo, currentStyle }) {
       console.log('selected size???', selectedSize);
     }
   };
-
-  // useEffect(() => {
-  //   setQuantities([]);
-  // }, [selectedSize]);
 
   return (
     <Wrapper>
@@ -104,8 +98,3 @@ const Wrapper = styled.div`
 const Selectors = styled.div`
   align-items: flex-end;
 `;
-
-// const Add = styled.button`
-//   max-width: 150px;
-//   height: 20px;
-// `;

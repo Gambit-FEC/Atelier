@@ -1,5 +1,4 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useGlobalContext } from '../../../context/GlobalStore';
 import { StyledRatingStars } from '../../../styled-lib';
@@ -24,8 +23,6 @@ const pn = 'https://img.icons8.com/color/344/pinterest--v1.png';
 export default function ProductInfo({ productInfo, currentStyle }) {
   const { avgRating, totalReviews } = useGlobalContext();
 
-  // console.log("NOT ANDY", productInfo)
-
   return (
     <Wrapper>
       <div>
@@ -43,15 +40,6 @@ export default function ProductInfo({ productInfo, currentStyle }) {
         <ProductName>
           {productInfo[0] ? productInfo[0].name : null}
         </ProductName>
-
-        {/* <Price>
-          {productInfo[1] ? productInfo[1].results[currentStyle].original_price : null}
-        </Price>
-        <SalePrice>
-          {productInfo[1] ? productInfo[1].results[currentStyle].sale_price : null}
-        </SalePrice> */}
-        {/* <PriceStreak>{productInfo[1].results[currentStyle].original_price}</PriceStreak> */}
-
         {productInfo[1].results[currentStyle].sale_price
           ? <PriceStreak>{productInfo[1].results[currentStyle].original_price}</PriceStreak>
           : <Price>{productInfo[1].results[currentStyle].original_price}</Price>}
@@ -62,11 +50,9 @@ export default function ProductInfo({ productInfo, currentStyle }) {
             </SalePrice>
           )
           : null}
-
         <ProductOverview>
           {productInfo[0] ? productInfo[0].description : null}
         </ProductOverview>
-
         <Share id="social-media">
           <p>Share this item!</p>
           <Facebook src={fb} onClick={() => onFacebookClick()} />
@@ -93,14 +79,13 @@ const Category = styled.div`
   font-weight: lighter;
   text-transform: uppercase;
   margin: 10px 0 10px;
+  color: rgba(102, 91, 165, 1);
 `;
-// color: rgba(102, 91, 165, 1);
 
 const ProductName = styled.h2`
   font-weight: bold;
   text-transform: uppercase;
 `;
-// color: #9F2B68;
 
 const Price = styled.h4`
 `;
@@ -116,7 +101,6 @@ const PriceStreak = styled.h4`
 const ProductOverview = styled.h4`
   width: 70%;
 `;
-// color: #9F2B68;
 
 const Share = styled.h3`
   font-weight: bold;
