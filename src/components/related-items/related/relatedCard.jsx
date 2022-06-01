@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { FcNext, FcPrevious } from 'react-icons/fc';
-import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
+import { BiChevronLeftCircle, BiChevronRightCircle } from 'react-icons/bi';
+import { HiEye } from 'react-icons/hi';
 import styled from 'styled-components';
 import CompareModal from './compareModal';
 import { StyledRatingStars } from '../../../styled-lib';
@@ -19,6 +19,8 @@ function relatedCard(data) {
     const modal = document.getElementById('myModal');
 
     modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    document.body.style.height = '100%';
   }
 
   function closeDisplay() {
@@ -26,6 +28,8 @@ function relatedCard(data) {
     setModal(!showModal);
     setCurrentItem(0);
     modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+    document.body.style.height = 'auto';
   }
 
   const nextSlide = () => {
@@ -40,18 +44,12 @@ function relatedCard(data) {
   }, [data.data]);
 
   return (
-    <Container>
+    <RelatedList>
       {
         current !== 0
-          ? <FcPrevious className="left-arrow" onClick={prevSlide} />
-          : <FcPrevious className="left-arrow transparent-arrow" />
+          ? <PrevArrow onClick={prevSlide} />
+          : <PrevArrowTrans />
       }
-      {
-        current !== maxDisplay
-          ? <FcNext className="right-arrow" onClick={nextSlide} />
-          : <FcNext className="right-arrow transparent-arrow" />
-      }
-
       <div id="myModal" className="modal">
         <div className="modal-content">
           <span
@@ -95,17 +93,20 @@ function relatedCard(data) {
           ))
         }
       </CardWrapper>
-    </Container>
+      {
+        current !== maxDisplay
+          ? <NextArrow onClick={nextSlide} />
+          : <NextArrowTrans />
+      }
+    </RelatedList>
   );
 }
 
 export default relatedCard;
 
-const Container = styled.div`
-position: relative;
-display:flex;
-justify-content: space-evenly;
-align-items: center;
+const RelatedList = styled.div`
+display: flex;
+flex-direction: row;
 `;
 
 const CardWrapper = styled.div`
@@ -114,18 +115,15 @@ object-fit:cover;
 `;
 
 const StyledCard = styled.div`
-display: flex;
 border-radius: 10px;
-padding: 15px;
+padding: 20px;
 border-width: 5px;
 border-style: solid;
-width: 20%;
-height: 420px;
-margin: 10px;
+width: 270px;
+height: 450px;
+margin: 15px;
 flex-direction: column;
 flex-wrap: nowrap;
-align-items: center;
-justify-content: space-between;
 &:hover {
   box-shadow: 0 0 10px rgba(90, 90, 90, 0.8)
 }
@@ -134,10 +132,24 @@ justify-content: space-between;
 const StyleImg = styled.img`
 width: 100%;
 height: 250px;
-object-fit: contain;
+object-fit: fill;
+align-items: center;
+position: relative;
+cursor: pointer;
+`;
+
+const Comparison = styled(HiEye)`
+height: 20px;
+width: auto;
+position: relative;
+float: right;
+margin: 5px;
+padding-bottom: 5px;
+cursor: pointer;
 `;
 
 const InfoWrapper = styled.div`
+text-align:center;
   background-color: white;
 `;
 
@@ -155,7 +167,46 @@ font-weight: normal;
 font-size: 16px;
 `;
 
-const Comparison = styled(AiOutlineStar)`
-right:0;
-top:-15px;
+const NextArrow = styled(BiChevronRightCircle)`
+position: relative;
+height: 30px;
+width: auto;
+top: 250px;
+cursor: pointer;
+user-select: none;
+&:hover {
+  box-shadow: 0 0 10px rgba(90, 90, 90, 0.8)
+}
+`;
+
+const NextArrowTrans = styled(BiChevronRightCircle)`
+position: relative;
+height: 30px;
+width: auto;
+top: 250px;
+cursor: default;
+user-select: none;
+opacity: 0.01;
+`;
+
+const PrevArrow = styled(BiChevronLeftCircle)`
+position: relative;
+height: 30px;
+width: auto;
+top: 250px;
+cursor: pointer;
+user-select: none;
+&:hover {
+  box-shadow: 0 0 10px rgba(90, 90, 90, 0.8)
+}
+`;
+
+const PrevArrowTrans = styled(BiChevronLeftCircle)`
+position: relative;
+height: 30px;
+width: auto;
+top: 250px;
+cursor: default;
+user-select: none;
+opacity: 0.01;
 `;
