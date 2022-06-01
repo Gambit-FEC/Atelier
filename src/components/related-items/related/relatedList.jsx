@@ -40,7 +40,6 @@ export default function relatedList() {
           product.favorite = false;
           allProductList.push(product);
         });
-        // console.log(allProductList);
         setRelatedInfo(allProductList);
       }).catch((err) => {
         console.log(err);

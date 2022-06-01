@@ -8,9 +8,9 @@ function compareModal({ value }) {
   const { productId } = useGlobalContext();
   const relatedData = [];
   const currentData = [];
+  const valueData = [];
   const [relatedInfo, setRelatedInfo] = useState([]);
   const [currentInfo, setCurrentInfo] = useState([]);
-  const valueData = [];
   const [resultData, setResultData] = useState([]);
 
   async function getRelatedProductInfo() {
@@ -20,7 +20,13 @@ function compareModal({ value }) {
         relatedData.push(result.data[0].features[i].value);
       }
     }
+    console.log('RELATED DATA', relatedData);
     setRelatedInfo(relatedData);
+    for (let i = 0; i < result.data[0].features.length; i++) {
+      if (result.data[0].features[i].value !== null) {
+        valueData.push(result.data[0].features[i].value);
+      }
+    }
   }
 
   async function getCurrentProductInfo() {
@@ -30,13 +36,21 @@ function compareModal({ value }) {
         currentData.push(result.data[0].features[i].value);
       }
     }
+    console.log('CURRENT DATA', currentData);
     setCurrentInfo(currentData);
     for (let i = 0; i < result.data[0].features.length; i++) {
       if (resultData.indexOf(result.data[0].features[i].value) < 0) {
-        valueData.push(result.data[0].features[i].value);
+        if (result.data[0].features[i].value !== null) {
+          valueData.push(result.data[0].features[i].value);
+        }
       }
     }
+    console.log(valueData);
   }
+
+  // async function getAllFeatureInfo() {
+
+  // }
 
   async function callBothFunctions() {
     await getRelatedProductInfo();
