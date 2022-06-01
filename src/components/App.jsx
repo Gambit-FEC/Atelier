@@ -7,14 +7,24 @@ import RatingsAndReviews from './ratings-reviews/RatingsAndReviews';
 
 function App() {
   return (
-    <GlobalContextProvider>
-      <ProductDetail />
-      {/* <QuestionsAndAnswers /> */}
-      <RelatedItems />
-      <RAndRContextProvider>
-        <RatingsAndReviews />
-      </RAndRContextProvider>
-    </GlobalContextProvider>
+    <>
+      <div className="page-top-bar">
+        <div className="page-title">Gambit Outlet</div>
+        <div className="nav-bar">
+          <a className="underline-button nav-bar-item" href="#productDetail">Product Overview</a>
+          <a className="underline-button nav-bar-item" href="#related-products-module">Related Products & Outfit</a>
+          <a className="underline-button nav-bar-item" href="#ratings-and-reviews">Ratings and Reviews</a>
+        </div>
+      </div>
+      <GlobalContextProvider>
+        <ProductDetail />
+        {/* <QuestionsAndAnswers /> */}
+        <RelatedItems />
+        <RAndRContextProvider>
+          <RatingsAndReviews />
+        </RAndRContextProvider>
+      </GlobalContextProvider>
+    </>
   );
 }
 

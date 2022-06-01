@@ -6,7 +6,22 @@
 
 body {
   margin: 50px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+  margin-top: 110px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow-x: hidden;
+}
+
+body::-webkit-scrollbar, #reviews-list::-webkit-scrollbar {
+  width: 18px;
+}
+body::-webkit-scrollbar-track, #reviews-list::-webkit-scrollbar-track {
+  background: lightgrey;
+}
+body::-webkit-scrollbar-thumb, #reviews-list::-webkit-scrollbar-thumb {
+  background-color: #9F2B68;
+  border: 3.5px solid lightgrey;
+  border-top-width: 0px;
+  border-bottom-width: 0px;
 }
 
 #app {
@@ -16,9 +31,56 @@ body {
 }
 
 @media screen and (max-width:1199px) {
-  #ratings-and-reviews { margin-left:auto !important; }
-  #productDetail { margin-left:auto !important; }
-  #related-products-module { margin-left:auto !important; }
+  #ratings-and-reviews {
+    margin-left: auto !important;
+  }
+
+  #productDetail {
+    margin-left: auto !important;
+  }
+
+  #related-products-module {
+    margin-left: auto !important;
+  }
+}
+
+.page-top-bar {
+  position: absolute;
+  top:0;
+  left:0;
+  background-color: #9F2B68;
+  height: 88px;
+  width: 100%;
+  margin: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  user-select: none;
+}
+
+.page-title {
+  font-size: 60px;
+  font-weight: 800;
+  text-decoration: underline;
+  min-width: fit-content;
+  margin: 10px;
+  margin-left: 30px;
+}
+
+.nav-bar {
+  display: flex;
+  flex-flow: column nowrap;
+  margin-right: 30px;
+
+}
+
+.nav-bar-item {
+  font-size: larger;
+  margin-right: 10px;
+}
+
+.nav-bar-item:hover {
+  background-color: black !important;
 }
 
 h1 {
@@ -152,19 +214,24 @@ select {
   align-items: flex-start;
   margin-top: 25px;
   margin-bottom: 5px;
-  width: 91%;
+  width: 90%;
   padding: 15px;
   border: 2px solid #9F2B68;
   box-shadow: 2px 2px 2px #9F2B68;
 }
 
-.review-tile>* {
-  margin: 0px;
+.review-tile> * {
+  margin-top: 5px;
   word-break: break-word;
 }
 
 .review-tile-rating {
   user-select: none;
+}
+
+.review-tile-photos > * {
+  margin-right: 5px;
+  margin-bottom: 5px !important;
 }
 
 .review-summary {
@@ -231,6 +298,7 @@ select {
 .bigger-radio {
   height: 16px;
   width: 16px;
+  accent-color: #9F2B68;
 }
 
 .popup-prompt {
@@ -259,6 +327,14 @@ select {
 .form-italic {
   font-style: italic;
   color: #424242;
+}
+
+.form-stars {
+  font-size: xxx-large;
+  cursor: pointer;
+  padding: 0px;
+  border: none;
+  background-color: transparent;
 }
 
 /* related */

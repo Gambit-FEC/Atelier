@@ -89,7 +89,7 @@ export default function ReviewTile({ review, hidden, search }) {
       <div id={`review-${review.review_id}`} className="review-tile" hidden={hidden}>
         <div>
           <HighlightText text={review.reviewer_name} highlight={search} />
-          <span style={{ marginLeft: '20px' }}>{format(parseISO(review.date), 'MMM dd, yyyy')}</span>
+          <span>{` | ${format(parseISO(review.date), 'MMM dd, yyyy')}`}</span>
         </div>
         <StyledRatingStars className="review-tile-rating" rating={review.rating}>★★★★★</StyledRatingStars>
         <HighlightText summary text={review.summary} highlight={search} />
@@ -100,7 +100,7 @@ export default function ReviewTile({ review, hidden, search }) {
           </div>
         )}
         {!readMore && <HighlightText text={review.body} highlight={search} />}
-        <div>
+        <div className="review-tile-photos">
           {showPhotos()}
         </div>
         {review.recommend && <div>I recommend this product ✔️</div>}
