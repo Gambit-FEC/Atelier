@@ -12,8 +12,6 @@ export default function ImageGallery({productInfo, currentStyle}) {
   const { length } = images;
   const [showModel, setShowModel] = useState(false);
 
-  // console.log('images', images);
-
   // onClick functionalities for slides -------------
   const onLeftClick = (e) => {
     console.log('left');
@@ -79,6 +77,7 @@ export default function ImageGallery({productInfo, currentStyle}) {
 
 // onClick={(e) => e.stopPropagation()}
 
+// original display -----------------------------
 const Container = styled.div`
   border: white;
   display: flex;

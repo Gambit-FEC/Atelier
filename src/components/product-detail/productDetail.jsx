@@ -36,7 +36,6 @@ const Images = styled.div`
 `;
 
 export default function ProductDetail() {
-  // test------
   const { productId } = useGlobalContext();
   const [productInfo, setProductInfo] = useState([]);
   const [currentStyle, setCurrentStyle] = useState(0);
