@@ -60,7 +60,6 @@ export default function outfitList() {
           product.rating = element[2].data;
           outfitArray.push(product);
         });
-        console.log('after :', outfitArray);
         setOutfitInfo([...outfitArray]);
       }).catch((err) => {
         console.log(err);
@@ -73,8 +72,6 @@ export default function outfitList() {
     if (localStorageItem.length > 0) {
       const currentIndex = localStorageItem
         .findIndex((productID) => productID === currentProductId);
-      console.log(currentIndex);
-      console.log('length ', localStorageItem.length);
       if (currentIndex === 0 && localStorageItem.length === 1) {
         localStorage.removeItem('outfits');
         outfitArray = [];
@@ -95,8 +92,6 @@ export default function outfitList() {
     if (typeof (Storage) !== 'undefined') {
       saveToLocalStorage(productId);
       getRelatedProducts(productId);
-    } else {
-      console.log('BROWSER DOES NOT SUPPORT');
     }
   }
 

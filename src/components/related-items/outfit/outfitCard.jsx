@@ -21,8 +21,8 @@ export function EmptyCard({ addCard }) {
 export function OutfitCard({ data, removeCard, addCard }) {
   const placeholder = 'http://placecorgi.com/260/180';
   const [current, setCurrent] = useState(0);
-  const display = data.slice(current, (current + 4));
-  const maxDisplay = data.length - 4;
+  const display = data.slice(current, (current + 3));
+  const maxDisplay = data.length - 3;
 
   const nextSlide = () => {
     setCurrent(current === maxDisplay ? current : current + 1);
@@ -70,7 +70,7 @@ export function OutfitCard({ data, removeCard, addCard }) {
         ))
       }
       {
-        current > 4
+        current !== maxDisplay
           ? <NextArrow onClick={nextSlide} />
           : <NextArrowTrans />
       }

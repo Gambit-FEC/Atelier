@@ -42,7 +42,6 @@ function relatedCard(data) {
   };
 
   function newProductState(value) {
-    console.log('PRODUCT ID: ', value);
     setProductId(value);
   }
 
