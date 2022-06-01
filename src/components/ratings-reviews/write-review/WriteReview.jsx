@@ -35,7 +35,7 @@ export default function WriteReview() {
     imageData.append('file', file);
     imageData.append('api_key', '939183845857327');
     imageData.append('upload_preset', 'ml_default');
-    return axios.post('https://api.cloudinary.com/v1_1/gilcohen67/image/upload', imageData);
+    return axios.post('https://api.cloudinary.com/v1_1/gc7654738/image/upload', imageData);
   }
 
   function postForm() {

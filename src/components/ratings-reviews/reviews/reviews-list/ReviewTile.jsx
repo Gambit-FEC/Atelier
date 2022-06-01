@@ -36,7 +36,7 @@ export default function ReviewTile({ review, hidden, search }) {
     setShowModal({ show: !showModal.show, src: event.target.src });
   }
   function showPhotos() {
-    return review.photos.map((item) => <img style={{ cursor: 'pointer', height: '100px' }} key={item.id} src={item.url} alt={`review-${item.id}`} onClick={handlePhotoClick} />);
+    return review.photos.map((item) => <img style={{ cursor: 'pointer', height: '100px' }} loading="lazy" key={item.id} src={item.url} alt={`review-${item.id}`} onClick={handlePhotoClick} />);
   }
   function handleHelpfulClick(e) {
     e.target.classList.add('clicked-link-button');
