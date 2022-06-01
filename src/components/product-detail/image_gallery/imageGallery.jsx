@@ -14,13 +14,11 @@ export default function ImageGallery({productInfo, currentStyle}) {
 
   // onClick functionalities for slides -------------
   const onLeftClick = (e) => {
-    console.log('left');
     e.stopPropagation()
     setCurrentImage(currentImage === 0 ? length - 1 : currentImage - 1);
   };
 
   const onRightClick = (e) => {
-    console.log('right');
     e.stopPropagation()
     setCurrentImage(currentImage === length - 1 ? 0 : currentImage + 1);
   };
@@ -39,7 +37,6 @@ export default function ImageGallery({productInfo, currentStyle}) {
 
   // image expansion --------------------
   const onImageClick = () => {
-    console.log('showModel:', showModel);
     setShowModel(!showModel);
   }
 

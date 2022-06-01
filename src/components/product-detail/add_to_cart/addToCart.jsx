@@ -25,7 +25,7 @@ function AllStyles(styles) {
 export default function AddToCart({ productInfo, currentStyle }) {
   const { productId } = useGlobalContext();
   const allStyles = AllStyles(productInfo[currentStyle].skus);
-  console.log('allStyles', allStyles);
+  // console.log('allStyles', allStyles);
 
   const [styleID, setStyleID] = useState(productInfo[currentStyle].style_id);
   const [sizes, setSizes] = useState(allStyles[0]);
@@ -71,11 +71,11 @@ export default function AddToCart({ productInfo, currentStyle }) {
         quantArray.push(i);
       }
       setQuantMax(quantArray);
-      console.log('quantArray = ', quantArray);
-      console.log('quant max??', quantMax);
+      // console.log('quantArray = ', quantArray);
+      // console.log('quant max??', quantMax);
       setSelectedSize(e.target.value);
-      console.log('target value: ', e.target.value);
-      console.log('selected size???', selectedSize);
+      // console.log('target value: ', e.target.value);
+      // console.log('selected size???', selectedSize);
     }
   };
 
