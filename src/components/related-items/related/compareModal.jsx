@@ -48,10 +48,6 @@ function compareModal({ value }) {
     console.log(valueData);
   }
 
-  // async function getAllFeatureInfo() {
-
-  // }
-
   async function callBothFunctions() {
     await getRelatedProductInfo();
     await getCurrentProductInfo();
