@@ -71,13 +71,15 @@ function relatedCard(data) {
       <CardWrapper>
         {
           display.map((info, index) => (
-            <StyledCard key={index} onClick={() => newProductState(info.product.id)}>
+            <StyledCard key={index}>
               <Comparison onClick={(e) => showDisplay(e, info.product.id)} />
-              <StyleImg src={
-                info.style.thumbnail_url === null ? placeholder : info.style.thumbnail_url
-              }
-              />
-              <InfoWrapper value={info.product.id}>
+              <ImageContainer onClick={() => newProductState(info.product.id)}>
+                <StyleImg src={
+                  info.style.thumbnail_url === null ? placeholder : info.style.thumbnail_url
+                }
+                />
+              </ImageContainer>
+              <InfoWrapper value={info.product.id} onClick={() => newProductState(info.product.id)}>
                 <CategoryWrapper>
                   {info.product.category}
                 </CategoryWrapper>
@@ -118,28 +120,32 @@ object-fit:cover;
 `;
 
 const StyledCard = styled.div`
-border-radius: 10px;
-padding: 20px;
-border-width: 5px;
-border-style: solid;
-width: 270px;
-height: 450px;
+width: 300px;
+height: fit-content;
 margin: 15px;
 flex-direction: column;
 flex-wrap: nowrap;
-cursor: pointer;
-&:hover {
-  box-shadow: 0 0 10px rgba(90, 90, 90, 0.8)
-}
+align-items: center;
+justify-content: space-between;
+`;
+
+const ImageContainer = styled.div`
+height: 250px;
+width: 300px;
+object-fit: cover;
 `;
 
 const StyleImg = styled.img`
+display: block;
+background-size: contain;
 width: 100%;
-height: 250px;
-object-fit: fill;
-align-items: center;
-position: relative;
+height: 100%;
+object-fit: cover;
+border-radius: 10px;
+border-width: 1px;
+border-style: solid;
 cursor: pointer;
+overflow: hidden;
 `;
 
 const Comparison = styled(HiEye)`
@@ -153,8 +159,9 @@ cursor: pointer;
 `;
 
 const InfoWrapper = styled.div`
+padding-top: 30px;
 text-align:center;
-  background-color: white;
+cursor: pointer;
 `;
 
 const CategoryWrapper = styled.p`
