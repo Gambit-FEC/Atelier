@@ -12,8 +12,10 @@ import StyleSelector from './style_selector/styleSelector';
 const ProductDetailContainer = styled.div`
   display: flex;
   flex-direction: row;
-  width: 90vw;
+  width: 80vw;
   margin: 0 auto;
+  user-select: none;
+  max-width: fit-content;
 `;
 
 // Create a Wrapper component that'll render a <section> tag with some styles
@@ -28,7 +30,9 @@ const NotImages = styled.div`
 const Images = styled.div`
   display: flex;
   width: 70%;
+  padding: 0 150px 0;
   align-items: center;
+  justify-content: center;
 `;
 
 export default function ProductDetail() {
@@ -68,4 +72,3 @@ export default function ProductDetail() {
     </div>
   );
 }
-

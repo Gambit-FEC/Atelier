@@ -49,7 +49,7 @@ const AllThumbnails = styled.div`
   max-width: 350px;
   &:focus {
     outline: none;
-    border-color: purple;
+    border-color: #9F2B68;
   }
 `;
 
@@ -65,5 +65,7 @@ const Thumbnails = styled.img`
   border: 2px solid;
   box-sizing: border-box;
   margin: 10px;
+  &: hover {color: #9F2B68;};
+  cursor: pointer;
 `;
 
