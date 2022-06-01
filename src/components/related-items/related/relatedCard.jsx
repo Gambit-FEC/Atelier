@@ -4,21 +4,16 @@ import { HiEye } from 'react-icons/hi';
 import styled from 'styled-components';
 import CompareModal from './compareModal';
 import { StyledRatingStars } from '../../../styled-lib';
-import { GlobalContext, useGlobalContext } from '../../../context/GlobalStore';
+import { useGlobalContext } from '../../../context/GlobalStore';
 
 function relatedCard(data) {
-  const placeholder = 'http://placecorgi.com/260/180';
   const { setProductId } = useGlobalContext();
+  const placeholder = 'http://placecorgi.com/260/180';
   const [current, setCurrent] = useState(0);
   const display = data.data.slice(current, (current + 4));
   const maxDisplay = data.data.length - 4;
   const [showModal, setModal] = useState(false);
   const [currentItem, setCurrentItem] = useState(0);
-
-  function newProduct(value) {
-    console.log('PRODUCT ID: ', value);
-    setProductId(value);
-  }
 
   function showDisplay(e, value) {
     setModal(!showModal);
@@ -46,6 +41,11 @@ function relatedCard(data) {
     setCurrent(current === 0 ? 0 : current - 1);
   };
 
+  function newProductState(value) {
+    console.log('PRODUCT ID: ', value);
+    setProductId(value);
+  }
+
   useEffect(() => {
     setCurrent(0);
   }, [data.data]);
@@ -68,14 +68,11 @@ function relatedCard(data) {
           {showModal ? <CompareModal value={currentItem} /> : null}
         </div>
       </div>
-      {
-        console.log(display)
-      }
 
       <CardWrapper>
         {
           display.map((info, index) => (
-            <StyledCard key={index} onClick={() => newProduct(info.product.id)}>
+            <StyledCard key={index} onClick={() => newProductState(info.product.id)}>
               <Comparison onClick={(e) => showDisplay(e, info.product.id)} />
               <StyleImg src={
                 info.style.thumbnail_url === null ? placeholder : info.style.thumbnail_url

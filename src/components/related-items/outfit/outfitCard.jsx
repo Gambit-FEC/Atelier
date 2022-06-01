@@ -19,7 +19,6 @@ export function EmptyCard({ addCard }) {
 }
 
 export function OutfitCard({ data, removeCard, addCard }) {
-  console.log('OUTFIT CARD', data);
   const placeholder = 'http://placecorgi.com/260/180';
   const [current, setCurrent] = useState(0);
   const display = data.slice(current, (current + 4));

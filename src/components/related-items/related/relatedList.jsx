@@ -49,7 +49,7 @@ export default function relatedList() {
 
   useEffect(() => {
     getRelatedProducts();
-  }, []);
+  }, [productId]);
 
   return (
     <Container className="related-items-list">
