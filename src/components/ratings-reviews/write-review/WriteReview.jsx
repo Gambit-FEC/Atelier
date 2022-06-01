@@ -119,6 +119,7 @@ export default function WriteReview() {
     }
     for (let i = 0; i < parseInt(e.target.id, 10); i++) {
       e.target.parentNode.children[i].value = '★';
+      e.target.parentNode.children[i].setAttribute('style', 'color: #9F2B68;');
     }
   }
 
@@ -128,6 +129,7 @@ export default function WriteReview() {
     }
     for (let i = 0; i < parseInt(e.target.id, 10); i++) {
       e.target.parentNode.children[i].value = '☆';
+      e.target.parentNode.children[i].setAttribute('style', 'color: black;');
     }
   }
 
@@ -143,7 +145,7 @@ export default function WriteReview() {
     const spans = [];
     if (formData.rating === '0') {
       for (let i = 0; i < 5; i++) {
-        spans.push(<input type="button" key={i} id={i + 1} value="☆" style={{ fontSize: 'x-large', cursor: 'pointer', padding: '0px', border: 'none', backgroundColor: 'transparent' }} onClick={handleStarClick} onMouseEnter={handleStarMouseEnter} onMouseLeave={handleStarMouseLeave} required />);
+        spans.push(<input type="button" key={i} id={i + 1} value="☆" className="form-stars" onClick={handleStarClick} onMouseEnter={handleStarMouseEnter} onMouseLeave={handleStarMouseLeave} required />);
       }
       return (
         <div id="star-buttons">
@@ -153,9 +155,9 @@ export default function WriteReview() {
     }
     for (let i = 0; i < 5; i++) {
       if (i < formData.rating) {
-        spans.push(<input type="button" key={i} id={i + 1} value="★" style={{ fontSize: 'x-large', cursor: 'pointer', padding: '0px', border: 'none', backgroundColor: 'transparent' }} onClick={handleStarClick} required />);
+        spans.push(<input type="button" key={i} id={i + 1} value="★" className="form-stars" style={{ color: '#9F2B68' }} onClick={handleStarClick} required />);
       } else {
-        spans.push(<input type="button" key={i} id={i + 1} value="☆" style={{ fontSize: 'x-large', cursor: 'pointer', padding: '0px', border: 'none', backgroundColor: 'transparent' }} onClick={handleStarClick} required />);
+        spans.push(<input type="button" key={i} id={i + 1} value="☆" className="form-stars" onClick={handleStarClick} required />);
       }
     }
     return (

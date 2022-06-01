@@ -9,6 +9,18 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
+body::-webkit-scrollbar {
+  width: 12px;
+}
+body::-webkit-scrollbar-track {
+  background: orange;        /* color of the tracking area */
+}
+body::-webkit-scrollbar-thumb {
+  background-color: blue;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid orange;  /* creates padding around scroll thumb */
+}
+
 #app {
   display: flex;
   flex-direction: column;
@@ -16,9 +28,17 @@ body {
 }
 
 @media screen and (max-width:1199px) {
-  #ratings-and-reviews { margin-left:auto !important; }
-  #productDetail { margin-left:auto !important; }
-  #related-products-module { margin-left:auto !important; }
+  #ratings-and-reviews {
+    margin-left: auto !important;
+  }
+
+  #productDetail {
+    margin-left: auto !important;
+  }
+
+  #related-products-module {
+    margin-left: auto !important;
+  }
 }
 
 h1 {
@@ -148,19 +168,24 @@ select {
   align-items: flex-start;
   margin-top: 25px;
   margin-bottom: 5px;
-  width: 91%;
+  width: 90%;
   padding: 15px;
   border: 2px solid #9F2B68;
   box-shadow: 2px 2px 2px #9F2B68;
 }
 
-.review-tile>* {
-  margin: 0px;
+.review-tile> * {
+  margin-top: 5px;
   word-break: break-word;
 }
 
 .review-tile-rating {
   user-select: none;
+}
+
+.review-tile-photos > * {
+  margin-right: 5px;
+  margin-bottom: 5px !important;
 }
 
 .review-summary {
@@ -227,6 +252,7 @@ select {
 .bigger-radio {
   height: 16px;
   width: 16px;
+  accent-color: #9F2B68;
 }
 
 .popup-prompt {
@@ -255,6 +281,14 @@ select {
 .form-italic {
   font-style: italic;
   color: #424242;
+}
+
+.form-stars {
+  font-size: xxx-large;
+  cursor: pointer;
+  padding: 0px;
+  border: none;
+  background-color: transparent;
 }
 
 /* related */
