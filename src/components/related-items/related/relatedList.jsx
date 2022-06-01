@@ -6,7 +6,6 @@ import { useGlobalContext } from '../../../context/GlobalStore';
 
 export default function relatedList() {
   const { productId } = useGlobalContext();
-  const allProductList = [];
   const [relatedInfo, setRelatedInfo] = useState([]);
 
   function getRelatedInfo(id) {
@@ -23,6 +22,7 @@ export default function relatedList() {
 
   function getRelatedProducts() {
     const listOfPromises = [];
+    const allProductList = [];
     axios.get(`/related/productList/${productId}`).then((productIdsResponse) => {
       const listOfIds = productIdsResponse.data;
       listOfIds.forEach((id) => {
