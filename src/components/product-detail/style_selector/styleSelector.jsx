@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-// import Thumbnail from './thumbnails';
 import styled from 'styled-components';
 
-// import Thumbnail from './thumbnails';
 import { useGlobalContext } from '../../../context/GlobalStore';
 
 export default function StyleSelector({ productInfo, currentStyle, setCurrentStyle }) {
   const { productId } = useGlobalContext();
-
-  // console.log("prod info?", productInfo)
 
   // Click a style
   const onStyleClick = (index) => {
@@ -24,7 +20,7 @@ export default function StyleSelector({ productInfo, currentStyle, setCurrentSty
       {productInfo.length && (
       <Wrapper>
         <ProductStyle>
-          Style: {productInfo[currentStyle] ? productInfo[currentStyle].name : null}
+          Style > {productInfo[currentStyle] ? productInfo[currentStyle].name : null}
         </ProductStyle>
         <AllThumbnails>
           {productInfo.map((item, index) => (
