@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { BiChevronLeftCircle, BiChevronRightCircle } from 'react-icons/bi';
-import { HiEye } from 'react-icons/hi';
+import { MdArrowBackIosNew, MdArrowForwardIos } from 'react-icons/md';
 import styled from 'styled-components';
 import CompareModal from './compareModal';
 import { StyledRatingStars } from '../../../styled-lib';
 import { useGlobalContext } from '../../../context/GlobalStore';
 
 function relatedCard(data) {
+  const glass = 'https://img.icons8.com/ios/344/zoom-in--v1.png';
   const { setProductId } = useGlobalContext();
   const placeholder = 'http://placecorgi.com/260/180';
   const [current, setCurrent] = useState(0);
@@ -53,8 +53,16 @@ function relatedCard(data) {
     <RelatedList>
       {
         current !== 0
-          ? <PrevArrow onClick={prevSlide} />
-          : <PrevArrowTrans />
+          ? (
+            <ArrowButton onClick={prevSlide}>
+              <PrevArrow />
+            </ArrowButton>
+          )
+          : (
+            <ArrowButtonTrans>
+              <PrevArrowTrans />
+            </ArrowButtonTrans>
+          )
       }
       <div id="myModal" className="modal">
         <div className="modal-content">
@@ -72,12 +80,14 @@ function relatedCard(data) {
         {
           display.map((info, index) => (
             <StyledCard key={index}>
-              <Comparison onClick={(e) => showDisplay(e, info.product.id)} />
-              <ImageContainer onClick={() => newProductState(info.product.id)}>
-                <StyleImg src={
-                  info.style.thumbnail_url === null ? placeholder : info.style.thumbnail_url
-                }
+              <ImageContainer>
+                <StyleImg
+                  src={info.style.thumbnail_url === null ? placeholder : info.style.thumbnail_url}
+                  onClick={() => newProductState(info.product.id)}
                 />
+                <CompareButton>
+                  <Button src={glass} onClick={(e) => showDisplay(e, info.product.id)} />
+                </CompareButton>
               </ImageContainer>
               <InfoWrapper value={info.product.id} onClick={() => newProductState(info.product.id)}>
                 <CategoryWrapper>
@@ -100,8 +110,16 @@ function relatedCard(data) {
       </CardWrapper>
       {
         current !== maxDisplay
-          ? <NextArrow onClick={nextSlide} />
-          : <NextArrowTrans />
+          ? (
+            <ArrowButton onClick={nextSlide}>
+              <NextArrow />
+            </ArrowButton>
+          )
+          : (
+            <ArrowButtonTrans>
+              <NextArrowTrans />
+            </ArrowButtonTrans>
+          )
       }
     </RelatedList>
   );
@@ -112,6 +130,30 @@ export default relatedCard;
 const RelatedList = styled.div`
 display: flex;
 flex-direction: row;
+`;
+
+const CompareButton = styled.button`
+position: relative;
+top: -250px;
+float: right;
+cursor: pointer;
+height: 30px;
+width: 30px;
+background-color: white;
+box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+&:active {
+  box-shadow: 0 1px #666;
+}
+`;
+
+const Button = styled.img`
+position: relative;
+left: -5px;
+width: 25px;
+height: 25px;
+&:hover {
+  filter: brightness(150%);
+}
 `;
 
 const CardWrapper = styled.div`
@@ -150,24 +192,13 @@ cursor: pointer;
 overflow: hidden;
 `;
 
-const Comparison = styled(HiEye)`
-height: 30px;
-width: auto;
-position: relative;
-float: right;
-margin: 5px;
-padding-bottom: 5px;
-cursor: pointer;
-&:hover {
-  color: #9F2B68
-}
-`;
-
 const InfoWrapper = styled.div`
 padding-top: 30px;
 text-align:center;
 cursor: pointer;
 padding-bottom: 10px;
+position: relative;
+top: -25px;
 `;
 
 const CategoryWrapper = styled.p`
@@ -184,46 +215,63 @@ font-weight: normal;
 font-size: 16px;
 `;
 
-const NextArrow = styled(BiChevronRightCircle)`
+const NextArrow = styled(MdArrowForwardIos)`
 position: relative;
 height: 30px;
 width: auto;
-top: 250px;
 cursor: pointer;
 user-select: none;
-&:hover {
-  color: #9F2B68
-}
+top: 3px;
 `;
 
-const NextArrowTrans = styled(BiChevronRightCircle)`
+const NextArrowTrans = styled(MdArrowForwardIos)`
 position: relative;
 height: 30px;
 width: auto;
-top: 250px;
+top: 3px;
 cursor: default;
 user-select: none;
-opacity: 0.01;
+visibility: hidden;
 `;
 
-const PrevArrow = styled(BiChevronLeftCircle)`
+const PrevArrow = styled(MdArrowBackIosNew)`
 position: relative;
 height: 30px;
 width: auto;
-top: 250px;
+top: 3px;
 cursor: pointer;
 user-select: none;
-&:hover {
-  color: #9F2B68
-}
 `;
 
-const PrevArrowTrans = styled(BiChevronLeftCircle)`
+const PrevArrowTrans = styled(MdArrowBackIosNew)`
 position: relative;
 height: 30px;
 width: auto;
-top: 250px;
+top: 3px;
 cursor: default;
 user-select: none;
-opacity: 0.01;
+visibility: hidden;
+`;
+
+const ArrowButton = styled.button`
+height: 50px;
+width: 50px;
+align-items: center;
+position: relative;
+top: 250px;
+cursor: pointer;
+background-color: white;
+border: #9F2B68;
+border: 2px solid #9F2B68;
+border-radius: 5px;
+`;
+
+const ArrowButtonTrans = styled.button`
+height: 50px;
+width: 50px;
+align-items: center;
+position: relative;
+top: 250px;
+cursor: pointer;
+visibility: hidden;
 `;
