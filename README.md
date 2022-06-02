@@ -1,6 +1,6 @@
 # Team Gambit
 
-### Atelier
+### Gambit Outlet
 
 ## Building Client
 
@@ -13,7 +13,7 @@ npm install
 To create a production build:
 
 ```sh
-npm run build-prod
+npm run build
 ```
 
 To create a development build:
@@ -37,7 +37,7 @@ npm test
 ```
 
 Members
+- Esther Kuang
+- Andy Luu
 - Gil Cohen
 - Danika Partridge
-- Andy Luu
-- Esther Kuang
