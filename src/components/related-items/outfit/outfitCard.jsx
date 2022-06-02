@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { BiChevronLeftCircle, BiChevronRightCircle } from 'react-icons/bi';
 import { GiCancel } from 'react-icons/gi';
-import { FiPlusSquare } from 'react-icons/fi';
 import styled from 'styled-components';
+import { MdArrowBackIosNew, MdArrowForwardIos } from 'react-icons/md';
 import { StyledRatingStars } from '../../../styled-lib';
 
 export function EmptyCard({ addCard }) {
@@ -11,7 +10,9 @@ export function EmptyCard({ addCard }) {
     <EmptyStyledCard onClick={() => addCard()}>
       <EmptyInfoWrapper>
         <OutfitButton>
-          Add Outfit!
+          <AddOutfit>
+            Add Outfit
+          </AddOutfit>
         </OutfitButton>
       </EmptyInfoWrapper>
     </EmptyStyledCard>
@@ -39,20 +40,30 @@ export function OutfitCard({ data, removeCard, addCard }) {
     <OutfitList>
       {
         current !== 0
-          ? <PrevArrow onClick={prevSlide} />
-          : <PrevArrowTrans />
+          ? (
+            <ArrowButton onClick={prevSlide}>
+              <PrevArrow />
+            </ArrowButton>
+          )
+          : (
+            <ArrowButtonTrans>
+              <PrevArrowTrans />
+            </ArrowButtonTrans>
+          )
       }
       <EmptyCard addCard={() => { addCard(); }} />
       {
         display.map((info, index) => (
           <StyledCard key={index} className="style-card">
-            <Cancel onClick={() => { removeCard(info.product.id); }} />
             <HoverCard className="hover-card">
               <ImageContainer className="image-container">
                 <StyleImg src={
                   info.style.thumbnail_url === null ? placeholder : info.style.thumbnail_url
                 }
                 />
+                <CancelButton>
+                  <Cancel onClick={() => { removeCard(info.product.id); }} />
+                </CancelButton>
               </ImageContainer>
               <InfoWrapper value={info.product.id}>
                 <CategoryWrapper>
@@ -75,12 +86,27 @@ export function OutfitCard({ data, removeCard, addCard }) {
       }
       {
         current !== maxDisplay && display.length >= 3
-          ? <NextArrow onClick={nextSlide} />
-          : <NextArrowTrans />
+          ? (
+            <ArrowButton onClick={nextSlide}>
+              <NextArrow />
+            </ArrowButton>
+          )
+          : (
+            <ArrowButtonTrans>
+              <NextArrowTrans />
+            </ArrowButtonTrans>
+          )
+
       }
     </OutfitList>
   );
 }
+
+const AddOutfit = styled.p`
+font-size: 25px;
+color: #fff;
+text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+`;
 
 const HoverCard = styled.div`
 border-radius: 10px;
@@ -124,7 +150,7 @@ width: 300px;
 
 const StyleImg = styled.img`
 position: relative;
-top: -27px;
+top: -30px;
 display: block;
 background-size: contain;
 width: 100%;
@@ -140,6 +166,8 @@ padding-top: 30px;
 padding-bottom: 10px;
 text-align:center;
 cursor: pointer;
+position: relative;
+top: -25px;
 `;
 
 const EmptyInfoWrapper = styled.div`
@@ -167,69 +195,75 @@ font-size: 16px;
 align-items: center;
 `;
 
-const Cancel = styled(GiCancel)`
-height: 30px;
-width: auto;
+const CancelButton = styled.button`
 position: relative;
-float: right;
-margin: 5px;
+top: -280px;
+left: 270px;
 cursor: pointer;
+height: 30px;
+width: 30px;
+background-color: white;
+box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+&:active {
+  box-shadow: 0 1px #666;
+}
+`;
+
+const Cancel = styled(GiCancel)`
+position: relative;
+left: -5px;
+width: 25px;
+height: 25px;
+position: relative;
 &:hover {
   color: #FF0000
 }
 `;
 
-const NextArrow = styled(BiChevronRightCircle)`
+const NextArrow = styled(MdArrowForwardIos)`
 position: relative;
 height: 30px;
 width: auto;
-top: 250px;
 cursor: pointer;
 user-select: none;
-&:hover {
-  color: #9F2B68
-}
+top: 3px;
 `;
 
-const NextArrowTrans = styled(BiChevronRightCircle)`
+const NextArrowTrans = styled(MdArrowForwardIos)`
 position: relative;
 height: 30px;
 width: auto;
-top: 250px;
+top: 3px;
 cursor: default;
 user-select: none;
-opacity: 0.01;
+visibility: hidden;
 `;
 
-const PrevArrow = styled(BiChevronLeftCircle)`
+const PrevArrow = styled(MdArrowBackIosNew)`
 position: relative;
 height: 30px;
 width: auto;
-top: 250px;
+top: 3px;
 cursor: pointer;
 user-select: none;
-&:hover {
-  color: #9F2B68
-}
 `;
 
-const PrevArrowTrans = styled(BiChevronLeftCircle)`
+const PrevArrowTrans = styled(MdArrowBackIosNew)`
 position: relative;
 height: 30px;
 width: auto;
-top: 250px;
+top: 3px;
 cursor: default;
 user-select: none;
-opacity: 0.01;
+visibility: hidden;
 `;
 
 const OutfitButton = styled.button`
-  top: 230px;
-  background-color: #CC66CC;
+  top: 195px;
+  background-color: #9F2B68;
   border: 0 solid #E5E7EB;
   box-sizing: border-box;
   color: #000000;
-  font-family: ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
   font-size: 1rem;
   font-weight: 700;
   justify-content: center;
@@ -259,16 +293,31 @@ const OutfitButton = styled.button`
     width: calc(100% - 1px);
     height: calc(100% - 1px);
   }
-
   &:hover:after {
     bottom: 2px;
     left: 2px;
   }
-  @media (min-width: 768px) {
-    .button-53 {
-      padding: .75rem 3rem;
-      font-size: 1.25rem;
-    }
-  }
 }
+`;
+
+const ArrowButton = styled.button`
+height: 50px;
+width: 50px;
+align-items: center;
+position: relative;
+top: 250px;
+cursor: pointer;
+background-color: white;
+border: 2px solid #9F2B68;
+border-radius: 5px;
+`;
+
+const ArrowButtonTrans = styled.button`
+height: 50px;
+width: 50px;
+align-items: center;
+position: relative;
+top: 250px;
+cursor: pointer;
+visibility: hidden;
 `;

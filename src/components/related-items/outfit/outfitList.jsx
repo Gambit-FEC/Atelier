@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import { BiChevronLeftCircle, BiChevronRightCircle } from 'react-icons/bi';
+import { MdArrowBackIosNew, MdArrowForwardIos } from 'react-icons/md';
 import { OutfitCard, EmptyCard } from './outfitCard';
 import { useGlobalContext } from '../../../context/GlobalStore';
 
@@ -112,14 +112,18 @@ export default function outfitList() {
 
   return (
     <div className="outfit-items-list">
-      <h2 className="outfit">Build Your Outfit</h2>
+      <h2 className="outfit">Your Outfit</h2>
       {
         cardList ? <OutfitCard data={outfitInfo} addCard={addCard} removeCard={removeCard} />
           : (
             <OutfitList>
-              <PrevArrowTrans />
+              <ArrowButtonTrans>
+                <PrevArrowTrans />
+              </ArrowButtonTrans>
               <EmptyCard addCard={addCard} />
-              <NextArrowTrans />
+              <ArrowButtonTrans>
+                <NextArrowTrans />
+              </ArrowButtonTrans>
             </OutfitList>
           )
       }
@@ -132,22 +136,32 @@ display: flex;
 flex-direction: row;
 `;
 
-const NextArrowTrans = styled(BiChevronRightCircle)`
+const NextArrowTrans = styled(MdArrowForwardIos)`
 position: relative;
 height: 30px;
 width: auto;
-top: 250px;
+top: 3px;
 cursor: default;
 user-select: none;
-opacity: 0.01;
+visibility: hidden;
 `;
 
-const PrevArrowTrans = styled(BiChevronLeftCircle)`
+const PrevArrowTrans = styled(MdArrowBackIosNew)`
 position: relative;
 height: 30px;
 width: auto;
-top: 250px;
+top: 3px;
 cursor: default;
 user-select: none;
-opacity: 0.01;
+visibility: hidden;
+`;
+
+const ArrowButtonTrans = styled.button`
+height: 50px;
+width: 50px;
+align-items: center;
+position: relative;
+top: 250px;
+cursor: pointer;
+visibility: hidden;
 `;
