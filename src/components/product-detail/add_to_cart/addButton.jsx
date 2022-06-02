@@ -1,10 +1,11 @@
+/* eslint-disable no-else-return */
 import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 
 export default function AddButton({ size, quantity }) {
-  // console.log('add to cart works?', size);
-  // console.log('add to cart works?', quantity);
+  console.log('add to cart works?', size);
+  console.log('add to cart works?', quantity);
 
   const onAddtoCart = () => {
     alert('Added to cart!');
@@ -15,14 +16,15 @@ export default function AddButton({ size, quantity }) {
       .catch((err) => { console.log('add to cart button did not send correctly', err); });
   };
 
-  if (!size && !quantity) {
+  if (!size) {
     return (
-      <div>Please select size</div>
+      <div>Please select a size</div>
+    );
+  } else if (size && quantity) {
+    return (
+      <Add onClick={() => onAddtoCart()}>Add to Cart</Add>
     );
   }
-  return (
-    <Add onClick={() => onAddtoCart()}>Add to Cart</Add>
-  );
 }
 
 const Add = styled.button`
