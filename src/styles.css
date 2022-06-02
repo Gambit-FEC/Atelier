@@ -1,7 +1,7 @@
 /* main */
 
 body {
-  font-family: 'DM sans';
+  font-family: 'DM sans', Tahoma, sans-serif;
   margin: 50px;
   margin-top: 110px;
   overflow-x: hidden;
