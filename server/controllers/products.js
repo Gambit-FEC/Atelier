@@ -3,7 +3,6 @@ const { API_URL } = require('../../config');
 
 // get one product
 exports.getOneProduct = async (req, res) => {
-  console.log('get1product server works??')
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${req.params.productId}`, { headers: { Authorization: req.headers.Authorization } })
   try {
     const overview = await axios.get(`${API_URL}products/${req.params.productId}`, { headers: { Authorization: req.headers.Authorization }});
@@ -18,7 +17,6 @@ exports.getOneProduct = async (req, res) => {
 
 // add to cart NEED TO FIX!!
 exports.addToCart = async (req, res) => {
-  console.log('addToCart server works??')
   axios.post(async (req, res) => {
     try {
       const response = await axios.post(`${API_URL}cart`, req.body, apiHeaders);
