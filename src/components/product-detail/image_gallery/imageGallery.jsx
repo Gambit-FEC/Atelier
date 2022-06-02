@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { useGlobalContext } from '../../../context/GlobalStore';
 import { BiChevronLeftCircle, BiChevronRightCircle } from 'react-icons/bi';
-import { AiOutlineExpand } from 'react-icons/ai';
+import { AiOutlineExpand, AiOutlineMinus } from 'react-icons/ai';
 
 export default function ImageGallery({productInfo, currentStyle}) {
   const { productId } = useGlobalContext();
@@ -14,13 +14,11 @@ export default function ImageGallery({productInfo, currentStyle}) {
 
   // onClick functionalities for slides -------------
   const onLeftClick = (e) => {
-    console.log('left');
     e.stopPropagation()
     setCurrentImage(currentImage === 0 ? length - 1 : currentImage - 1);
   };
 
   const onRightClick = (e) => {
-    console.log('right');
     e.stopPropagation()
     setCurrentImage(currentImage === length - 1 ? 0 : currentImage + 1);
   };
@@ -39,15 +37,41 @@ export default function ImageGallery({productInfo, currentStyle}) {
 
   // image expansion --------------------
   const onImageClick = () => {
-    console.log('showModel:', showModel);
     setShowModel(!showModel);
   }
+
+  //handle zoom
+  const [zoom, setZoom] = useState(false);
+  const zoomScale = 2.5;
+  const handleZoom = (e) => {
+    e.stopPropagation();
+    setZoom((prevState) => !prevState)
+  }
+  const isDisabled = zoom;
+
+  // //handle mouse hover
+  // const carouselSelect = useRef(null);
+  // const [mouseX, setMouseX] = useState(null);
+  // const [mouseY, setMouseY] = useState(null);
+  // const handleMouseHover = (event) => {
+  //   const DOMRect = carouselSelect.current.getBoundingClientRect();
+  //     const {
+  //       height, width, left: offsetLeft, top: offsetTop,
+  //     } = DOMRect;
+  //     const x = ((event.pageX - offsetLeft) / width) * 100;
+  //     const y = ((event.pageY - offsetTop) / height) * 100;
+  //     setMouseX(x);
+  //     setMouseY(y);
+  // }
+  // const transformOrigin = {
+  //   transformOrigin: `${mouseX}% ${mouseY}%`,
+  // };
 
   return (
     <>
       <ImagesBar>
-        {images.map((slide, index) => (
-          <ImageSelections key={index} src={slide.url} onClick={() => showSelectedImage(index)} />
+        {images.slice(0, 7).map((slide, index) => (
+          <ImageSelections key={index} src={slide.url} onClick={() => showSelectedImage(index)}/>
         ))}
       </ImagesBar>
       <Container>
@@ -58,11 +82,17 @@ export default function ImageGallery({productInfo, currentStyle}) {
             <div className="modal-bg modal-prod-detail" onClick={onImageClick}>
               <ExpandedLeft onClick={onLeftClick}/>
               <ModalBar id="modal-bar">
-                {images.map((slide, index) => (
+                {images.slice(0, 7).map((slide, index) => (
                   <ModalImageSelections key={index} src={slide.url} onClick={(e) => showSelectedImage(index, e)} />
                   ))}
               </ModalBar>
-              <ModalImage src={images[currentImage]?.url} onClick={(e) => e.stopPropagation()}/>
+              <ModalImage src={images[currentImage]?.url} onClick={(e) => handleZoom(e)}
+              style={{
+                transform: zoom ? `scale(${zoomScale})` : 'scale(1)',
+                cursor: zoom ? 'zoom-out' : 'crosshair',
+                // ...transformOrigin,
+              }}
+              />
               <ExpandedRight onClick={onRightClick}/>
             </div>
           </ModalBarAndImage>
@@ -74,6 +104,43 @@ export default function ImageGallery({productInfo, currentStyle}) {
     </>
   );
 }
+
+// {/* FOR thumbnail images */}
+// {
+//   styleList.map((style, index) => {
+//     if (index === styleList.indexOf(defaultStyle)) {
+//       return (
+//         <StyleEntry
+//           style={style}
+//           handleStyleChange={handleStyleChange}
+//           selected
+//           key={index}
+//           thumbnailImg={thumbList[index]}
+//         />
+//       );
+//     }
+//     return (
+//       <StyleEntry
+//       style={style}
+//       key={index}
+//       handleStyleChange={handleStyleChange}
+//       thumbnailImg={thumbList[index]}
+//       />
+//     )
+//   })}
+
+//   const StyleEntry = ({style, handleStyleChange, selected,thumbnailImg}) => (
+//     <StyleEntryStyle
+//     onClick={() => handleStyleChange(style)}
+//     selected={selected}
+//     >
+//       <span>
+//         <BsCheckCircleFill />
+//       </span>
+//       <img src={thumbnailImg} alt=""/>
+//     </StyleEntryStyle>
+//   )
+
 
 // onClick={(e) => e.stopPropagation()}
 
@@ -153,7 +220,6 @@ const ModalImage = styled.img`
   max-height: 70%;
   max-width: 70%;
   z-index: 99;
-  cursor: crosshair;
 `;
 
 const ModalBar = styled.div`
