@@ -34,10 +34,11 @@ export default function AddToCart({ productInfo, currentStyle }) {
   // const [skuIndex, setskuIndex] = useState(0);
   // const [skuID, setSkuID] = useState(0);
 
-  // console.log('add me to cart hohoho', productInfo);
-  // console.log('add me to cart hohoho with style', productInfo[currentStyle].skus);
-  // console.log('styleID??', styleID);
+  useEffect(() => {
+    allStyles;
+  }, [currentStyle, productInfo]);
 
+  // selecting styles -----------------------
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedQuantity, setSelectedQuantity] = useState(0);
   const [quantMax, setQuantMax] = useState([]);
