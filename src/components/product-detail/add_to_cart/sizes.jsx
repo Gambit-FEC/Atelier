@@ -7,7 +7,7 @@ export default function SelectSize({ sizes, selectedSize, onChange }) {
       ? <Size disabled>OUT OF STOCK</Size>
       : (
         <Size name="Select Size" onChange={(e) => onChange(e)}>
-          <option defaultValue>Select Size</option>
+          <option selected={selectedSize === ''} disabled hidden>Select Size</option>
           {sizes.map((size, i) => <option value={size} key={i}>{size}</option>)}
         </Size>
       )

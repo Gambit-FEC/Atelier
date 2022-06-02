@@ -29,7 +29,7 @@ export default function AddButton({ size, quantity }) {
 }
 
 const Text = styled.div`
-  color: red;
+  color: rgba(102, 91, 165, 1);
 `;
 
 const Add = styled.button`
