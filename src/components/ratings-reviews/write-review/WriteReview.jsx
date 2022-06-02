@@ -6,6 +6,7 @@ import { useGlobalContext } from '../../../context/GlobalStore';
 export default function WriteReview() {
   const { productId } = useGlobalContext();
   const { setShowWriteReview, reviewsMeta, characteristicsMeaning } = useRAndRContext();
+  const [reviewSubmitted, setReviewSubmitted] = useState(false);
   const [formData, setFormData] = useState(() => {
     const data = {
       rating: '0',
@@ -79,7 +80,8 @@ export default function WriteReview() {
     postForm()
       .then(() => {
         window.alert('Review submitted');
-        handleExitView();
+        setReviewSubmitted(true);
+        setTimeout(() => { handleExitView(); }, 2000);
       })
       .catch((err) => {
         window.alert('There was an issue submitting your review.', err);
@@ -235,11 +237,9 @@ export default function WriteReview() {
   return (
     <div className="write-review modal-bg">
       <form className="modal-form" onSubmit={handleSubmitReview}>
-        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-          <span className="required-guide form-italic" style={{ minWidth: 'fit-content' }}>= required</span>
-          <h3 style={{ textAlign: 'center', width: '100%', marginRight: '80px' }}>Write A Review</h3>
-          <div className="form-exit-button close" onClick={handleExitView}>×</div>
-        </div>
+        <div className="form-exit-button" onClick={handleExitView}>×</div>
+        <div className="write-review-header">Write A Review</div>
+        <span className="required-guide form-italic">= required</span>
         <label id="overall-rating-prompt" className="required">Overall Rating</label>
         {starRender()}
         <label className="required">Do you recommend this product?</label>
@@ -265,7 +265,8 @@ export default function WriteReview() {
         <label className="required">Email</label>
         <input type="email" id="email" placeholder="Example: jackson11@email.com" maxLength="60" onChange={updateFormData} required />
         <label className="form-italic">For authentication reasons, you will not be emailed</label>
-        <input type="submit" className="underline-button larger-text" value="Submit Review" />
+        {!reviewSubmitted && <input type="submit" className="underline-button larger-text" value="Submit Review" />}
+        {reviewSubmitted && <input type="button" className="write-review-submitted underline-button larger-text" value="Review Submitted!" />}
       </form>
     </div>
   );

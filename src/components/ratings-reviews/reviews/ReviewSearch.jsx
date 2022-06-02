@@ -15,7 +15,7 @@ export default function ReviewSearch() {
     }
   }, [searchText]);
   return (
-    <form onSubmit={(e) => { e.preventDefault(); }}>
+    <form className="reviews-search" onSubmit={(e) => { e.preventDefault(); }}>
       <input type="text" placeholder="Search..." value={searchText} onChange={handleChange} />
     </form>
   );
