@@ -222,13 +222,24 @@ select {
   margin-bottom: 5px;
   width: 90%;
   padding: 15px;
-  border: 2px solid #9F2B68;
-  box-shadow: 2px 2px 2px #9F2B68;
+  /* border-bottom: 2px solid #9F2B68; */
 }
 
 .review-tile> * {
   margin-top: 5px;
   word-break: break-word;
+}
+
+.review-tile-top-bar {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+.review-tile-date {
+  font-style: italic;
+  color: grey;
 }
 
 .review-tile-rating {
