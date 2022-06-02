@@ -26,7 +26,7 @@ export default function AddButton({ size, quantity }) {
 }
 
 const Add = styled.button`
-  max-width: 200px;
+  width: 337px;
   height: 35px;
   cursor: pointer;
   border-radius: 5px;

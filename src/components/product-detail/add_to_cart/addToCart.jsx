@@ -72,30 +72,33 @@ export default function AddToCart({ productInfo, currentStyle }) {
         quantArray.push(i);
       }
       setQuantMax(quantArray);
-      // console.log('quantArray = ', quantArray);
-      // console.log('quant max??', quantMax);
       setSelectedSize(e.target.value);
-      // console.log('target value: ', e.target.value);
-      // console.log('selected size???', selectedSize);
     }
   };
 
   return (
-    <Wrapper>
+    <>
       <Selectors>
         <SelectSize id="select" sizes={sizes} onChange={onSelectSize} />
-        <SelectQuantity quantities={quantMax} />
+        <SelectQuantity quantities={quantMax} selectedSize={selectedSize} />
       </Selectors>
-      <AddButton size={selectedSize} quantity={selectedQuantity} />
-    </Wrapper>
+      <Cart>
+        <AddButton size={selectedSize} quantity={selectedQuantity} />
+      </Cart>
+    </>
   );
 }
 
-const Wrapper = styled.div`
-  padding: 1em;
+const Selectors = styled.div`
+  display: flex;
   align-items: flex-end;
+  padding: 0.5em;
+  max-width: 350px;
+  justify-content: space-around;
 `;
 
-const Selectors = styled.div`
+const Cart = styled.div`
+  padding: 0.5em;
+  margin: 8px;
   align-items: flex-end;
 `;
