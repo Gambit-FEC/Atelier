@@ -151,7 +151,7 @@ overflow: hidden;
 `;
 
 const Comparison = styled(HiEye)`
-height: 20px;
+height: 30px;
 width: auto;
 position: relative;
 float: right;
