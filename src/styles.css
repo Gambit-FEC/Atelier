@@ -309,6 +309,7 @@ select {
 
 .required-guide {
   margin-bottom: 10px;
+  color: grey !important;
 }
 
 .required:after {
