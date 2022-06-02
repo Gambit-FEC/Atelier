@@ -18,7 +18,11 @@ export default function AddButton({ size, quantity }) {
 
   if (!size) {
     return (
-      <div>Please select a size</div>
+      <Text>Please select a size</Text>
+    );
+  } else if (size && !quantity) {
+    return (
+      <Text>Please select a quantity</Text>
     );
   } else if (size && quantity) {
     return (
@@ -26,6 +30,10 @@ export default function AddButton({ size, quantity }) {
     );
   }
 }
+
+const Text = styled.div`
+  color: red;
+`
 
 const Add = styled.button`
   width: 337px;
