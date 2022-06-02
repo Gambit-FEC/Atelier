@@ -4,9 +4,6 @@ import styled from 'styled-components';
 import axios from 'axios';
 
 export default function AddButton({ size, quantity }) {
-  console.log('add to cart works?', size);
-  console.log('add to cart works?', quantity);
-
   const onAddtoCart = () => {
     alert('Added to cart!');
     axios.post('/cart')
@@ -33,7 +30,7 @@ export default function AddButton({ size, quantity }) {
 
 const Text = styled.div`
   color: red;
-`
+`;
 
 const Add = styled.button`
   width: 337px;

@@ -36,7 +36,9 @@ export default function AddToCart({ productInfo, currentStyle }) {
 
   useEffect(() => {
     allStyles;
-  }, [currentStyle, productInfo]);
+    setSelectedSize('');
+    setSelectedQuantity(0);
+  }, [currentStyle, productInfo, productId]);
 
   // selecting styles -----------------------
   const [selectedSize, setSelectedSize] = useState('');
@@ -84,7 +86,7 @@ export default function AddToCart({ productInfo, currentStyle }) {
   return (
     <>
       <Selectors>
-        <SelectSize id="select" sizes={sizes} onChange={onSelectSize} />
+        <SelectSize id="select" sizes={sizes} selectedSize={selectedSize}onChange={onSelectSize} />
         <SelectQuantity quantities={quantMax} selectedSize={selectedSize} onChange={onSelectQuantity} />
       </Selectors>
       <Cart>
