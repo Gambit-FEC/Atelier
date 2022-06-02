@@ -1,4 +1,5 @@
-import React, { createContext, useState, useContext, useCallback } from 'react';
+import React, { createContext, useState, useContext, useCallback, useEffect } from 'react';
+import { useGlobalContext } from './GlobalStore';
 
 const RAndRContext = createContext();
 
@@ -7,6 +8,7 @@ export function useRAndRContext() {
 }
 
 export function RAndRContextProvider({ children }) {
+  const { productId } = useGlobalContext();
   const [reviews, setReviews] = useState(() => []);
   const [reviewsMeta, setReviewsMeta] = useState();
   const [count, setCount] = useState(() => 2);
@@ -23,8 +25,8 @@ export function RAndRContextProvider({ children }) {
   const [showWriteReview, setShowWriteReview] = useState(() => false);
   const [reviewSearch, setReviewSearch] = useState(() => '');
   const [reviewFeedback, setReviewFeedback] = useState(() => ({
-    helpful: JSON.parse(localStorage.getItem('helpful')) || [],
-    reported: JSON.parse(localStorage.getItem('reported')) || [],
+    helpful: JSON.parse(localStorage.getItem(`helpful-${productId}`)) || [],
+    reported: JSON.parse(localStorage.getItem(`reported-${productId}`)) || [],
   }));
   const [showCollapse, setShowCollapse] = useState(() => false);
   const [shownReviews, setShownReviews] = useState(() => []);
@@ -37,6 +39,13 @@ export function RAndRContextProvider({ children }) {
     Fit: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long'],
   }));
   const [lastReviewIdx, setLastReviewIdx] = useState(() => 0);
+
+  useEffect(() => {
+    setReviewFeedback({
+      helpful: JSON.parse(localStorage.getItem(`helpful-${productId}`)) || [],
+      reported: JSON.parse(localStorage.getItem(`reported-${productId}`)) || [],
+    });
+  }, [productId]);
 
   const value = {
     reviewsSort,

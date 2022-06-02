@@ -61,7 +61,6 @@ exports.addReview = (req, res) => {
 };
 
 exports.updateHelpful = (req, res) => {
-  console.log(req.params);
   axios.put(`${API_URL}reviews/${req.params.review_id}/helpful`, undefined, { headers: { Authorization: req.headers.Authorization } })
     .then(() => {
       res.sendStatus(203);
