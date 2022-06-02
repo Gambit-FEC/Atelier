@@ -8,7 +8,7 @@ export default function AddButton({ size, quantity }) {
     alert('Added to cart!');
     axios.post('/cart')
       .then((result) => {
-        console.log('axios post works?', result);
+        // console.log('axios post works?', result);
       })
       .catch((err) => { console.log('add to cart button did not send correctly', err); });
   };

@@ -35,7 +35,6 @@ export default function RatingsAndReviews() {
   }, [productId, reviewsSort, showWriteReview]);
 
   useEffect(() => {
-    console.log(reviewFeedback);
     if (reviewFeedback.helpful.length) {
       localStorage.setItem(`helpful-${productId}`, JSON.stringify(reviewFeedback.helpful));
     }
