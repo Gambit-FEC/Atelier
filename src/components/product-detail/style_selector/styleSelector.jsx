@@ -82,6 +82,7 @@ const Thumbnails = styled.img`
   border: 2px solid;
   margin: 10px;
   &: hover {color: #9F2B68;};
+  cursor: pointer;
 `;
 
 const Checkmark = styled(BsCheck2Circle)`

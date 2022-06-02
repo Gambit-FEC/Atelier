@@ -35,8 +35,12 @@ export default function AddToCart({ productInfo, currentStyle }) {
   // const [skuID, setSkuID] = useState(0);
 
   useEffect(() => {
-    allStyles;
-  }, [currentStyle, productInfo]);
+    AllStyles(productInfo[currentStyle].skus);
+    setSelectedSize('');
+    setSelectedQuantity(0);
+    setSizes(allStyles[0]);
+    setQuantities(allStyles[1]);
+  }, [currentStyle, productInfo, productId]);
 
   // selecting styles -----------------------
   const [selectedSize, setSelectedSize] = useState('');
@@ -72,30 +76,40 @@ export default function AddToCart({ productInfo, currentStyle }) {
         quantArray.push(i);
       }
       setQuantMax(quantArray);
-      // console.log('quantArray = ', quantArray);
-      // console.log('quant max??', quantMax);
       setSelectedSize(e.target.value);
-      // console.log('target value: ', e.target.value);
-      // console.log('selected size???', selectedSize);
     }
   };
 
+  // selecting quantity --------------------
+  const onSelectQuantity = (e) => {
+    setSelectedQuantity(e);
+  };
+
   return (
-    <Wrapper>
+    <>
       <Selectors>
-        <SelectSize id="select" sizes={sizes} onChange={onSelectSize} />
-        <SelectQuantity quantities={quantMax} />
+        <SelectSize id="select" sizes={sizes} selectedSize={selectedSize} onChange={onSelectSize} />
+        <SelectQuantity quantities={quantMax} selectedSize={selectedSize} onChange={onSelectQuantity} />
       </Selectors>
-      <AddButton size={selectedSize} quantity={selectedQuantity} />
-    </Wrapper>
+      <Cart>
+        <AddButton size={selectedSize} quantity={selectedQuantity} />
+      </Cart>
+    </>
   );
 }
 
-const Wrapper = styled.div`
-  padding: 1em;
+const Selectors = styled.div`
+  display: flex;
   align-items: flex-end;
+  padding: 0.5em;
+  max-width: 350px;
+  justify-content: space-around;
+  margin: 7px 0px 0px;
 `;
 
-const Selectors = styled.div`
+const Cart = styled.div`
+  padding: 0.5em;
+  margin: 8px;
   align-items: flex-end;
+  margin: -2px 7px 0px;
 `;
