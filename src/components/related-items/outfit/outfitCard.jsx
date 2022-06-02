@@ -7,22 +7,22 @@ import { StyledRatingStars } from '../../../styled-lib';
 
 export function EmptyCard({ addCard }) {
   return (
-    <StyledCard onClick={() => addCard()}>
+
+    <EmptyStyledCard onClick={() => addCard()}>
       <EmptyInfoWrapper>
-        <OutfitText>
-          Add to Outfit
-        </OutfitText>
-        <PlusAddIcon />
+        <OutfitButton>
+          Add Outfit!
+        </OutfitButton>
       </EmptyInfoWrapper>
-    </StyledCard>
+    </EmptyStyledCard>
   );
 }
 
 export function OutfitCard({ data, removeCard, addCard }) {
   const placeholder = 'http://placecorgi.com/260/180';
   const [current, setCurrent] = useState(0);
-  const display = data.slice(current, (current + 4));
-  const maxDisplay = data.length - 4;
+  const display = data.slice(current, (current + 3));
+  const maxDisplay = data.length - 3;
 
   const nextSlide = () => {
     setCurrent(current === maxDisplay ? current : current + 1);
@@ -45,70 +45,100 @@ export function OutfitCard({ data, removeCard, addCard }) {
       <EmptyCard addCard={() => { addCard(); }} />
       {
         display.map((info, index) => (
-          <StyledCard key={index}>
+          <StyledCard key={index} className="style-card">
             <Cancel onClick={() => { removeCard(info.product.id); }} />
-            <StyleImg src={
-              info.style.thumbnail_url === null ? placeholder : info.style.thumbnail_url
-            }
-            />
-            <InfoWrapper value={info.product.id}>
-              <CategoryWrapper>
-                {info.product.category}
-              </CategoryWrapper>
-              <NameWrapper>
-                {info.product.name}
-              </NameWrapper>
-              <PriceWrapper>
-                $
-                {info.product.price}
-              </PriceWrapper>
-              <StyledRatingStars rating={info.rating.averageRating}>
-                ★★★★★
-              </StyledRatingStars>
-            </InfoWrapper>
+            <HoverCard className="hover-card">
+              <ImageContainer className="image-container">
+                <StyleImg src={
+                  info.style.thumbnail_url === null ? placeholder : info.style.thumbnail_url
+                }
+                />
+              </ImageContainer>
+              <InfoWrapper value={info.product.id}>
+                <CategoryWrapper>
+                  {info.product.category}
+                </CategoryWrapper>
+                <NameWrapper>
+                  {info.product.name}
+                </NameWrapper>
+                <PriceWrapper>
+                  $
+                  {info.product.price}
+                </PriceWrapper>
+                <StyledRatingStars rating={info.rating.averageRating}>
+                  ★★★★★
+                </StyledRatingStars>
+              </InfoWrapper>
+            </HoverCard>
           </StyledCard>
         ))
       }
       {
-        current > 4
+        current !== maxDisplay && display.length >= 3
           ? <NextArrow onClick={nextSlide} />
           : <NextArrowTrans />
       }
     </OutfitList>
   );
 }
+
+const HoverCard = styled.div`
+border-radius: 10px;
+width: 300px;
+height: auto;
+margin: 15px;
+flex-direction: column;
+flex-wrap: nowrap;
+align-items: center;
+&:hover {
+  box-shadow: 0 0 10px #9F2B68
+  }
+`;
+
 const OutfitList = styled.div`
 display: flex;
 flex-direction: row;
 `;
 
-const StyledCard = styled.div`
+const EmptyStyledCard = styled.div`
 border-radius: 10px;
-padding: 20px;
-border-width: 5px;
-border-style: solid;
-width: 270px;
-height: 450px;
+width: 300px;
+height: fit-content;
 margin: 15px;
 flex-direction: column;
 flex-wrap: nowrap;
 align-items: center;
-justify-content: space-between;
-&:hover {
-box-shadow: 0 0 10px rgba(90, 90, 90, 0.8)
-}
+cursor: pointer;
+padding-bottom: 390px;
+`;
+
+const StyledCard = styled.div`
+`;
+
+const ImageContainer = styled.div`
+position: relative;
+top: 30px;
+height: 250px;
+width: 300px;
 `;
 
 const StyleImg = styled.img`
+position: relative;
+top: -27px;
+display: block;
+background-size: contain;
 width: 100%;
-height: 250px;
-object-fit: fill;
+height: 100%;
+border-radius: 10px;
+object-fit: cover;
+cursor: pointer;
+overflow: hidden;
 `;
 
 const InfoWrapper = styled.div`
-style: block;
-text-align: center;
-background-color: white;
+padding-top: 30px;
+padding-bottom: 10px;
+text-align:center;
 cursor: pointer;
 `;
 
@@ -124,11 +154,13 @@ text-transform: uppercase;
 font-size: 16px;
 align-items: center;
 `;
+
 const NameWrapper = styled.p`
 font-weight: bold;
 font-size: 18px;
 align-items: center;
 `;
+
 const PriceWrapper = styled.p`
 font-weight: normal;
 font-size: 16px;
@@ -136,24 +168,15 @@ align-items: center;
 `;
 
 const Cancel = styled(GiCancel)`
-height: 20px;
+height: 30px;
 width: auto;
 position: relative;
 float: right;
 margin: 5px;
-padding-bottom: 15px;
 cursor: pointer;
-`;
-
-const OutfitText = styled.p`
-font-size: 30px;
-font-weight: bold;
-`;
-const PlusAddIcon = styled(FiPlusSquare)`
-position: relative;
-height: 300px;
-width: 100%;
-cursor: pointer;
+&:hover {
+  color: #FF0000
+}
 `;
 
 const NextArrow = styled(BiChevronRightCircle)`
@@ -164,7 +187,7 @@ top: 250px;
 cursor: pointer;
 user-select: none;
 &:hover {
-  box-shadow: 0 0 10px rgba(90, 90, 90, 0.8)
+  color: #9F2B68
 }
 `;
 
@@ -186,7 +209,7 @@ top: 250px;
 cursor: pointer;
 user-select: none;
 &:hover {
-  box-shadow: 0 0 10px rgba(90, 90, 90, 0.8)
+  color: #9F2B68
 }
 `;
 
@@ -198,4 +221,54 @@ top: 250px;
 cursor: default;
 user-select: none;
 opacity: 0.01;
+`;
+
+const OutfitButton = styled.button`
+  top: 230px;
+  background-color: #CC66CC;
+  border: 0 solid #E5E7EB;
+  box-sizing: border-box;
+  color: #000000;
+  font-family: ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: 1rem;
+  font-weight: 700;
+  justify-content: center;
+  line-height: 1.75rem;
+  padding: .75rem 1.65rem;
+  position: relative;
+  text-align: center;
+  text-decoration: none #000000 solid;
+  text-decoration-thickness: auto;
+  width: 100%;
+  max-width: 460px;
+  position: relative;
+  cursor: pointer;
+  transform: rotate(-2deg);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  &:focus {
+    outline: 0;
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    border: 1px solid #000000;
+    bottom: 4px;
+    left: 4px;
+    width: calc(100% - 1px);
+    height: calc(100% - 1px);
+  }
+
+  &:hover:after {
+    bottom: 2px;
+    left: 2px;
+  }
+  @media (min-width: 768px) {
+    .button-53 {
+      padding: .75rem 3rem;
+      font-size: 1.25rem;
+    }
+  }
+}
 `;

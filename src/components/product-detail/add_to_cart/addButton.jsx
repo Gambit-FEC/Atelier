@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import axios from 'axios';
 
 export default function AddButton({ size, quantity }) {
-  console.log('add to cart works?', size);
-  console.log('add to cart works?', quantity);
+  // console.log('add to cart works?', size);
+  // console.log('add to cart works?', quantity);
 
   const onAddtoCart = () => {
     alert('Added to cart!');
@@ -27,6 +27,9 @@ export default function AddButton({ size, quantity }) {
 
 const Add = styled.button`
   max-width: 200px;
-  height: 30px;
+  height: 35px;
   cursor: pointer;
+  border-radius: 5px;
+  padding: 10px 20px 10px 20px;
+  &: hover {background-color: #9F2B68;};
 `;

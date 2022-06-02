@@ -1,21 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-// import Thumbnail from './thumbnails';
 import styled from 'styled-components';
+import { BsCheck2Circle } from 'react-icons/bs';
 
-// import Thumbnail from './thumbnails';
 import { useGlobalContext } from '../../../context/GlobalStore';
 
 export default function StyleSelector({ productInfo, currentStyle, setCurrentStyle }) {
   const { productId } = useGlobalContext();
-
-  // console.log("prod info?", productInfo)
+  const [currentThumbnail, setCurrentThumbnail] = useState(0);
 
   // Click a style
   const onStyleClick = (index) => {
     console.log('onclick index', index);
     setCurrentStyle(index);
-    console.log('what style:', currentStyle)
+    setCurrentThumbnail(index)
   };
 
   return (
@@ -24,11 +22,22 @@ export default function StyleSelector({ productInfo, currentStyle, setCurrentSty
       {productInfo.length && (
       <Wrapper>
         <ProductStyle>
-          Style: {productInfo[currentStyle] ? productInfo[currentStyle].name : null}
+          Style > {productInfo[currentStyle] ? productInfo[currentStyle].name : null}
         </ProductStyle>
         <AllThumbnails>
           {productInfo.map((item, index) => (
-            <Thumbnails key={index} src={item.photos[0].thumbnail_url ? item.photos[0].thumbnail_url : 'https://img.icons8.com/stickers/344/gambit.png'} onClick={() => onStyleClick(index)} />
+            (currentThumbnail === index)
+            ? (<SelectedThumbnail className="selected-thumbnail">
+                <Thumbnails key={index} src={
+                  item.photos[0].thumbnail_url
+                  ? item.photos[0].thumbnail_url
+                  : 'https://img.icons8.com/stickers/344/gambit.png'} onClick={() => onStyleClick(index)} />
+                  <Checkmark id="checkmark"/>
+                </SelectedThumbnail>)
+            : <Thumbnails key={index} src={
+              item.photos[0].thumbnail_url
+              ? item.photos[0].thumbnail_url
+              : 'https://img.icons8.com/stickers/344/gambit.png'} onClick={() => onStyleClick(index)} />
           ))}
         </AllThumbnails>
       </Wrapper>
@@ -57,15 +66,30 @@ const ProductStyle = styled.h2`
   text-transform: uppercase;
 `;
 
+const SelectedThumbnail = styled.div`
+  border-radius: 50%;
+  position: relative;
+  object-fit: cover;
+  &: hover {color: #9F2B68;};
+`
+
 const Thumbnails = styled.img`
   border-radius: 50%;
-  width: 18%;
-  aspect-ratio: 1/1;
+  position: relative;
+  width: 60px;
+  height: 60px;
   object-fit: cover;
   border: 2px solid;
-  box-sizing: border-box;
   margin: 10px;
   &: hover {color: #9F2B68;};
-  cursor: pointer;
 `;
+
+const Checkmark = styled(BsCheck2Circle)`
+  z-index: 10;
+  font-size: 3rem;
+  color: #9F2B68;
+  font-weight: bold;
+  position: absolute;
+  transform: translate(-34px, 0px);
+  `
 

@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { useGlobalContext } from '../../../context/GlobalStore';
 import { BiChevronLeftCircle, BiChevronRightCircle } from 'react-icons/bi';
-import { AiOutlineExpand } from 'react-icons/ai';
+import { AiOutlineExpand, AiOutlineMinus } from 'react-icons/ai';
 
 export default function ImageGallery({productInfo, currentStyle}) {
   const { productId } = useGlobalContext();
@@ -12,17 +12,13 @@ export default function ImageGallery({productInfo, currentStyle}) {
   const { length } = images;
   const [showModel, setShowModel] = useState(false);
 
-  // console.log('images', images);
-
   // onClick functionalities for slides -------------
   const onLeftClick = (e) => {
-    console.log('left');
     e.stopPropagation()
     setCurrentImage(currentImage === 0 ? length - 1 : currentImage - 1);
   };
 
   const onRightClick = (e) => {
-    console.log('right');
     e.stopPropagation()
     setCurrentImage(currentImage === length - 1 ? 0 : currentImage + 1);
   };
@@ -37,19 +33,45 @@ export default function ImageGallery({productInfo, currentStyle}) {
   useEffect(() => {
     setImages(productInfo[currentStyle].photos);
     setCurrentImage(0);
-  }, [currentStyle])
+  }, [currentStyle, productInfo, productId])
 
   // image expansion --------------------
   const onImageClick = () => {
-    console.log('showModel:', showModel);
     setShowModel(!showModel);
   }
+
+  //handle zoom
+  const [zoom, setZoom] = useState(false);
+  const zoomScale = 2.5;
+  const handleZoom = (e) => {
+    e.stopPropagation();
+    setZoom((prevState) => !prevState)
+  }
+  const isDisabled = zoom;
+
+  // //handle mouse hover
+  // const carouselSelect = useRef(null);
+  // const [mouseX, setMouseX] = useState(null);
+  // const [mouseY, setMouseY] = useState(null);
+  // const handleMouseHover = (event) => {
+  //   const DOMRect = carouselSelect.current.getBoundingClientRect();
+  //     const {
+  //       height, width, left: offsetLeft, top: offsetTop,
+  //     } = DOMRect;
+  //     const x = ((event.pageX - offsetLeft) / width) * 100;
+  //     const y = ((event.pageY - offsetTop) / height) * 100;
+  //     setMouseX(x);
+  //     setMouseY(y);
+  // }
+  // const transformOrigin = {
+  //   transformOrigin: `${mouseX}% ${mouseY}%`,
+  // };
 
   return (
     <>
       <ImagesBar>
-        {images.map((slide, index) => (
-          <ImageSelections key={index} src={slide.url} onClick={() => showSelectedImage(index)} />
+        {images.slice(0, 7).map((slide, index) => (
+          <ImageSelections key={index} src={slide.url} onClick={() => showSelectedImage(index)}/>
         ))}
       </ImagesBar>
       <Container>
@@ -60,11 +82,17 @@ export default function ImageGallery({productInfo, currentStyle}) {
             <div className="modal-bg modal-prod-detail" onClick={onImageClick}>
               <ExpandedLeft onClick={onLeftClick}/>
               <ModalBar id="modal-bar">
-                {images.map((slide, index) => (
+                {images.slice(0, 7).map((slide, index) => (
                   <ModalImageSelections key={index} src={slide.url} onClick={(e) => showSelectedImage(index, e)} />
                   ))}
               </ModalBar>
-              <ModalImage src={images[currentImage]?.url} onClick={(e) => e.stopPropagation()}/>
+              <ModalImage src={images[currentImage]?.url} onClick={(e) => handleZoom(e)}
+              style={{
+                transform: zoom ? `scale(${zoomScale})` : 'scale(1)',
+                cursor: zoom ? 'zoom-out' : 'crosshair',
+                // ...transformOrigin,
+              }}
+              />
               <ExpandedRight onClick={onRightClick}/>
             </div>
           </ModalBarAndImage>
@@ -77,43 +105,75 @@ export default function ImageGallery({productInfo, currentStyle}) {
   );
 }
 
+// {/* FOR thumbnail images */}
+// {
+//   styleList.map((style, index) => {
+//     if (index === styleList.indexOf(defaultStyle)) {
+//       return (
+//         <StyleEntry
+//           style={style}
+//           handleStyleChange={handleStyleChange}
+//           selected
+//           key={index}
+//           thumbnailImg={thumbList[index]}
+//         />
+//       );
+//     }
+//     return (
+//       <StyleEntry
+//       style={style}
+//       key={index}
+//       handleStyleChange={handleStyleChange}
+//       thumbnailImg={thumbList[index]}
+//       />
+//     )
+//   })}
+
+//   const StyleEntry = ({style, handleStyleChange, selected,thumbnailImg}) => (
+//     <StyleEntryStyle
+//     onClick={() => handleStyleChange(style)}
+//     selected={selected}
+//     >
+//       <span>
+//         <BsCheckCircleFill />
+//       </span>
+//       <img src={thumbnailImg} alt=""/>
+//     </StyleEntryStyle>
+//   )
+
+
 // onClick={(e) => e.stopPropagation()}
 
+// original display -----------------------------
 const Container = styled.div`
   border: white;
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: 500px;
+  justify-content: center;
+  height: 600px;
   min-width: 500px;
 `
-
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  position: relative;
-`;
-
-const Image = styled.div`
-  display: flex;
-  width: 50px;
-`;
 
 const ImagesBar = styled.div`
   display: flex;
   flex-direction: column;
   align-content: space-between;
   justify-content: center;
+  padding: 30px;git
 `;
 
 const ImageSelections = styled.img`
   display: flex;
   margin: 10px 0 10px;
-  width: 35px;
-  height: 35px;
+  width: 40px;
+  height: 40px;
   aspect-ratio: 1/1;
   object-fit: cover;
   cursor: pointer;
+  border-radius: 2px;
+  border: 2px solid;
+  &: hover {color: #9F2B68};
 `;
 
 const ArrowLeft = styled(BiChevronLeftCircle)`
@@ -122,7 +182,7 @@ const ArrowLeft = styled(BiChevronLeftCircle)`
   user-select: none;
   z-index: 10;
   position: relative;
-  left: 70px;
+  left: 45px;
   &: hover {color: #9F2B68;};
 `;
 
@@ -132,7 +192,7 @@ const ArrowRight = styled(BiChevronRightCircle)`
   user-select: none;
   z-index: 10;
   position: relative;
-  right: 96px;
+  right: 70px;
   &: hover {color: #9F2B68;};
 `;
 
@@ -143,8 +203,8 @@ const ExpandIcon = styled(AiOutlineExpand)`
   cursor: pointer;
   z-index: 10;
   position: relative;
-  top: -215px;
-  right: 54px;
+  top: -260px;
+  right: 27px;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   border-radius: 5px;
@@ -160,7 +220,6 @@ const ModalImage = styled.img`
   max-height: 70%;
   max-width: 70%;
   z-index: 99;
-  cursor: crosshair;
 `;
 
 const ModalBar = styled.div`
@@ -189,6 +248,7 @@ const ExpandedLeft = styled(BiChevronLeftCircle)`
   cursor: pointer;
   user-select: none;
   z-index: 110;
+  padding: 10px;
   &: hover {color: #9F2B68;};
 `;
 
@@ -198,5 +258,6 @@ const ExpandedRight = styled(BiChevronRightCircle)`
   cursor: pointer;
   user-select: none;
   z-index: 110;
+  padding: 10px;
   &: hover {color: #9F2B68;};
 `;

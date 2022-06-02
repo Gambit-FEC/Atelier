@@ -42,7 +42,6 @@ function relatedCard(data) {
   };
 
   function newProductState(value) {
-    console.log('PRODUCT ID: ', value);
     setProductId(value);
   }
 
@@ -72,13 +71,15 @@ function relatedCard(data) {
       <CardWrapper>
         {
           display.map((info, index) => (
-            <StyledCard key={index} onClick={() => newProductState(info.product.id)}>
+            <StyledCard key={index}>
               <Comparison onClick={(e) => showDisplay(e, info.product.id)} />
-              <StyleImg src={
-                info.style.thumbnail_url === null ? placeholder : info.style.thumbnail_url
-              }
-              />
-              <InfoWrapper value={info.product.id}>
+              <ImageContainer onClick={() => newProductState(info.product.id)}>
+                <StyleImg src={
+                  info.style.thumbnail_url === null ? placeholder : info.style.thumbnail_url
+                }
+                />
+              </ImageContainer>
+              <InfoWrapper value={info.product.id} onClick={() => newProductState(info.product.id)}>
                 <CategoryWrapper>
                   {info.product.category}
                 </CategoryWrapper>
@@ -120,42 +121,53 @@ object-fit:cover;
 
 const StyledCard = styled.div`
 border-radius: 10px;
-padding: 20px;
-border-width: 5px;
-border-style: solid;
-width: 270px;
-height: 450px;
+width: 300px;
+height: fit-content;
 margin: 15px;
 flex-direction: column;
 flex-wrap: nowrap;
-cursor: pointer;
+align-items: center;
+justify-content: space-between;
 &:hover {
-  box-shadow: 0 0 10px rgba(90, 90, 90, 0.8)
-}
+  box-shadow: 0 0 10px #9F2B68
+  }
+`;
+
+const ImageContainer = styled.div`
+height: 250px;
+width: 300px;
+object-fit: cover;
 `;
 
 const StyleImg = styled.img`
+display: block;
+background-size: contain;
 width: 100%;
-height: 250px;
-object-fit: fill;
-align-items: center;
-position: relative;
+height: 100%;
+object-fit: cover;
+border-radius: 10px;
 cursor: pointer;
+overflow: hidden;
 `;
 
 const Comparison = styled(HiEye)`
-height: 20px;
+height: 30px;
 width: auto;
 position: relative;
 float: right;
 margin: 5px;
 padding-bottom: 5px;
 cursor: pointer;
+&:hover {
+  color: #9F2B68
+}
 `;
 
 const InfoWrapper = styled.div`
+padding-top: 30px;
 text-align:center;
-  background-color: white;
+cursor: pointer;
+padding-bottom: 10px;
 `;
 
 const CategoryWrapper = styled.p`
@@ -180,7 +192,7 @@ top: 250px;
 cursor: pointer;
 user-select: none;
 &:hover {
-  box-shadow: 0 0 10px rgba(90, 90, 90, 0.8)
+  color: #9F2B68
 }
 `;
 
@@ -202,7 +214,7 @@ top: 250px;
 cursor: pointer;
 user-select: none;
 &:hover {
-  box-shadow: 0 0 10px rgba(90, 90, 90, 0.8)
+  color: #9F2B68
 }
 `;
 
