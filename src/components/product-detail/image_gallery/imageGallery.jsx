@@ -105,43 +105,6 @@ export default function ImageGallery({productInfo, currentStyle}) {
   );
 }
 
-// {/* FOR thumbnail images */}
-// {
-//   styleList.map((style, index) => {
-//     if (index === styleList.indexOf(defaultStyle)) {
-//       return (
-//         <StyleEntry
-//           style={style}
-//           handleStyleChange={handleStyleChange}
-//           selected
-//           key={index}
-//           thumbnailImg={thumbList[index]}
-//         />
-//       );
-//     }
-//     return (
-//       <StyleEntry
-//       style={style}
-//       key={index}
-//       handleStyleChange={handleStyleChange}
-//       thumbnailImg={thumbList[index]}
-//       />
-//     )
-//   })}
-
-//   const StyleEntry = ({style, handleStyleChange, selected,thumbnailImg}) => (
-//     <StyleEntryStyle
-//     onClick={() => handleStyleChange(style)}
-//     selected={selected}
-//     >
-//       <span>
-//         <BsCheckCircleFill />
-//       </span>
-//       <img src={thumbnailImg} alt=""/>
-//     </StyleEntryStyle>
-//   )
-
-
 // onClick={(e) => e.stopPropagation()}
 
 // original display -----------------------------
