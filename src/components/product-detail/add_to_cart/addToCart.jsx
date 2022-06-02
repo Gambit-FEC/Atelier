@@ -35,9 +35,11 @@ export default function AddToCart({ productInfo, currentStyle }) {
   // const [skuID, setSkuID] = useState(0);
 
   useEffect(() => {
-    allStyles;
+    AllStyles(productInfo[currentStyle].skus);
     setSelectedSize('');
     setSelectedQuantity(0);
+    setSizes(allStyles[0]);
+    setQuantities(allStyles[1]);
   }, [currentStyle, productInfo, productId]);
 
   // selecting styles -----------------------
@@ -102,10 +104,12 @@ const Selectors = styled.div`
   padding: 0.5em;
   max-width: 350px;
   justify-content: space-around;
+  margin: 7px 0px 0px;
 `;
 
 const Cart = styled.div`
   padding: 0.5em;
   margin: 8px;
   align-items: flex-end;
+  margin: -2px 7px 0px;
 `;

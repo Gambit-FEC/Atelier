@@ -33,7 +33,7 @@ const Text = styled.div`
 `;
 
 const Add = styled.button`
-  width: 337px;
+  width: 335px;
   height: 35px;
   cursor: pointer;
   border-radius: 5px;
