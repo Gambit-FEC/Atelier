@@ -7,7 +7,6 @@ import ImageGallery from './image_gallery/imageGallery';
 import ProductInfo from './product_information/productInfo';
 import StyleSelector from './style_selector/styleSelector';
 
-// //styled-components ex
 // Create a Title component that'll render an <h1> tag with some styles
 const ProductDetailContainer = styled.div`
   display: flex;
@@ -44,7 +43,6 @@ export default function ProductDetail() {
   useEffect(() => {
     axios.get(`/products/${productId}`)
       .then((result) => {
-        console.log('results', result.data);
         setProductInfo(result.data);
       })
       .catch((err) => { console.log('getproduct didnt work', err); });
