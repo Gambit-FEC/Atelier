@@ -71,7 +71,7 @@ export default function ImageGallery({productInfo, currentStyle}) {
     <>
       <ImagesBar>
         {images.slice(0, 7).map((slide, index) => (
-          <ImageSelections key={index} src={slide.url} onClick={() => showSelectedImage(index)} />
+          <ImageSelections key={index} src={slide.url} onClick={() => showSelectedImage(index)}/>
         ))}
       </ImagesBar>
       <Container>
@@ -105,41 +105,41 @@ export default function ImageGallery({productInfo, currentStyle}) {
   );
 }
 
-{/* FOR thumbnail images */}
-{
-  styleList.map((style, index) => {
-    if (index === styleList.indexOf(defaultStyle)) {
-      return (
-        <StyleEntry
-          style={style}
-          handleStyleChange={handleStyleChange}
-          selected
-          key={index}
-          thumbnailImg={thumbList[index]}
-        />
-      );
-    }
-    return (
-      <StyleEntry
-      style={style}
-      key={index}
-      handleStyleChange={handleStyleChange}
-      thumbnailImg={thumbList[index]}
-      />
-    )
-  })}
+// {/* FOR thumbnail images */}
+// {
+//   styleList.map((style, index) => {
+//     if (index === styleList.indexOf(defaultStyle)) {
+//       return (
+//         <StyleEntry
+//           style={style}
+//           handleStyleChange={handleStyleChange}
+//           selected
+//           key={index}
+//           thumbnailImg={thumbList[index]}
+//         />
+//       );
+//     }
+//     return (
+//       <StyleEntry
+//       style={style}
+//       key={index}
+//       handleStyleChange={handleStyleChange}
+//       thumbnailImg={thumbList[index]}
+//       />
+//     )
+//   })}
 
-  const StyleEntry = ({style, handleStyleChange, selected,thumbnailImg}) => (
-    <StyleEntryStyle
-    onClick={() => handleStyleChange(style)}
-    selected={selected}
-    >
-      <span>
-        <BsCheckCircleFill />
-      </span>
-      <img src={thumbnailImg} alt=""/>
-    </StyleEntryStyle>
-  )
+//   const StyleEntry = ({style, handleStyleChange, selected,thumbnailImg}) => (
+//     <StyleEntryStyle
+//     onClick={() => handleStyleChange(style)}
+//     selected={selected}
+//     >
+//       <span>
+//         <BsCheckCircleFill />
+//       </span>
+//       <img src={thumbnailImg} alt=""/>
+//     </StyleEntryStyle>
+//   )
 
 
 // onClick={(e) => e.stopPropagation()}
