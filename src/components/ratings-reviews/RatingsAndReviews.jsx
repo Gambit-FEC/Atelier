@@ -35,8 +35,13 @@ export default function RatingsAndReviews() {
   }, [productId, reviewsSort, showWriteReview]);
 
   useEffect(() => {
-    localStorage.setItem(`helpful-${productId}`, JSON.stringify(reviewFeedback.helpful));
-    localStorage.setItem(`reported-${productId}`, JSON.stringify(reviewFeedback.reported));
+    console.log(reviewFeedback);
+    if (reviewFeedback.helpful.length) {
+      localStorage.setItem(`helpful-${productId}`, JSON.stringify(reviewFeedback.helpful));
+    }
+    if (reviewFeedback.reported.length) {
+      localStorage.setItem(`reported-${productId}`, JSON.stringify(reviewFeedback.reported));
+    }
   }, [reviewFeedback]);
 
   return (

@@ -9,7 +9,7 @@ export default function OverviewAndSort() {
     setReviewsSort(event.target.value);
   };
   return (
-    <div className="reviews-overview-and-sort" style={{ userSelect: 'none' }}>
+    <div className="reviews-overview-and-sort">
       <span>
         {`Showing ${lastReviewIdx + 1} of ${totalReviews || 0} reviews, sort by: `}
       </span>

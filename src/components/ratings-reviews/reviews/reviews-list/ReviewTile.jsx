@@ -4,16 +4,16 @@ import { format, parseISO } from 'date-fns';
 import { StyledRatingStars } from '../../../../styled-lib';
 import { useRAndRContext } from '../../../../context/RAndRContext';
 
-function HighlightText({ text, highlight, summary = false }) {
+function HighlightText({ text, highlight, bold = false, className }) {
   if (highlight === '' || highlight === null) {
     return (
-      <span style={summary ? { fontWeight: 'bold' } : {}}>{text}</span>
+      <span style={bold ? { fontWeight: 'bold' } : {}}>{text}</span>
     );
   }
   const regex = new RegExp(`(${highlight})`, 'gi');
   const parts = text.split(regex);
   return (
-    <span style={summary ? { fontWeight: 'bold' } : {}}>
+    <span style={bold ? { fontWeight: 'bold' } : {}}>
       {parts.filter((part) => part).map((part, index) => {
         if (part.toLowerCase() === highlight.toLowerCase()) {
           return <mark key={index}>{part}</mark>;
@@ -96,12 +96,15 @@ export default function ReviewTile({ review, hidden, search }) {
   return (
     <>
       <div id={`review-${review.review_id}`} className="review-tile" hidden={hidden}>
-        <div>
-          <HighlightText text={review.reviewer_name} highlight={search} />
-          <span>{` | ${format(parseISO(review.date), 'MMM dd, yyyy')}`}</span>
+        <div className="review-tile-top-bar">
+          <StyledRatingStars className="review-tile-rating" rating={review.rating}>★★★★★</StyledRatingStars>
+          <div>
+            <HighlightText bold text={review.reviewer_name} highlight={search} className="review-tile-reviewer" />
+            <span> | </span>
+            <span className="review-tile-date">{format(parseISO(review.date), 'MMM dd, yyyy')}</span>
+          </div>
         </div>
-        <StyledRatingStars className="review-tile-rating" rating={review.rating}>★★★★★</StyledRatingStars>
-        <HighlightText summary text={review.summary} highlight={search} />
+        <HighlightText bold text={review.summary} highlight={search} />
         {readMore && (
           <div>
             <HighlightText text={review.body.slice(0, 247)} highlight={search} />
