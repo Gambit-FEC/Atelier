@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { MdArrowBackIosNew, MdArrowForwardIos } from 'react-icons/md';
 import styled from 'styled-components';
 import CompareModal from './compareModal';
 import { StyledRatingStars } from '../../../styled-lib';
 import { useGlobalContext } from '../../../context/GlobalStore';
 
-function relatedCard(data) {
+function RelatedCard({ data }) {
   const { setProductId } = useGlobalContext();
   const placeholder = 'http://placecorgi.com/260/180';
-  const [current, setCurrent] = useState(0);
-  const display = data.data.slice(current, (current + 4));
-  const maxDisplay = data.data.length - 4;
+  const [indexItem, setIndex] = useState(0);
+  const maxDisplay = data.length - 4;
+  const listRef = useRef(null);
   const [showModal, setModal] = useState(false);
   const [currentItem, setCurrentItem] = useState(0);
 
@@ -33,11 +33,30 @@ function relatedCard(data) {
     document.body.style.height = 'auto';
   }
 
-  const nextSlide = () => {
-    setCurrent(current === maxDisplay ? current : current + 1);
+  const scrollLeft = () => {
+    if (listRef.current) {
+      listRef.current.scrollBy({
+        top: 0,
+        left: -332,
+        behavior: 'smooth',
+      });
+    }
+    if (indexItem > 0) {
+      setIndex((indexItem - 1));
+    }
   };
-  const prevSlide = () => {
-    setCurrent(current === 0 ? 0 : current - 1);
+
+  const scrollRight = () => {
+    if (listRef.current) {
+      listRef.current.scrollBy({
+        top: 0,
+        left: +332,
+        behavior: 'smooth',
+      });
+    }
+    if (indexItem < maxDisplay) {
+      setIndex((indexItem + 1));
+    }
   };
 
   function newProductState(value) {
@@ -45,15 +64,19 @@ function relatedCard(data) {
   }
 
   useEffect(() => {
-    setCurrent(0);
-  }, [data.data]);
+    listRef.current.scrollLeft = 0;
+    setIndex(0);
+  }, [data]);
 
   return (
     <RelatedList>
       {
-        current !== 0
+        console.log(data)
+      }
+      {
+        indexItem !== 0
           ? (
-            <ArrowButton onClick={prevSlide}>
+            <ArrowButton onClick={scrollLeft}>
               <PrevArrow />
             </ArrowButton>
           )
@@ -75,13 +98,14 @@ function relatedCard(data) {
         </div>
       </div>
 
-      <CardWrapper>
+      <CardWrapper ref={listRef}>
         {
-          display.map((info, index) => (
+          data.map((info, index) => (
             <StyledCard key={index}>
               <ImageContainer>
                 <StyleImg
-                  src={info.style.thumbnail_url === null ? placeholder : info.style.thumbnail_url}
+                  src={info.style.photo.thumbnail_url === null
+                    ? placeholder : info.style.photo.thumbnail_url}
                   onClick={() => newProductState(info.product.id)}
                 />
                 <CompareButton onClick={() => showDisplay(info.product.id)}>
@@ -95,10 +119,27 @@ function relatedCard(data) {
                 <NameWrapper>
                   {info.product.name}
                 </NameWrapper>
-                <PriceWrapper>
-                  $
-                  {info.product.price}
-                </PriceWrapper>
+                {
+                  (info.style.sale)
+                    ? (
+                      <PriceWrapper>
+                        <OriginalPrice>
+                          $
+                          {info.style.price}
+                        </OriginalPrice>
+                        <SalePrice>
+                          $
+                          {info.style.sale}
+                        </SalePrice>
+                      </PriceWrapper>
+                    )
+                    : (
+                      <PriceWrapper>
+                        $
+                        {info.style.price}
+                      </PriceWrapper>
+                    )
+                }
                 <StyledRatingStars rating={info.rating.averageRating}>
                   ★★★★★
                 </StyledRatingStars>
@@ -108,9 +149,9 @@ function relatedCard(data) {
         }
       </CardWrapper>
       {
-        current !== maxDisplay
+        indexItem !== maxDisplay && data.length > 4
           ? (
-            <ArrowButton onClick={nextSlide}>
+            <ArrowButton onClick={scrollRight}>
               <NextArrow />
             </ArrowButton>
           )
@@ -122,13 +163,17 @@ function relatedCard(data) {
       }
     </RelatedList>
   );
-}
+};
 
-export default relatedCard;
+export default RelatedCard;
 
 const RelatedList = styled.div`
 display: flex;
-flex-direction: row;
+align-items: flex-start;
+max-width: 1420px;
+overflow-y: hidden;
+overflow-x: hidden;
+
 `;
 
 const CompareButton = styled.button`
@@ -154,7 +199,13 @@ box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 
 const CardWrapper = styled.div`
 display:flex;
-object-fit:cover;
+// object-fit:cover;
+overflow-y: hidden;
+overflow-x: hidden;
+&::-webkit-scrollbar{
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
 `;
 
 const StyledCard = styled.div`
@@ -207,9 +258,20 @@ const NameWrapper = styled.p`
 font-weight: bold;
 font-size: 18px;
 `;
-const PriceWrapper = styled.p`
+
+const PriceWrapper = styled.div`
 font-weight: normal;
 font-size: 16px;
+padding-bottom: 10px;
+`;
+
+const OriginalPrice = styled.span`
+text-decoration: line-through;
+`;
+
+const SalePrice = styled.span`
+color: red;
+padding-left: 5px;
 `;
 
 const NextArrow = styled(MdArrowForwardIos)`
