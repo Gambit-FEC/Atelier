@@ -1,11 +1,12 @@
 const express = require('express');
+const compress = require('compression');
 const path = require('path');
 const ctrl = require('./controllers');
 const { API_KEY } = require('../config');
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, '..', 'dist')));
+app.use(compress(), express.static(path.join(__dirname, '..', 'dist')));
 app.use(express.json());
 
 app.use((req, res, next) => {
