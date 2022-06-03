@@ -173,7 +173,6 @@ top: -25px;
 const EmptyInfoWrapper = styled.div`
 style: block;
 text-align: center;
-background-color: white;
 `;
 
 const CategoryWrapper = styled.p`
