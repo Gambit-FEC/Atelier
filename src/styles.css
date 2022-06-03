@@ -52,27 +52,38 @@ body {
     background-color: #202124;
     color: white;
   }
+
   .underline-button {
     color: white !important;
   }
+
   .rating-star {
     background-color: white;
   }
+
   .modal-content {
     color: black !important;
   }
+
   .modal-form {
     color: black !important;
   }
+
   .grey-button {
     color: rgb(200, 200, 200) !important;
   }
 }
 
+@media (prefers-color-scheme: light) {
+  .grey-button {
+    color: grey !important;
+  }
+}
+
 .page-top-bar {
   position: absolute;
-  top:0;
-  left:0;
+  top: 0;
+  left: 0;
   background-color: #9F2B68;
   height: 88px;
   width: 100%;
@@ -220,9 +231,6 @@ select {
   padding: 3px;
 }
 
-.grey-button {
-  color: #424242 !important;
-}
 
 .larger-text {
   font-size: larger;
@@ -248,7 +256,7 @@ select {
   user-select: none;
 }
 
-.reviews-overview-and-sort > * {
+.reviews-overview-and-sort>* {
   user-select: none;
   margin-right: 10px;
 }
@@ -275,7 +283,7 @@ select {
   padding: 15px;
 }
 
-.review-tile> * {
+.review-tile>* {
   margin-top: 5px;
   word-break: break-word;
 }
@@ -296,7 +304,7 @@ select {
   user-select: none;
 }
 
-.review-tile-photos > * {
+.review-tile-photos>* {
   margin-right: 5px;
   margin-bottom: 5px !important;
 }
