@@ -111,11 +111,11 @@ function RelatedCard({ data }) {
                 <CompareButton onClick={() => showDisplay(info.product.id)}>
                   <i className="fa-solid fa-magnifying-glass" />
                 </CompareButton>
+                {/* <CategoryWrapper>
+                  {info.product.category}
+                </CategoryWrapper> */}
               </ImageContainer>
               <InfoWrapper value={info.product.id} onClick={() => newProductState(info.product.id)}>
-                <CategoryWrapper>
-                  {info.product.category}
-                </CategoryWrapper>
                 <NameWrapper>
                   {info.product.name}
                 </NameWrapper>
@@ -178,7 +178,7 @@ overflow-x: hidden;
 
 const CompareButton = styled.button`
 position: relative;
-top: -250px;
+top: -350px;
 float: right;
 cursor: pointer;
 height: 30px;
@@ -199,7 +199,6 @@ box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 
 const CardWrapper = styled.div`
 display:flex;
-// object-fit:cover;
 overflow-y: hidden;
 overflow-x: hidden;
 &::-webkit-scrollbar{
@@ -213,20 +212,20 @@ border-radius: 10px;
 width: 300px;
 height: fit-content;
 margin: 15px;
-flex-direction: column;
-flex-wrap: nowrap;
+// flex-direction: column;
+// flex-wrap: nowrap;
 align-items: center;
 border: 1px solid #ddd;
-justify-content: space-between;
 &:hover {
   box-shadow: 0 0 10px #9F2B68
   }
 `;
 
 const ImageContainer = styled.div`
-height: 250px;
+height: 350px;
 width: 300px;
 object-fit: cover;
+align-text: center;
 `;
 
 const StyleImg = styled.img`
@@ -241,10 +240,8 @@ overflow: hidden;
 `;
 
 const InfoWrapper = styled.div`
-padding-top: 30px;
-text-align:center;
+text-align: center;
 cursor: pointer;
-padding-bottom: 10px;
 position: relative;
 top: -25px;
 `;
@@ -253,16 +250,20 @@ const CategoryWrapper = styled.p`
 font-weight: normal;
 text-transform: uppercase;
 font-size: 16px;
+margin: none;
+background-color: white;
 `;
+
 const NameWrapper = styled.p`
 font-weight: bold;
-font-size: 18px;
+font-size: 20px;
+margin: 0px;
+background-color: #ddd;
 `;
 
 const PriceWrapper = styled.div`
 font-weight: normal;
 font-size: 16px;
-padding-bottom: 10px;
 `;
 
 const OriginalPrice = styled.span`
