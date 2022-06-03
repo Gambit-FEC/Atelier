@@ -61,12 +61,12 @@ export function OutfitCard({ data, removeCard, addCard }) {
       {
         indexItem !== 0
           ? (
-            <ArrowButton onClick={scrollLeft}>
+            <ArrowButton onClick={scrollLeft} aria-label="prev">
               <PrevArrow />
             </ArrowButton>
           )
           : (
-            <ArrowButtonTrans>
+            <ArrowButtonTrans aria-label="prev-trans">
               <PrevArrowTrans />
             </ArrowButtonTrans>
           )
@@ -78,12 +78,14 @@ export function OutfitCard({ data, removeCard, addCard }) {
             <StyledCard key={index} className="style-card">
               <HoverCard className="hover-card">
                 <ImageContainer className="image-container">
-                  <StyleImg src={
-                    info.style.photo.thumbnail_url === null
-                      ? placeholder : info.style.photo.thumbnail_url
-                  }
+                  <StyleImg
+                    src={
+                      info.style.photo.thumbnail_url === null
+                        ? placeholder : info.style.photo.thumbnail_url
+                    }
+                    alt="image"
                   />
-                  <CancelButton>
+                  <CancelButton aria-label="cancel">
                     <Cancel onClick={() => { removeCard(info.product.id); }} />
                   </CancelButton>
                   {
@@ -129,12 +131,12 @@ export function OutfitCard({ data, removeCard, addCard }) {
       {
         indexItem !== maxDisplay && data.length >= 3
           ? (
-            <ArrowButton onClick={scrollRight}>
+            <ArrowButton onClick={scrollRight} aria-label="next">
               <NextArrow />
             </ArrowButton>
           )
           : (
-            <ArrowButtonTrans>
+            <ArrowButtonTrans aria-label="next-trans">
               <NextArrowTrans />
             </ArrowButtonTrans>
           )
