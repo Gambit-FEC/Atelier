@@ -71,17 +71,14 @@ function RelatedCard({ data }) {
   return (
     <RelatedList>
       {
-        console.log(data)
-      }
-      {
         indexItem !== 0
           ? (
-            <ArrowButton onClick={scrollLeft}>
+            <ArrowButton onClick={scrollLeft} aria-label="prev">
               <PrevArrow />
             </ArrowButton>
           )
           : (
-            <ArrowButtonTrans>
+            <ArrowButtonTrans aria-label="prev-trans">
               <PrevArrowTrans />
             </ArrowButtonTrans>
           )
@@ -107,8 +104,9 @@ function RelatedCard({ data }) {
                   src={info.style.photo.thumbnail_url === null
                     ? placeholder : info.style.photo.thumbnail_url}
                   onClick={() => newProductState(info.product.id)}
+                  alt="image"
                 />
-                <CompareButton onClick={() => showDisplay(info.product.id)}>
+                <CompareButton onClick={() => showDisplay(info.product.id)} aria-label="compare">
                   <i className="fa-solid fa-magnifying-glass" />
                 </CompareButton>
                 {
@@ -153,12 +151,12 @@ function RelatedCard({ data }) {
       {
         indexItem !== maxDisplay && data.length > 4
           ? (
-            <ArrowButton onClick={scrollRight}>
+            <ArrowButton onClick={scrollRight} aria-label="next">
               <NextArrow />
             </ArrowButton>
           )
           : (
-            <ArrowButtonTrans>
+            <ArrowButtonTrans aria-label="next-trans">
               <NextArrowTrans />
             </ArrowButtonTrans>
           )
