@@ -5,15 +5,10 @@ import styled from 'styled-components';
 export default function NavBar() {
   return (
     <div className="page-top-bar">
-      {/* <div className="page-title">
-        <span className="page-title-g">Gambit</span>
-        <span className="page-title-o">Outlet</span>
-      </div> */}
       <div className="page-title-border" />
       <div className="page-title-short">
         <span className="page-title-short-g">G</span>
         <span className="page-title-short-o">o</span>
-        {/* <span className="page-title-short-spade">♠</span> */}
         <Spade />
       </div>
       <div className="nav-bar">

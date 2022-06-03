@@ -61,21 +61,6 @@ body {
   user-select: none;
 }
 
-.page-title {
-  font-family: 'Oswald', sans-serif;
-  font-size: 48px;
-  margin: 10px;
-  margin-left: 15px;
-}
-
-.page-title-g {
-  font-weight: 500;
-}
-
-.page-title-o {
-  font-weight: 200;
-}
-
 .page-title-short {
   font-family: 'Oswald', sans-serif;
   display: flex;
@@ -98,13 +83,6 @@ body {
   margin-left: 4px;
   margin-right: 3px;
   margin-bottom: 23px;
-}
-
-.page-title-short-spade {
-  font-size: 70px;
-  position: absolute;
-  top: -20px;
-  left: 66px;
 }
 
 .page-title-border {
