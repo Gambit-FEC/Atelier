@@ -253,6 +253,7 @@ padding: 2px;
 
 const OriginalPrice = styled.span`
 text-decoration: line-through;
+color: grey;
 `;
 
 const SalePrice = styled.span`

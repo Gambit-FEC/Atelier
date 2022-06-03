@@ -138,12 +138,12 @@ function RelatedCard({ data }) {
                   {info.product.name}
                 </NameWrapper>
                 <CatAndStars>
-                <CategoryWrapper>
-                  {info.product.category}
-                </CategoryWrapper>
-                <StyledRatingStars rating={info.rating.averageRating}>
-                  ★★★★★
-                </StyledRatingStars>
+                  <CategoryWrapper>
+                    {info.product.category}
+                  </CategoryWrapper>
+                  <StyledRatingStars rating={info.rating.averageRating}>
+                    ★★★★★
+                  </StyledRatingStars>
                 </CatAndStars>
               </InfoWrapper>
             </StyledCard>
@@ -276,6 +276,7 @@ padding: 2px;
 
 const OriginalPrice = styled.span`
 text-decoration: line-through;
+color: grey;
 `;
 
 const SalePrice = styled.span`
