@@ -6,7 +6,6 @@ import { StyledRatingStars } from '../../../styled-lib';
 import { useGlobalContext } from '../../../context/GlobalStore';
 
 function relatedCard(data) {
-  const glass = 'https://img.icons8.com/ios/344/zoom-in--v1.png';
   const { setProductId } = useGlobalContext();
   const placeholder = 'http://placecorgi.com/260/180';
   const [current, setCurrent] = useState(0);
@@ -15,7 +14,7 @@ function relatedCard(data) {
   const [showModal, setModal] = useState(false);
   const [currentItem, setCurrentItem] = useState(0);
 
-  function showDisplay(e, value) {
+  function showDisplay(value) {
     setModal(!showModal);
     setCurrentItem(value);
     const modal = document.getElementById('myModal');
@@ -85,8 +84,8 @@ function relatedCard(data) {
                   src={info.style.thumbnail_url === null ? placeholder : info.style.thumbnail_url}
                   onClick={() => newProductState(info.product.id)}
                 />
-                <CompareButton>
-                  <Button src={glass} onClick={(e) => showDisplay(e, info.product.id)} />
+                <CompareButton onClick={() => showDisplay(info.product.id)}>
+                  <i className="fa-solid fa-magnifying-glass" />
                 </CompareButton>
               </ImageContainer>
               <InfoWrapper value={info.product.id} onClick={() => newProductState(info.product.id)}>
@@ -139,20 +138,17 @@ float: right;
 cursor: pointer;
 height: 30px;
 width: 30px;
+opacity: 0.8;
+border-top-right-radius: 10px;
+border-bottom-left-radius: 10px;
 background-color: white;
+font-size: 16px;
 box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 &:active {
   box-shadow: 0 1px #666;
 }
-`;
-
-const Button = styled.img`
-position: relative;
-left: -5px;
-width: 25px;
-height: 25px;
-&:hover {
-  filter: brightness(150%);
+&:hover{
+  color: #9F2B68;
 }
 `;
 
@@ -169,6 +165,7 @@ margin: 15px;
 flex-direction: column;
 flex-wrap: nowrap;
 align-items: center;
+border: 1px solid #ddd;
 justify-content: space-between;
 &:hover {
   box-shadow: 0 0 10px #9F2B68
