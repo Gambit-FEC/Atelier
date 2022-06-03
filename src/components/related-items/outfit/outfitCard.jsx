@@ -262,7 +262,7 @@ visibility: hidden;
 const OutfitButton = styled.button`
   top: 100px;
   background-color: #9F2B68;
-  border: 0 solid #E5E7EB;
+  border: 0 solid black;
   box-sizing: border-box;
   color: #000000;
   font-size: 1rem;
@@ -284,12 +284,24 @@ const OutfitButton = styled.button`
   touch-action: manipulation;
   border-radius: 50%;
   &:hover {
-    box-shadow: 0 0 10px #9F2B68
+    box-shadow: 0 0 50px #9F2B68
     }
   &:focus {
     outline: 0;
   }
-}
+// BEY BLADE MODE
+//   animation-name: spin;
+//   animation-duration: 100ms;
+//   animation-iteration-count: infinite;
+//   animation-timing-function: linear;
+//   @keyframes spin {
+//     from {
+//         transform:rotate(0deg);
+//     }
+//     to {
+//         transform:rotate(360deg);
+//     }
+// }
 `;
 
 const ArrowButton = styled.button`
