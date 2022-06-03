@@ -111,38 +111,40 @@ function RelatedCard({ data }) {
                 <CompareButton onClick={() => showDisplay(info.product.id)}>
                   <i className="fa-solid fa-magnifying-glass" />
                 </CompareButton>
-                {/* <CategoryWrapper>
-                  {info.product.category}
-                </CategoryWrapper> */}
-              </ImageContainer>
-              <InfoWrapper value={info.product.id} onClick={() => newProductState(info.product.id)}>
-                <NameWrapper>
-                  {info.product.name}
-                </NameWrapper>
                 {
                   (info.style.sale)
                     ? (
                       <PriceWrapper>
                         <OriginalPrice>
                           $
-                          {info.style.price}
+                          {Math.trunc(info.style.price)}
                         </OriginalPrice>
                         <SalePrice>
                           $
-                          {info.style.sale}
+                          {Math.trunc(info.style.sale)}
                         </SalePrice>
                       </PriceWrapper>
                     )
                     : (
                       <PriceWrapper>
                         $
-                        {info.style.price}
+                        {Math.trunc(info.style.price)}
                       </PriceWrapper>
                     )
                 }
+              </ImageContainer>
+              <InfoWrapper value={info.product.id} onClick={() => newProductState(info.product.id)}>
+                <NameWrapper>
+                  {info.product.name}
+                </NameWrapper>
+                <CatAndStars>
+                <CategoryWrapper>
+                  {info.product.category}
+                </CategoryWrapper>
                 <StyledRatingStars rating={info.rating.averageRating}>
                   ★★★★★
                 </StyledRatingStars>
+                </CatAndStars>
               </InfoWrapper>
             </StyledCard>
           ))
@@ -240,30 +242,36 @@ overflow: hidden;
 `;
 
 const InfoWrapper = styled.div`
-text-align: center;
+margin: 10px;
 cursor: pointer;
-position: relative;
-top: -25px;
+`;
+
+const CatAndStars = styled.div`
+display: flex;
+justify-content: space-between;
 `;
 
 const CategoryWrapper = styled.p`
 font-weight: normal;
 text-transform: uppercase;
 font-size: 16px;
-margin: none;
-background-color: white;
+margin-top: 5px;
+margin-bottom: 5px;
 `;
 
 const NameWrapper = styled.p`
 font-weight: bold;
 font-size: 20px;
 margin: 0px;
-background-color: #ddd;
 `;
 
 const PriceWrapper = styled.div`
+transform: translate(0px, -25px);
 font-weight: normal;
 font-size: 16px;
+background-color: white;
+width: min-content;
+padding: 2px;
 `;
 
 const OriginalPrice = styled.span`

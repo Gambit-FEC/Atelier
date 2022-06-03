@@ -86,38 +86,40 @@ export function OutfitCard({ data, removeCard, addCard }) {
                   <CancelButton>
                     <Cancel onClick={() => { removeCard(info.product.id); }} />
                   </CancelButton>
+                  {
+                    (info.style.sale)
+                      ? (
+                        <PriceWrapper>
+                          <OriginalPrice>
+                            $
+                            {Math.trunc(info.style.price)}
+                          </OriginalPrice>
+                          <SalePrice>
+                            $
+                            {Math.trunc(info.style.sale)}
+                          </SalePrice>
+                        </PriceWrapper>
+                      )
+                      : (
+                        <PriceWrapper>
+                          $
+                          {Math.trunc(info.style.price)}
+                        </PriceWrapper>
+                      )
+                  }
                 </ImageContainer>
                 <InfoWrapper value={info.product.id}>
-                  <CategoryWrapper>
-                    {info.product.category}
-                  </CategoryWrapper>
                   <NameWrapper>
                     {info.product.name}
                   </NameWrapper>
-                  {
-                  (info.style.sale)
-                    ? (
-                      <PriceWrapper>
-                        <OriginalPrice>
-                          $
-                          {info.style.price}
-                        </OriginalPrice>
-                        <SalePrice>
-                          $
-                          {info.style.sale}
-                        </SalePrice>
-                      </PriceWrapper>
-                    )
-                    : (
-                      <PriceWrapper>
-                        $
-                        {info.style.price}
-                      </PriceWrapper>
-                    )
-                }
-                  <StyledRatingStars rating={info.rating.averageRating}>
-                    ★★★★★
-                  </StyledRatingStars>
+                  <CatAndStars>
+                    <CategoryWrapper>
+                      {info.product.category}
+                    </CategoryWrapper>
+                    <StyledRatingStars rating={info.rating.averageRating}>
+                      ★★★★★
+                    </StyledRatingStars>
+                  </CatAndStars>
                 </InfoWrapper>
               </HoverCard>
             </StyledCard>
@@ -160,7 +162,7 @@ text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
 const HoverCard = styled.div`
 border-radius: 10px;
 width: 300px;
-height: auto;
+height: fit-content;
 margin: 15px;
 flex-direction: column;
 flex-wrap: nowrap;
@@ -182,7 +184,7 @@ overflow-x: hidden;
 const EmptyStyledCard = styled.div`
 border-radius: 10px;
 min-width: 300px;
-height: 446px;
+height: 429px;
 margin: 15px;
 flex-direction: column;
 flex-wrap: nowrap;
@@ -194,32 +196,26 @@ const StyledCard = styled.div`
 `;
 
 const ImageContainer = styled.div`
-position: relative;
-top: 30px;
-height: 250px;
+height: 350px;
 width: 300px;
+object-fit: cover;
+align-text: center;
 `;
 
 const StyleImg = styled.img`
-position: relative;
-top: -30px;
 display: block;
 background-size: contain;
 width: 100%;
 height: 100%;
-border-radius: 10px;
 object-fit: cover;
+border-radius: 10px;
 cursor: pointer;
 overflow: hidden;
 `;
 
 const InfoWrapper = styled.div`
-padding-top: 30px;
-padding-bottom: 10px;
-text-align:center;
+margin: 10px;
 cursor: pointer;
-position: relative;
-top: -25px;
 `;
 
 const EmptyInfoWrapper = styled.div`
@@ -227,23 +223,32 @@ style: block;
 text-align: center;
 `;
 
+const CatAndStars = styled.div`
+display: flex;
+justify-content: space-between;
+`;
+
 const CategoryWrapper = styled.p`
 font-weight: normal;
 text-transform: uppercase;
 font-size: 16px;
-align-items: center;
+margin-top: 5px;
+margin-bottom: 5px;
 `;
 
 const NameWrapper = styled.p`
 font-weight: bold;
-font-size: 18px;
-align-items: center;
+font-size: 20px;
+margin: 0px;
 `;
 
 const PriceWrapper = styled.div`
+transform: translate(0px, -58px);
 font-weight: normal;
 font-size: 16px;
-padding-bottom: 10px;
+background-color: white;
+width: min-content;
+padding: 2px;
 `;
 
 const OriginalPrice = styled.span`
@@ -257,7 +262,7 @@ padding-left: 5px;
 
 const CancelButton = styled.button`
 position: relative;
-top: -280px;
+top: -350px;
 left: 270px;
 cursor: pointer;
 height: 30px;
