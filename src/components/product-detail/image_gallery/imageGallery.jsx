@@ -71,22 +71,22 @@ export default function ImageGallery({productInfo, currentStyle}) {
     <>
       <ImagesBar>
         {images.slice(0, 7).map((slide, index) => (
-          <ImageSelections key={index} src={slide.url} onClick={() => showSelectedImage(index)}/>
+          <ImageSelections key={index} alt="additional-images" src={slide.url} onClick={() => showSelectedImage(index)}/>
         ))}
       </ImagesBar>
       <Container>
         <ArrowLeft onClick={onLeftClick} />
-        <img src={images[currentImage]?.url} style={{width: "80%", objectFit: "contain", maxHeight: "100%"}} />
+        <img src={images[currentImage]?.url} alt="main-image" style={{width: "80%", objectFit: "contain", maxHeight: "100%"}} />
         {showModel
         ? <ModalBarAndImage id="modal-bar-and-image">
             <div className="modal-bg modal-prod-detail" onClick={onImageClick}>
               <ExpandedLeft onClick={onLeftClick}/>
               <ModalBar id="modal-bar">
                 {images.slice(0, 7).map((slide, index) => (
-                  <ModalImageSelections key={index} src={slide.url} onClick={(e) => showSelectedImage(index, e)} />
+                  <ModalImageSelections key={index} alt="modal-additional-images" src={slide.url} onClick={(e) => showSelectedImage(index, e)} />
                   ))}
               </ModalBar>
-              <ModalImage src={images[currentImage]?.url} onClick={(e) => handleZoom(e)}
+              <ModalImage src={images[currentImage]?.url} alt="modal-image" onClick={(e) => handleZoom(e)}
               style={{
                 transform: zoom ? `scale(${zoomScale})` : 'scale(1)',
                 cursor: zoom ? 'zoom-out' : 'crosshair',

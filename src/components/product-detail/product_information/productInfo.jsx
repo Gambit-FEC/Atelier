@@ -63,9 +63,9 @@ export default function ProductInfo({ productInfo, currentStyle }) {
         </ProductOverview>
         <Share id="social-media">
           <p>Share this item!</p>
-          <Facebook src={fb} onClick={() => onFacebookClick()} />
-          <Twitter src={tw} onClick={() => onTwitterClick()} />
-          <Pin src={pn} onClick={() => onPinterestClick()} />
+          <Facebook src={fb} alt="FB" onClick={() => onFacebookClick()} />
+          <Twitter src={tw} alt="Twitter" onClick={() => onTwitterClick()} />
+          <Pin src={pn} alt="Pinterest" onClick={() => onPinterestClick()} />
         </Share>
       </div>
     </Wrapper>
