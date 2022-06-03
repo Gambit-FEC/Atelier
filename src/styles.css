@@ -47,6 +47,28 @@ body {
   }
 }
 
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #202124;
+    color: white;
+  }
+  .underline-button {
+    color: white !important;
+  }
+  .rating-star {
+    background-color: white;
+  }
+  .modal-content {
+    color: black !important;
+  }
+  .modal-form {
+    color: black !important;
+  }
+  .grey-button {
+    color: rgb(200, 200, 200) !important;
+  }
+}
+
 .page-top-bar {
   position: absolute;
   top:0;
