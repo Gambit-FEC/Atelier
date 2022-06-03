@@ -62,12 +62,52 @@ body {
 }
 
 .page-title {
-  font-size: 60px;
-  font-weight: 700;
-  text-decoration: underline;
-  min-width: fit-content;
+  font-family: 'Oswald', sans-serif;
+  font-size: 48px;
   margin: 10px;
-  margin-left: 30px;
+  margin-left: 15px;
+}
+
+.page-title-g {
+  font-weight: 500;
+}
+
+.page-title-o {
+  font-weight: 200;
+}
+
+.page-title-short {
+  font-family: 'Oswald', sans-serif;
+  display: flex;
+  align-items: flex-end;
+  margin: 5px;
+  margin-left: 19px;
+  border: 3px solid;
+  padding-left: 7px;
+  padding-right: 45px;
+  color: white;
+}
+
+.page-title-short-g {
+  font-weight: 500;
+  font-size: 48px;
+}
+
+.page-title-short-o {
+  /* font-family: 'Montserrat', sans-serif; */
+  font-weight: 100;
+  font-size: 34px;
+  text-decoration: underline;
+  margin-left: 4px;
+  margin-right: 3px;
+  margin-bottom: 23px;
+}
+
+.page-title-short-spade {
+  font-size: 70px;
+  position: fixed;
+  top: -16px;
+  left: 78px;
 }
 
 .nav-bar {
@@ -80,6 +120,7 @@ body {
 .nav-bar-item {
   font-size: larger;
   margin-right: 10px;
+  color: white !important;
 }
 
 .nav-bar-item:hover {
