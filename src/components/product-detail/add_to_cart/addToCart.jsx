@@ -25,12 +25,11 @@ function AllStyles(styles) {
 export default function AddToCart({ productInfo, currentStyle }) {
   const { productId } = useGlobalContext();
   const allStyles = AllStyles(productInfo[currentStyle].skus);
-  // console.log('allStyles', allStyles);
 
-  const [styleID, setStyleID] = useState(productInfo[currentStyle].style_id);
   const [sizes, setSizes] = useState(allStyles[0]);
   const [quantities, setQuantities] = useState(allStyles[1]);
-  const [skuList, setSkuList] = useState(allStyles[2]);
+  // const [styleID, setStyleID] = useState(productInfo[currentStyle].style_id);
+  // const [skuList, setSkuList] = useState(allStyles[2]);
   // const [skuIndex, setskuIndex] = useState(0);
   // const [skuID, setSkuID] = useState(0);
 
@@ -46,7 +45,7 @@ export default function AddToCart({ productInfo, currentStyle }) {
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedQuantity, setSelectedQuantity] = useState(0);
   const [quantMax, setQuantMax] = useState([]);
-  const [selectedSku, setSelectedSku] = useState(0);
+  // const [selectedSku, setSelectedSku] = useState(0);
 
   // // add to cart button --------------------
   // const skuID = {

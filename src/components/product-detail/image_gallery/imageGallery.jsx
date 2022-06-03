@@ -105,43 +105,6 @@ export default function ImageGallery({productInfo, currentStyle}) {
   );
 }
 
-// {/* FOR thumbnail images */}
-// {
-//   styleList.map((style, index) => {
-//     if (index === styleList.indexOf(defaultStyle)) {
-//       return (
-//         <StyleEntry
-//           style={style}
-//           handleStyleChange={handleStyleChange}
-//           selected
-//           key={index}
-//           thumbnailImg={thumbList[index]}
-//         />
-//       );
-//     }
-//     return (
-//       <StyleEntry
-//       style={style}
-//       key={index}
-//       handleStyleChange={handleStyleChange}
-//       thumbnailImg={thumbList[index]}
-//       />
-//     )
-//   })}
-
-//   const StyleEntry = ({style, handleStyleChange, selected,thumbnailImg}) => (
-//     <StyleEntryStyle
-//     onClick={() => handleStyleChange(style)}
-//     selected={selected}
-//     >
-//       <span>
-//         <BsCheckCircleFill />
-//       </span>
-//       <img src={thumbnailImg} alt=""/>
-//     </StyleEntryStyle>
-//   )
-
-
 // onClick={(e) => e.stopPropagation()}
 
 // original display -----------------------------
@@ -173,7 +136,10 @@ const ImageSelections = styled.img`
   cursor: pointer;
   border-radius: 2px;
   border: 2px solid;
-  &: hover {color: #9F2B68};
+  &: hover {
+    color: #9F2B68;
+    box-shadow: #9F2B68 0px 0px 10px
+  };
 `;
 
 const ArrowLeft = styled(BiChevronLeftCircle)`
@@ -219,7 +185,7 @@ const ModalImage = styled.img`
   display: flex;
   max-height: 70%;
   max-width: 70%;
-  z-index: 99;
+  z-index: 101;
 `;
 
 const ModalBar = styled.div`
