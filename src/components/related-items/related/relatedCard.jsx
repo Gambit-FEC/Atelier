@@ -71,9 +71,6 @@ function RelatedCard({ data }) {
   return (
     <RelatedList>
       {
-        console.log(data)
-      }
-      {
         indexItem !== 0
           ? (
             <ArrowButton onClick={scrollLeft} aria-label="prev">
