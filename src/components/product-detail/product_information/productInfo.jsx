@@ -43,18 +43,20 @@ export default function ProductInfo({ productInfo, currentStyle }) {
         {productInfo[1].results[currentStyle].sale_price
           ? (
             <PriceStreak>
-              {Math.trunc(productInfo[1].results[currentStyle].original_price)}
+              {`$${Math.trunc(productInfo[1].results[currentStyle].original_price)}`}
             </PriceStreak>
           )
           : (
             <Price>
-              {Math.trunc(productInfo[1].results[currentStyle].original_price)}
+              {`$${Math.trunc(productInfo[1].results[currentStyle].original_price)}`}
             </Price>
           )}
         {productInfo[1].results[currentStyle].sale_price
           ? (
             <SalePrice>
-              On Sale: {Math.trunc(productInfo[1].results[currentStyle].sale_price)}
+              On Sale:
+{' '}
+{`$${Math.trunc(productInfo[1].results[currentStyle].sale_price)}`}
             </SalePrice>
           )
           : null }
@@ -103,6 +105,7 @@ const SalePrice = styled.h3`
 `;
 
 const PriceStreak = styled.h3`
+  color: grey;
   text-decoration: line-through;
 `;
 
