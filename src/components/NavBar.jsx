@@ -1,4 +1,6 @@
 import React from 'react';
+import { GiSpades } from 'react-icons/gi';
+import styled from 'styled-components';
 
 export default function NavBar() {
   return (
@@ -11,7 +13,8 @@ export default function NavBar() {
       <div className="page-title-short">
         <span className="page-title-short-g">G</span>
         <span className="page-title-short-o">o</span>
-        <span className="page-title-short-spade">♠</span>
+        {/* <span className="page-title-short-spade">♠</span> */}
+        <Spade />
       </div>
       <div className="nav-bar">
         <a className="underline-button nav-bar-item" href="#product-detail">Product Overview</a>
@@ -21,3 +24,11 @@ export default function NavBar() {
     </div>
   );
 }
+
+const Spade = styled(GiSpades)`
+  position: absolute;
+  top: 8px;
+  left: 65px;
+  height: 70px;
+  width: 47px;
+`;
