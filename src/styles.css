@@ -246,7 +246,7 @@ select {
 
 .review-tile-date {
   font-style: italic;
-  color: grey;
+  color: #595959;
 }
 
 .review-tile-rating {
