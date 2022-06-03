@@ -7,9 +7,9 @@ import { StyledRatingStars } from '../../../styled-lib';
 export function EmptyCard({ addCard }) {
   return (
 
-    <EmptyStyledCard onClick={() => addCard()}>
+    <EmptyStyledCard>
       <EmptyInfoWrapper>
-        <OutfitButton>
+        <OutfitButton onClick={() => addCard()}>
           <AddOutfit>
             Add Outfit
           </AddOutfit>
@@ -116,6 +116,7 @@ margin: 15px;
 flex-direction: column;
 flex-wrap: nowrap;
 align-items: center;
+border: 1px solid #ddd;
 &:hover {
   box-shadow: 0 0 10px #9F2B68
   }
@@ -129,13 +130,12 @@ flex-direction: row;
 const EmptyStyledCard = styled.div`
 border-radius: 10px;
 width: 300px;
-height: fit-content;
+height: 446px;
 margin: 15px;
 flex-direction: column;
 flex-wrap: nowrap;
 align-items: center;
-cursor: pointer;
-padding-bottom: 390px;
+border: 1px solid #ddd;
 `;
 
 const StyledCard = styled.div`
@@ -202,6 +202,8 @@ left: 270px;
 cursor: pointer;
 height: 30px;
 width: 30px;
+border-top-right-radius: 10px;
+border-bottom-left-radius: 10px;
 background-color: white;
 box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 &:active {
@@ -259,43 +261,34 @@ visibility: hidden;
 `;
 
 const OutfitButton = styled.button`
-  top: 195px;
+  top: 100px;
   background-color: #9F2B68;
   border: 0 solid #E5E7EB;
   box-sizing: border-box;
   color: #000000;
   font-size: 1rem;
   font-weight: 700;
-  justify-content: center;
+  justify-content: space-between;
   line-height: 1.75rem;
   padding: .75rem 1.65rem;
   position: relative;
   text-align: center;
   text-decoration: none #000000 solid;
   text-decoration-thickness: auto;
-  width: 100%;
+  width: 200px;
+  height: 200px;
   max-width: 460px;
   position: relative;
   cursor: pointer;
-  transform: rotate(-2deg);
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+  border-radius: 50%;
+  &:hover {
+    box-shadow: 0 0 10px #9F2B68
+    }
   &:focus {
     outline: 0;
-  }
-  &:after {
-    content: '';
-    position: absolute;
-    border: 1px solid #000000;
-    bottom: 4px;
-    left: 4px;
-    width: calc(100% - 1px);
-    height: calc(100% - 1px);
-  }
-  &:hover:after {
-    bottom: 2px;
-    left: 2px;
   }
 }
 `;
