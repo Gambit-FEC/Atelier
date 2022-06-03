@@ -185,7 +185,7 @@ const ModalImage = styled.img`
   display: flex;
   max-height: 70%;
   max-width: 70%;
-  z-index: 99;
+  z-index: 101;
 `;
 
 const ModalBar = styled.div`
