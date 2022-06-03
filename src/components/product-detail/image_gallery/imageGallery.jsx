@@ -136,7 +136,10 @@ const ImageSelections = styled.img`
   cursor: pointer;
   border-radius: 2px;
   border: 2px solid;
-  &: hover {color: #9F2B68};
+  &: hover {
+    color: #9F2B68;
+    box-shadow: #9F2B68 0px 0px 10px
+  };
 `;
 
 const ArrowLeft = styled(BiChevronLeftCircle)`

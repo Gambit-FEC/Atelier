@@ -41,12 +41,20 @@ export default function ProductInfo({ productInfo, currentStyle }) {
           {productInfo[0] ? productInfo[0].name : null}
         </ProductName>
         {productInfo[1].results[currentStyle].sale_price
-          ? <PriceStreak>{productInfo[1].results[currentStyle].original_price}</PriceStreak>
-          : <Price>{productInfo[1].results[currentStyle].original_price}</Price>}
+          ? (
+            <PriceStreak>
+              {Math.trunc(productInfo[1].results[currentStyle].original_price)}
+            </PriceStreak>
+          )
+          : (
+            <Price>
+              {Math.trunc(productInfo[1].results[currentStyle].original_price)}
+            </Price>
+          )}
         {productInfo[1].results[currentStyle].sale_price
           ? (
             <SalePrice>
-              On Sale: {productInfo[1].results[currentStyle].sale_price}
+              On Sale: {Math.trunc(productInfo[1].results[currentStyle].sale_price)}
             </SalePrice>
           )
           : null }
@@ -87,14 +95,14 @@ const ProductName = styled.h2`
   text-transform: uppercase;
 `;
 
-const Price = styled.h4`
+const Price = styled.h3`
 `;
 
-const SalePrice = styled.h4`
+const SalePrice = styled.h3`
   color: red;
 `;
 
-const PriceStreak = styled.h4`
+const PriceStreak = styled.h3`
   text-decoration: line-through;
 `;
 
