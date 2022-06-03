@@ -24,9 +24,7 @@ exports.getRelatedInfo = (req, res) => {
         id: result.data.id,
         name: result.data.name,
         category: result.data.category,
-        price: result.data.default_price,
       };
-      // console.log(data);
       res.status(200);
       res.send(data);
     })
@@ -39,9 +37,13 @@ exports.getRelatedInfo = (req, res) => {
 exports.getRelatedStyle = (req, res) => {
   axios.get(`${API_URL}products/${req.params.product_id}/styles`, { headers: { Authorization: API_KEY } })
     .then((result) => {
-      // console.log(result.data.results);
       res.status(200);
-      res.send(result.data.results[0].photos[0]);
+      const styleData = {
+        photo: result.data.results[0].photos[0],
+        price: result.data.results[0].original_price,
+        sale: result.data.results[0].sale_price,
+      };
+      res.send(styleData);
     })
     .catch((err) => {
       res.status(500);

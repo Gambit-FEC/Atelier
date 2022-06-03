@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { GiCancel } from 'react-icons/gi';
 import styled from 'styled-components';
 import { MdArrowBackIosNew, MdArrowForwardIos } from 'react-icons/md';
@@ -21,27 +21,47 @@ export function EmptyCard({ addCard }) {
 
 export function OutfitCard({ data, removeCard, addCard }) {
   const placeholder = 'http://placecorgi.com/260/180';
-  const [current, setCurrent] = useState(0);
-  const display = data.slice(current, (current + 3));
+  const [indexItem, setIndex] = useState(0);
+  const listRef = useRef(null);
   const maxDisplay = data.length - 3;
 
-  const nextSlide = () => {
-    setCurrent(current === maxDisplay ? current : current + 1);
+  const scrollLeft = () => {
+    if (listRef.current) {
+      listRef.current.scrollBy({
+        top: 0,
+        left: -332,
+        behavior: 'smooth',
+      });
+    }
+    if (indexItem > 0) {
+      setIndex((indexItem - 1));
+    }
   };
-  const prevSlide = () => {
-    setCurrent(current === 0 ? 0 : current - 1);
+
+  const scrollRight = () => {
+    if (listRef.current) {
+      listRef.current.scrollBy({
+        top: 0,
+        left: +332,
+        behavior: 'smooth',
+      });
+    }
+    if (indexItem < maxDisplay) {
+      setIndex((indexItem + 1));
+    }
   };
 
   useEffect(() => {
-    setCurrent(0);
+    listRef.current.scrollLeft = 0;
+    setIndex(0);
   }, [data]);
 
   return (
     <OutfitList>
       {
-        current !== 0
+        indexItem !== 0
           ? (
-            <ArrowButton onClick={prevSlide}>
+            <ArrowButton onClick={scrollLeft}>
               <PrevArrow />
             </ArrowButton>
           )
@@ -51,43 +71,63 @@ export function OutfitCard({ data, removeCard, addCard }) {
             </ArrowButtonTrans>
           )
       }
-      <EmptyCard addCard={() => { addCard(); }} />
-      {
-        display.map((info, index) => (
-          <StyledCard key={index} className="style-card">
-            <HoverCard className="hover-card">
-              <ImageContainer className="image-container">
-                <StyleImg src={
-                  info.style.thumbnail_url === null ? placeholder : info.style.thumbnail_url
+      <CardWrapper ref={listRef}>
+        <EmptyCard addCard={() => { addCard(); }} />
+        {
+          data.map((info, index) => (
+            <StyledCard key={index} className="style-card">
+              <HoverCard className="hover-card">
+                <ImageContainer className="image-container">
+                  <StyleImg src={
+                    info.style.photo.thumbnail_url === null
+                      ? placeholder : info.style.photo.thumbnail_url
+                  }
+                  />
+                  <CancelButton>
+                    <Cancel onClick={() => { removeCard(info.product.id); }} />
+                  </CancelButton>
+                </ImageContainer>
+                <InfoWrapper value={info.product.id}>
+                  <CategoryWrapper>
+                    {info.product.category}
+                  </CategoryWrapper>
+                  <NameWrapper>
+                    {info.product.name}
+                  </NameWrapper>
+                  {
+                  (info.style.sale)
+                    ? (
+                      <PriceWrapper>
+                        <OriginalPrice>
+                          $
+                          {info.style.price}
+                        </OriginalPrice>
+                        <SalePrice>
+                          $
+                          {info.style.sale}
+                        </SalePrice>
+                      </PriceWrapper>
+                    )
+                    : (
+                      <PriceWrapper>
+                        $
+                        {info.style.price}
+                      </PriceWrapper>
+                    )
                 }
-                />
-                <CancelButton>
-                  <Cancel onClick={() => { removeCard(info.product.id); }} />
-                </CancelButton>
-              </ImageContainer>
-              <InfoWrapper value={info.product.id}>
-                <CategoryWrapper>
-                  {info.product.category}
-                </CategoryWrapper>
-                <NameWrapper>
-                  {info.product.name}
-                </NameWrapper>
-                <PriceWrapper>
-                  $
-                  {info.product.price}
-                </PriceWrapper>
-                <StyledRatingStars rating={info.rating.averageRating}>
-                  ★★★★★
-                </StyledRatingStars>
-              </InfoWrapper>
-            </HoverCard>
-          </StyledCard>
-        ))
-      }
+                  <StyledRatingStars rating={info.rating.averageRating}>
+                    ★★★★★
+                  </StyledRatingStars>
+                </InfoWrapper>
+              </HoverCard>
+            </StyledCard>
+          ))
+        }
+      </CardWrapper>
       {
-        current !== maxDisplay && display.length >= 3
+        indexItem !== maxDisplay && data.length >= 3
           ? (
-            <ArrowButton onClick={nextSlide}>
+            <ArrowButton onClick={scrollRight}>
               <NextArrow />
             </ArrowButton>
           )
@@ -101,6 +141,15 @@ export function OutfitCard({ data, removeCard, addCard }) {
     </OutfitList>
   );
 }
+const CardWrapper = styled.div`
+display:flex;
+overflow-y: hidden;
+overflow-x: hidden;
+&::-webkit-scrollbar{
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+`;
 
 const AddOutfit = styled.p`
 font-size: 25px;
@@ -124,12 +173,15 @@ border: 1px solid #ddd;
 
 const OutfitList = styled.div`
 display: flex;
-flex-direction: row;
+align-items: flex-start;
+max-width: 1420px;
+overflow-y: hidden;
+overflow-x: hidden;
 `;
 
 const EmptyStyledCard = styled.div`
 border-radius: 10px;
-width: 300px;
+min-width: 300px;
 height: 446px;
 margin: 15px;
 flex-direction: column;
@@ -188,10 +240,19 @@ font-size: 18px;
 align-items: center;
 `;
 
-const PriceWrapper = styled.p`
+const PriceWrapper = styled.div`
 font-weight: normal;
 font-size: 16px;
-align-items: center;
+padding-bottom: 10px;
+`;
+
+const OriginalPrice = styled.span`
+text-decoration: line-through;
+`;
+
+const SalePrice = styled.span`
+color: red;
+padding-left: 5px;
 `;
 
 const CancelButton = styled.button`
