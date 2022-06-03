@@ -7,6 +7,7 @@ export default function NavBar() {
         <span className="page-title-g">Gambit</span>
         <span className="page-title-o">Outlet</span>
       </div> */}
+      <div className="page-title-border" />
       <div className="page-title-short">
         <span className="page-title-short-g">G</span>
         <span className="page-title-short-o">o</span>
