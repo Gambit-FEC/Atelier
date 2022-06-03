@@ -38,5 +38,8 @@ const Add = styled.button`
   cursor: pointer;
   border-radius: 5px;
   padding: 10px 20px 10px 20px;
-  &: hover {background-color: #9F2B68;};
+  &: hover {
+    color: #9F2B68;
+    box-shadow: #9F2B68 0px 0px 10px
+  };
 `;

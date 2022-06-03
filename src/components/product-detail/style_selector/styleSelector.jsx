@@ -27,7 +27,7 @@ export default function StyleSelector({ productInfo, currentStyle, setCurrentSty
         <AllThumbnails>
           {productInfo.map((item, index) => (
             (currentThumbnail === index)
-            ? (<SelectedThumbnail className="selected-thumbnail">
+            ? (<SelectedThumbnail key={item.style_id} className="selected-thumbnail">
                 <Thumbnails key={index} src={
                   item.photos[0].thumbnail_url
                   ? item.photos[0].thumbnail_url
@@ -81,9 +81,12 @@ const Thumbnails = styled.img`
   object-fit: cover;
   border: 2px solid;
   margin: 10px;
-  &: hover {color: #9F2B68;};
+  &: hover {
+    color: #9F2B68;
+    box-shadow: #9F2B68 0px 0px 10px
+  };
   cursor: pointer;
-`;
+  `;
 
 const Checkmark = styled(BsCheck2Circle)`
   z-index: 10;
