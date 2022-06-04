@@ -45,7 +45,7 @@ export default function relatedList() {
             setRelatedInfo(allProductList);
           })
           .catch((err) => {
-            console.log(err);
+            console.error('Could not retrieve related data: ', err);
           });
       });
   }
