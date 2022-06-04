@@ -24,7 +24,7 @@ export function OutfitCard({ data, removeCard, addCard }) {
   const listRef = useRef(null);
   const maxDisplay = data.length - 3;
 
-  const scrollLeft = () => {
+  function scrollLeft() {
     if (listRef.current) {
       listRef.current.scrollBy({
         top: 0,
@@ -35,9 +35,9 @@ export function OutfitCard({ data, removeCard, addCard }) {
     if (indexItem > 0) {
       setIndex((indexItem - 1));
     }
-  };
+  }
 
-  const scrollRight = () => {
+  function scrollRight() {
     if (listRef.current) {
       listRef.current.scrollBy({
         top: 0,
@@ -48,7 +48,7 @@ export function OutfitCard({ data, removeCard, addCard }) {
     if (indexItem < maxDisplay) {
       setIndex((indexItem + 1));
     }
-  };
+  }
 
   useEffect(() => {
     listRef.current.scrollLeft = 0;

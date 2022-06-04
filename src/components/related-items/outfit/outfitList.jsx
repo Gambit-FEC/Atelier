@@ -52,18 +52,20 @@ export default function outfitList() {
         getRelatedStyle(currentProductId), getRelatedRating(currentProductId)]);
       listOfPromises.push(promise);
 
-      Promise.all(listOfPromises).then((promiseResults) => {
-        promiseResults.forEach((element) => {
-          const product = {};
-          product.product = element[0].data;
-          product.style = element[1].data;
-          product.rating = element[2].data;
-          outfitArray.push(product);
+      Promise.all(listOfPromises)
+        .then((promiseResults) => {
+          promiseResults.forEach((element) => {
+            const product = {};
+            product.product = element[0].data;
+            product.style = element[1].data;
+            product.rating = element[2].data;
+            outfitArray.push(product);
+          });
+          setOutfitInfo([...outfitArray]);
+        })
+        .catch((err) => {
+          console.log(err);
         });
-        setOutfitInfo([...outfitArray]);
-      }).catch((err) => {
-        console.log(err);
-      });
     }
   }
 

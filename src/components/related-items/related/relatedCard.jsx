@@ -33,7 +33,7 @@ function RelatedCard({ data }) {
     document.body.style.height = 'auto';
   }
 
-  const scrollLeft = () => {
+  function scrollLeft() {
     if (listRef.current) {
       listRef.current.scrollBy({
         top: 0,
@@ -44,9 +44,9 @@ function RelatedCard({ data }) {
     if (indexItem > 0) {
       setIndex((indexItem - 1));
     }
-  };
+  }
 
-  const scrollRight = () => {
+  function scrollRight() {
     if (listRef.current) {
       listRef.current.scrollBy({
         top: 0,
@@ -57,7 +57,7 @@ function RelatedCard({ data }) {
     if (indexItem < maxDisplay) {
       setIndex((indexItem + 1));
     }
-  };
+  }
 
   function newProductState(value) {
     setProductId(value);
@@ -173,7 +173,6 @@ const RelatedList = styled.div`
   max-width: 1420px;
   overflow-y: hidden;
   overflow-x: hidden;
-
 `;
 
 const CompareButton = styled.button`
