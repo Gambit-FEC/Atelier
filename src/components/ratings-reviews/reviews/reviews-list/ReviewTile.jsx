@@ -74,9 +74,7 @@ export default function ReviewTile({ review, hidden, search }) {
           reported: [...reviewFeedback.reported, review.review_id],
         });
       })
-      .catch((err) => {
-        console.log('Error trying to report review:', err);
-      });
+      .catch((err) => console.log('Error trying to report review:', err));
   }
 
   function whichButton(name) {
