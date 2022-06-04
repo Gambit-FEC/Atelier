@@ -64,7 +64,7 @@ export default function outfitList() {
           setOutfitInfo([...outfitArray]);
         })
         .catch((err) => {
-          console.log(err);
+          console.error(err);
         });
     }
   }
