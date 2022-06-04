@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { API_KEY, API_URL } = require('../../config');
+const { API_URL } = require('../../config');
 
 exports.getAllRelated = (req, res) => (
   axios.get(`${API_URL}products/${req.params.product_id}/related`, { headers: { Authorization: req.headers.Authorization } })

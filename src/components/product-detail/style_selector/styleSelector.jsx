@@ -9,15 +9,12 @@ export default function StyleSelector({ productInfo, currentStyle, setCurrentSty
   const { productId } = useGlobalContext();
   const [currentThumbnail, setCurrentThumbnail] = useState(0);
 
-  // Click a style
-  const onStyleClick = (index) => {
-    // console.log('onclick index', index);
+  function onStyleClick(index) {
     setCurrentStyle(index);
-    setCurrentThumbnail(index)
+    setCurrentThumbnail(index);
   };
 
   return (
-    // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
       {productInfo.length && (
       <Wrapper>
@@ -31,13 +28,17 @@ export default function StyleSelector({ productInfo, currentStyle, setCurrentSty
                 <Thumbnails key={index} alt={item.style_id} src={
                   item.photos[0].thumbnail_url
                   ? item.photos[0].thumbnail_url
-                  : 'https://img.icons8.com/stickers/344/gambit.png'} onClick={() => onStyleClick(index)} />
+                  : 'https://img.icons8.com/stickers/344/gambit.png'}
+                    onClick={() => onStyleClick(index)}
+                  />
                   <Checkmark id="checkmark"/>
                 </SelectedThumbnail>)
             : <Thumbnails key={index} alt={item.style_id} src={
               item.photos[0].thumbnail_url
               ? item.photos[0].thumbnail_url
-              : 'https://img.icons8.com/stickers/344/gambit.png'} onClick={() => onStyleClick(index)} />
+              : 'https://img.icons8.com/stickers/344/gambit.png'}
+                onClick={() => onStyleClick(index)}
+              />
           ))}
         </AllThumbnails>
       </Wrapper>
@@ -71,7 +72,7 @@ const SelectedThumbnail = styled.div`
   position: relative;
   object-fit: cover;
   &: hover {color: #9F2B68;};
-`
+`;
 
 const Thumbnails = styled.img`
   border-radius: 50%;
@@ -86,7 +87,7 @@ const Thumbnails = styled.img`
     box-shadow: #9F2B68 0px 0px 10px
   };
   cursor: pointer;
-  `;
+`;
 
 const Checkmark = styled(BsCheck2Circle)`
   z-index: 10;
@@ -95,5 +96,5 @@ const Checkmark = styled(BsCheck2Circle)`
   font-weight: bold;
   position: absolute;
   transform: translate(-34px, 0px);
-  `
+`;
 
