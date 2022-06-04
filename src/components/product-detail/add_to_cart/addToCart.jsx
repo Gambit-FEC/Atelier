@@ -1,4 +1,3 @@
-// import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import SelectSize from './sizes';
@@ -6,7 +5,6 @@ import SelectQuantity from './quantities';
 import AddButton from './addButton';
 import { useGlobalContext } from '../../../context/GlobalStore';
 
-// create arrays for styles --------------
 function AllStyles(styles) {
   const sizes = [];
   const quantities = [];
@@ -28,10 +26,6 @@ export default function AddToCart({ productInfo, currentStyle }) {
 
   const [sizes, setSizes] = useState(allStyles[0]);
   const [quantities, setQuantities] = useState(allStyles[1]);
-  // const [styleID, setStyleID] = useState(productInfo[currentStyle].style_id);
-  // const [skuList, setSkuList] = useState(allStyles[2]);
-  // const [skuIndex, setskuIndex] = useState(0);
-  // const [skuID, setSkuID] = useState(0);
 
   useEffect(() => {
     AllStyles(productInfo[currentStyle].skus);
@@ -41,30 +35,12 @@ export default function AddToCart({ productInfo, currentStyle }) {
     setQuantities(allStyles[1]);
   }, [currentStyle, productInfo, productId]);
 
-  // selecting styles -----------------------
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedQuantity, setSelectedQuantity] = useState(0);
   const [quantMax, setQuantMax] = useState([]);
-  // const [selectedSku, setSelectedSku] = useState(0);
 
-  // // add to cart button --------------------
-  // const skuID = {
-  //   sku_id: skuList[skuIndex],
-  // };
-
-  // const onAddtoCart = () => {
-  //   console.log('i am clicked?');
-  //   axios.post('/cart', skuID)
-  //     .then((result) => {
-  //       console.log('axios post works?', result);
-  //     })
-  //     .catch((err) => { console.log('add to cart button did not send correctly', err); });
-  // };
-
-  // selecting size ------------------------
-  const onSelectSize = (e) => {
+  function onSelectSize(e) {
     const index = e.target.selectedIndex - 1;
-
     let quantArray = [];
     if (quantities[index] > 15) {
       quantArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
@@ -77,18 +53,24 @@ export default function AddToCart({ productInfo, currentStyle }) {
       setQuantMax(quantArray);
       setSelectedSize(e.target.value);
     }
-  };
+  }
 
-  // selecting quantity --------------------
-  const onSelectQuantity = (e) => {
-    setSelectedQuantity(e);
-  };
+  const onSelectQuantity = (e) => { setSelectedQuantity(e); };
 
   return (
     <>
       <Selectors>
-        <SelectSize id="select" sizes={sizes} selectedSize={selectedSize} onChange={onSelectSize} />
-        <SelectQuantity quantities={quantMax} selectedSize={selectedSize} onChange={onSelectQuantity} />
+        <SelectSize
+          id="select"
+          sizes={sizes}
+          selectedSize={selectedSize}
+          onChange={() => onSelectSize()}
+        />
+        <SelectQuantity
+          quantities={quantMax}
+          selectedSize={selectedSize}
+          onChange={() => onSelectQuantity()}
+        />
       </Selectors>
       <Cart>
         <AddButton size={selectedSize} quantity={selectedQuantity} />
