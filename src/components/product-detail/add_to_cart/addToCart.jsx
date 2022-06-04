@@ -19,7 +19,7 @@ const AllStyles = (styles) => {
     skuList.push(sizeID[i]);
   }
   return [sizes, quantities, skuList];
-}
+};
 
 export default function AddToCart({ productInfo, currentStyle }) {
   const { productId } = useGlobalContext();
