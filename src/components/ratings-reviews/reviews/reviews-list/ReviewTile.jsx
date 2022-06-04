@@ -23,7 +23,16 @@ export default function ReviewTile({ review, hidden, search }) {
   }
 
   function showPhotos() {
-    return review.photos.map((item) => <img style={{ cursor: 'pointer', height: '100px' }} loading="lazy" key={item.id} src={item.url} alt={`review-${item.id}`} onClick={handlePhotoClick} />);
+    return review.photos.map((item) => (
+      <img
+        className="review-tile-photo"
+        loading="lazy"
+        key={item.id}
+        src={item.url}
+        alt={`review-${item.id}`}
+        onClick={handlePhotoClick}
+      />
+    ));
   }
 
   function handleHelpfulClick(e) {
