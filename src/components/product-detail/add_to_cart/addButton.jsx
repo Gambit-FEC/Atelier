@@ -10,7 +10,6 @@ export default function AddButton({ size, quantity }) {
       .then((result) => { console.log('Added to cart', result); })
       .catch((err) => { console.error('ERROR: Did not correctly send item to cart', err); });
   };
-
   if (!size) {
     return (<Text>Please select a size</Text>);
   } else if (size && !quantity) {

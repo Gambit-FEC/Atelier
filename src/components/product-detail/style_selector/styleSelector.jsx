@@ -9,9 +9,9 @@ export default function StyleSelector({ productInfo, currentStyle, setCurrentSty
   const { productId } = useGlobalContext();
   const [currentThumbnail, setCurrentThumbnail] = useState(0);
 
-  const onStyleClick = (index) => {
+  function onStyleClick(index) {
     setCurrentStyle(index);
-    setCurrentThumbnail(index)
+    setCurrentThumbnail(index);
   };
 
   return (

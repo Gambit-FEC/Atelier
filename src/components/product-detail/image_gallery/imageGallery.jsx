@@ -11,22 +11,22 @@ export default function ImageGallery({productInfo, currentStyle}) {
   const [images, setImages] = useState(productInfo[currentStyle].photos);
   const { length } = images;
   const [showModel, setShowModel] = useState(false);
+  const [zoom, setZoom] = useState(false);
+  const zoomScale = 2.5;
+  const isDisabled = zoom;
 
-  // onClick functionalities for slides -------------
-  const onLeftClick = (e) => {
+  function onLeftClick(e) {
     e.stopPropagation()
     setCurrentImage(currentImage === 0 ? length - 1 : currentImage - 1);
   };
 
-  const onRightClick = (e) => {
+  function onRightClick(e) {
     e.stopPropagation()
     setCurrentImage(currentImage === length - 1 ? 0 : currentImage + 1);
   };
 
-  const showSelectedImage = (image, e) => {
-    if (e) {
-      e.stopPropagation();
-    }
+  function showSelectedImage(image, e) {
+    if (e) { e.stopPropagation(); };
     setCurrentImage(image);
   }
 
@@ -35,17 +35,12 @@ export default function ImageGallery({productInfo, currentStyle}) {
     setCurrentImage(0);
   }, [currentStyle, productInfo, productId])
 
-  const onImageClick = () => {
-    setShowModel(!showModel);
-  }
+  const onImageClick = () => { setShowModel(!showModel); }
 
-  const [zoom, setZoom] = useState(false);
-  const zoomScale = 2.5;
-  const handleZoom = (e) => {
+  function handleZoom(e) {
     e.stopPropagation();
-    setZoom((prevState) => !prevState)
+    setZoom((prevState) => !prevState);
   }
-  const isDisabled = zoom;
 
   return (
     <>
@@ -139,7 +134,6 @@ const ArrowRight = styled(BiChevronRightCircle)`
   &: hover {color: #9F2B68;};
 `;
 
-// expanded view ---------------------------------
 const ExpandIcon = styled(AiOutlineExpand)`
   font-size: 2rem;
   font-weight: bold;

@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import SelectSize from './sizes';
@@ -6,7 +5,7 @@ import SelectQuantity from './quantities';
 import AddButton from './addButton';
 import { useGlobalContext } from '../../../context/GlobalStore';
 
-const AllStyles = (styles) => {
+function AllStyles(styles) {
   const sizes = [];
   const quantities = [];
   const skuList = [];
@@ -19,7 +18,7 @@ const AllStyles = (styles) => {
     skuList.push(sizeID[i]);
   }
   return [sizes, quantities, skuList];
-};
+}
 
 export default function AddToCart({ productInfo, currentStyle }) {
   const { productId } = useGlobalContext();
@@ -40,9 +39,8 @@ export default function AddToCart({ productInfo, currentStyle }) {
   const [selectedQuantity, setSelectedQuantity] = useState(0);
   const [quantMax, setQuantMax] = useState([]);
 
-  const onSelectSize = (e) => {
+  function onSelectSize(e) {
     const index = e.target.selectedIndex - 1;
-
     let quantArray = [];
     if (quantities[index] > 15) {
       quantArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
@@ -55,11 +53,9 @@ export default function AddToCart({ productInfo, currentStyle }) {
       setQuantMax(quantArray);
       setSelectedSize(e.target.value);
     }
-  };
+  }
 
-  const onSelectQuantity = (e) => {
-    setSelectedQuantity(e);
-  };
+  const onSelectQuantity = (e) => { setSelectedQuantity(e); };
 
   return (
     <>
