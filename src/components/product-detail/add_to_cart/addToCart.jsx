@@ -64,12 +64,12 @@ export default function AddToCart({ productInfo, currentStyle }) {
           id="select"
           sizes={sizes}
           selectedSize={selectedSize}
-          onChange={() => onSelectSize()}
+          onChange={(e) => onSelectSize(e)}
         />
         <SelectQuantity
           quantities={quantMax}
           selectedSize={selectedSize}
-          onChange={() => onSelectQuantity()}
+          onChange={onSelectQuantity}
         />
       </Selectors>
       <Cart>
