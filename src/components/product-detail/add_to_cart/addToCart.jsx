@@ -23,7 +23,6 @@ function AllStyles(styles) {
 export default function AddToCart({ productInfo, currentStyle }) {
   const { productId } = useGlobalContext();
   const allStyles = AllStyles(productInfo[currentStyle].skus);
-
   const [sizes, setSizes] = useState(allStyles[0]);
   const [quantities, setQuantities] = useState(allStyles[1]);
 
