@@ -1,4 +1,4 @@
-// import axios from 'axios';
+/* eslint-disable max-len */
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import SelectSize from './sizes';
@@ -6,7 +6,6 @@ import SelectQuantity from './quantities';
 import AddButton from './addButton';
 import { useGlobalContext } from '../../../context/GlobalStore';
 
-// create arrays for styles --------------
 function AllStyles(styles) {
   const sizes = [];
   const quantities = [];
@@ -28,10 +27,6 @@ export default function AddToCart({ productInfo, currentStyle }) {
 
   const [sizes, setSizes] = useState(allStyles[0]);
   const [quantities, setQuantities] = useState(allStyles[1]);
-  // const [styleID, setStyleID] = useState(productInfo[currentStyle].style_id);
-  // const [skuList, setSkuList] = useState(allStyles[2]);
-  // const [skuIndex, setskuIndex] = useState(0);
-  // const [skuID, setSkuID] = useState(0);
 
   useEffect(() => {
     AllStyles(productInfo[currentStyle].skus);
@@ -41,27 +36,10 @@ export default function AddToCart({ productInfo, currentStyle }) {
     setQuantities(allStyles[1]);
   }, [currentStyle, productInfo, productId]);
 
-  // selecting styles -----------------------
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedQuantity, setSelectedQuantity] = useState(0);
   const [quantMax, setQuantMax] = useState([]);
-  // const [selectedSku, setSelectedSku] = useState(0);
 
-  // // add to cart button --------------------
-  // const skuID = {
-  //   sku_id: skuList[skuIndex],
-  // };
-
-  // const onAddtoCart = () => {
-  //   console.log('i am clicked?');
-  //   axios.post('/cart', skuID)
-  //     .then((result) => {
-  //       console.log('axios post works?', result);
-  //     })
-  //     .catch((err) => { console.log('add to cart button did not send correctly', err); });
-  // };
-
-  // selecting size ------------------------
   const onSelectSize = (e) => {
     const index = e.target.selectedIndex - 1;
 
@@ -79,7 +57,6 @@ export default function AddToCart({ productInfo, currentStyle }) {
     }
   };
 
-  // selecting quantity --------------------
   const onSelectQuantity = (e) => {
     setSelectedQuantity(e);
   };

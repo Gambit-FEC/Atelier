@@ -35,12 +35,10 @@ export default function ImageGallery({productInfo, currentStyle}) {
     setCurrentImage(0);
   }, [currentStyle, productInfo, productId])
 
-  // image expansion --------------------
   const onImageClick = () => {
     setShowModel(!showModel);
   }
 
-  //handle zoom
   const [zoom, setZoom] = useState(false);
   const zoomScale = 2.5;
   const handleZoom = (e) => {
@@ -48,24 +46,6 @@ export default function ImageGallery({productInfo, currentStyle}) {
     setZoom((prevState) => !prevState)
   }
   const isDisabled = zoom;
-
-  // //handle mouse hover
-  // const carouselSelect = useRef(null);
-  // const [mouseX, setMouseX] = useState(null);
-  // const [mouseY, setMouseY] = useState(null);
-  // const handleMouseHover = (event) => {
-  //   const DOMRect = carouselSelect.current.getBoundingClientRect();
-  //     const {
-  //       height, width, left: offsetLeft, top: offsetTop,
-  //     } = DOMRect;
-  //     const x = ((event.pageX - offsetLeft) / width) * 100;
-  //     const y = ((event.pageY - offsetTop) / height) * 100;
-  //     setMouseX(x);
-  //     setMouseY(y);
-  // }
-  // const transformOrigin = {
-  //   transformOrigin: `${mouseX}% ${mouseY}%`,
-  // };
 
   return (
     <>
@@ -105,9 +85,6 @@ export default function ImageGallery({productInfo, currentStyle}) {
   );
 }
 
-// onClick={(e) => e.stopPropagation()}
-
-// original display -----------------------------
 const Container = styled.div`
   border: white;
   display: flex;

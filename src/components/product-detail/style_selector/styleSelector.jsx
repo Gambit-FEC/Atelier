@@ -9,15 +9,12 @@ export default function StyleSelector({ productInfo, currentStyle, setCurrentSty
   const { productId } = useGlobalContext();
   const [currentThumbnail, setCurrentThumbnail] = useState(0);
 
-  // Click a style
   const onStyleClick = (index) => {
-    // console.log('onclick index', index);
     setCurrentStyle(index);
     setCurrentThumbnail(index)
   };
 
   return (
-    // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
       {productInfo.length && (
       <Wrapper>
@@ -86,7 +83,7 @@ const Thumbnails = styled.img`
     box-shadow: #9F2B68 0px 0px 10px
   };
   cursor: pointer;
-  `;
+`;
 
 const Checkmark = styled(BsCheck2Circle)`
   z-index: 10;
@@ -95,5 +92,5 @@ const Checkmark = styled(BsCheck2Circle)`
   font-weight: bold;
   position: absolute;
   transform: translate(-34px, 0px);
-  `
+`;
 
