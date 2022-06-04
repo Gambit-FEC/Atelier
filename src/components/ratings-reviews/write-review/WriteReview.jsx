@@ -147,7 +147,19 @@ export default function WriteReview() {
     const spans = [];
     if (formData.rating === '0') {
       for (let i = 0; i < 5; i++) {
-        spans.push(<input type="button" key={i} id={i + 1} value="☆" className="form-stars" onClick={handleStarClick} onMouseEnter={handleStarMouseEnter} onMouseLeave={handleStarMouseLeave} required />);
+        spans.push(
+          <input
+            type="button"
+            key={i}
+            id={i + 1}
+            value="☆"
+            className="form-stars"
+            onClick={handleStarClick}
+            onMouseEnter={handleStarMouseEnter}
+            onMouseLeave={handleStarMouseLeave}
+            required
+          />,
+        );
       }
       return (
         <div id="star-buttons">
@@ -157,9 +169,30 @@ export default function WriteReview() {
     }
     for (let i = 0; i < 5; i++) {
       if (i < formData.rating) {
-        spans.push(<input type="button" key={i} id={i + 1} value="★" className="form-stars" style={{ color: '#9F2B68' }} onClick={handleStarClick} required />);
+        spans.push(
+          <input
+            type="button"
+            key={i}
+            id={i + 1}
+            value="★"
+            className="form-stars"
+            style={{ color: '#9F2B68' }}
+            onClick={handleStarClick}
+            required
+          />,
+        );
       } else {
-        spans.push(<input type="button" key={i} id={i + 1} value="☆" className="form-stars" onClick={handleStarClick} required />);
+        spans.push(
+          <input
+            type="button"
+            key={i}
+            id={i + 1}
+            value="☆"
+            className="form-stars"
+            onClick={handleStarClick}
+            required
+          />,
+        );
       }
     }
     return (
@@ -212,12 +245,27 @@ export default function WriteReview() {
         radios.push(
           <>
             <label key={`${key}-${i}-label`}>{`${i + 1}: `}</label>
-            <input key={`${key}-${i}-radio`} type="radio" id={`${key}-${i + 1}`} className="bigger-radio" name={key} value={i + 1} style={i < 4 ? { marginRight: '10px' } : {}} onMouseEnter={handleCharactericsMouseEnter} onMouseLeave={handleCharactericsMouseLeave} required />
+            <input
+              key={`${key}-${i}-radio`}
+              type="radio"
+              id={`${key}-${i + 1}`}
+              className="bigger-radio"
+              name={key}
+              value={i + 1}
+              style={i < 4 ? { marginRight: '10px' } : {}}
+              onMouseEnter={handleCharactericsMouseEnter}
+              onMouseLeave={handleCharactericsMouseLeave}
+              required
+            />
           </>,
         );
       }
       allRadios.push(
-        <div key={key} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }} onChange={removeHoverChar}>
+        <div
+          key={key}
+          style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}
+          onChange={removeHoverChar}
+        >
           <label style={{ width: '85px' }}>{`${key}:`}</label>
           {formData.characteristics[key].value - 1 >= 0
             && (
@@ -245,28 +293,86 @@ export default function WriteReview() {
         <label className="required">Do you recommend this product?</label>
         <div onChange={handleRecommended}>
           <label>yes</label>
-          <input type="radio" id="yes" className="bigger-radio" name="recommend" value="yes" required />
+          <input
+            type="radio"
+            id="yes"
+            className="bigger-radio"
+            name="recommend"
+            value="yes"
+            required
+          />
           <label style={{ marginLeft: '20px' }}>no</label>
-          <input type="radio" id="no" className="bigger-radio" name="recommend" value="no" required />
+          <input
+            type="radio"
+            id="no"
+            className="bigger-radio"
+            name="recommend"
+            value="no"
+            required
+          />
         </div>
         <label className="required">Characteristics</label>
         <div onChange={handleCharacteristics}>
           {characteristicsRender()}
         </div>
         <label>Summary</label>
-        <textarea id="summary" placeholder="Example: Best purchase ever!" maxLength="60" onChange={updateFormData} />
+        <textarea
+          id="summary"
+          placeholder="Example: Best purchase ever!"
+          maxLength="60"
+          onChange={updateFormData}
+        />
         <label className="required">Body</label>
-        <textarea id="body" placeholder="Why did you like the product or not?" minLength="50" maxLength="1000" onChange={updateFormData} required />
+        <textarea
+          id="body"
+          placeholder="Why did you like the product or not?"
+          minLength="50"
+          maxLength="1000"
+          onChange={updateFormData}
+          required
+        />
         <label>Photos (5 max)</label>
-        <input id="photos" type="file" accept="image/*" onChange={handlePhotos} multiple />
+        <input
+          id="photos"
+          type="file"
+          accept="image/*"
+          onChange={handlePhotos}
+          multiple
+        />
         <label className="required">Name</label>
-        <input type="text" id="name" placeholder="Example: jackson11!" maxLength="60" onChange={updateFormData} required />
+        <input
+          type="text"
+          id="name"
+          placeholder="Example: jackson11!"
+          maxLength="60"
+          onChange={updateFormData}
+          required
+        />
         <label className="form-italic">For privacy reasons, do not use your full name or email address</label>
         <label className="required">Email</label>
-        <input type="email" id="email" placeholder="Example: jackson11@email.com" maxLength="60" onChange={updateFormData} required />
+        <input
+          type="email"
+          id="email"
+          placeholder="Example: jackson11@email.com"
+          maxLength="60"
+          onChange={updateFormData}
+          required
+        />
         <label className="form-italic">For authentication reasons, you will not be emailed</label>
-        {!reviewSubmitted && <input type="submit" className="underline-button larger-text" value="Submit Review" />}
-        {reviewSubmitted && <input type="button" className="write-review-submitted underline-button larger-text" value="Review Submitted!" />}
+        {!reviewSubmitted && (
+          <input
+            type="submit"
+            className="underline-button larger-text"
+            value="Submit Review"
+          />
+        )}
+        {reviewSubmitted && (
+          <input
+            type="button"
+            className="write-review-submitted underline-button larger-text"
+            value="Review Submitted!"
+          />
+        )}
       </form>
     </div>
   );
