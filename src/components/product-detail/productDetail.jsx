@@ -7,45 +7,15 @@ import ImageGallery from './image_gallery/imageGallery';
 import ProductInfo from './product_information/productInfo';
 import StyleSelector from './style_selector/styleSelector';
 
-// Create a Title component that'll render an <h1> tag with some styles
-const ProductDetailContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 80vw;
-  margin: 0 auto;
-  user-select: none;
-  max-width: fit-content;
-`;
-
-// Create a Wrapper component that'll render a <section> tag with some styles
-const NotImages = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  max-width: 800px;
-  min-width: 500px;
-`;
-
-const Images = styled.div`
-  display: flex;
-  width: 70%;
-  padding: 20px 130px 20px;
-  align-items: center;
-  justify-content: center;
-`;
-
 export default function ProductDetail() {
   const { productId } = useGlobalContext();
   const [productInfo, setProductInfo] = useState([]);
   const [currentStyle, setCurrentStyle] = useState(0);
 
-  // Grab item data from server----------------------
   useEffect(() => {
     axios.get(`/products/${productId}`)
-      .then((result) => {
-        setProductInfo(result.data);
-      })
-      .catch((err) => { console.log('getproduct didnt work', err); });
+      .then((result) => { setProductInfo(result.data); })
+      .catch((err) => { console.error('ERROR: Failed to retrieve product data - ', err); });
   }, [productId]);
 
   return (
@@ -62,10 +32,39 @@ export default function ProductDetail() {
               currentStyle={currentStyle}
               setCurrentStyle={setCurrentStyle}
             />
-            <AddToCart className="prodDetail-addToCart" productInfo={productInfo[1].results} currentStyle={currentStyle} />
+            <AddToCart
+              className="prodDetail-addToCart"
+              productInfo={productInfo[1].results}
+              currentStyle={currentStyle}
+            />
           </NotImages>
         </ProductDetailContainer>
       )}
     </div>
   );
 }
+
+const ProductDetailContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 80vw;
+  margin: 0 auto;
+  user-select: none;
+  max-width: fit-content;
+`;
+
+const NotImages = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  max-width: 800px;
+  min-width: 500px;
+`;
+
+const Images = styled.div`
+  display: flex;
+  width: 70%;
+  padding: 20px 130px 20px;
+  align-items: center;
+  justify-content: center;
+`;
