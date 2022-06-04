@@ -11,23 +11,18 @@ export default function MoreAndAddReview() {
     shownReviews,
     lastReviewIdx,
   } = useRAndRContext();
-
   const handleMoreClick = () => setCount(count + 2);
-
   const handleAddClick = () => {
     document.body.style.overflow = 'hidden';
     setShowWriteReview(true);
   };
-
   const handleCollapse = () => setCount(2);
-
   useEffect(() => {
     if (count !== 2 && lastReviewIdx) {
       const lastReview = document.getElementById(`review-${shownReviews[lastReviewIdx].key}`);
       lastReview.scrollIntoView();
     }
   }, [count]);
-
   return (
     <div className="reviews-more-add">
       {showAdd && <button className="underline-button larger-text" type="button" onClick={handleMoreClick}>Show more</button>}

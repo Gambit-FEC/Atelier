@@ -4,7 +4,7 @@ import { format, parseISO } from 'date-fns';
 import { StyledRatingStars } from '../../../../styled-lib';
 import { useRAndRContext } from '../../../../context/RAndRContext';
 
-function HighlightText({ text, highlight, bold = false, className }) {
+function HighlightText({ text, highlight, bold = false }) {
   if (highlight === '' || highlight === null) {
     return (
       <span style={bold ? { fontWeight: 'bold' } : {}}>{text}</span>
@@ -23,16 +23,13 @@ function HighlightText({ text, highlight, bold = false, className }) {
     </span>
   );
 }
-
 export default function ReviewTile({ review, hidden, search }) {
   const [readMore, setReadMore] = useState(review.body.length > 250);
   const [showModal, setShowModal] = useState({ show: false, src: '' });
   const { reviewFeedback, setReviewFeedback } = useRAndRContext();
-
   function handleReadMoreClick() {
     setReadMore(!readMore);
   }
-
   function handlePhotoClick(event) {
     showModal.show ? (
       document.body.style.overflowX = 'hidden',
@@ -40,11 +37,9 @@ export default function ReviewTile({ review, hidden, search }) {
     ) : document.body.style.overflow = 'hidden';
     setShowModal({ show: !showModal.show, src: event.target.src });
   }
-
   function showPhotos() {
     return review.photos.map((item) => <img style={{ cursor: 'pointer', height: '100px' }} loading="lazy" key={item.id} src={item.url} alt={`review-${item.id}`} onClick={handlePhotoClick} />);
   }
-
   function handleHelpfulClick(e) {
     e.target.classList.add('clicked-link-button');
     e.target.removeAttribute('onClick');
@@ -60,7 +55,6 @@ export default function ReviewTile({ review, hidden, search }) {
         console.log('Error trying to mark review as helpful:', err);
       });
   }
-
   function handleReportClick(e) {
     e.target.classList.add('clicked-link-button');
     setReviewFeedback({
@@ -76,7 +70,6 @@ export default function ReviewTile({ review, hidden, search }) {
       })
       .catch((err) => console.log('Error trying to report review:', err));
   }
-
   function whichButton(name) {
     if (name === 'helpful') {
       return reviewFeedback.helpful.includes(review.review_id)
@@ -90,7 +83,6 @@ export default function ReviewTile({ review, hidden, search }) {
     }
     return <div />;
   }
-
   return (
     <>
       <div id={`review-${review.review_id}`} className="review-tile" hidden={hidden}>
@@ -143,5 +135,3 @@ export default function ReviewTile({ review, hidden, search }) {
     </>
   );
 }
-
-

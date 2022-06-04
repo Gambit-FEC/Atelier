@@ -33,7 +33,6 @@ export default function RatingsAndReviews() {
         console.log('Error fetching average ratings:', err);
       });
   }, [productId, reviewsSort, showWriteReview]);
-
   useEffect(() => {
     if (reviewFeedback.helpful.length) {
       localStorage.setItem(`helpful-${productId}`, JSON.stringify(reviewFeedback.helpful));
@@ -42,7 +41,6 @@ export default function RatingsAndReviews() {
       localStorage.setItem(`reported-${productId}`, JSON.stringify(reviewFeedback.reported));
     }
   }, [reviewFeedback]);
-
   return (
     <div id="ratings-and-reviews">
       <Ratings />

@@ -16,7 +16,13 @@ export default function RatingBreakdown() {
     return percents.map((item) => Math.floor((item / highestStar) * 100));
   }
   function handleRatingClick(star) {
-    setReviewsFilter(Object.assign({}, reviewsFilter, reviewsFilter[star] = !reviewsFilter[star]));
+    setReviewsFilter(
+      Object.assign(
+        {},
+        reviewsFilter,
+        reviewsFilter[star] = !reviewsFilter[star]
+      )
+    );
   }
   function handleResetClick() {
     setReviewsFilter({
@@ -27,13 +33,12 @@ export default function RatingBreakdown() {
       5: false,
     });
   }
-
   return (
     <div className="rating-breakdown">
       {reviewsMeta && (
         <>
           {calcPercents(reviewsMeta.ratings).map((item, index) => (
-            <div id={`${index}-star`} key={index} style={{fontSize: '20px'}}>
+            <div id={`${index}-star`} key={index} style={{ fontSize: '20px' }}>
               <StarButton
                 id={`${index}-star-filter-button`}
                 className="underline-button"
@@ -49,7 +54,7 @@ export default function RatingBreakdown() {
             <>
               <span>Filters applied </span>
               <button onClick={handleResetClick} className="underline-button">Reset Filters</button>
-              <div id="rating-filters" style={{marginTop: '5px'}}>
+              <div id="rating-filters" style={{ marginTop: '5px' }}>
                 {Object.values(reviewsFilter).map((item, index) => {
                   if (item === true) {
                     return <div key={index + 1}>{`${index + 1} ★`}</div>;
