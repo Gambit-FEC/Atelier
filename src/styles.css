@@ -253,9 +253,11 @@ select {
   user-select: none;
 }
 
-.review-tile-photos > * {
+.review-tile-photo {
   margin-right: 5px;
   margin-bottom: 5px !important;
+  cursor: pointer;
+  height: 100px;
 }
 
 .review-summary {

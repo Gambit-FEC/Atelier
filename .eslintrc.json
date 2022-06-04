@@ -11,11 +11,7 @@
     "react/no-array-index-key": 0,
     "react/jsx-no-constructed-context-values": 0,
     "react/button-has-type": 0,
-    "import/no-cycle": 0,
-    "no-console": "off",
     "no-plusplus": "off",
-    "no-unused-expressions": "off",
-    "guard-for-in":"off",
-    "no-restricted-syntax":"off"
+    "no-unused-expressions": "off"
   }
 }
