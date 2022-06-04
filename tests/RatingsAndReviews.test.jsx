@@ -19,13 +19,12 @@ const value = {
       Size: { id: 135240, value: '2.7500000000000000' },
       Width: { id: 135241, value: '3.1428571428571429' },
     },
-    product_id: "40350",
+    product_id: '40350',
     ratings: { 1: '4', 2: '4', 3: '5', 4: '5', 5: '11' },
     recommended: { false: '8', true: '21' },
     totalRatings: 29,
   },
 };
-
 describe('Ratings and Reviews widget', () => {
   test('widget should render on screen', () => {
     act(() => {
@@ -39,7 +38,3 @@ describe('Ratings and Reviews widget', () => {
     });
   });
 });
-
-          // const { container, getByText } = await render(<OverallRating />);
-          // await expect(getByText('★★★★★')).toBeInTheDocument();
-          // console.log('DONE');

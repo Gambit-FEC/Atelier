@@ -11,16 +11,19 @@ export default function MoreAndAddReview() {
     shownReviews,
     lastReviewIdx,
   } = useRAndRContext();
-  const handleMoreClick = () => {
+
+  function handleMoreClick() {
     setCount(count + 2);
-  };
-  const handleAddClick = () => {
+  }
+
+  function handleAddClick() {
     document.body.style.overflow = 'hidden';
     setShowWriteReview(true);
-  };
-  const handleCollapse = () => {
+  }
+
+  function handleCollapse() {
     setCount(2);
-  };
+  }
 
   useEffect(() => {
     if (count !== 2 && lastReviewIdx) {

@@ -7,6 +7,7 @@ export default function OverallRating() {
   const { reviewsMeta } = useRAndRContext();
   const { avgRating } = useGlobalContext();
   const [recommended, setRecommended] = useState(0);
+
   useEffect(() => {
     if (reviewsMeta) {
       setRecommended(
@@ -19,6 +20,7 @@ export default function OverallRating() {
       );
     }
   }, [reviewsMeta]);
+
   return (
     <div className="ratings-overall">
       <StyledRatingStars id="overall-star-rating" size="38px" rating={avgRating} border="2">★★★★★</StyledRatingStars>

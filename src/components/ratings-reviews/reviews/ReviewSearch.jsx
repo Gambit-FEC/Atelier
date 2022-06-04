@@ -4,9 +4,11 @@ import { useRAndRContext } from '../../../context/RAndRContext';
 export default function ReviewSearch() {
   const { setReviewSearch } = useRAndRContext();
   const [searchText, setSearchText] = useState('');
+
   function handleChange(e) {
     setSearchText(e.target.value);
   }
+
   useEffect(() => {
     if (searchText.length >= 3) {
       setReviewSearch(searchText);
@@ -14,8 +16,9 @@ export default function ReviewSearch() {
       setReviewSearch('');
     }
   }, [searchText]);
+
   return (
-    <form className="reviews-search" onSubmit={(e) => { e.preventDefault(); }}>
+    <form className="reviews-search" onSubmit={(e) => e.preventDefault()}>
       <input type="text" placeholder="Search..." value={searchText} onChange={handleChange} />
     </form>
   );

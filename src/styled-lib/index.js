@@ -5,19 +5,18 @@ function ratingToPercent(rating) {
   return `${rating * 20}%`;
 }
 
-// takes rating, [border], [size] props
 const StyledRatingStars = styled.div`
   display: inline-block;
   font-size: ${({ size }) => size};
   background: linear-gradient(to right, #9F2B68 ${({ rating }) => ratingToPercent(rating)}, white ${({ rating }) => ratingToPercent(rating)});
   background-clip: text;
   -webkit-background-clip: text;
-  -webkit-text-stroke: ${({ border }) => (border || '1') + 'px'} black;
+  -webkit-text-stroke: ${({ border }) => `${border || '1'}px`} black;
   color: transparent;
 `;
 
 const RatingBar = styled.div`
-  background: linear-gradient(to right, #9F2B68 ${({ percent }) => percent + '%'}, lightgrey ${({ percent }) => percent + '%'});
+  background: linear-gradient(to right, #9F2B68 ${({ percent }) => `${percent}%`}, lightgrey ${({ percent }) => `${percent}%`});
   height: 8px;
 `;
 
@@ -45,7 +44,6 @@ const CharacteristicsPointer = styled(GoTriangleDown)`
   left: ${({ position }) => `${position - 3.3}%`};
   color: #9F2B68;
   `;
-  // left: -2.7%;
 export {
   StyledRatingStars,
   RatingBar,
