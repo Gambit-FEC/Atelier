@@ -9,18 +9,18 @@ export default function ProductBreakdown() {
   }
   return (
     <div className="ratings-product-breakdown">
-      {reviewsMeta && Object.keys(reviewsMeta.characteristics).map((item, index) => (
-        <div key={index} id={`${item}-breakdown`}>
-          <div style={{fontWeight: 'bold'}}>{item}</div>
-          <CharacteristicsBar className={`${item}-characteristics-bar`}>
+      {reviewsMeta && Object.keys(reviewsMeta.characteristics).map((characteristic, index) => (
+        <div key={index} id={`${characteristic}-breakdown`}>
+          <div style={{fontWeight: 'bold'}}>{characteristic}</div>
+          <CharacteristicsBar className={`${characteristic}-characteristics-bar`}>
             <CharacteristicsPointer
-              className={`${item}-bar-pointer`}
-              position={calcPercent(reviewsMeta.characteristics[item].value)}
+              className={`${characteristic}-bar-pointer`}
+              position={calcPercent(reviewsMeta.characteristics[characteristic].value)}
             />
           </CharacteristicsBar>
           <div className="first-and-last-char">
-            <div className="first-char">{characteristicsMeaning[item][0]}</div>
-            <div className="last-char">{characteristicsMeaning[item][4]}</div>
+            <div className="first-char">{characteristicsMeaning[characteristic][0]}</div>
+            <div className="last-char">{characteristicsMeaning[characteristic][4]}</div>
           </div>
         </div>
       ))}
