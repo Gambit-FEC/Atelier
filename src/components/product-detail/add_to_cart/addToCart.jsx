@@ -6,7 +6,7 @@ import SelectQuantity from './quantities';
 import AddButton from './addButton';
 import { useGlobalContext } from '../../../context/GlobalStore';
 
-function AllStyles(styles) {
+const AllStyles = (styles) => {
   const sizes = [];
   const quantities = [];
   const skuList = [];

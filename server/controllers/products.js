@@ -1,7 +1,6 @@
 const axios = require('axios');
 const { API_URL } = require('../../config');
 
-// get one product
 exports.getOneProduct = async (req, res) => {
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${req.params.productId}`, { headers: { Authorization: req.headers.Authorization } });
   try {

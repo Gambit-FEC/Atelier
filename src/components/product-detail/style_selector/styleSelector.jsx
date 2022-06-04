@@ -68,7 +68,7 @@ const SelectedThumbnail = styled.div`
   position: relative;
   object-fit: cover;
   &: hover {color: #9F2B68;};
-`
+`;
 
 const Thumbnails = styled.img`
   border-radius: 50%;
