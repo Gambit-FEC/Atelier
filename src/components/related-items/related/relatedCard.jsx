@@ -73,7 +73,7 @@ function RelatedCard({ data }) {
       {
         indexItem !== 0
           ? (
-            <ArrowButton onClick={scrollLeft} aria-label="prev">
+            <ArrowButton onClick={() => scrollLeft()} aria-label="prev">
               <PrevArrow />
             </ArrowButton>
           )
@@ -151,7 +151,7 @@ function RelatedCard({ data }) {
       {
         indexItem !== maxDisplay && data.length > 4
           ? (
-            <ArrowButton onClick={scrollRight} aria-label="next">
+            <ArrowButton onClick={() => scrollRight()} aria-label="next">
               <NextArrow />
             </ArrowButton>
           )

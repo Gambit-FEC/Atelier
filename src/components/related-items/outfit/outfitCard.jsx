@@ -60,7 +60,7 @@ export function OutfitCard({ data, removeCard, addCard }) {
       {
         indexItem !== 0
           ? (
-            <ArrowButton onClick={scrollLeft} aria-label="prev">
+            <ArrowButton onClick={() => scrollLeft()} aria-label="prev">
               <PrevArrow />
             </ArrowButton>
           )
@@ -130,7 +130,7 @@ export function OutfitCard({ data, removeCard, addCard }) {
       {
         indexItem !== maxDisplay && data.length >= 3
           ? (
-            <ArrowButton onClick={scrollRight} aria-label="next">
+            <ArrowButton onClick={() => scrollRight()} aria-label="next">
               <NextArrow />
             </ArrowButton>
           )
