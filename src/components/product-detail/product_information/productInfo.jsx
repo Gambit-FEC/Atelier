@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { useGlobalContext } from '../../../context/GlobalStore';
 import { StyledRatingStars } from '../../../styled-lib';
 
-// Share on social media------------------------------
 const onFacebookClick = () => {
   window.open('https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fparse.com', 'Facebook');
 };
@@ -54,7 +53,9 @@ export default function ProductInfo({ productInfo, currentStyle }) {
         {productInfo[1].results[currentStyle].sale_price
           ? (
             <SalePrice>
-              On Sale: {`$${Math.trunc(productInfo[1].results[currentStyle].sale_price)}`}
+              On Sale:
+              {' '}
+              {`$${Math.trunc(productInfo[1].results[currentStyle].sale_price)}`}
             </SalePrice>
           )
           : null }
@@ -72,7 +73,6 @@ export default function ProductInfo({ productInfo, currentStyle }) {
   );
 }
 
-// CSS styled-components ----------------------
 const Wrapper = styled.div`
   padding: 1em;
   align-items: flex-end;

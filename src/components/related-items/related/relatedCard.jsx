@@ -133,11 +133,11 @@ function RelatedCard({ data }) {
               </ImageContainer>
               <InfoWrapper value={info.product.id} onClick={() => newProductState(info.product.id)}>
                 <NameWrapper>
-                  {info.product.name}
+                  { info.product.name }
                 </NameWrapper>
                 <CatAndStars>
                   <CategoryWrapper>
-                    {info.product.category}
+                    { info.product.category }
                   </CategoryWrapper>
                   <StyledRatingStars rating={info.rating.averageRating}>
                     ★★★★★

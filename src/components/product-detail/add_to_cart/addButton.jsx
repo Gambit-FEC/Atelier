@@ -7,24 +7,15 @@ export default function AddButton({ size, quantity }) {
   const onAddtoCart = () => {
     alert('Added to cart!');
     axios.post('/cart')
-      .then((result) => {
-        // console.log('axios post works?', result);
-      })
-      .catch((err) => { console.log('add to cart button did not send correctly', err); });
+      .then((result) => { (result); })
+      .catch((err) => { console.error('ERROR: Did not correctly send item to cart', err); });
   };
-
   if (!size) {
-    return (
-      <Text>Please select a size</Text>
-    );
+    return (<Text>Please select a size</Text>);
   } else if (size && !quantity) {
-    return (
-      <Text>Please select a quantity</Text>
-    );
+    return (<Text>Please select a quantity</Text>);
   } else if (size && quantity) {
-    return (
-      <Add onClick={() => onAddtoCart()}>Add to Cart</Add>
-    );
+    return (<Add onClick={() => onAddtoCart()}>Add to Cart</Add>);
   }
 }
 
