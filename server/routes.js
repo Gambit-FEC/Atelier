@@ -8,7 +8,6 @@ const app = express();
 
 app.use(compress(), express.static(path.join(__dirname, '..', 'dist')));
 app.use(express.json());
-
 app.use((req, res, next) => {
   req.headers.Authorization = API_KEY;
   next();
