@@ -3,26 +3,7 @@ import axios from 'axios';
 import { format, parseISO } from 'date-fns';
 import { StyledRatingStars } from '../../../../styled-lib';
 import { useRAndRContext } from '../../../../context/RAndRContext';
-
-function HighlightText({ text, highlight, bold = false, className }) {
-  if (highlight === '' || highlight === null) {
-    return (
-      <span style={bold ? { fontWeight: 'bold' } : {}}>{text}</span>
-    );
-  }
-  const regex = new RegExp(`(${highlight})`, 'gi');
-  const parts = text.split(regex);
-  return (
-    <span style={bold ? { fontWeight: 'bold' } : {}}>
-      {parts.filter((part) => part).map((part, index) => {
-        if (part.toLowerCase() === highlight.toLowerCase()) {
-          return <mark key={index}>{part}</mark>;
-        }
-        return <span key={index}>{part}</span>;
-      })}
-    </span>
-  );
-}
+import HighlightText from './HighlightText';
 
 export default function ReviewTile({ review, hidden, search }) {
   const [readMore, setReadMore] = useState(review.body.length > 250);
@@ -74,9 +55,7 @@ export default function ReviewTile({ review, hidden, search }) {
           reported: [...reviewFeedback.reported, review.review_id],
         });
       })
-      .catch((err) => {
-        console.log('Error trying to report review:', err);
-      });
+      .catch((err) => console.log('Error trying to report review:', err));
   }
 
   function whichButton(name) {
@@ -145,5 +124,3 @@ export default function ReviewTile({ review, hidden, search }) {
     </>
   );
 }
-
-
