@@ -47,7 +47,7 @@ export default function ReviewTile({ review, hidden, search }) {
         });
       })
       .catch((err) => {
-        console.log('Error trying to mark review as helpful:', err);
+        console.error('Error trying to mark review as helpful:', err);
       });
   }
 
@@ -64,7 +64,7 @@ export default function ReviewTile({ review, hidden, search }) {
           reported: [...reviewFeedback.reported, review.review_id],
         });
       })
-      .catch((err) => console.log('Error trying to report review:', err));
+      .catch((err) => console.error('Error trying to report review:', err));
   }
 
   function whichButton(name) {
