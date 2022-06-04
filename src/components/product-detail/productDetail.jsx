@@ -32,7 +32,11 @@ export default function ProductDetail() {
               currentStyle={currentStyle}
               setCurrentStyle={setCurrentStyle}
             />
-            <AddToCart className="prodDetail-addToCart" productInfo={productInfo[1].results} currentStyle={currentStyle} />
+            <AddToCart
+              className="prodDetail-addToCart"
+              productInfo={productInfo[1].results}
+              currentStyle={currentStyle}
+            />
           </NotImages>
         </ProductDetailContainer>
       )}

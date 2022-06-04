@@ -60,8 +60,17 @@ export default function AddToCart({ productInfo, currentStyle }) {
   return (
     <>
       <Selectors>
-        <SelectSize id="select" sizes={sizes} selectedSize={selectedSize} onChange={onSelectSize} />
-        <SelectQuantity quantities={quantMax} selectedSize={selectedSize} onChange={onSelectQuantity} />
+        <SelectSize
+          id="select"
+          sizes={sizes}
+          selectedSize={selectedSize}
+          onChange={() => onSelectSize()}
+        />
+        <SelectQuantity
+          quantities={quantMax}
+          selectedSize={selectedSize}
+          onChange={() => onSelectQuantity()}
+        />
       </Selectors>
       <Cart>
         <AddButton size={selectedSize} quantity={selectedQuantity} />

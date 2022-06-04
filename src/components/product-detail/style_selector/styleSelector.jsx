@@ -28,13 +28,17 @@ export default function StyleSelector({ productInfo, currentStyle, setCurrentSty
                 <Thumbnails key={index} alt={item.style_id} src={
                   item.photos[0].thumbnail_url
                   ? item.photos[0].thumbnail_url
-                  : 'https://img.icons8.com/stickers/344/gambit.png'} onClick={() => onStyleClick(index)} />
+                  : 'https://img.icons8.com/stickers/344/gambit.png'}
+                    onClick={() => onStyleClick(index)}
+                  />
                   <Checkmark id="checkmark"/>
                 </SelectedThumbnail>)
             : <Thumbnails key={index} alt={item.style_id} src={
               item.photos[0].thumbnail_url
               ? item.photos[0].thumbnail_url
-              : 'https://img.icons8.com/stickers/344/gambit.png'} onClick={() => onStyleClick(index)} />
+              : 'https://img.icons8.com/stickers/344/gambit.png'}
+                onClick={() => onStyleClick(index)}
+              />
           ))}
         </AllThumbnails>
       </Wrapper>
