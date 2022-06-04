@@ -1,8 +1,8 @@
 const axios = require('axios');
-const { API_KEY, API_URL } = require('../../config');
+const { API_URL } = require('../../config');
 
 exports.getAllRelated = (req, res) => (
-  axios.get(`${API_URL}products/${req.params.product_id}/related`, { headers: { Authorization: API_KEY } })
+  axios.get(`${API_URL}products/${req.params.product_id}/related`, { headers: { Authorization: req.headers.Authorization } })
     .then((result) => {
       res.status(200);
       res.send(result.data);
@@ -14,7 +14,7 @@ exports.getAllRelated = (req, res) => (
 );
 
 exports.getRelatedInfo = (req, res) => (
-  axios.get(`${API_URL}products/${req.params.product_id}`, { headers: { Authorization: API_KEY } })
+  axios.get(`${API_URL}products/${req.params.product_id}`, { headers: { Authorization: req.headers.Authorization } })
     .then((result) => {
       const data = {
         id: result.data.id,
@@ -31,7 +31,7 @@ exports.getRelatedInfo = (req, res) => (
 );
 
 exports.getRelatedStyle = (req, res) => (
-  axios.get(`${API_URL}products/${req.params.product_id}/styles`, { headers: { Authorization: API_KEY } })
+  axios.get(`${API_URL}products/${req.params.product_id}/styles`, { headers: { Authorization: req.headers.Authorization } })
     .then((result) => {
       res.status(200);
       const styleData = {
