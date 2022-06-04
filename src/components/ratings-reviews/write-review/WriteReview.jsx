@@ -25,17 +25,20 @@ export default function WriteReview() {
     });
     return data;
   });
+
   function handleExitView() {
     document.body.style.overflowY = 'auto';
     document.body.style.overflowX = 'hidden';
     setShowWriteReview(false);
   }
+
   function cloudPhotoUpload(file) {
     const imageData = new FormData();
     imageData.append('file', file);
     imageData.append('upload_preset', 'zghnihfu');
     return axios.post('https://api.cloudinary.com/v1_1/gc7654738/image/upload', imageData);
   }
+
   function postForm() {
     const formSubmission = {
       ...formData,
@@ -59,10 +62,9 @@ export default function WriteReview() {
         });
         return axios.post('/reviews', formSubmission);
       })
-      .catch((err) => {
-        console.log('promise all error:', err);
-      });
+      .catch((err) => console.error('Error uploading photos:', err));
   }
+
   function handleSubmitReview(e) {
     e.preventDefault();
     if (formData.rating === '0') {
@@ -83,11 +85,13 @@ export default function WriteReview() {
         window.alert('There was an issue submitting your review.', err);
       });
   }
+
   function updateFormData(e) {
     const newData = { ...formData };
     newData[e.target.id] = e.target.value;
     setFormData(newData);
   }
+
   function handleRecommended(e) {
     if (e.target.value === 'yes') {
       setFormData({ ...formData, recommend: true });
@@ -95,6 +99,7 @@ export default function WriteReview() {
       setFormData({ ...formData, recommend: false });
     }
   }
+
   function handlePhotos(e) {
     if (e.target.files.length > 5) {
       window.alert('5 photos max!');
@@ -107,6 +112,7 @@ export default function WriteReview() {
     }
     setFormData({ ...formData, photos: newPhotos });
   }
+
   function handleStarMouseEnter(e) {
     if (e.target.id === 'star-buttons') {
       return;
@@ -116,6 +122,7 @@ export default function WriteReview() {
       e.target.parentNode.children[i].setAttribute('style', 'color: #9F2B68;');
     }
   }
+
   function handleStarMouseLeave(e) {
     if (e.target.id === 'star-buttons') {
       return;
@@ -125,6 +132,7 @@ export default function WriteReview() {
       e.target.parentNode.children[i].setAttribute('style', 'color: black;');
     }
   }
+
   function handleStarClick(e) {
     if (formData.rating === e.target.id) {
       setFormData({ ...formData, rating: '0' });
@@ -132,6 +140,7 @@ export default function WriteReview() {
       setFormData({ ...formData, rating: e.target.id });
     }
   }
+
   function starRender() {
     const spans = [];
     if (formData.rating === '0') {
@@ -190,6 +199,7 @@ export default function WriteReview() {
       </div>
     );
   }
+
   function handleCharactericsMouseEnter(e) {
     if (formData.characteristics[e.target.name].value !== '0') {
       return;
@@ -199,6 +209,7 @@ export default function WriteReview() {
     popup.setAttribute('style', 'margin-right: auto;');
     e.target.parentNode.parentNode.insertBefore(popup, e.target.parentNode);
   }
+
   function handleCharactericsMouseLeave(e) {
     if (e.target.parentNode.children.length === 2) {
       return;
@@ -209,11 +220,13 @@ export default function WriteReview() {
     const popup = e.target.parentNode.parentNode.children[1];
     e.target.parentNode.parentNode.removeChild(popup);
   }
+
   function handleCharacteristics(e) {
     const newData = { ...formData };
     newData.characteristics[e.target.name].value = e.target.value;
     setFormData(newData);
   }
+
   function removeHoverChar(e) {
     if (formData.characteristics[e.target.name].value !== '0') {
       return;
@@ -221,6 +234,7 @@ export default function WriteReview() {
     const popup = e.target.parentNode.parentNode.children[1];
     e.target.parentNode.parentNode.removeChild(popup);
   }
+
   function characteristicsRender() {
     const allRadios = [];
     for (const key in reviewsMeta.characteristics) {
@@ -265,6 +279,7 @@ export default function WriteReview() {
     }
     return allRadios;
   }
+
   return (
     <div className="write-review modal-bg">
       <form className="modal-form" onSubmit={handleSubmitReview}>

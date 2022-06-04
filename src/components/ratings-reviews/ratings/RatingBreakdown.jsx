@@ -4,6 +4,7 @@ import { RatingBar, StarButton } from '../../../styled-lib';
 
 export default function RatingBreakdown() {
   const { reviewsMeta, setReviewsFilter, reviewsFilter } = useRAndRContext();
+
   function calcPercents(ratings) {
     const percents = [];
     let highestStar = 0;
@@ -15,6 +16,7 @@ export default function RatingBreakdown() {
     }
     return percents.map((item) => Math.floor((item / highestStar) * 100));
   }
+
   function handleRatingClick(star) {
     setReviewsFilter(
       Object.assign(
@@ -24,6 +26,7 @@ export default function RatingBreakdown() {
       )
     );
   }
+
   function handleResetClick() {
     setReviewsFilter({
       1: false,
@@ -33,6 +36,7 @@ export default function RatingBreakdown() {
       5: false,
     });
   }
+
   return (
     <div className="rating-breakdown">
       {reviewsMeta && (

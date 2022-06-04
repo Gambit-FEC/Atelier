@@ -4,14 +4,16 @@ import { useRAndRContext } from '../../../context/RAndRContext';
 
 export default function ProductBreakdown() {
   const { reviewsMeta, characteristicsMeaning } = useRAndRContext();
+
   function calcPercent(value) {
     return Math.floor(parseFloat(value) * 20);
   }
+
   return (
     <div className="ratings-product-breakdown">
       {reviewsMeta && Object.keys(reviewsMeta.characteristics).map((characteristic, index) => (
         <div key={index} id={`${characteristic}-breakdown`}>
-          <div style={{fontWeight: 'bold'}}>{characteristic}</div>
+          <div style={{ fontWeight: 'bold' }}>{characteristic}</div>
           <CharacteristicsBar className={`${characteristic}-characteristics-bar`}>
             <CharacteristicsPointer
               className={`${characteristic}-bar-pointer`}

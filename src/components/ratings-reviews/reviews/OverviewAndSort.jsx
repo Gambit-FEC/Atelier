@@ -5,9 +5,11 @@ import { useRAndRContext } from '../../../context/RAndRContext';
 export default function OverviewAndSort() {
   const { totalReviews } = useGlobalContext();
   const { reviewsSort, setReviewsSort, lastReviewIdx } = useRAndRContext();
+
   function onChange(event) {
     setReviewsSort(event.target.value);
   }
+
   return (
     <div className="reviews-overview-and-sort">
       <span>

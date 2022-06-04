@@ -14,6 +14,7 @@ export default function ReviewsList() {
     setShownReviews,
     setLastReviewIdx,
   } = useRAndRContext();
+
   function searchFilter(review) {
     return (
       reviewSearch === ''
@@ -23,6 +24,7 @@ export default function ReviewsList() {
       || review.response.toLowerCase().includes(reviewSearch.toLowerCase())
     );
   }
+
   useEffect(() => {
     setShownReviews(
       reviews.filter((review) => (Object.values(reviewsFilter).every((item) => item === false)
@@ -30,11 +32,13 @@ export default function ReviewsList() {
         .map((review) => <ReviewTile key={review.review_id} review={review} search={reviewSearch === '' ? null : reviewSearch} />),
     );
   }, [reviews, count, reviewsFilter, reviewSearch]);
+
   useEffect(() => {
     setShowAdd(shownReviews.length > count);
     setShowCollapse(shownReviews.slice(0, count).length > 2);
     setLastReviewIdx(count > shownReviews.length ? shownReviews.length - 1 : count - 1);
   }, [shownReviews]);
+
   return (
     <div id="reviews-list">
       {shownReviews.slice(0, count)}
