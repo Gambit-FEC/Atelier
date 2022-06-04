@@ -54,7 +54,7 @@ export default function ImageGallery({productInfo, currentStyle}) {
         <img src={images[currentImage]?.url} alt="main-image" style={{width: "80%", objectFit: "contain", maxHeight: "100%"}} />
         {showModel
         ? <ModalBarAndImage id="modal-bar-and-image">
-            <div className="modal-bg modal-prod-detail" onClick={onImageClick}>
+            <div className="modal-bg modal-prod-detail" onClick={(e) => onImageClick(e)}>
               <ExpandedLeft onClick={onLeftClick}/>
               <ModalBar id="modal-bar">
                 {images.slice(0, 7).map((slide, index) => (
@@ -64,17 +64,16 @@ export default function ImageGallery({productInfo, currentStyle}) {
               <ModalImage src={images[currentImage]?.url} alt="modal-image" onClick={(e) => handleZoom(e)}
               style={{
                 transform: zoom ? `scale(${zoomScale})` : 'scale(1)',
-                cursor: zoom ? 'zoom-out' : 'crosshair',
-                // ...transformOrigin,
+                cursor: zoom ? 'zoom-out' : 'crosshair'
               }}
               />
-              <ExpandedRight onClick={onRightClick}/>
+              <ExpandedRight onClick={(e) => onRightClick(e)}/>
             </div>
           </ModalBarAndImage>
-        : <ExpandIcon onClick={onImageClick}>
+        : <ExpandIcon onClick={(e) => onImageClick(e)}>
         </ExpandIcon>
         }
-        <ArrowRight onClick={onRightClick} />
+        <ArrowRight onClick={(e) => onRightClick(e)} />
       </Container>
     </>
   );
