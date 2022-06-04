@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { BsCheck2Circle } from 'react-icons/bs';
-
 import { useGlobalContext } from '../../../context/GlobalStore';
 
 export default function StyleSelector({ productInfo, currentStyle, setCurrentStyle }) {
