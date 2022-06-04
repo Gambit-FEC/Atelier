@@ -194,8 +194,7 @@ align-items: center;
 border: 1px solid #ddd;
 `;
 
-const StyledCard = styled.div`
-`;
+const StyledCard = styled.div``;
 
 const ImageContainer = styled.div`
 height: 350px;
