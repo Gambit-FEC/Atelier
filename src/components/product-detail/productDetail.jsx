@@ -42,9 +42,7 @@ export default function ProductDetail() {
   // Grab item data from server----------------------
   useEffect(() => {
     axios.get(`/products/${productId}`)
-      .then((result) => {
-        setProductInfo(result.data);
-      })
+      .then((result) => { setProductInfo(result.data); })
       .catch((err) => { console.log('getproduct didnt work', err); });
   }, [productId]);
 
