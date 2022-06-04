@@ -15,17 +15,17 @@ export default function ImageGallery({productInfo, currentStyle}) {
   const zoomScale = 2.5;
   const isDisabled = zoom;
 
-  function onLeftClick(e) {
+  const onLeftClick = (e) => {
     e.stopPropagation()
     setCurrentImage(currentImage === 0 ? length - 1 : currentImage - 1);
   };
 
-  function onRightClick(e) {
+  const onRightClick = (e) => {
     e.stopPropagation()
     setCurrentImage(currentImage === length - 1 ? 0 : currentImage + 1);
   };
 
-  function showSelectedImage(image, e) {
+  const showSelectedImage = (image, e) => {
     if (e) { e.stopPropagation(); };
     setCurrentImage(image);
   }
@@ -37,7 +37,7 @@ export default function ImageGallery({productInfo, currentStyle}) {
 
   const onImageClick = () => { setShowModel(!showModel); }
 
-  function handleZoom(e) {
+  const handleZoom = (e) => {
     e.stopPropagation();
     setZoom((prevState) => !prevState);
   }
