@@ -52,18 +52,20 @@ export default function outfitList() {
         getRelatedStyle(currentProductId), getRelatedRating(currentProductId)]);
       listOfPromises.push(promise);
 
-      Promise.all(listOfPromises).then((promiseResults) => {
-        promiseResults.forEach((element) => {
-          const product = {};
-          product.product = element[0].data;
-          product.style = element[1].data;
-          product.rating = element[2].data;
-          outfitArray.push(product);
+      Promise.all(listOfPromises)
+        .then((promiseResults) => {
+          promiseResults.forEach((element) => {
+            const product = {};
+            product.product = element[0].data;
+            product.style = element[1].data;
+            product.rating = element[2].data;
+            outfitArray.push(product);
+          });
+          setOutfitInfo([...outfitArray]);
+        })
+        .catch((err) => {
+          console.log(err);
         });
-        setOutfitInfo([...outfitArray]);
-      }).catch((err) => {
-        console.log(err);
-      });
     }
   }
 
@@ -87,6 +89,7 @@ export default function outfitList() {
       }
     }
   }
+
   function addCard() {
     setCardList(true);
     if (typeof (Storage) !== 'undefined') {
@@ -132,36 +135,36 @@ export default function outfitList() {
 }
 
 const OutfitList = styled.div`
-display: flex;
-flex-direction: row;
+  display: flex;
+  flex-direction: row;
 `;
 
 const NextArrowTrans = styled(MdArrowForwardIos)`
-position: relative;
-height: 30px;
-width: auto;
-top: 3px;
-cursor: default;
-user-select: none;
-visibility: hidden;
+  position: relative;
+  height: 30px;
+  width: auto;
+  top: 3px;
+  cursor: default;
+  user-select: none;
+  visibility: hidden;
 `;
 
 const PrevArrowTrans = styled(MdArrowBackIosNew)`
-position: relative;
-height: 30px;
-width: auto;
-top: 3px;
-cursor: default;
-user-select: none;
-visibility: hidden;
+  position: relative;
+  height: 30px;
+  width: auto;
+  top: 3px;
+  cursor: default;
+  user-select: none;
+  visibility: hidden;
 `;
 
 const ArrowButtonTrans = styled.button`
-height: 50px;
-width: 50px;
-align-items: center;
-position: relative;
-top: 250px;
-cursor: pointer;
-visibility: hidden;
+  height: 50px;
+  width: 50px;
+  align-items: center;
+  position: relative;
+  top: 250px;
+  cursor: pointer;
+  visibility: hidden;
 `;

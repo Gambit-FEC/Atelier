@@ -8,9 +8,9 @@ import { useGlobalContext } from '../../../context/GlobalStore';
 function RelatedCard({ data }) {
   const { setProductId } = useGlobalContext();
   const placeholder = 'http://placecorgi.com/260/180';
-  const [indexItem, setIndex] = useState(0);
   const maxDisplay = data.length - 4;
   const listRef = useRef(null);
+  const [indexItem, setIndex] = useState(0);
   const [showModal, setModal] = useState(false);
   const [currentItem, setCurrentItem] = useState(0);
 
@@ -33,7 +33,7 @@ function RelatedCard({ data }) {
     document.body.style.height = 'auto';
   }
 
-  const scrollLeft = () => {
+  function scrollLeft() {
     if (listRef.current) {
       listRef.current.scrollBy({
         top: 0,
@@ -44,9 +44,9 @@ function RelatedCard({ data }) {
     if (indexItem > 0) {
       setIndex((indexItem - 1));
     }
-  };
+  }
 
-  const scrollRight = () => {
+  function scrollRight() {
     if (listRef.current) {
       listRef.current.scrollBy({
         top: 0,
@@ -57,7 +57,7 @@ function RelatedCard({ data }) {
     if (indexItem < maxDisplay) {
       setIndex((indexItem + 1));
     }
-  };
+  }
 
   function newProductState(value) {
     setProductId(value);
@@ -73,7 +73,7 @@ function RelatedCard({ data }) {
       {
         indexItem !== 0
           ? (
-            <ArrowButton onClick={scrollLeft} aria-label="prev">
+            <ArrowButton onClick={() => scrollLeft()} aria-label="prev">
               <PrevArrow />
             </ArrowButton>
           )
@@ -151,7 +151,7 @@ function RelatedCard({ data }) {
       {
         indexItem !== maxDisplay && data.length > 4
           ? (
-            <ArrowButton onClick={scrollRight} aria-label="next">
+            <ArrowButton onClick={() => scrollRight()} aria-label="next">
               <NextArrow />
             </ArrowButton>
           )
@@ -168,177 +168,174 @@ function RelatedCard({ data }) {
 export default RelatedCard;
 
 const RelatedList = styled.div`
-display: flex;
-align-items: flex-start;
-max-width: 1420px;
-overflow-y: hidden;
-overflow-x: hidden;
-
+  display: flex;
+  align-items: flex-start;
+  max-width: 1420px;
+  overflow-y: hidden;
+  overflow-x: hidden;
 `;
 
 const CompareButton = styled.button`
-position: relative;
-top: -350px;
-float: right;
-cursor: pointer;
-height: 30px;
-width: 30px;
-opacity: 0.8;
-border-top-right-radius: 10px;
-border-bottom-left-radius: 10px;
-background-color: white;
-font-size: 16px;
-box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-&:active {
-  box-shadow: 0 1px #666;
-}
-&:hover{
-  color: #9F2B68;
-}
-`;
-
-const CardWrapper = styled.div`
-display:flex;
-overflow-y: hidden;
-overflow-x: hidden;
-&::-webkit-scrollbar{
-  overflow-x: hidden;
-  overflow-y: hidden;
-}
-`;
-
-const StyledCard = styled.div`
-border-radius: 10px;
-width: 300px;
-height: fit-content;
-margin: 15px;
-// flex-direction: column;
-// flex-wrap: nowrap;
-align-items: center;
-border: 1px solid #ddd;
-&:hover {
-  box-shadow: 0 0 10px #9F2B68
+  position: relative;
+  top: -350px;
+  float: right;
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  opacity: 0.8;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  background-color: white;
+  font-size: 16px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  &:active {
+    box-shadow: 0 1px #666;
+  }
+  &:hover{
+    color: #9F2B68;
   }
 `;
 
+const CardWrapper = styled.div`
+  display:flex;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  &::-webkit-scrollbar{
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+`;
+
+const StyledCard = styled.div`
+  border-radius: 10px;
+  width: 300px;
+  height: fit-content;
+  margin: 15px;
+  align-items: center;
+  border: 1px solid #ddd;
+  &:hover {
+    box-shadow: 0 0 10px #9F2B68
+    }
+`;
+
 const ImageContainer = styled.div`
-height: 350px;
-width: 300px;
-object-fit: cover;
-align-text: center;
+  height: 350px;
+  width: 300px;
+  object-fit: cover;
+  align-text: center;
 `;
 
 const StyleImg = styled.img`
-display: block;
-background-size: contain;
-width: 100%;
-height: 100%;
-object-fit: cover;
-border-radius: 10px;
-cursor: pointer;
-overflow: hidden;
+  display: block;
+  background-size: contain;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  cursor: pointer;
+  overflow: hidden;
 `;
 
 const InfoWrapper = styled.div`
-margin: 10px;
-cursor: pointer;
+  margin: 10px;
+  cursor: pointer;
 `;
 
 const CatAndStars = styled.div`
-display: flex;
-justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const CategoryWrapper = styled.p`
-font-weight: normal;
-text-transform: uppercase;
-font-size: 16px;
-margin-top: 5px;
-margin-bottom: 5px;
+  font-weight: normal;
+  text-transform: uppercase;
+  font-size: 16px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 `;
 
 const NameWrapper = styled.p`
-font-weight: bold;
-font-size: 20px;
-margin: 0px;
+  font-weight: bold;
+  font-size: 20px;
+  margin: 0px;
 `;
 
 const PriceWrapper = styled.div`
-transform: translate(0px, -25px);
-font-weight: normal;
-font-size: 16px;
-background-color: white;
-width: min-content;
-padding: 2px;
+  transform: translate(0px, -25px);
+  font-weight: normal;
+  font-size: 16px;
+  background-color: white;
+  width: min-content;
+  padding: 2px;
 `;
 
 const OriginalPrice = styled.span`
-text-decoration: line-through;
-color: grey;
+  text-decoration: line-through;
+  color: grey;
 `;
 
 const SalePrice = styled.span`
-color: red;
-padding-left: 5px;
+  color: red;
+  padding-left: 5px;
 `;
 
 const NextArrow = styled(MdArrowForwardIos)`
-position: relative;
-height: 30px;
-width: auto;
-cursor: pointer;
-user-select: none;
-top: 3px;
+  position: relative;
+  height: 30px;
+  width: auto;
+  cursor: pointer;
+  user-select: none;
+  top: 3px;
 `;
 
 const NextArrowTrans = styled(MdArrowForwardIos)`
-position: relative;
-height: 30px;
-width: auto;
-top: 3px;
-cursor: default;
-user-select: none;
-visibility: hidden;
+  position: relative;
+  height: 30px;
+  width: auto;
+  top: 3px;
+  cursor: default;
+  user-select: none;
+  visibility: hidden;
 `;
 
 const PrevArrow = styled(MdArrowBackIosNew)`
-position: relative;
-height: 30px;
-width: auto;
-top: 3px;
-cursor: pointer;
-user-select: none;
+  position: relative;
+  height: 30px;
+  width: auto;
+  top: 3px;
+  cursor: pointer;
+  user-select: none;
 `;
 
 const PrevArrowTrans = styled(MdArrowBackIosNew)`
-position: relative;
-height: 30px;
-width: auto;
-top: 3px;
-cursor: default;
-user-select: none;
-visibility: hidden;
+  position: relative;
+  height: 30px;
+  width: auto;
+  top: 3px;
+  cursor: default;
+  user-select: none;
+  visibility: hidden;
 `;
 
 const ArrowButton = styled.button`
-height: 50px;
-width: 50px;
-align-items: center;
-position: relative;
-top: 250px;
-cursor: pointer;
-background-color: white;
-border: #9F2B68;
-border: 2px solid #9F2B68;
-border-radius: 5px;
+  height: 50px;
+  width: 50px;
+  align-items: center;
+  position: relative;
+  top: 250px;
+  cursor: pointer;
+  background-color: white;
+  border: #9F2B68;
+  border: 2px solid #9F2B68;
+  border-radius: 5px;
 `;
 
 const ArrowButtonTrans = styled.button`
-height: 50px;
-width: 50px;
-align-items: center;
-position: relative;
-top: 250px;
-cursor: pointer;
-visibility: hidden;
+  height: 50px;
+  width: 50px;
+  align-items: center;
+  position: relative;
+  top: 250px;
+  cursor: pointer;
+  visibility: hidden;
 `;
