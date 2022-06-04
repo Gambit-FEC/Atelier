@@ -104,20 +104,20 @@ function compareModal({ value }) {
 export default compareModal;
 
 const StyledTable = styled.table`
-width: 100%;
-border: 4px solic black;
-border-collapse: collapse;
-th,
-td {
-  border 2px solid black;
+  width: 100%;
+  border: 4px solic black;
   border-collapse: collapse;
-}
-th,
-td,
-tr {
-  padding: 10px;
-}
-th {
-  text-align: center;
-}
+  th,
+  td {
+    border 2px solid black;
+    border-collapse: collapse;
+  }
+  th,
+  td,
+  tr {
+    padding: 10px;
+  }
+  th {
+    text-align: center;
+  }
 `;

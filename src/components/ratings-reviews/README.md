@@ -7,32 +7,33 @@
 1. Write new review
 2. Reviews List
 3. Sorting
-4. Rating Breakdown
-5. Product Breakdown
+4. Searching
+5. Overall Rating
+6. Rating Breakdown
+7. Product Breakdown
 
 ## Components
-*I* - Interactible
+-*I*- - Interactible
 
 - Ratings
   - Overall rating
-  - Bars *I*
-  - Spec bars
+  - Bars -*I*-
+  - Characteristics bars
 
 - Reviews
-  - Overview and sort options *I*
+  - Overview and sort options -*I*-
   - Reviews list
-    - Review
+    - Review tile
       - Rating
       - Date & User
       - Title
       - Content
       - Response
       - Feedback
-        - Helpful? *I*
-        - Report *I*
+        - Helpful? -*I*-
+        - Report -*I*-
   - More/add reviews
-    - More Reviews *I*
-    - Add Reviews *I*
+    - More Reviews -*I*-
+    - Add Reviews -*I*-
 
 - Write review
-  -

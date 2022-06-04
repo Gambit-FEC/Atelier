@@ -23,28 +23,31 @@ export default function relatedList() {
   function getRelatedProducts() {
     const listOfPromises = [];
     const allProductList = [];
-    axios.get(`/related/productList/${productId}`).then((productIdsResponse) => {
-      const listOfIds = productIdsResponse.data;
-      listOfIds.forEach((id) => {
-        const promise = Promise.all([getRelatedInfo(id),
-          getRelatedStyle(id), getRelatedRating(id)]);
-        listOfPromises.push(promise);
-      });
-
-      Promise.all(listOfPromises).then((promiseResults) => {
-        promiseResults.forEach((element) => {
-          const product = {};
-          product.product = element[0].data;
-          product.style = element[1].data;
-          product.rating = element[2].data;
-          product.favorite = false;
-          allProductList.push(product);
+    axios.get(`/related/productList/${productId}`)
+      .then((productIdsResponse) => {
+        const listOfIds = productIdsResponse.data;
+        listOfIds.forEach((id) => {
+          const promise = Promise.all([getRelatedInfo(id),
+            getRelatedStyle(id), getRelatedRating(id)]);
+          listOfPromises.push(promise);
         });
-        setRelatedInfo(allProductList);
-      }).catch((err) => {
-        console.log(err);
+
+        Promise.all(listOfPromises)
+          .then((promiseResults) => {
+            promiseResults.forEach((element) => {
+              const product = {};
+              product.product = element[0].data;
+              product.style = element[1].data;
+              product.rating = element[2].data;
+              product.favorite = false;
+              allProductList.push(product);
+            });
+            setRelatedInfo(allProductList);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       });
-    });
   }
 
   useEffect(() => {
@@ -60,7 +63,7 @@ export default function relatedList() {
 }
 
 const Container = styled.div`
-display: flex;
-flex-direction: column;
-align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
