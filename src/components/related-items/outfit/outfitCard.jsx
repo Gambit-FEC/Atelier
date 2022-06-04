@@ -116,7 +116,7 @@ export function OutfitCard({ data, removeCard, addCard }) {
                   </NameWrapper>
                   <CatAndStars>
                     <CategoryWrapper>
-                      {info.product.category}
+                      { info.product.category }
                     </CategoryWrapper>
                     <StyledRatingStars rating={info.rating.averageRating}>
                       ★★★★★
